@@ -189,9 +189,7 @@ async function getBundesligaTable() {
 
 async function getNews() {
   try {
-    const result = await fetchVfbNews();
-
-    return result;
+    return await fetchVfbNews();
   } catch (error) {
     console.error(
       "NEWS ERROR:",
@@ -269,7 +267,9 @@ async function buildDashboard() {
     matches.length
   );
 
-  console.log("Lade Bundesliga-Tabelle...");
+  console.log(
+    "Lade Bundesliga-Tabelle..."
+  );
 
   const table =
     await getBundesligaTable();
@@ -286,19 +286,21 @@ async function buildDashboard() {
       match.competition === "Bundesliga"
   );
 
-  const championsLeague = matches.filter(
-    match =>
-      match.competition ===
-        "UEFA Champions League" ||
-      match.competition ===
-        "Champions League"
-  );
+  const championsLeague =
+    matches.filter(
+      match =>
+        match.competition ===
+          "UEFA Champions League" ||
+        match.competition ===
+          "Champions League"
+    );
 
   const now = new Date();
 
   const nextGame =
     matches.find(match => {
-      const date = new Date(match.rawDate);
+      const date =
+        new Date(match.rawDate);
 
       return (
         date >= now &&
@@ -394,8 +396,9 @@ function sendJSON(res, data) {
 }
 
 function serveFile(res, filename) {
+
   const filePath =
-    path.join(__dirname, filename);
+    path.join(process.cwd(), filename);
 
   if (!fs.existsSync(filePath)) {
     res.writeHead(404);
@@ -430,21 +433,26 @@ function serveFile(res, filename) {
 const server =
   http.createServer(
     async (req, res) => {
+
       try {
+
         if (
           req.url ===
           "/api/dashboard"
         ) {
+
           const data =
             await getDashboard();
 
           sendJSON(res, data);
+
           return;
         }
 
         if (
           req.url === "/health"
         ) {
+
           sendJSON(res, {
             status: "ok",
             apiConfigured:
@@ -458,6 +466,7 @@ const server =
           req.url === "/" ||
           req.url === "/index.html"
         ) {
+
           serveFile(
             res,
             "index.html"
@@ -467,8 +476,13 @@ const server =
         }
 
         res.writeHead(404);
-        res.end("Nicht gefunden");
+
+        res.end(
+          "Nicht gefunden"
+        );
+
       } catch (error) {
+
         console.error(
           "SERVER ERROR:",
           error
@@ -493,6 +507,7 @@ server.listen(
   PORT,
   "0.0.0.0",
   () => {
+
     console.log(
       `Server läuft auf Port ${PORT}`
     );
