@@ -41,10 +41,6 @@ text-decoration:none;
 color:inherit;
 }
 
-/* =========================
-TOP BAR
-========================= */
-
 .top{
 background:#080808;
 color:#fff;
@@ -54,10 +50,6 @@ display:flex;
 justify-content:space-between;
 gap:10px;
 }
-
-/* =========================
-HEADER
-========================= */
 
 .bar{
 position:sticky;
@@ -108,10 +100,6 @@ font-weight:800;
 .nav a:hover{
 color:#e30613;
 }
-
-/* =========================
-HERO
-========================= */
 
 .hero{
 background:
@@ -167,10 +155,6 @@ font-weight:900;
 margin-top:8px;
 }
 
-/* =========================
-LAYOUT
-========================= */
-
 .wrap{
 width:min(1150px,90%);
 margin:auto;
@@ -208,10 +192,6 @@ padding:20px;
 box-shadow:0 5px 20px #00000008;
 }
 
-/* =========================
-NEWS
-========================= */
-
 .news{
 padding:15px 0;
 border-bottom:1px solid #eee;
@@ -239,10 +219,6 @@ color:#666;
 font-size:12px;
 line-height:1.5;
 }
-
-/* =========================
-NEXT GAME
-========================= */
 
 .next{
 background:#111;
@@ -283,10 +259,6 @@ background:#e30613;
 border-radius:50%;
 }
 
-/* =========================
-NOTICE
-========================= */
-
 .notice{
 background:#fff1f1;
 border-left:4px solid #e30613;
@@ -294,10 +266,6 @@ padding:13px;
 font-size:12px;
 margin-bottom:18px;
 }
-
-/* =========================
-LOADING / ERROR
-========================= */
 
 .loading{
 color:#888;
@@ -312,10 +280,6 @@ padding:15px;
 border-radius:8px;
 font-size:12px;
 }
-
-/* =========================
-SPIEL
-========================= */
 
 .fixture{
 display:flex;
@@ -352,10 +316,6 @@ font-size:10px;
 font-weight:900;
 }
 
-/* =========================
-TEAM LOGOS
-========================= */
-
 .team-line{
 display:flex;
 align-items:center;
@@ -370,10 +330,6 @@ height:30px;
 object-fit:contain;
 flex-shrink:0;
 }
-
-/* =========================
-COMPETITION HEADER
-========================= */
 
 .competition-title{
 display:flex;
@@ -401,10 +357,6 @@ font-size:11px;
 font-weight:600;
 }
 
-/* =========================
-FAN AREA
-========================= */
-
 .fan-grid{
 display:grid;
 grid-template-columns:repeat(3,1fr);
@@ -428,10 +380,6 @@ color:#aaa;
 font-size:13px;
 line-height:1.5;
 }
-
-/* =========================
-KADER
-========================= */
 
 .squad-section{
 margin-top:20px;
@@ -492,10 +440,6 @@ margin-top:4px;
 max-width:350px;
 }
 
-/* =========================
-FOOTER
-========================= */
-
 footer{
 background:#111;
 color:#999;
@@ -514,10 +458,6 @@ margin-top:12px;
 font-size:11px;
 color:#777;
 }
-
-/* =========================
-MOBILE
-========================= */
 
 @media(max-width:900px){
 
@@ -688,6 +628,10 @@ Spiele
 Tabelle
 </a>
 
+<a href="#transfers">
+Transfers
+</a>
+
 <a href="#kader">
 Kader
 </a>
@@ -751,6 +695,8 @@ Aktuelle News
 <b>
 Automatische Datenanbindung:
 </b>
+
+<br>
 
 Die Daten werden automatisch über unseren Server aktualisiert.
 
@@ -901,6 +847,104 @@ Tabelle wird geladen …
 </section>
 
 <!-- =========================
+TRANSFERS
+========================= -->
+
+<section class="section" id="transfers">
+
+<h2>
+Transfers 2026/27
+</h2>
+
+<div class="line"></div>
+
+<div class="notice">
+
+<b>
+🔄 Zu- und Abgänge
+</b>
+
+<br>
+
+Aktuelle Transfers des VfB Stuttgart.
+
+</div>
+
+<div class="grid">
+
+<!-- ZUGÄNGE -->
+
+<div class="card">
+
+<div class="competition-title">
+
+<div class="icon">
+🟢
+</div>
+
+<div>
+
+<h3>
+Zugänge
+</h3>
+
+<span>
+Neue Spieler beim VfB Stuttgart
+</span>
+
+</div>
+
+</div>
+
+<div id="transferArrivals">
+
+<div class="loading">
+Transfers werden geladen …
+</div>
+
+</div>
+
+</div>
+
+<!-- ABGÄNGE -->
+
+<div class="card">
+
+<div class="competition-title">
+
+<div class="icon">
+🔴
+</div>
+
+<div>
+
+<h3>
+Abgänge
+</h3>
+
+<span>
+Spieler verlassen den VfB
+</span>
+
+</div>
+
+</div>
+
+<div id="transferDepartures">
+
+<div class="loading">
+Transfers werden geladen …
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- =========================
 KADER
 ========================= -->
 
@@ -959,9 +1003,8 @@ TOR
 </div>
 
 </div>
-<!-- =========================
-ABWEHR
-========================= -->
+
+<!-- ABWEHR -->
 
 <div class="squad-group">
 
@@ -1034,10 +1077,7 @@ ABWEHR
 </div>
 </div>
 
-
-<!-- =========================
-MITTELFELD
-========================= -->
+<!-- MITTELFELD -->
 
 <div class="squad-group">
 
@@ -1098,10 +1138,7 @@ MITTELFELD
 </div>
 </div>
 
-
-<!-- =========================
-STURM
-========================= -->
+<!-- STURM -->
 
 <div class="squad-group">
 
@@ -1168,10 +1205,7 @@ STURM
 </div>
 </div>
 
-
-<!-- =========================
-TRAINER
-========================= -->
+<!-- TRAINER -->
 
 <div class="squad-group">
 
@@ -1194,7 +1228,6 @@ Cheftrainer
 </div>
 
 </section>
-
 
 <!-- =========================
 FANBEREICH
@@ -1223,7 +1256,6 @@ Stimmung und Spieltage.
 
 </div>
 
-
 <div class="fan">
 
 <h3>
@@ -1236,7 +1268,6 @@ und weitere Fan-Abstimmungen.
 </p>
 
 </div>
-
 
 <div class="fan">
 
@@ -1256,7 +1287,6 @@ rund um den VfB.
 </section>
 
 </main>
-
 
 <!-- =========================
 FOOTER
@@ -1284,7 +1314,8 @@ Daten bereitgestellt von football-data.org
 </div>
 
 </footer>
-   <script>
+
+<script>
 
 /* =========================
    DASHBOARD LADEN
@@ -1308,6 +1339,141 @@ throw new Error(
 const data =
 await response.json();
 
+/* =========================
+   TRANSFERS
+========================= */
+
+const arrivals =
+document.getElementById(
+"transferArrivals"
+);
+
+const departures =
+document.getElementById(
+"transferDepartures"
+);
+
+if(data.transfers){
+
+if(arrivals){
+
+if(
+data.transfers.arrivals &&
+data.transfers.arrivals.length
+){
+
+arrivals.innerHTML =
+data.transfers.arrivals
+.map(transfer => `
+
+<div class="fixture">
+
+<div style="flex:1">
+
+<strong>
+${escapeHTML(
+transfer.player
+)}
+</strong>
+
+<div class="competition">
+
+← ${escapeHTML(
+transfer.club
+)}
+
+</div>
+
+${
+transfer.type
+?
+`
+<div class="competition">
+${escapeHTML(
+transfer.type
+)}
+</div>
+`
+:
+""
+}
+
+</div>
+
+</div>
+
+`)
+.join("");
+
+}else{
+
+arrivals.innerHTML =
+'<div class="loading">Keine Zugänge gefunden.</div>';
+
+}
+
+}
+
+if(departures){
+
+if(
+data.transfers.departures &&
+data.transfers.departures.length
+){
+
+departures.innerHTML =
+data.transfers.departures
+.map(transfer => `
+
+<div class="fixture">
+
+<div style="flex:1">
+
+<strong>
+${escapeHTML(
+transfer.player
+)}
+</strong>
+
+<div class="competition">
+
+→ ${escapeHTML(
+transfer.club
+)}
+
+</div>
+
+${
+transfer.type
+?
+`
+<div class="competition">
+${escapeHTML(
+transfer.type
+)}
+</div>
+`
+:
+""
+}
+
+</div>
+
+</div>
+
+`)
+.join("");
+
+}else{
+
+departures.innerHTML =
+'<div class="loading">Keine Abgänge gefunden.</div>';
+
+}
+
+}
+
+}
 
 /* =========================
    AKTUALISIERT
@@ -1319,8 +1485,9 @@ document.getElementById("updated")
 new Date(
 data.updatedAt
 )
-.toLocaleString("de-DE");
-
+.toLocaleString(
+"de-DE"
+);
 
 /* =========================
    NEWS
@@ -1411,7 +1578,6 @@ newsList.innerHTML =
 
 }
 
-
 /* =========================
    NÄCHSTES SPIEL
 ========================= */
@@ -1434,7 +1600,6 @@ NÄCHSTES SPIEL
 
 </div>
 
-
 <h3>
 
 ${escapeHTML(game.home)}
@@ -1445,13 +1610,11 @@ ${escapeHTML(game.away)}
 
 </h3>
 
-
 <p>
 
 ${escapeHTML(game.date)}
 
 </p>
-
 
 <div class="competition">
 
@@ -1465,7 +1628,6 @@ game.competition ||
 `;
 
 }
-
 
 /* =========================
    BUNDESLIGA
@@ -1487,7 +1649,6 @@ data.fixtures.map(game => `
 
 <div class="fixture">
 
-
 <div class="date">
 
 ${escapeHTML(
@@ -1496,9 +1657,7 @@ game.date
 
 </div>
 
-
 <div style="flex:1">
-
 
 <div class="team-line">
 
@@ -1530,7 +1689,6 @@ game.home
 </span>
 
 </div>
-
 
 <div
 class="team-line"
@@ -1566,7 +1724,6 @@ game.away
 
 </div>
 
-
 <div class="competition">
 
 ${escapeHTML(
@@ -1578,7 +1735,6 @@ game.competition ||
 
 </div>
 
-
 <div class="status">
 
 ${formatStatus(
@@ -1586,7 +1742,6 @@ game.status
 )}
 
 </div>
-
 
 </div>
 
@@ -1598,7 +1753,6 @@ bundesliga.innerHTML =
 '<div class="loading">Keine Bundesliga-Spiele verfügbar.</div>';
 
 }
-
 
 /* =========================
    CHAMPIONS LEAGUE
@@ -1620,7 +1774,6 @@ data.championsLeague.map(game => `
 
 <div class="fixture">
 
-
 <div class="date">
 
 ${escapeHTML(
@@ -1629,9 +1782,7 @@ game.date
 
 </div>
 
-
 <div style="flex:1">
-
 
 <div class="team-line">
 
@@ -1663,7 +1814,6 @@ game.home
 </span>
 
 </div>
-
 
 <div
 class="team-line"
@@ -1699,7 +1849,6 @@ game.away
 
 </div>
 
-
 <div class="competition">
 
 ⭐ Champions League
@@ -1708,7 +1857,6 @@ game.away
 
 </div>
 
-
 <div class="status">
 
 ${formatStatus(
@@ -1716,7 +1864,6 @@ game.status
 )}
 
 </div>
-
 
 </div>
 
@@ -1735,7 +1882,6 @@ Keine Champions-League-Spiele verfügbar.
 `;
 
 }
-
 
 /* =========================
    TABELLE
@@ -1757,7 +1903,6 @@ data.table.map(team => `
 
 <div class="fixture">
 
-
 <div class="date">
 
 #${escapeHTML(
@@ -1766,9 +1911,7 @@ team.position
 
 </div>
 
-
 <div style="flex:1">
-
 
 <div class="team-line">
 
@@ -1791,7 +1934,6 @@ loading="lazy">
 ""
 }
 
-
 <strong>
 
 ${escapeHTML(
@@ -1804,7 +1946,6 @@ team.team
 
 </div>
 
-
 <div class="status">
 
 ${escapeHTML(
@@ -1814,7 +1955,6 @@ team.points
  Pkt.
 
 </div>
-
 
 </div>
 
@@ -1827,7 +1967,6 @@ table.innerHTML =
 
 }
 
-
 }catch(error){
 
 console.error(error);
@@ -1837,7 +1976,6 @@ document.getElementById(
 )
 .textContent =
 "Datenquelle nicht erreichbar";
-
 
 document.getElementById(
 "newsList"
@@ -1857,7 +1995,6 @@ nicht erreichbar. Bitte später erneut versuchen.
 
 }
 
-
 /* =========================
    STATUS
 ========================= */
@@ -1869,7 +2006,6 @@ if(!status){
 return "";
 
 }
-
 
 const statuses = {
 
@@ -1899,11 +2035,9 @@ CANCELLED:
 
 };
 
-
 return statuses[status] || status;
 
 }
-
 
 /* =========================
    HTML SICHERN
@@ -1925,13 +2059,11 @@ return String(value ?? "")
 
 }
 
-
 /* =========================
    START
 ========================= */
 
 loadDashboard();
-
 
 /* =========================
    AUTOMATISCHE AKTUALISIERUNG
@@ -1947,5 +2079,3 @@ loadDashboard,
 </body>
 
 </html>
-   
-   
