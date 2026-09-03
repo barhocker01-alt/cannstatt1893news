@@ -8,23 +8,29 @@ const TOKEN = process.env.FOOTBALL_DATA_TOKEN;
 
 const VFB_TEAM_ID = 10;
 
+/*
+ * Dashboard-Cache
+ * 15 Minuten, damit neue News relativ schnell erscheinen.
+ */
 let cache = {
   data: null,
   time: 0
 };
 
-const CACHE_TIME = 6 * 60 * 60 * 1000;
+const CACHE_TIME = 15 * 60 * 1000;
 
 
-/* =========================
-   FOOTBALL-DATA API
-========================= */
+/* =========================================================
+   FOOTBALL-DATA.ORG API
+========================================================= */
 
 function apiRequest(endpoint) {
   return new Promise((resolve, reject) => {
 
     if (!TOKEN) {
-      reject(new Error("FOOTBALL_DATA_TOKEN fehlt"));
+      reject(
+        new Error("FOOTBALL_DATA_TOKEN fehlt")
+      );
       return;
     }
 
@@ -32,7 +38,8 @@ function apiRequest(endpoint) {
       "https://api.football-data.org/v4" + endpoint,
       {
         headers: {
-          "X-Auth-Token": TOKEN
+          "X-Auth-Token": TOKEN,
+          "User-Agent": "Canstatt1893News/1.0"
         }
       },
       res => {
@@ -62,7 +69,8 @@ function apiRequest(endpoint) {
             reject(
               new Error(
                 `football-data.org HTTP ${res.statusCode}: ${
-                  json.message || JSON.stringify(json)
+                  json.message ||
+                  JSON.stringify(json)
                 }`
               )
             );
@@ -70,7 +78,9 @@ function apiRequest(endpoint) {
           }
 
           resolve(json);
+
         });
+
       }
     );
 
@@ -78,7 +88,7 @@ function apiRequest(endpoint) {
 
     req.setTimeout(15000, () => {
       req.destroy(
-        new Error("API Timeout")
+        new Error("football-data.org Timeout")
       );
     });
 
@@ -86,9 +96,9 @@ function apiRequest(endpoint) {
 }
 
 
-/* =========================
+/* =========================================================
    DATUM FORMATIEREN
-========================= */
+========================================================= */
 
 function formatDate(dateString) {
 
@@ -96,7 +106,13 @@ function formatDate(dateString) {
     return "";
   }
 
-  return new Date(dateString).toLocaleString(
+  const date = new Date(dateString);
+
+  if (Number.isNaN(date.getTime())) {
+    return "";
+  }
+
+  return date.toLocaleString(
     "de-DE",
     {
       timeZone: "Europe/Berlin",
@@ -110,21 +126,22 @@ function formatDate(dateString) {
 }
 
 
-/* =========================
+/* =========================================================
    SPIEL UMWANDELN
-========================= */
+========================================================= */
 
 function mapMatch(match) {
 
   return {
 
-    id: match.id,
+    id:
+      match.id,
 
-    date: formatDate(
-      match.utcDate
-    ),
+    date:
+      formatDate(match.utcDate),
 
-    rawDate: match.utcDate,
+    rawDate:
+      match.utcDate,
 
     home:
       match.homeTeam?.name || "",
@@ -167,9 +184,9 @@ function mapMatch(match) {
 }
 
 
-/* =========================
+/* =========================================================
    VFB SPIELE LADEN
-========================= */
+========================================================= */
 
 async function getVfbMatches() {
 
@@ -188,9 +205,9 @@ async function getVfbMatches() {
 }
 
 
-/* =========================
+/* =========================================================
    BUNDESLIGA TABELLE
-========================= */
+========================================================= */
 
 async function getBundesligaTable() {
 
@@ -214,11 +231,6 @@ async function getBundesligaTable() {
   return (total.table || [])
     .map(item => ({
 
-      /*
-       * WICHTIG:
-       * Die Webseite erwartet
-       * team.position
-       */
       position:
         item.position,
 
@@ -260,18 +272,400 @@ async function getBundesligaTable() {
 }
 
 
-/* =========================
-   VFB NEWS
-========================= */
+/* =========================================================
+   XML TEXT BEREINIGEN
+========================================================= */
+
+function cleanXmlText(value) {
+
+  if (!value) {
+    return "";
+  }
+
+  return String(value)
+
+    .replace(
+      /<!\[CDATA\[([\s\S]*?)\]\]>/gi,
+      "$1"
+    )
+
+    .replace(
+      /<[^>]*>/g,
+      " "
+    )
+
+    .replace(
+      /&amp;/gi,
+      "&"
+    )
+
+    .replace(
+      /&quot;/gi,
+      '"'
+    )
+
+    .replace(
+      /&apos;/gi,
+      "'"
+    )
+
+    .replace(
+      /&#39;/gi,
+      "'"
+    )
+
+    .replace(
+      /&lt;/gi,
+      "<"
+    )
+
+    .replace(
+      /&gt;/gi,
+      ">"
+    )
+
+    .replace(
+      /&nbsp;/gi,
+      " "
+    )
+
+    .replace(
+      /&#(\d+);/g,
+      (match, dec) =>
+        String.fromCharCode(
+          Number(dec)
+        )
+    )
+
+    .replace(
+      /&#x([0-9a-f]+);/gi,
+      (match, hex) =>
+        String.fromCharCode(
+          parseInt(hex, 16)
+        )
+    )
+
+    .replace(
+      /\s+/g,
+      " "
+    )
+
+    .trim();
+
+}
+
+
+/* =========================================================
+   XML TAG AUSLESEN
+========================================================= */
+
+function getXmlTag(
+  xml,
+  tag
+) {
+
+  const regex =
+    new RegExp(
+      `<${tag}(?:\\s[^>]*)?>([\\s\\S]*?)<\\/${tag}>`,
+      "i"
+    );
+
+  const match =
+    xml.match(regex);
+
+  if (!match) {
+    return "";
+  }
+
+  return cleanXmlText(
+    match[1]
+  );
+
+}
+
+
+/* =========================================================
+   OFFIZIELLE VFB NEWS
+========================================================= */
+
+/*
+ * Offizieller RSS-Feed des VfB Stuttgart.
+ *
+ * Quelle:
+ * https://www.vfb.de/templates/generated/1/raw/de.xml
+ */
+
+function fetchVfbRSS() {
+
+  return new Promise(
+    (resolve, reject) => {
+
+      const rssUrl =
+        "https://www.vfb.de/templates/generated/1/raw/de.xml";
+
+      console.log(
+        "Lade offizielle VfB-News..."
+      );
+
+      const request =
+        https.get(
+          rssUrl,
+          {
+            headers: {
+              "User-Agent":
+                "Canstatt1893News/1.0",
+              "Accept":
+                "application/rss+xml, application/xml, text/xml, */*"
+            }
+          },
+          res => {
+
+            let xml = "";
+
+            res.on(
+              "data",
+              chunk => {
+                xml += chunk;
+              }
+            );
+
+            res.on(
+              "end",
+              () => {
+
+                if (
+                  res.statusCode !== 200
+                ) {
+
+                  reject(
+                    new Error(
+                      `VfB RSS HTTP ${res.statusCode}`
+                    )
+                  );
+
+                  return;
+
+                }
+
+                if (
+                  !xml ||
+                  !xml.includes("<")
+                ) {
+
+                  reject(
+                    new Error(
+                      "VfB RSS Feed ist leer"
+                    )
+                  );
+
+                  return;
+
+                }
+
+                resolve(xml);
+
+              }
+            );
+
+          }
+        );
+
+      request.on(
+        "error",
+        reject
+      );
+
+      request.setTimeout(
+        15000,
+        () => {
+
+          request.destroy(
+            new Error(
+              "VfB RSS Timeout"
+            )
+          );
+
+        }
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   NEWS AUS RSS ERSTELLEN
+========================================================= */
 
 async function getNews() {
 
   try {
 
-    const result =
-      await fetchVfbNews();
+    const xml =
+      await fetchVfbRSS();
 
-    return result;
+    const items = [];
+
+    const itemRegex =
+      /<item(?:\s[^>]*)?>([\s\S]*?)<\/item>/gi;
+
+    let match;
+
+    while (
+      (match =
+        itemRegex.exec(xml)) !== null
+    ) {
+
+      const item =
+        match[1];
+
+      const title =
+        getXmlTag(
+          item,
+          "title"
+        );
+
+      const link =
+        getXmlTag(
+          item,
+          "link"
+        );
+
+      const pubDate =
+        getXmlTag(
+          item,
+          "pubDate"
+        );
+
+      const description =
+        getXmlTag(
+          item,
+          "description"
+        );
+
+      const category =
+        getXmlTag(
+          item,
+          "category"
+        );
+
+
+      if (
+        !title ||
+        !link
+      ) {
+        continue;
+      }
+
+
+      /*
+       * Nur echte VfB-Artikel.
+       */
+      if (
+        !link.includes(
+          "vfb.de"
+        )
+      ) {
+        continue;
+      }
+
+
+      /*
+       * Keine doppelten Meldungen.
+       */
+      if (
+        items.some(
+          news =>
+            news.url === link
+        )
+      ) {
+        continue;
+      }
+
+
+      let date = "";
+
+      if (pubDate) {
+
+        const parsed =
+          new Date(pubDate);
+
+        if (
+          !Number.isNaN(
+            parsed.getTime()
+          )
+        ) {
+
+          date =
+            parsed.toLocaleString(
+              "de-DE",
+              {
+                timeZone:
+                  "Europe/Berlin",
+                day:
+                  "2-digit",
+                month:
+                  "2-digit",
+                year:
+                  "numeric",
+                hour:
+                  "2-digit",
+                minute:
+                  "2-digit"
+              }
+            );
+
+        }
+
+      }
+
+
+      items.push({
+
+        title:
+
+          title,
+
+        url:
+
+          link,
+
+        date:
+
+          date,
+
+        summary:
+
+          description,
+
+        category:
+
+          category ||
+          "VfB aktuell"
+
+      });
+
+
+      /*
+       * Maximal 10 News.
+       */
+      if (
+        items.length >= 10
+      ) {
+        break;
+      }
+
+    }
+
+
+    console.log(
+      "VfB-News gefunden:",
+      items.length
+    );
+
+
+    return items;
 
   } catch (error) {
 
@@ -287,114 +681,9 @@ async function getNews() {
 }
 
 
-function fetchVfbNews() {
-
-  return new Promise(
-    (resolve, reject) => {
-
-      https.get(
-        "https://www.vfb.de/de/1893/aktuell/neues/",
-        res => {
-
-          let html = "";
-
-          res.on(
-            "data",
-            chunk => {
-              html += chunk;
-            }
-          );
-
-          res.on(
-            "end",
-            () => {
-
-              const links = [];
-
-              const regex =
-                /<a[^>]+href=["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi;
-
-              let match;
-
-              while (
-                (match =
-                  regex.exec(html)) !== null
-              ) {
-
-                let url =
-                  match[1];
-
-                let title =
-                  match[2]
-                    .replace(
-                      /<[^>]*>/g,
-                      " "
-                    )
-                    .replace(
-                      /\s+/g,
-                      " "
-                    )
-                    .trim();
-
-                if (
-                  !title ||
-                  title.length < 8
-                ) {
-                  continue;
-                }
-
-                if (
-                  url.startsWith("/")
-                ) {
-                  url =
-                    "https://www.vfb.de" +
-                    url;
-                }
-
-                if (
-                  url.includes(
-                    "vfb.de"
-                  ) &&
-                  !links.some(
-                    item =>
-                      item.url === url
-                  )
-                ) {
-
-                  links.push({
-
-                    title,
-
-                    url
-
-                  });
-
-                }
-
-              }
-
-              resolve(
-                links.slice(0, 10)
-              );
-
-            }
-          );
-
-        }
-      ).on(
-        "error",
-        reject
-      );
-
-    }
-  );
-
-}
-
-
-/* =========================
+/* =========================================================
    DASHBOARD AUFBAUEN
-========================= */
+========================================================= */
 
 async function buildDashboard() {
 
@@ -424,9 +713,17 @@ async function buildDashboard() {
   );
 
 
+  console.log(
+    "Lade echte VfB-News..."
+  );
+
   const news =
     await getNews();
 
+
+  /* =======================================================
+     BUNDESLIGA
+  ======================================================= */
 
   const bundesliga =
     matches.filter(
@@ -436,19 +733,27 @@ async function buildDashboard() {
     );
 
 
+  /* =======================================================
+     CHAMPIONS LEAGUE
+  ======================================================= */
+
   const championsLeague =
     matches.filter(
       match =>
         match.competition ===
           "UEFA Champions League" ||
+
         match.competition ===
           "Champions League"
     );
 
 
+  /* =======================================================
+     NÄCHSTES SPIEL
+  ======================================================= */
+
   const now =
     new Date();
-
 
   const nextGame =
     matches.find(
@@ -464,6 +769,7 @@ async function buildDashboard() {
           (
             match.status ===
               "SCHEDULED" ||
+
             match.status ===
               "TIMED"
           )
@@ -473,25 +779,41 @@ async function buildDashboard() {
     ) || null;
 
 
+  /* =======================================================
+     DASHBOARD
+  ======================================================= */
+
   return {
 
     updatedAt:
       new Date().toISOString(),
 
-    news,
+    news:
 
-    nextGame,
+      news,
+
+    nextGame:
+
+      nextGame,
 
     fixtures:
+
       bundesliga,
 
-    championsLeague,
+    championsLeague:
 
-    table,
+      championsLeague,
 
-    live: [],
+    table:
+
+      table,
+
+    live:
+
+      [],
 
     attribution:
+
       "Data provided by football-data.org"
 
   };
@@ -499,15 +821,16 @@ async function buildDashboard() {
 }
 
 
-/* =========================
+/* =========================================================
    DASHBOARD CACHE
-========================= */
+========================================================= */
 
 async function getDashboard() {
 
   if (
     cache.data &&
-    Date.now() - cache.time <
+    Date.now() -
+      cache.time <
       CACHE_TIME
   ) {
 
@@ -521,40 +844,52 @@ async function getDashboard() {
     const data =
       await buildDashboard();
 
+
     cache = {
 
-      data,
+      data:
+
+        data,
 
       time:
+
         Date.now()
 
     };
+
 
     return data;
 
   } catch (error) {
 
     console.error(
-      "API ERROR:",
+      "DASHBOARD ERROR:",
       error.message
     );
+
 
     return {
 
       updatedAt:
         new Date().toISOString(),
 
-      news: [],
+      news:
+        [],
 
-      nextGame: null,
+      nextGame:
+        null,
 
-      fixtures: [],
+      fixtures:
+        [],
 
-      championsLeague: [],
+      championsLeague:
+        [],
 
-      table: [],
+      table:
+        [],
 
-      live: [],
+      live:
+        [],
 
       error:
         error.message,
@@ -569,9 +904,9 @@ async function getDashboard() {
 }
 
 
-/* =========================
+/* =========================================================
    JSON ANTWORT
-========================= */
+========================================================= */
 
 function sendJSON(
   res,
@@ -590,26 +925,22 @@ function sendJSON(
   );
 
   res.end(
-    JSON.stringify(data)
+    JSON.stringify(
+      data
+    )
   );
 
 }
 
 
-/* =========================
+/* =========================================================
    DATEI AUSLIEFERN
-========================= */
+========================================================= */
 
 function serveFile(
   res,
   filename
 ) {
-
-  /*
-   * __dirname zeigt direkt
-   * auf den Ordner,
-   * in dem server.js liegt.
-   */
 
   const filePath =
     path.join(
@@ -625,13 +956,16 @@ function serveFile(
 
 
   if (
-    !fs.existsSync(filePath)
+    !fs.existsSync(
+      filePath
+    )
   ) {
 
     console.error(
       "DATEI NICHT GEFUNDEN:",
       filePath
     );
+
 
     res.writeHead(
       404,
@@ -641,9 +975,11 @@ function serveFile(
       }
     );
 
+
     res.end(
       "Nicht gefunden"
     );
+
 
     return;
 
@@ -683,7 +1019,10 @@ function serveFile(
       "image/svg+xml",
 
     ".ico":
-      "image/x-icon"
+      "image/x-icon",
+
+    ".webp":
+      "image/webp"
 
   };
 
@@ -705,21 +1044,15 @@ function serveFile(
 }
 
 
-/* =========================
+/* =========================================================
    SERVER
-========================= */
+========================================================= */
 
 const server =
   http.createServer(
     async (req, res) => {
 
       try {
-
-        /*
-         * URL sauber auslesen.
-         * Dadurch funktionieren
-         * auch URLs mit ?... dahinter.
-         */
 
         const pathname =
           new URL(
@@ -734,9 +1067,9 @@ const server =
         );
 
 
-        /* =====================
-           API
-        ===================== */
+        /* =================================================
+           DASHBOARD API
+        ================================================= */
 
         if (
           pathname ===
@@ -746,19 +1079,21 @@ const server =
           const data =
             await getDashboard();
 
+
           sendJSON(
             res,
             data
           );
+
 
           return;
 
         }
 
 
-        /* =====================
+        /* =================================================
            HEALTH CHECK
-        ===================== */
+        ================================================= */
 
         if (
           pathname ===
@@ -792,14 +1127,15 @@ const server =
             }
           );
 
+
           return;
 
         }
 
 
-        /* =====================
+        /* =================================================
            HOMEPAGE
-        ===================== */
+        ================================================= */
 
         if (
           pathname === "/" ||
@@ -812,20 +1148,15 @@ const server =
             "index.html"
           );
 
+
           return;
 
         }
 
 
-        /* =====================
+        /* =================================================
            FALLBACK
-        ===================== */
-
-        /*
-         * Alles, was keine API ist,
-         * versucht die Homepage
-         * auszuliefern.
-         */
+        ================================================= */
 
         if (
           !pathname.startsWith(
@@ -838,14 +1169,15 @@ const server =
             "index.html"
           );
 
+
           return;
 
         }
 
 
-        /* =====================
+        /* =================================================
            404
-        ===================== */
+        ================================================= */
 
         res.writeHead(
           404,
@@ -854,6 +1186,7 @@ const server =
               "text/plain; charset=utf-8"
           }
         );
+
 
         res.end(
           "Nicht gefunden"
@@ -867,6 +1200,7 @@ const server =
           error
         );
 
+
         res.writeHead(
           500,
           {
@@ -874,6 +1208,7 @@ const server =
               "application/json; charset=utf-8"
           }
         );
+
 
         res.end(
           JSON.stringify(
@@ -890,9 +1225,9 @@ const server =
   );
 
 
-/* =========================
+/* =========================================================
    SERVER START
-========================= */
+========================================================= */
 
 server.listen(
   PORT,
@@ -903,15 +1238,18 @@ server.listen(
       `Server läuft auf Port ${PORT}`
     );
 
+
     console.log(
       "Football-Data Token vorhanden:",
       !!TOKEN
     );
 
+
     console.log(
       "Server-Verzeichnis:",
       __dirname
     );
+
 
     console.log(
       "index.html vorhanden:",
