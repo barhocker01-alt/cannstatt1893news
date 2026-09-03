@@ -1,557 +1,334 @@
 const http = require("http");
 const https = require("https");
-const fs = require("fs");
-const path = require("path");
 
 const PORT = process.env.PORT || 3000;
+const API_KEY = process.env.API_FOOTBALL_KEY;
 
-const VFB_NEWS_URL =
-  "https://www.vfb.de/de/1893/aktuell/neues/";
+const VFB_TEAM_ID = 160;
+const BUNDESLIGA_ID = 78;
+const CHAMPIONS_LEAGUE_ID = 2;
+const SEASON = 2026;
 
-function request(url) {
+let cache = {
+  data: null,
+  time: 0
+};
 
+function apiFootball(path) {
   return new Promise((resolve, reject) => {
-
-    https.get(
-      url,
+    const req = https.get(
       {
+        hostname: "v3.football.api-sports.io",
+        path,
         headers: {
-          "User-Agent":
-            "Canstatt1893News/1.0"
+          "x-apisports-key": API_KEY
         }
       },
       response => {
-
-        let data = "";
-
-        response.setEncoding("utf8");
+        let body = "";
 
         response.on("data", chunk => {
-          data += chunk;
+          body += chunk;
         });
 
         response.on("end", () => {
+          try {
+            const json = JSON.parse(body);
 
-          if (
-            response.statusCode >= 200 &&
-            response.statusCode < 400
-          ) {
-            resolve(data);
-          } else {
-            reject(
-              new Error(
-                "HTTP " +
-                response.statusCode
-              )
-            );
+            if (response.statusCode >= 400) {
+              reject(new Error("API Fehler " + response.statusCode));
+              return;
+            }
+
+            resolve(json);
+          } catch (error) {
+            reject(error);
           }
-
         });
-
       }
-    ).on("error", reject);
-
-  });
-
-}
-
-
-/*
- Entfernt HTML-Tags und bereinigt Text
-*/
-
-function cleanText(text) {
-
-  return String(text || "")
-    .replace(/<script[\s\S]*?<\/script>/gi, "")
-    .replace(/<style[\s\S]*?<\/style>/gi, "")
-    .replace(/<[^>]+>/g, " ")
-    .replace(/&nbsp;/g, " ")
-    .replace(/&amp;/g, "&")
-    .replace(/&quot;/g, '"')
-    .replace(/&#039;/g, "'")
-    .replace(/\s+/g, " ")
-    .trim();
-
-}
-
-
-/*
- Versucht News aus der offiziellen
- VfB-Newsseite zu erkennen.
-*/
-
-function extractNews(html) {
-
-  const results = [];
-  const seen = new Set();
-
-  const regex =
-    /<a[^>]+href=["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi;
-
-  let match;
-
-  while (
-    (match = regex.exec(html)) &&
-    results.length < 10
-  ) {
-
-    let url = match[1];
-
-    let title =
-      cleanText(match[2]);
-
-    if (
-      title.length < 25 ||
-      title.length > 180
-    ) {
-      continue;
-    }
-
-    if (
-      /cookie|datenschutz|impressum|login|menu|mehr laden/i
-        .test(title)
-    ) {
-      continue;
-    }
-
-    if (
-      url.startsWith("/")
-    ) {
-      url =
-        "https://www.vfb.de" +
-        url;
-    }
-
-    if (
-      !url.includes("vfb.de")
-    ) {
-      continue;
-    }
-
-    if (
-      seen.has(title)
-    ) {
-      continue;
-    }
-
-    seen.add(title);
-
-    results.push({
-
-      title,
-
-      category:
-        "VfB aktuell",
-
-      date:
-        new Date()
-          .toLocaleDateString("de-DE"),
-
-      summary:
-        "Aktuelle Meldung des VfB Stuttgart.",
-
-      url
-
-    });
-
-  }
-
-  return results;
-
-}
-
-
-/*
- Fallback-Daten.
- Falls die Newsquelle kurzzeitig nicht
- erreichbar ist, bleibt die Homepage
- trotzdem funktionsfähig.
-*/
-
-function fallbackData() {
-
-  return {
-
-    updatedAt:
-      new Date().toISOString(),
-
-    news: [
-
-      {
-        title:
-          "VfB Stuttgart – aktuelle News",
-
-        category:
-          "VfB aktuell",
-
-        date:
-          "Aktuell",
-
-        summary:
-          "Neue Meldungen findest du auf der offiziellen VfB-Webseite.",
-
-        url:
-          "https://www.vfb.de/"
-      },
-
-      {
-        title:
-          "Champions League 2026/27",
-
-        category:
-          "Champions League",
-
-        date:
-          "Saison 2026/27",
-
-        summary:
-          "Der VfB Stuttgart spielt in der Königsklasse.",
-
-        url:
-          "https://www.vfb.de/"
-      }
-
-    ],
-
-
-    nextGame: {
-
-      home:
-        "VfB Stuttgart",
-
-      away:
-        "1. FC Köln",
-
-      date:
-        "04.09.2026 · 20:30 Uhr · MHPArena"
-
-    },
-
-
-    fixtures: [
-
-      {
-        date:
-          "04.09.2026 · 20:30",
-
-        home:
-          "VfB Stuttgart",
-
-        away:
-          "1. FC Köln",
-
-        competition:
-          "Bundesliga",
-
-        status:
-          "HEIM"
-      },
-
-      {
-        date:
-          "09.09.2026 · 18:45",
-
-        home:
-          "VfB Stuttgart",
-
-        away:
-          "Viking Stavanger",
-
-        competition:
-          "Champions League",
-
-        status:
-          "HEIM"
-      },
-
-      {
-        date:
-          "12.09.2026 · 15:30",
-
-        home:
-          "TSG Hoffenheim",
-
-        away:
-          "VfB Stuttgart",
-
-        competition:
-          "Bundesliga",
-
-        status:
-          "AUSW."
-      },
-
-      {
-        date:
-          "19.09.2026 · 18:30",
-
-        home:
-          "VfB Stuttgart",
-
-        away:
-          "Borussia Dortmund",
-
-        competition:
-          "Bundesliga",
-
-        status:
-          "HEIM"
-      }
-
-    ],
-
-
-    table: [
-
-      {
-        position:
-          1,
-
-        team:
-          "FC Bayern München",
-
-        points:
-          3
-      },
-
-      {
-        position:
-          18,
-
-        team:
-          "VfB Stuttgart",
-
-        points:
-          0
-      }
-
-    ]
-
-  };
-
-}
-
-
-/*
- Dashboard erzeugen
-*/
-
-async function createDashboard() {
-
-  const data =
-    fallbackData();
-
-  try {
-
-    const html =
-      await request(
-        VFB_NEWS_URL
-      );
-
-    const news =
-      extractNews(html);
-
-    if (
-      news.length >= 1
-    ) {
-
-      data.news =
-        news;
-
-    }
-
-  } catch (error) {
-
-    console.log(
-      "Newsquelle momentan nicht erreichbar."
     );
 
-  }
-
-  data.updatedAt =
-    new Date().toISOString();
-
-  return data;
-
+    req.on("error", reject);
+    req.setTimeout(15000, () => {
+      req.destroy();
+      reject(new Error("API Timeout"));
+    });
+  });
 }
 
+function formatDate(dateString) {
+  if (!dateString) return "";
 
-/*
- HTTP Server
-*/
+  const date = new Date(dateString);
 
-const server =
-  http.createServer(
-    async (req, res) => {
+  return new Intl.DateTimeFormat("de-DE", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit"
+  }).format(date);
+}
 
-      /*
-       API
-      */
-
-      if (
-        req.url ===
-        "/api/dashboard"
-      ) {
-
-        try {
-
-          const data =
-            await createDashboard();
-
-          res.writeHead(
-            200,
-            {
-              "Content-Type":
-                "application/json; charset=utf-8",
-
-              "Cache-Control":
-                "public, max-age=300"
-            }
-          );
-
-          res.end(
-            JSON.stringify(data)
-          );
-
-        } catch (error) {
-
-          res.writeHead(
-            500,
-            {
-              "Content-Type":
-                "application/json"
-            }
-          );
-
-          res.end(
-            JSON.stringify({
-              error:
-                "Daten konnten nicht geladen werden."
-            })
-          );
-
-        }
-
-        return;
-
-      }
-
-
-      /*
-       Homepage
-      */
-
-      let file =
-        req.url === "/"
-          ? "index.html"
-          : req.url.substring(1);
-
-
-      /*
-       Sicherheitsprüfung
-      */
-
-      file =
-        path.normalize(file);
-
-      if (
-        file.includes("..")
-      ) {
-
-        res.writeHead(403);
-
-        res.end(
-          "Forbidden"
-        );
-
-        return;
-
-      }
-
-
-      const filePath =
-        path.join(
-          __dirname,
-          file
-        );
-
-
-      fs.readFile(
-        filePath,
-        (error, content) => {
-
-          if (error) {
-
-            res.writeHead(404);
-
-            res.end(
-              "404 – Seite nicht gefunden"
-            );
-
-            return;
-
-          }
-
-
-          let contentType =
-            "text/plain";
-
-          if (
-            file.endsWith(".html")
-          ) {
-
-            contentType =
-              "text/html; charset=utf-8";
-
-          }
-
-          if (
-            file.endsWith(".css")
-          ) {
-
-            contentType =
-              "text/css";
-
-          }
-
-          if (
-            file.endsWith(".js")
-          ) {
-
-            contentType =
-              "application/javascript";
-
-          }
-
-
-          res.writeHead(
-            200,
-            {
-              "Content-Type":
-                contentType
-            }
-          );
-
-          res.end(
-            content
-          );
-
-        }
-      );
-
-    }
+async function getFixtures(league) {
+  const result = await apiFootball(
+    `/fixtures?team=${VFB_TEAM_ID}&league=${league}&season=${SEASON}`
   );
 
+  return (result.response || []).map(match => ({
+    id: match.fixture.id,
+    date: match.fixture.date,
+    formattedDate: formatDate(match.fixture.date),
+    status: match.fixture.status.short,
+    statusLong: match.fixture.status.long,
+    home: match.teams.home.name,
+    away: match.teams.away.name,
+    homeLogo: match.teams.home.logo,
+    awayLogo: match.teams.away.logo,
+    homeGoals: match.goals.home,
+    awayGoals: match.goals.away,
+    league: match.league.name
+  }));
+}
 
-server.listen(
-  PORT,
-  () => {
+async function getTable() {
+  const result = await apiFootball(
+    `/standings?league=${BUNDESLIGA_ID}&season=${SEASON}&team=${VFB_TEAM_ID}`
+  );
 
-    console.log(
-      "Canstatt 1893 News läuft auf Port " +
-      PORT
+  const standings =
+    result.response?.[0]?.league?.standings?.[0] || [];
+
+  return standings.map(row => ({
+    position: row.rank,
+    team: row.team.name,
+    logo: row.team.logo,
+    points: row.points,
+    played: row.all.played,
+    wins: row.all.win,
+    draws: row.all.draw,
+    losses: row.all.lose,
+    goalsFor: row.all.goals.for,
+    goalsAgainst: row.all.goals.against,
+    goalDiff: row.goalsDiff
+  }));
+}
+
+async function getLiveMatches() {
+  const result = await apiFootball("/fixtures?live=all");
+
+  return (result.response || [])
+    .filter(match =>
+      match.teams.home.id === VFB_TEAM_ID ||
+      match.teams.away.id === VFB_TEAM_ID
+    )
+    .map(match => ({
+      id: match.fixture.id,
+      elapsed: match.fixture.status.elapsed,
+      status: match.fixture.status.short,
+      home: match.teams.home.name,
+      away: match.teams.away.name,
+      homeGoals: match.goals.home,
+      awayGoals: match.goals.away
+    }));
+}
+
+async function getNews() {
+  return new Promise(resolve => {
+    const req = https.get(
+      "https://www.vfb.de/de/1893/aktuell/neues/",
+      {
+        headers: {
+          "User-Agent": "Canstatt1893News/2.0"
+        }
+      },
+      response => {
+        let html = "";
+
+        response.on("data", chunk => {
+          html += chunk;
+        });
+
+        response.on("end", () => {
+          const news = [];
+          const regex =
+            /href="([^"]+)"[^>]*>([\s\S]{0,500}?)<\/a>/gi;
+
+          let match;
+
+          while (
+            (match = regex.exec(html)) !== null &&
+            news.length < 10
+          ) {
+            let title = match[2]
+              .replace(/<[^>]+>/g, " ")
+              .replace(/\s+/g, " ")
+              .trim();
+
+            if (
+              title.length > 20 &&
+              !title.includes("Cookie") &&
+              !title.includes("Datenschutz")
+            ) {
+              let url = match[1];
+
+              if (url.startsWith("/")) {
+                url = "https://www.vfb.de" + url;
+              }
+
+              if (url.startsWith("http")) {
+                news.push({
+                  title,
+                  url
+                });
+              }
+            }
+          }
+
+          resolve(news);
+        });
+      }
     );
 
+    req.on("error", () => resolve([]));
+  });
+}
+
+async function buildDashboard() {
+  if (!API_KEY) {
+    throw new Error("API_FOOTBALL_KEY fehlt");
   }
-);
+
+  const [
+    bundesligaFixtures,
+    championsLeagueFixtures,
+    table,
+    live,
+    news
+  ] = await Promise.all([
+    getFixtures(BUNDESLIGA_ID),
+    getFixtures(CHAMPIONS_LEAGUE_ID),
+    getTable(),
+    getLiveMatches(),
+    getNews()
+  ]);
+
+  const now = Date.now();
+
+  const upcoming = [
+    ...bundesligaFixtures,
+    ...championsLeagueFixtures
+  ]
+    .filter(match => new Date(match.date).getTime() > now)
+    .sort(
+      (a, b) =>
+        new Date(a.date).getTime() -
+        new Date(b.date).getTime()
+    );
+
+  return {
+    updatedAt: new Date().toISOString(),
+
+    news,
+
+    nextGame: upcoming[0] || null,
+
+    fixtures: bundesligaFixtures
+      .sort(
+        (a, b) =>
+          new Date(a.date).getTime() -
+          new Date(b.date).getTime()
+      )
+      .slice(0, 20),
+
+    championsLeague: championsLeagueFixtures
+      .sort(
+        (a, b) =>
+          new Date(a.date).getTime() -
+          new Date(b.date).getTime()
+      ),
+
+    table,
+
+    live
+  };
+}
+
+async function getDashboard() {
+  const fiveMinutes = 5 * 60 * 1000;
+
+  if (
+    cache.data &&
+    Date.now() - cache.time < fiveMinutes
+  ) {
+    return cache.data;
+  }
+
+  const data = await buildDashboard();
+
+  cache.data = data;
+  cache.time = Date.now();
+
+  return data;
+}
+
+const server = http.createServer(async (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+
+  if (req.url === "/api/dashboard") {
+    try {
+      const data = await getDashboard();
+
+      res.writeHead(200, {
+        "Content-Type": "application/json; charset=utf-8"
+      });
+
+      res.end(JSON.stringify(data));
+    } catch (error) {
+      console.error(error);
+
+      res.writeHead(500, {
+        "Content-Type": "application/json; charset=utf-8"
+      });
+
+      res.end(
+        JSON.stringify({
+          error: "Daten konnten nicht geladen werden"
+        })
+      );
+    }
+
+    return;
+  }
+
+  if (req.url === "/health") {
+    res.writeHead(200, {
+      "Content-Type": "text/plain"
+    });
+
+    res.end("Canstatt 1893 News läuft");
+    return;
+  }
+
+  if (req.url === "/" || req.url === "/index.html") {
+    res.writeHead(200, {
+      "Content-Type": "text/html; charset=utf-8"
+    });
+
+    const fs = require("fs");
+    res.end(
+      fs.readFileSync(__dirname + "/index.html")
+    );
+
+    return;
+  }
+
+  res.writeHead(404);
+  res.end("Nicht gefunden");
+});
+
+server.listen(PORT, "0.0.0.0", () => {
+  console.log(
+    `Canstatt 1893 News läuft auf Port ${PORT}`
+  );
+});
