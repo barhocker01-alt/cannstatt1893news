@@ -231,10 +231,18 @@ text-transform:uppercase;
 .news h3{
 margin:5px 0;
 font-size:17px;
+line-height:1.3;
 }
 
 .news p{
 margin:5px 0;
+color:#666;
+font-size:12px;
+line-height:1.5;
+}
+
+.news-summary{
+margin:6px 0 8px;
 color:#666;
 font-size:12px;
 line-height:1.5;
@@ -518,6 +526,7 @@ border-radius:8px;
 padding:5px 8px;
 font-size:12px;
 font-weight:1000;
+z-index:2;
 }
 
 .player-stats{
@@ -885,8 +894,6 @@ Spielplan
 
 <div class="line"></div>
 
-<!-- BUNDESLIGA -->
-
 <div class="card">
 
 <div class="competition-title">
@@ -920,8 +927,6 @@ Bundesliga-Spiele werden geladen …
 </div>
 
 <br>
-
-<!-- CHAMPIONS LEAGUE -->
 
 <div class="card">
 
@@ -1205,18 +1210,12 @@ Daten bereitgestellt von football-data.org
 
 <script>
 
-async function loadDashboard(){
+/* =====================================================
+CANNSTATT 1893 NEWS
+DASHBOARD
+===================================================== */
 
-const ids=[
-"newsList",
-"nextGame",
-"bundesligaFixtures",
-"championsLeagueFixtures",
-"table",
-"transferArrivals",
-"transferDepartures",
-"squadPlayers"
-];
+async function loadDashboard(){
 
 try{
 
@@ -1242,9 +1241,10 @@ console.log(
 data
 );
 
-/* =========================
+
+/* =====================================================
 AKTUALISIERT
-========================= */
+===================================================== */
 
 const updated=
 document.getElementById(
@@ -1257,21 +1257,37 @@ const stamp=
 data.updatedAt ||
 data.generatedAt;
 
+if(stamp){
+
+const date=
+new Date(stamp);
+
 updated.textContent=
-stamp
-?
 "Stand: "+
-new Date(stamp)
-.toLocaleString("de-DE")
-:
+date.toLocaleString(
+"de-DE",
+{
+day:"2-digit",
+month:"2-digit",
+year:"numeric",
+hour:"2-digit",
+minute:"2-digit"
+}
+);
+
+}else{
+
+updated.textContent=
 "Daten aktualisiert";
 
 }
 
+}
 
-/* =========================
+
+/* =====================================================
 NEWS
-========================= */
+===================================================== */
 
 const newsList=
 document.getElementById(
@@ -1287,12 +1303,10 @@ data.news
 :
 [];
 
+if(news.length){
+
 newsList.innerHTML=
-news.length
-
-?
-
-news.map(n=>{
+news.map(function(n){
 
 const title=
 n.title ||
@@ -1308,17 +1322,26 @@ n.dateFormatted ||
 n.date ||
 "";
 
-const desc=
+const originalText=
 n.description ||
 n.summary ||
 "";
+
+/* ---------------------------------------------
+NEWS TEXT KURZ ZUSAMMENFASSEN
+--------------------------------------------- */
+
+const summary=
+createShortSummary(
+originalText
+);
 
 return `
 
 <article class="news">
 
 <span class="tag">
-VfB aktuell
+VFB AKTUELL
 </span>
 
 <h3>
@@ -1338,11 +1361,11 @@ ${escapeHTML(date)}
 }
 
 ${
-desc
+summary
 ?
 `
-<p>
-${escapeHTML(desc)}
+<p class="news-summary">
+${escapeHTML(summary)}
 </p>
 `
 :
@@ -1353,7 +1376,7 @@ ${escapeHTML(desc)}
 class="btn"
 href="${safeURL(url)}"
 target="_blank"
-rel="noopener">
+rel="noopener noreferrer">
 
 ORIGINALMELDUNG →
 
@@ -1363,10 +1386,11 @@ ORIGINALMELDUNG →
 
 `;
 
-}).join("")
+}).join("");
 
-:
+}else{
 
+newsList.innerHTML=
 `
 <div class="loading">
 Keine News verfügbar.
@@ -1375,10 +1399,12 @@ Keine News verfügbar.
 
 }
 
+}
 
-/* =========================
+
+/* =====================================================
 NÄCHSTES SPIEL
-========================= */
+===================================================== */
 
 const next=
 document.getElementById(
@@ -1387,7 +1413,8 @@ document.getElementById(
 
 if(next){
 
-const g=data.nextGame;
+const g=
+data.nextGame;
 
 if(g){
 
@@ -1411,6 +1438,17 @@ g.awayLogo ||
 g.awayTeam?.crest ||
 "";
 
+const matchDate=
+g.dateTimeFormatted ||
+g.dateFormatted ||
+g.date ||
+"";
+
+const competition=
+g.competition ||
+g.league ||
+"Bundesliga";
+
 next.innerHTML=`
 
 <div class="live">
@@ -1426,8 +1464,16 @@ style="
 display:flex;
 justify-content:center;
 align-items:center;
-gap:18px;
+gap:12px;
 margin:18px 0 10px;
+flex-wrap:wrap;
+">
+
+<div
+style="
+display:flex;
+align-items:center;
+gap:8px;
 ">
 
 ${
@@ -1438,8 +1484,8 @@ homeLogo
 src="${safeURL(homeLogo)}"
 alt=""
 style="
-width:48px;
-height:48px;
+width:42px;
+height:42px;
 object-fit:contain;
 ">
 `
@@ -1447,14 +1493,13 @@ object-fit:contain;
 ""
 }
 
-<strong
-style="
-font-size:17px;
-">
+<strong>
 
 ${escapeHTML(home)}
 
 </strong>
+
+</div>
 
 <span
 style="
@@ -1462,14 +1507,18 @@ color:#aaa;
 font-weight:900;
 ">
 
-–
+VS.
 
 </span>
 
-<strong
+<div
 style="
-font-size:17px;
+display:flex;
+align-items:center;
+gap:8px;
 ">
+
+<strong>
 
 ${escapeHTML(away)}
 
@@ -1483,8 +1532,8 @@ awayLogo
 src="${safeURL(awayLogo)}"
 alt=""
 style="
-width:48px;
-height:48px;
+width:42px;
+height:42px;
 object-fit:contain;
 ">
 `
@@ -1494,17 +1543,15 @@ object-fit:contain;
 
 </div>
 
+</div>
+
 <p
 style="
 text-align:center;
+margin-bottom:5px;
 ">
 
-${escapeHTML(
-g.dateTimeFormatted ||
-g.dateFormatted ||
-g.date ||
-""
-)}
+${escapeHTML(matchDate)}
 
 </p>
 
@@ -1514,11 +1561,7 @@ style="
 text-align:center;
 ">
 
-${escapeHTML(
-g.competition ||
-g.league ||
-"Bundesliga"
-)}
+${escapeHTML(competition)}
 
 </div>
 
@@ -1538,9 +1581,9 @@ Kein nächstes Spiel verfügbar.
 }
 
 
-/* =========================
+/* =====================================================
 BUNDESLIGA
-========================= */
+===================================================== */
 
 renderFixtures(
 "bundesligaFixtures",
@@ -1553,9 +1596,9 @@ data.fixtures
 );
 
 
-/* =========================
+/* =====================================================
 CHAMPIONS LEAGUE
-========================= */
+===================================================== */
 
 renderFixtures(
 "championsLeagueFixtures",
@@ -1568,9 +1611,9 @@ data.championsLeague
 );
 
 
-/* =========================
+/* =====================================================
 TABELLE
-========================= */
+===================================================== */
 
 const table=
 document.getElementById(
@@ -1586,13 +1629,10 @@ data.table
 :
 [];
 
+if(rows.length){
+
 table.innerHTML=
-
-rows.length
-
-?
-
-rows.map(t=>{
+rows.map(function(t){
 
 const name=
 typeof t.team==="string"
@@ -1609,17 +1649,55 @@ t.logo ||
 t.team?.crest ||
 "";
 
+const position=
+t.position ??
+"";
+
+const points=
+t.points ??
+0;
+
+const played=
+t.played ??
+0;
+
+const wins=
+t.wins ??
+0;
+
+const draws=
+t.draws ??
+0;
+
+const losses=
+t.losses ??
+0;
+
+const goalsFor=
+t.goalsFor ??
+0;
+
+const goalsAgainst=
+t.goalsAgainst ??
+0;
+
+const goalDiff=
+t.goalDiff ??
+0;
+
 return `
 
 <div class="fixture">
 
-<div class="date">
+<div
+class="date"
+style="
+min-width:38px;
+">
 
 #
 
-${escapeHTML(
-t.position ?? ""
-)}
+${escapeHTML(position)}
 
 </div>
 
@@ -1649,13 +1727,50 @@ ${escapeHTML(name)}
 
 </div>
 
+<div
+class="competition"
+style="
+margin-left:38px;
+">
+
+Sp:
+${escapeHTML(played)}
+&nbsp;&nbsp;
+
+S:
+${escapeHTML(wins)}
+&nbsp;&nbsp;
+
+U:
+${escapeHTML(draws)}
+&nbsp;&nbsp;
+
+N:
+${escapeHTML(losses)}
+
+&nbsp;·&nbsp;
+
+Tore:
+${escapeHTML(goalsFor)}:${escapeHTML(goalsAgainst)}
+
+&nbsp;·&nbsp;
+
+Diff:
+${escapeHTML(goalDiff)}
+
+</div>
+
 </div>
 
 <div class="status">
 
-${escapeHTML(
-t.points ?? 0
-)}
+<strong>
+
+${escapeHTML(points)}
+
+</strong>
+
+<br>
 
 Pkt.
 
@@ -1665,10 +1780,11 @@ Pkt.
 
 `;
 
-}).join("")
+}).join("");
 
-:
+}else{
 
+table.innerHTML=
 `
 <div class="loading">
 Keine Tabelle verfügbar.
@@ -1677,10 +1793,12 @@ Keine Tabelle verfügbar.
 
 }
 
+}
 
-/* =========================
-TRANSFERS
-========================= */
+
+/* =====================================================
+TRANSFERS – ZUGÄNGE
+===================================================== */
 
 renderTransfers(
 "transferArrivals",
@@ -1689,6 +1807,11 @@ data.transfers?.arrivals,
 "←",
 "from"
 );
+
+
+/* =====================================================
+TRANSFERS – ABGÄNGE
+===================================================== */
 
 renderTransfers(
 "transferDepartures",
@@ -1699,9 +1822,9 @@ data.transfers?.departures,
 );
 
 
-/* =========================
+/* =====================================================
 KADER
-========================= */
+===================================================== */
 
 renderSquad(
 Array.isArray(data.squad)
@@ -1714,14 +1837,14 @@ data.squad
 }
 
 
-/* =========================
+/* =====================================================
 FEHLER
-========================= */
+===================================================== */
 
 catch(error){
 
 console.error(
-"Dashboard-Fehler:",
+"Cannstatt 1893 News Dashboard Fehler:",
 error
 );
 
@@ -1737,7 +1860,7 @@ updated.textContent=
 
 }
 
-[
+const elements=[
 "newsList",
 "nextGame",
 "bundesligaFixtures",
@@ -1746,22 +1869,25 @@ updated.textContent=
 "transferArrivals",
 "transferDepartures",
 "squadPlayers"
-].forEach(id=>{
+];
+
+elements.forEach(function(id){
 
 const el=
 document.getElementById(id);
 
-if(
-el &&
-el.querySelector(".loading")
-){
+if(el){
 
 el.innerHTML=
 `
 <div class="error">
 
-Daten konnten momentan
+⚠️ Daten konnten momentan
 nicht geladen werden.
+
+<br><br>
+
+Bitte Seite kurz neu laden.
 
 </div>
 `;
@@ -1775,9 +1901,9 @@ nicht geladen werden.
 }
 
 
-/* =========================
+/* =====================================================
 SPIELE RENDERN
-========================= */
+===================================================== */
 
 function renderFixtures(
 id,
@@ -1794,7 +1920,7 @@ return;
 
 }
 
-if(!list.length){
+if(!Array.isArray(list) || !list.length){
 
 el.innerHTML=
 `
@@ -1812,7 +1938,7 @@ return;
 }
 
 el.innerHTML=
-list.map(g=>{
+list.map(function(g){
 
 const home=
 g.home ||
@@ -1834,18 +1960,28 @@ g.awayLogo ||
 g.awayTeam?.crest ||
 "";
 
+const date=
+g.dateTimeFormatted ||
+g.dateFormatted ||
+g.date ||
+"";
+
+const comp=
+g.competition ||
+g.league ||
+competition;
+
+const status=
+g.status ||
+"";
+
 return `
 
 <div class="fixture">
 
 <div class="date">
 
-${escapeHTML(
-g.dateTimeFormatted ||
-g.dateFormatted ||
-g.date ||
-""
-)}
+${escapeHTML(date)}
 
 </div>
 
@@ -1905,11 +2041,7 @@ ${escapeHTML(away)}
 
 <div class="competition">
 
-${escapeHTML(
-g.competition ||
-g.league ||
-competition
-)}
+${escapeHTML(comp)}
 
 </div>
 
@@ -1917,8 +2049,8 @@ competition
 
 <div class="status">
 
-${formatStatus(
-g.status
+${escapeHTML(
+formatStatus(status)
 )}
 
 </div>
@@ -1932,9 +2064,9 @@ g.status
 }
 
 
-/* =========================
+/* =====================================================
 TRANSFERS RENDERN
-========================= */
+===================================================== */
 
 function renderTransfers(
 id,
@@ -1966,7 +2098,7 @@ el.innerHTML=
 `
 <div class="loading">
 
-${emptyText}
+${escapeHTML(emptyText)}
 
 </div>
 `;
@@ -1976,7 +2108,19 @@ return;
 }
 
 el.innerHTML=
-list.map(t=>{
+list.map(function(t){
+
+const name=
+t.name ||
+"";
+
+const destination=
+t[key] ||
+"";
+
+const type=
+t.type ||
+"";
 
 return `
 
@@ -1986,31 +2130,25 @@ return `
 
 <strong>
 
-${escapeHTML(
-t.name || ""
-)}
+${escapeHTML(name)}
 
 </strong>
 
 <div class="competition">
 
-${arrow}
+${escapeHTML(arrow)}
 
-${escapeHTML(
-t[key] || ""
-)}
+${escapeHTML(destination)}
 
 </div>
 
 ${
-t.type
+type
 ?
 `
 <div class="competition">
 
-${escapeHTML(
-t.type
-)}
+${escapeHTML(type)}
 
 </div>
 `
@@ -2029,9 +2167,9 @@ t.type
 }
 
 
-/* =========================
+/* =====================================================
 KADER RENDERN
-========================= */
+===================================================== */
 
 function renderSquad(
 squad
@@ -2048,7 +2186,7 @@ return;
 
 }
 
-if(!squad.length){
+if(!Array.isArray(squad) || !squad.length){
 
 el.innerHTML=
 `
@@ -2072,20 +2210,22 @@ const groups=[
 ];
 
 el.innerHTML=
-groups.map(pos=>{
+groups.map(function(pos){
 
 const players=
-squad.filter(
-p=>
-(
+squad.filter(function(p){
+
+const playerPosition=
 p.position ||
 p.pos ||
-""
-)
+"";
+
+return playerPosition
 .toLowerCase()
 ===
-pos.toLowerCase()
-);
+pos.toLowerCase();
+
+});
 
 if(!players.length){
 
@@ -2105,11 +2245,16 @@ ${pos.toUpperCase()}
 
 <div class="squad-grid">
 
-${players.map(p=>{
+${players.map(function(p){
 
 const st=
 p.stats ||
 p;
+
+const image=
+p.image ||
+p.photo ||
+"";
 
 return `
 
@@ -2130,16 +2275,17 @@ p.number ?? ""
 </span>
 
 ${
-p.image
+image
 ?
 `
 <img
 class="player-photo"
-src="${safeURL(p.image)}"
+src="${safeURL(image)}"
 alt="${escapeHTML(
 p.name || ""
 )}"
-loading="lazy">
+loading="lazy"
+onerror="this.style.display='none';">
 `
 :
 ""
@@ -2248,9 +2394,9 @@ Minuten
 }
 
 
-/* =========================
+/* =====================================================
 STATUS
-========================= */
+===================================================== */
 
 function formatStatus(
 status
@@ -2292,9 +2438,81 @@ status ||
 }
 
 
-/* =========================
+/* =====================================================
+NEWS-ZUSAMMENFASSUNG
+===================================================== */
+
+function createShortSummary(
+text
+){
+
+if(!text){
+
+return "";
+
+}
+
+/* HTML-Tags entfernen */
+
+let clean=
+String(text)
+.replace(/<script[\s\S]*?<\/script>/gi," ")
+.replace(/<style[\s\S]*?<\/style>/gi," ")
+.replace(/<[^>]*>/g," ")
+.replace(/&nbsp;/gi," ")
+.replace(/&amp;/gi,"&")
+.replace(/&quot;/gi,'"')
+.replace(/&#039;/gi,"'")
+.replace(/\s+/g," ")
+.trim();
+
+/* Falls der Text bereits kurz genug ist */
+
+if(clean.length<=180){
+
+return clean;
+
+}
+
+/* Auf ungefähr 180 Zeichen kürzen */
+
+let short=
+clean.substring(
+0,
+180
+);
+
+/* Nicht mitten in einem Wort abschneiden */
+
+const lastSpace=
+short.lastIndexOf(" ");
+
+if(lastSpace>100){
+
+short=
+short.substring(
+0,
+lastSpace
+);
+
+}
+
+/* Satzzeichen am Ende sauber behandeln */
+
+short=
+short.replace(
+/[,\.;:!?-]+$/,
+""
+);
+
+return short+" …";
+
+}
+
+
+/* =====================================================
 HTML SICHERN
-========================= */
+===================================================== */
 
 function escapeHTML(
 value
@@ -2332,9 +2550,9 @@ value ?? ""
 }
 
 
-/* =========================
+/* =====================================================
 URL SICHERN
-========================= */
+===================================================== */
 
 function safeURL(
 value
@@ -2366,20 +2584,21 @@ return "#";
 }
 
 
-/* =========================
+/* =====================================================
 START
-========================= */
+===================================================== */
 
 loadDashboard();
 
 
-/* =========================
-ALLE 5 MINUTEN AKTUALISIEREN
-========================= */
+/* =====================================================
+AUTOMATISCHE AKTUALISIERUNG
+ALLE 5 MINUTEN
+===================================================== */
 
 setInterval(
 loadDashboard,
-5 * 60 * 1000
+5*60*1000
 );
 
 </script>
