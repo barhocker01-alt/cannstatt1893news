@@ -1,0 +1,12 @@
+{
+  "name": "canstatt1893news",
+  "version": "4.1.0",
+  "description": "Canstatt 1893 News – unabhängige VfB Stuttgart Fanpage",
+  "private": true,
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
