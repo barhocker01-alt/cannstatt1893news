@@ -8,15 +8,24 @@ const TOKEN = process.env.FOOTBALL_DATA_TOKEN;
 
 const VFB_TEAM_ID = 10;
 
-/*
- * OFFIZIELLER VFB RSS FEED
- */
+/* =========================================================
+   OFFIZIELLER VFB RSS FEED
+========================================================= */
+
 const VFB_RSS_URL =
   "https://www.vfb.de/templates/generated/1/raw/de.xml";
 
-/*
- * CACHE
- */
+/* =========================================================
+   OFFIZIELLE VFB TRANSFERSEITE
+========================================================= */
+
+const VFB_TRANSFERS_URL =
+  "https://www.vfb.de/de/1893/profis/kader/saisonen/2026-2027/zu--abgaenge/";
+
+/* =========================================================
+   CACHE
+========================================================= */
+
 const CACHE_TIME = 6 * 60 * 60 * 1000;
 
 let cache = {
@@ -24,12 +33,12 @@ let cache = {
   time: 0
 };
 
-
 /* =========================================================
    HTTP REQUEST
 ========================================================= */
 
 function httpsRequest(url, headers = {}) {
+
   return new Promise((resolve, reject) => {
 
     const req = https.get(
@@ -37,9 +46,9 @@ function httpsRequest(url, headers = {}) {
       {
         headers: {
           "User-Agent":
-            "Mozilla/5.0 (compatible; Canstatt1893News/1.0)",
+            "Mozilla/5.0 (compatible; Cannstatt1893News/1.0)",
           "Accept":
-            "application/rss+xml, application/xml, text/xml, */*",
+            "text/html,application/rss+xml,application/xml,text/xml,*/*",
           ...headers
         }
       },
@@ -59,8 +68,10 @@ function httpsRequest(url, headers = {}) {
             res.statusCode >= 200 &&
             res.statusCode < 300
           ) {
+
             resolve(body);
             return;
+
           }
 
           reject(
@@ -75,9 +86,11 @@ function httpsRequest(url, headers = {}) {
     );
 
     req.setTimeout(20000, () => {
+
       req.destroy(
         new Error("HTTP Request Timeout")
       );
+
     });
 
     req.on("error", error => {
@@ -85,8 +98,8 @@ function httpsRequest(url, headers = {}) {
     });
 
   });
-}
 
+}
 
 /* =========================================================
    FOOTBALL-DATA.ORG API
@@ -97,12 +110,15 @@ function apiRequest(endpoint) {
   return new Promise((resolve, reject) => {
 
     if (!TOKEN) {
+
       reject(
         new Error(
           "FOOTBALL_DATA_TOKEN fehlt"
         )
       );
+
       return;
+
     }
 
     const url =
@@ -115,7 +131,7 @@ function apiRequest(endpoint) {
         headers: {
           "X-Auth-Token": TOKEN,
           "User-Agent":
-            "Canstatt1893News/1.0"
+            "Cannstatt1893News/1.0"
         }
       },
       res => {
@@ -133,14 +149,19 @@ function apiRequest(endpoint) {
           let json;
 
           try {
+
             json = JSON.parse(body);
+
           } catch (error) {
+
             reject(
               new Error(
                 "football-data.org lieferte kein gültiges JSON"
               )
             );
+
             return;
+
           }
 
           if (res.statusCode !== 200) {
@@ -155,6 +176,7 @@ function apiRequest(endpoint) {
             );
 
             return;
+
           }
 
           resolve(json);
@@ -165,11 +187,13 @@ function apiRequest(endpoint) {
     );
 
     req.setTimeout(20000, () => {
+
       req.destroy(
         new Error(
           "Football-Data API Timeout"
         )
       );
+
     });
 
     req.on("error", error => {
@@ -179,7 +203,6 @@ function apiRequest(endpoint) {
   });
 
 }
-
 
 /* =========================================================
    DATUM FORMATIEREN
@@ -208,8 +231,8 @@ function formatDate(dateString) {
       minute: "2-digit"
     }
   );
-}
 
+}
 
 /* =========================================================
    SPIEL UMWANDELN
@@ -272,7 +295,6 @@ function mapMatch(match) {
 
 }
 
-
 /* =========================================================
    VFB SPIELE
 ========================================================= */
@@ -305,7 +327,6 @@ async function getVfbMatches() {
   return matches;
 
 }
-
 
 /* =========================================================
    BUNDESLIGA TABELLE
@@ -386,7 +407,6 @@ async function getBundesligaTable() {
 
 }
 
-
 /* =========================================================
    HTML ENTITIES DEKODIEREN
 ========================================================= */
@@ -398,42 +418,17 @@ function decodeHTML(text = "") {
       /<!\[CDATA\[([\s\S]*?)\]\]>/gi,
       "$1"
     )
-    .replace(
-      /&amp;/gi,
-      "&"
-    )
-    .replace(
-      /&quot;/gi,
-      '"'
-    )
-    .replace(
-      /&#39;/gi,
-      "'"
-    )
-    .replace(
-      /&apos;/gi,
-      "'"
-    )
-    .replace(
-      /&lt;/gi,
-      "<"
-    )
-    .replace(
-      /&gt;/gi,
-      ">"
-    )
-    .replace(
-      /&#x27;/gi,
-      "'"
-    )
-    .replace(
-      /&#x2F;/gi,
-      "/"
-    )
+    .replace(/&amp;/gi, "&")
+    .replace(/&quot;/gi, '"')
+    .replace(/&#39;/gi, "'")
+    .replace(/&apos;/gi, "'")
+    .replace(/&lt;/gi, "<")
+    .replace(/&gt;/gi, ">")
+    .replace(/&#x27;/gi, "'")
+    .replace(/&#x2F;/gi, "/")
     .trim();
 
 }
-
 
 /* =========================================================
    XML TAG AUSLESEN
@@ -459,7 +454,6 @@ function getXmlValue(block, tag) {
   );
 
 }
-
 
 /* =========================================================
    TEXT BEREINIGEN
@@ -488,7 +482,6 @@ function cleanText(text = "") {
 
 }
 
-
 /* =========================================================
    URL NORMALISIEREN
 ========================================================= */
@@ -501,22 +494,17 @@ function normalizeVfbUrl(url = "") {
     return "";
   }
 
-  if (
-    url.startsWith("//")
-  ) {
+  if (url.startsWith("//")) {
     return "https:" + url;
   }
 
-  if (
-    url.startsWith("/")
-  ) {
+  if (url.startsWith("/")) {
     return "https://www.vfb.de" + url;
   }
 
   return url;
 
 }
-
 
 /* =========================================================
    RSS NEWS
@@ -546,9 +534,6 @@ async function fetchVfbNews() {
 
     const items = [];
 
-    /*
-     * Normale RSS <item>-Blöcke
-     */
     const rssItems =
       xml.match(
         /<item\b[\s\S]*?<\/item>/gi
@@ -591,9 +576,6 @@ async function fetchVfbNews() {
           "pubDate"
         );
 
-      /*
-       * Manche Feeds benutzen dc:date
-       */
       if (!pubDate) {
 
         pubDate =
@@ -604,9 +586,6 @@ async function fetchVfbNews() {
 
       }
 
-      /*
-       * Manche Feeds benutzen date
-       */
       if (!pubDate) {
 
         pubDate =
@@ -617,19 +596,11 @@ async function fetchVfbNews() {
 
       }
 
-      /*
-       * Link sauber machen
-       */
       link =
         normalizeVfbUrl(
           link
         );
 
-      /*
-       * Falls kein normaler <link>
-       * vorhanden ist, versuchen wir
-       * guid
-       */
       if (!link) {
 
         link =
@@ -642,9 +613,6 @@ async function fetchVfbNews() {
 
       }
 
-      /*
-       * Nur echte VfB-News
-       */
       if (
         !title ||
         title.length < 5 ||
@@ -653,10 +621,6 @@ async function fetchVfbNews() {
         continue;
       }
 
-      /*
-       * Navigations-/Service-Seiten
-       * nicht als News anzeigen
-       */
       const blocked = [
         "News-Archiv",
         "VfB Magazine",
@@ -681,9 +645,6 @@ async function fetchVfbNews() {
         continue;
       }
 
-      /*
-       * Duplikate verhindern
-       */
       if (
         items.some(
           existing =>
@@ -719,10 +680,6 @@ async function fetchVfbNews() {
 
     }
 
-    /*
-     * Nach Datum sortieren,
-     * neueste zuerst.
-     */
     items.sort(
       (a, b) => {
 
@@ -773,6 +730,278 @@ async function fetchVfbNews() {
 
 }
 
+/* =========================================================
+   VFB TRANSFERS
+========================================================= */
+
+async function fetchVfbTransfers() {
+
+  console.log(
+    "Lade offizielle VfB Transferseite..."
+  );
+
+  try {
+
+    const html =
+      await httpsRequest(
+        VFB_TRANSFERS_URL,
+        {
+          "Accept":
+            "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
+        }
+      );
+
+    console.log(
+      "VfB Transferseite geladen."
+    );
+
+    const plainText =
+      decodeHTML(html)
+        .replace(
+          /<script[\s\S]*?<\/script>/gi,
+          " "
+        )
+        .replace(
+          /<style[\s\S]*?<\/style>/gi,
+          " "
+        )
+        .replace(
+          /<br\s*\/?>/gi,
+          "\n"
+        )
+        .replace(
+          /<\/(?:p|li|div|h1|h2|h3|h4|section|article)>/gi,
+          "\n"
+        )
+        .replace(
+          /<[^>]+>/g,
+          " "
+        )
+        .replace(
+          /\r/g,
+          "\n"
+        )
+        .replace(
+          /[ \t]+/g,
+          " "
+        )
+        .replace(
+          /\n[ \t]+/g,
+          "\n"
+        )
+        .trim();
+
+    const lines =
+      plainText
+        .split(/\n+/)
+        .map(
+          line => line.trim()
+        )
+        .filter(Boolean);
+
+    const transfers = {
+      arrivals: [],
+      departures: []
+    };
+
+    /*
+     * Wir suchen die Überschriften "Zugänge"
+     * und "Abgänge" und nehmen die Einträge
+     * dazwischen.
+     */
+
+    const accessIndex =
+      lines.findIndex(
+        line =>
+          /^(zu[- ]?gänge|zugänge)$/i.test(
+            line
+          )
+      );
+
+    const departuresIndex =
+      lines.findIndex(
+        line =>
+          /^abgänge$/i.test(
+            line
+          )
+      );
+
+    function parseTransferLines(
+      sourceLines
+    ) {
+
+      const result = [];
+
+      for (
+        const line of sourceLines
+      ) {
+
+        /*
+         * Typisches Format:
+         * Spieler (Verein)
+         */
+
+        const match =
+          line.match(
+            /^(.+?)\s*\(([^()\n]+)\)\s*$/
+          );
+
+        if (!match) {
+          continue;
+        }
+
+        const player =
+          cleanText(
+            match[1]
+          );
+
+        const details =
+          cleanText(
+            match[2]
+          );
+
+        if (
+          !player ||
+          !details ||
+          player.length < 2
+        ) {
+          continue;
+        }
+
+        let club =
+          details;
+
+        let type =
+          "";
+
+        if (
+          /,\s*(Leihe|Ende der Leihe)$/i.test(
+            details
+          )
+        ) {
+
+          const parts =
+            details.split(
+              /,\s*/
+            );
+
+          type =
+            parts.pop();
+
+          club =
+            parts.join(", ");
+
+        }
+
+        /*
+         * Offensichtliche Überschriften/Navis
+         * nicht als Spieler übernehmen.
+         */
+
+        const ignored = [
+          "Zugänge",
+          "Abgänge",
+          "Kader",
+          "Spielplan",
+          "Tabelle",
+          "News"
+        ];
+
+        if (
+          ignored.some(
+            word =>
+              player.toLowerCase() ===
+              word.toLowerCase()
+          )
+        ) {
+          continue;
+        }
+
+        if (
+          result.some(
+            item =>
+              item.player === player
+          )
+        ) {
+          continue;
+        }
+
+        result.push({
+
+          player:
+            player,
+
+          club:
+            club,
+
+          type:
+            type
+
+        });
+
+      }
+
+      return result;
+
+    }
+
+    if (
+      accessIndex !== -1 &&
+      departuresIndex !== -1 &&
+      departuresIndex > accessIndex
+    ) {
+
+      transfers.arrivals =
+        parseTransferLines(
+          lines.slice(
+            accessIndex + 1,
+            departuresIndex
+          )
+        );
+
+      transfers.departures =
+        parseTransferLines(
+          lines.slice(
+            departuresIndex + 1
+          )
+        );
+
+    }
+
+    /*
+     * Falls die Struktur der VfB-Seite anders
+     * aufgebaut ist, versuchen wir zusätzlich
+     * anhand von typischen Spieler-/Vereinsangaben
+     * zu erkennen, ob etwas gefunden wurde.
+     */
+
+    console.log(
+      "VfB-Zugänge gefunden:",
+      transfers.arrivals.length
+    );
+
+    console.log(
+      "VfB-Abgänge gefunden:",
+      transfers.departures.length
+    );
+
+    return transfers;
+
+  } catch (error) {
+
+    console.error(
+      "VFB TRANSFER FEHLER:",
+      error.message
+    );
+
+    return {
+      arrivals: [],
+      departures: []
+    };
+
+  }
+
+}
 
 /* =========================================================
    NEWS
@@ -797,7 +1026,6 @@ async function getNews() {
 
 }
 
-
 /* =========================================================
    DASHBOARD
 ========================================================= */
@@ -809,7 +1037,7 @@ async function buildDashboard() {
   );
 
   console.log(
-    "Baue Canstatt 1893 News Dashboard..."
+    "Baue Cannstatt 1893 News Dashboard..."
   );
 
   console.log(
@@ -819,17 +1047,16 @@ async function buildDashboard() {
   const [
     matches,
     table,
-    news
+    news,
+    transfers
   ] =
     await Promise.all([
       getVfbMatches(),
       getBundesligaTable(),
-      getNews()
+      getNews(),
+      fetchVfbTransfers()
     ]);
 
-  /*
-   * Bundesliga
-   */
   const bundesliga =
     matches.filter(
       match =>
@@ -837,9 +1064,6 @@ async function buildDashboard() {
         "Bundesliga"
     );
 
-  /*
-   * Champions League
-   */
   const championsLeague =
     matches.filter(
       match =>
@@ -849,9 +1073,6 @@ async function buildDashboard() {
           "Champions League"
     );
 
-  /*
-   * Nächstes Spiel
-   */
   const now =
     new Date();
 
@@ -883,31 +1104,27 @@ async function buildDashboard() {
       new Date().toISOString(),
 
     news:
-
       news,
 
     nextGame:
-
       nextGame,
 
     fixtures:
-
       bundesliga,
 
     championsLeague:
-
       championsLeague,
 
     table:
-
       table,
 
-    live:
+    transfers:
+      transfers,
 
+    live:
       [],
 
     attribution:
-
       "Data provided by football-data.org"
 
   };
@@ -931,10 +1148,19 @@ async function buildDashboard() {
     championsLeague.length
   );
 
+  console.log(
+    "Zugänge:",
+    transfers.arrivals.length
+  );
+
+  console.log(
+    "Abgänge:",
+    transfers.departures.length
+  );
+
   return dashboard;
 
 }
-
 
 /* =========================================================
    DASHBOARD CACHE
@@ -1001,6 +1227,16 @@ async function getDashboard() {
       table:
         [],
 
+      transfers: {
+
+        arrivals:
+          [],
+
+        departures:
+          []
+
+      },
+
       live:
         [],
 
@@ -1015,7 +1251,6 @@ async function getDashboard() {
   }
 
 }
-
 
 /* =========================================================
    JSON SENDEN
@@ -1042,7 +1277,6 @@ function sendJSON(
   );
 
 }
-
 
 /* =========================================================
    DATEI AUSLIEFERN
@@ -1142,7 +1376,6 @@ function serveFile(
 
 }
 
-
 /* =========================================================
    SERVER
 ========================================================= */
@@ -1167,7 +1400,6 @@ const server =
           pathname
         );
 
-
         /* =========================================
            DASHBOARD API
         ========================================= */
@@ -1188,7 +1420,6 @@ const server =
           return;
 
         }
-
 
         /* =========================================
            HEALTH CHECK
@@ -1212,6 +1443,9 @@ const server =
               rssConfigured:
                 !!VFB_RSS_URL,
 
+              transfersConfigured:
+                !!VFB_TRANSFERS_URL,
+
               cwd:
                 process.cwd(),
 
@@ -1233,7 +1467,6 @@ const server =
 
         }
 
-
         /* =========================================
            HOMEPAGE
         ========================================= */
@@ -1252,7 +1485,6 @@ const server =
           return;
 
         }
-
 
         /* =========================================
            CSS / JS / BILDER ETC.
@@ -1312,9 +1544,6 @@ const server =
 
           }
 
-          /*
-           * Fallback auf index.html
-           */
           serveFile(
             res,
             "index.html"
@@ -1323,7 +1552,6 @@ const server =
           return;
 
         }
-
 
         /* =========================================
            404
@@ -1340,7 +1568,6 @@ const server =
         res.end(
           "Nicht gefunden"
         );
-
 
       } catch (error) {
 
@@ -1371,7 +1598,6 @@ const server =
     }
   );
 
-
 /* =========================================================
    SERVER START
 ========================================================= */
@@ -1386,7 +1612,7 @@ server.listen(
     );
 
     console.log(
-      `Canstatt 1893 News läuft auf Port ${PORT}`
+      `Cannstatt 1893 News läuft auf Port ${PORT}`
     );
 
     console.log(
@@ -1397,6 +1623,11 @@ server.listen(
     console.log(
       "VfB RSS Feed:",
       VFB_RSS_URL
+    );
+
+    console.log(
+      "VfB Transferseite:",
+      VFB_TRANSFERS_URL
     );
 
     console.log(
