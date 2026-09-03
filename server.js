@@ -1,96 +1,83 @@
 const http = require("http");
 const https = require("https");
+const fs = require("fs");
+const path = require("path");
 
 const PORT = process.env.PORT || 3000;
-const API_KEY = process.env.API_FOOTBALL_KEY;
+const TOKEN = process.env.FOOTBALL_DATA_TOKEN;
 
-const VFB_TEAM_ID = 160;
-const BUNDESLIGA_ID = 78;
-const CHAMPIONS_LEAGUE_ID = 2;
-const SEASON = 2026;
+const VFB_TEAM_ID = 10;
 
-const VFB_NEWS_URL = "https://www.vfb.de/de/1893/aktuell/neues/";
-
-let staticCache = {
+let cache = {
   data: null,
   time: 0
 };
 
-let liveCache = {
-  data: [],
-  time: 0
-};
+const CACHE_TIME = 6 * 60 * 60 * 1000;
 
-const STATIC_CACHE_TIME = 6 * 60 * 60 * 1000;
-const LIVE_CACHE_TIME = 20 * 60 * 1000;
-
-function request(url, options = {}) {
+function apiRequest(endpoint) {
   return new Promise((resolve, reject) => {
-    const req = https.get(url, options, res => {
-      let body = "";
+    if (!TOKEN) {
+      reject(new Error("FOOTBALL_DATA_TOKEN fehlt"));
+      return;
+    }
 
-      res.on("data", chunk => {
-        body += chunk;
-      });
+    const req = https.get(
+      "https://api.football-data.org/v4" + endpoint,
+      {
+        headers: {
+          "X-Auth-Token": TOKEN
+        }
+      },
+      res => {
+        let body = "";
 
-      res.on("end", () => {
-        resolve({
-          status: res.statusCode,
-          body
+        res.on("data", chunk => {
+          body += chunk;
         });
-      });
-    });
+
+        res.on("end", () => {
+          let json;
+
+          try {
+            json = JSON.parse(body);
+          } catch {
+            reject(
+              new Error(
+                "football-data.org lieferte kein gültiges JSON"
+              )
+            );
+            return;
+          }
+
+          if (res.statusCode !== 200) {
+            reject(
+              new Error(
+                `football-data.org HTTP ${res.statusCode}: ${
+                  json.message || JSON.stringify(json)
+                }`
+              )
+            );
+            return;
+          }
+
+          resolve(json);
+        });
+      }
+    );
 
     req.on("error", reject);
+
     req.setTimeout(15000, () => {
-      req.destroy(new Error("Request timeout"));
+      req.destroy(new Error("API Timeout"));
     });
   });
-}
-
-async function apiFootball(endpoint) {
-  if (!API_KEY) {
-    throw new Error("API_FOOTBALL_KEY fehlt in Render");
-  }
-
-  const result = await request(
-    "https://v3.football.api-sports.io" + endpoint,
-    {
-      headers: {
-        "x-apisports-key": API_KEY
-      }
-    }
-  );
-
-  let json;
-
-  try {
-    json = JSON.parse(result.body);
-  } catch {
-    throw new Error("API-Football lieferte kein gültiges JSON");
-  }
-
-  if (result.status !== 200) {
-    throw new Error(
-      `API-Football HTTP ${result.status}: ${JSON.stringify(json.errors || json)}`
-    );
-  }
-
-  if (json.errors && Object.keys(json.errors).length > 0) {
-    throw new Error(
-      `API-Football Fehler: ${JSON.stringify(json.errors)}`
-    );
-  }
-
-  return json.response || [];
 }
 
 function formatDate(dateString) {
   if (!dateString) return "";
 
-  const date = new Date(dateString);
-
-  return date.toLocaleString("de-DE", {
+  return new Date(dateString).toLocaleString("de-DE", {
     timeZone: "Europe/Berlin",
     day: "2-digit",
     month: "2-digit",
@@ -100,149 +87,192 @@ function formatDate(dateString) {
   });
 }
 
-function mapFixture(item) {
+function mapMatch(match) {
   return {
-    id: item.fixture?.id,
-    date: formatDate(item.fixture?.date),
-    rawDate: item.fixture?.date,
+    id: match.id,
 
-    home: item.teams?.home?.name || "",
-    away: item.teams?.away?.name || "",
+    date: formatDate(match.utcDate),
+    rawDate: match.utcDate,
 
-    homeLogo: item.teams?.home?.logo || "",
-    awayLogo: item.teams?.away?.logo || "",
+    home: match.homeTeam?.name || "",
+    away: match.awayTeam?.name || "",
 
-    competition: item.league?.name || "",
-    league: item.league?.name || "",
+    homeLogo: match.homeTeam?.crest || "",
+    awayLogo: match.awayTeam?.crest || "",
 
-    status: item.fixture?.status?.short || "",
-    statusLong: item.fixture?.status?.long || "",
+    competition:
+      match.competition?.name || "",
 
-    homeGoals: item.goals?.home,
-    awayGoals: item.goals?.away,
+    league:
+      match.competition?.name || "",
 
-    venue: item.fixture?.venue?.name || "",
-    city: item.fixture?.venue?.city || ""
+    status: match.status || "",
+
+    statusLong: match.status || "",
+
+    homeGoals:
+      match.score?.fullTime?.home ?? null,
+
+    awayGoals:
+      match.score?.fullTime?.away ?? null,
+
+    venue: match.venue || "",
+
+    matchday: match.matchday || null
   };
 }
 
-async function getFixtures(leagueId) {
-  const response = await apiFootball(
-    `/fixtures?team=${VFB_TEAM_ID}&league=${leagueId}&season=${SEASON}`
+async function getVfbMatches() {
+  const data = await apiRequest(
+    `/teams/${VFB_TEAM_ID}/matches?competitions=BL1,CL&dateFrom=2026-07-01&dateTo=2027-06-30&limit=100`
   );
 
-  return response
-    .map(mapFixture)
-    .sort((a, b) => {
-      return new Date(a.rawDate) - new Date(b.rawDate);
-    });
+  return (data.matches || [])
+    .map(mapMatch)
+    .sort(
+      (a, b) =>
+        new Date(a.rawDate) -
+        new Date(b.rawDate)
+    );
 }
 
-async function getTable() {
-  const response = await apiFootball(
-    `/standings?league=${BUNDESLIGA_ID}&season=${SEASON}`
+async function getBundesligaTable() {
+  const data = await apiRequest(
+    "/competitions/BL1/standings"
   );
 
-  if (!response.length) {
-    return [];
-  }
+  const standings = data.standings || [];
 
-  const groups = response[0].league?.standings || [];
+  const total = standings.find(
+    item => item.type === "TOTAL"
+  );
 
-  if (!groups.length) {
-    return [];
-  }
+  if (!total) return [];
 
-  return groups[0].map(item => ({
-    rank: item.rank,
-    team: item.team?.name || "",
-    logo: item.team?.logo || "",
-    played: item.all?.played ?? 0,
-    wins: item.all?.win ?? 0,
-    draws: item.all?.draw ?? 0,
-    losses: item.all?.lose ?? 0,
-    goalsFor: item.all?.goals?.for ?? 0,
-    goalsAgainst: item.all?.goals?.against ?? 0,
-    goalDiff: item.goalsDiff ?? 0,
-    points: item.points ?? 0,
-    form: item.form || ""
+  return (total.table || []).map(item => ({
+    rank: item.position,
+
+    team:
+      item.team?.name || "",
+
+    logo:
+      item.team?.crest || "",
+
+    played:
+      item.playedGames ?? 0,
+
+    wins:
+      item.won ?? 0,
+
+    draws:
+      item.draw ?? 0,
+
+    losses:
+      item.lost ?? 0,
+
+    goalsFor:
+      item.goalsFor ?? 0,
+
+    goalsAgainst:
+      item.goalsAgainst ?? 0,
+
+    goalDiff:
+      item.goalDifference ?? 0,
+
+    points:
+      item.points ?? 0,
+
+    form:
+      item.form || ""
   }));
-}
-
-async function getLiveMatches() {
-  const response = await apiFootball(
-    `/fixtures?team=${VFB_TEAM_ID}&live=all`
-  );
-
-  return response.map(mapFixture);
 }
 
 async function getNews() {
   try {
-    const result = await request(VFB_NEWS_URL);
+    const result = await fetchVfbNews();
 
-    const html = result.body;
-
-    const links = [];
-    const regex =
-      /<a[^>]+href=["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi;
-
-    let match;
-
-    while ((match = regex.exec(html)) !== null) {
-      let url = match[1];
-      let title = match[2]
-        .replace(/<[^>]*>/g, " ")
-        .replace(/\s+/g, " ")
-        .trim();
-
-      if (!title || title.length < 8) continue;
-
-      if (url.startsWith("/")) {
-        url = "https://www.vfb.de" + url;
-      }
-
-      if (
-        url.includes("vfb.de") &&
-        !links.some(x => x.url === url)
-      ) {
-        links.push({
-          title,
-          url
-        });
-      }
-    }
-
-    return links.slice(0, 10);
+    return result;
   } catch (error) {
-    console.error("NEWS ERROR:", error.message);
+    console.error(
+      "NEWS ERROR:",
+      error.message
+    );
+
     return [];
   }
 }
 
-async function buildStaticDashboard() {
-  console.log("Lade Bundesliga-Spiele...");
+function fetchVfbNews() {
+  return new Promise((resolve, reject) => {
+    https.get(
+      "https://www.vfb.de/de/1893/aktuell/neues/",
+      res => {
+        let html = "";
 
-  const bundesliga = await getFixtures(BUNDESLIGA_ID);
+        res.on("data", chunk => {
+          html += chunk;
+        });
+
+        res.on("end", () => {
+          const links = [];
+
+          const regex =
+            /<a[^>]+href=["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi;
+
+          let match;
+
+          while (
+            (match = regex.exec(html)) !== null
+          ) {
+            let url = match[1];
+
+            let title = match[2]
+              .replace(/<[^>]*>/g, " ")
+              .replace(/\s+/g, " ")
+              .trim();
+
+            if (!title || title.length < 8) {
+              continue;
+            }
+
+            if (url.startsWith("/")) {
+              url = "https://www.vfb.de" + url;
+            }
+
+            if (
+              url.includes("vfb.de") &&
+              !links.some(
+                item => item.url === url
+              )
+            ) {
+              links.push({
+                title,
+                url
+              });
+            }
+          }
+
+          resolve(links.slice(0, 10));
+        });
+      }
+    ).on("error", reject);
+  });
+}
+
+async function buildDashboard() {
+  console.log("Lade VfB-Spiele...");
+
+  const matches = await getVfbMatches();
 
   console.log(
-    "Bundesliga-Spiele:",
-    bundesliga.length
+    "VfB-Spiele gefunden:",
+    matches.length
   );
 
-  console.log("Lade Champions-League-Spiele...");
+  console.log("Lade Bundesliga-Tabelle...");
 
-  const championsLeague =
-    await getFixtures(CHAMPIONS_LEAGUE_ID);
-
-  console.log(
-    "Champions-League-Spiele:",
-    championsLeague.length
-  );
-
-  console.log("Lade Tabelle...");
-
-  const table = await getTable();
+  const table =
+    await getBundesligaTable();
 
   console.log(
     "Tabellenplätze:",
@@ -251,46 +281,69 @@ async function buildStaticDashboard() {
 
   const news = await getNews();
 
+  const bundesliga = matches.filter(
+    match =>
+      match.competition === "Bundesliga"
+  );
+
+  const championsLeague = matches.filter(
+    match =>
+      match.competition ===
+        "UEFA Champions League" ||
+      match.competition ===
+        "Champions League"
+  );
+
   const now = new Date();
 
-  const allFixtures = [
-    ...bundesliga,
-    ...championsLeague
-  ].sort((a, b) => {
-    return new Date(a.rawDate) - new Date(b.rawDate);
-  });
-
   const nextGame =
-    allFixtures.find(game => {
+    matches.find(match => {
+      const date = new Date(match.rawDate);
+
       return (
-        game.rawDate &&
-        new Date(game.rawDate) >= now &&
-        !["FT", "AET", "PEN"].includes(game.status)
+        date >= now &&
+        (
+          match.status === "SCHEDULED" ||
+          match.status === "TIMED"
+        )
       );
     }) || null;
 
   return {
-    updatedAt: new Date().toISOString(),
+    updatedAt:
+      new Date().toISOString(),
+
     news,
+
     nextGame,
+
     fixtures: bundesliga,
+
     championsLeague,
-    table
+
+    table,
+
+    live: [],
+
+    attribution:
+      "Data provided by football-data.org"
   };
 }
 
-async function getStaticDashboard() {
+async function getDashboard() {
   if (
-    staticCache.data &&
-    Date.now() - staticCache.time < STATIC_CACHE_TIME
+    cache.data &&
+    Date.now() - cache.time <
+      CACHE_TIME
   ) {
-    return staticCache.data;
+    return cache.data;
   }
 
   try {
-    const data = await buildStaticDashboard();
+    const data =
+      await buildDashboard();
 
-    staticCache = {
+    cache = {
       data,
       time: Date.now()
     };
@@ -298,76 +351,51 @@ async function getStaticDashboard() {
     return data;
   } catch (error) {
     console.error(
-      "STATIC API ERROR:",
+      "API ERROR:",
       error.message
     );
-
-    if (staticCache.data) {
-      return staticCache.data;
-    }
 
     return {
-      updatedAt: new Date().toISOString(),
-      news: await getNews(),
+      updatedAt:
+        new Date().toISOString(),
+
+      news: [],
+
       nextGame: null,
+
       fixtures: [],
+
       championsLeague: [],
+
       table: [],
-      error: error.message
+
+      live: [],
+
+      error: error.message,
+
+      attribution:
+        "Data provided by football-data.org"
     };
   }
-}
-
-async function getLiveCached() {
-  if (
-    Date.now() - liveCache.time < LIVE_CACHE_TIME
-  ) {
-    return liveCache.data;
-  }
-
-  try {
-    const data = await getLiveMatches();
-
-    liveCache = {
-      data,
-      time: Date.now()
-    };
-
-    return data;
-  } catch (error) {
-    console.error(
-      "LIVE API ERROR:",
-      error.message
-    );
-
-    return liveCache.data;
-  }
-}
-
-async function buildDashboard() {
-  const staticData = await getStaticDashboard();
-  const live = await getLiveCached();
-
-  return {
-    ...staticData,
-    live
-  };
 }
 
 function sendJSON(res, data) {
   res.writeHead(200, {
-    "Content-Type": "application/json; charset=utf-8",
-    "Cache-Control": "no-store"
+    "Content-Type":
+      "application/json; charset=utf-8",
+
+    "Cache-Control":
+      "no-store"
   });
 
-  res.end(JSON.stringify(data));
+  res.end(
+    JSON.stringify(data)
+  );
 }
 
-async function serveFile(res, file) {
-  const fs = require("fs");
-  const path = require("path");
-
-  const filePath = path.join(__dirname, file);
+function serveFile(res, filename) {
+  const filePath =
+    path.join(__dirname, filename);
 
   if (!fs.existsSync(filePath)) {
     res.writeHead(404);
@@ -375,74 +403,103 @@ async function serveFile(res, file) {
     return;
   }
 
-  const ext = path.extname(filePath);
+  const ext =
+    path.extname(filePath);
 
   const types = {
-    ".html": "text/html; charset=utf-8",
-    ".css": "text/css; charset=utf-8",
-    ".js": "application/javascript; charset=utf-8",
-    ".json": "application/json; charset=utf-8"
+    ".html":
+      "text/html; charset=utf-8",
+
+    ".css":
+      "text/css; charset=utf-8",
+
+    ".js":
+      "application/javascript; charset=utf-8"
   };
 
   res.writeHead(200, {
     "Content-Type":
-      types[ext] || "application/octet-stream"
+      types[ext] ||
+      "application/octet-stream"
   });
 
-  fs.createReadStream(filePath).pipe(res);
+  fs.createReadStream(filePath)
+    .pipe(res);
 }
 
-const server = http.createServer(async (req, res) => {
-  try {
-    if (req.url === "/api/dashboard") {
-      const data = await buildDashboard();
-      sendJSON(res, data);
-      return;
+const server =
+  http.createServer(
+    async (req, res) => {
+      try {
+        if (
+          req.url ===
+          "/api/dashboard"
+        ) {
+          const data =
+            await getDashboard();
+
+          sendJSON(res, data);
+          return;
+        }
+
+        if (
+          req.url === "/health"
+        ) {
+          sendJSON(res, {
+            status: "ok",
+            apiConfigured:
+              !!TOKEN
+          });
+
+          return;
+        }
+
+        if (
+          req.url === "/" ||
+          req.url === "/index.html"
+        ) {
+          serveFile(
+            res,
+            "index.html"
+          );
+
+          return;
+        }
+
+        res.writeHead(404);
+        res.end("Nicht gefunden");
+      } catch (error) {
+        console.error(
+          "SERVER ERROR:",
+          error
+        );
+
+        res.writeHead(500, {
+          "Content-Type":
+            "application/json"
+        });
+
+        res.end(
+          JSON.stringify({
+            error:
+              error.message
+          })
+        );
+      }
     }
+  );
 
-    if (req.url === "/health") {
-      sendJSON(res, {
-        status: "ok",
-        apiConfigured: !!API_KEY
-      });
-      return;
-    }
+server.listen(
+  PORT,
+  "0.0.0.0",
+  () => {
+    console.log(
+      `Server läuft auf Port ${PORT}`
+    );
 
-    if (
-      req.url === "/" ||
-      req.url === "/index.html"
-    ) {
-      await serveFile(res, "index.html");
-      return;
-    }
-
-    res.writeHead(404, {
-      "Content-Type": "text/plain; charset=utf-8"
-    });
-
-    res.end("Nicht gefunden");
-  } catch (error) {
-    console.error("SERVER ERROR:", error);
-
-    res.writeHead(500, {
-      "Content-Type": "application/json; charset=utf-8"
-    });
-
-    res.end(
-      JSON.stringify({
-        error: error.message
-      })
+    console.log(
+      "Football-Data Token vorhanden:",
+      !!TOKEN
     );
   }
-});
-
-server.listen(PORT, "0.0.0.0", () => {
-  console.log(
-    `Server läuft auf Port ${PORT}`
-  );
-
-  console.log(
-    "API-Football Key vorhanden:",
-    !!API_KEY
-  );
-});
+);
