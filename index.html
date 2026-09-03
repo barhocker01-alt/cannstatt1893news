@@ -2,15 +2,22 @@
 <html lang="de">
 
 <head>
+
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#e30613">
+
+<meta name="viewport"
+content="width=device-width,initial-scale=1">
+
+<meta name="theme-color"
+content="#e30613">
 
 <meta
 name="description"
 content="Canstatt 1893 News – unabhängige VfB Stuttgart Fanpage">
 
-<title>Canstatt 1893 News – VfB Stuttgart</title>
+<title>
+Canstatt 1893 News – VfB Stuttgart
+</title>
 
 <style>
 
@@ -35,7 +42,7 @@ color:inherit;
 }
 
 /* =========================
-   TOP BAR
+TOP BAR
 ========================= */
 
 .top{
@@ -49,7 +56,7 @@ gap:10px;
 }
 
 /* =========================
-   HEADER
+HEADER
 ========================= */
 
 .bar{
@@ -103,7 +110,7 @@ color:#e30613;
 }
 
 /* =========================
-   HERO
+HERO
 ========================= */
 
 .hero{
@@ -161,7 +168,7 @@ margin-top:8px;
 }
 
 /* =========================
-   LAYOUT
+LAYOUT
 ========================= */
 
 .wrap{
@@ -202,7 +209,7 @@ box-shadow:0 5px 20px #00000008;
 }
 
 /* =========================
-   NEWS
+NEWS
 ========================= */
 
 .news{
@@ -234,7 +241,7 @@ line-height:1.5;
 }
 
 /* =========================
-   NEXT GAME
+NEXT GAME
 ========================= */
 
 .next{
@@ -277,7 +284,7 @@ border-radius:50%;
 }
 
 /* =========================
-   NOTICE
+NOTICE
 ========================= */
 
 .notice{
@@ -289,7 +296,7 @@ margin-bottom:18px;
 }
 
 /* =========================
-   LOADING / ERROR
+LOADING / ERROR
 ========================= */
 
 .loading{
@@ -307,7 +314,7 @@ font-size:12px;
 }
 
 /* =========================
-   SPIEL
+SPIEL
 ========================= */
 
 .fixture{
@@ -346,7 +353,7 @@ font-weight:900;
 }
 
 /* =========================
-   TEAM LOGOS
+TEAM LOGOS
 ========================= */
 
 .team-line{
@@ -365,7 +372,7 @@ flex-shrink:0;
 }
 
 /* =========================
-   COMPETITION HEADER
+COMPETITION HEADER
 ========================= */
 
 .competition-title{
@@ -395,7 +402,7 @@ font-weight:600;
 }
 
 /* =========================
-   FAN AREA
+FAN AREA
 ========================= */
 
 .fan-grid{
@@ -423,7 +430,70 @@ line-height:1.5;
 }
 
 /* =========================
-   FOOTER
+KADER
+========================= */
+
+.squad-section{
+margin-top:20px;
+}
+
+.squad-group{
+margin-top:28px;
+}
+
+.squad-title{
+font-size:20px;
+font-weight:900;
+margin:0 0 14px;
+}
+
+.squad-grid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:14px;
+}
+
+.player-card{
+background:#fff;
+border:1px solid #ddd;
+border-radius:14px;
+padding:17px;
+box-shadow:0 5px 20px #00000008;
+transition:.2s;
+}
+
+.player-card:hover{
+transform:translateY(-3px);
+box-shadow:0 8px 25px #00000012;
+}
+
+.player-number{
+font-size:28px;
+font-weight:1000;
+color:#e30613;
+line-height:1;
+}
+
+.player-name{
+font-size:15px;
+font-weight:900;
+margin-top:10px;
+}
+
+.player-position{
+font-size:10px;
+color:#777;
+text-transform:uppercase;
+font-weight:800;
+margin-top:4px;
+}
+
+.coach-card{
+max-width:350px;
+}
+
+/* =========================
+FOOTER
 ========================= */
 
 footer{
@@ -446,8 +516,16 @@ color:#777;
 }
 
 /* =========================
-   MOBILE
+MOBILE
 ========================= */
+
+@media(max-width:900px){
+
+.squad-grid{
+grid-template-columns:repeat(3,1fr);
+}
+
+}
 
 @media(max-width:760px){
 
@@ -482,6 +560,10 @@ grid-template-columns:1fr;
 
 .fan-grid{
 grid-template-columns:1fr;
+}
+
+.squad-grid{
+grid-template-columns:repeat(2,1fr);
 }
 
 .section{
@@ -550,12 +632,10 @@ font-size:10px;
 
 </head>
 
-
 <body>
 
-
 <!-- =========================
-     TOP
+TOP
 ========================= -->
 
 <div class="top">
@@ -570,9 +650,8 @@ Daten werden geladen …
 
 </div>
 
-
 <!-- =========================
-     HEADER
+HEADER
 ========================= -->
 
 <header class="bar">
@@ -595,7 +674,6 @@ DEINE VFB FANPAGE AUS STUTTGART
 
 </a>
 
-
 <nav class="nav">
 
 <a href="#news">
@@ -610,6 +688,10 @@ Spiele
 Tabelle
 </a>
 
+<a href="#kader">
+Kader
+</a>
+
 <a href="#fans">
 Fans
 </a>
@@ -618,9 +700,8 @@ Fans
 
 </header>
 
-
 <!-- =========================
-     HERO
+HERO
 ========================= -->
 
 <section class="hero">
@@ -632,38 +713,29 @@ VFB STUTTGART · SAISON 2026/27
 </div>
 
 <h1>
-
 WEISS. ROT.<br>
-
 <span>
 CANSTATT.
 </span>
-
 </h1>
 
 <p>
-
 VfB-News, Spieltage, Ergebnisse und alles,
 was das weiß-rote Herz bewegt.
-
 </p>
 
 <a class="btn" href="#news">
-
 AKTUELLE NEWS ↓
-
 </a>
 
 </div>
 
 </section>
 
-
 <main class="wrap">
 
-
 <!-- =========================
-     NEWS
+NEWS
 ========================= -->
 
 <section class="section" id="news">
@@ -684,9 +756,7 @@ Die Daten werden automatisch über unseren Server aktualisiert.
 
 </div>
 
-
 <div class="grid">
-
 
 <div class="card">
 
@@ -699,7 +769,6 @@ Die Daten werden automatisch über unseren Server aktualisiert.
 </div>
 
 </div>
-
 
 <div class="next">
 
@@ -717,15 +786,12 @@ Spiel wird geladen …
 
 </div>
 
-
 </div>
 
 </section>
 
-
-
 <!-- =========================
-     SPIELPLAN
+SPIELPLAN
 ========================= -->
 
 <section class="section" id="spiele">
@@ -735,7 +801,6 @@ Spielplan
 </h2>
 
 <div class="line"></div>
-
 
 <!-- BUNDESLIGA -->
 
@@ -761,7 +826,6 @@ VfB Stuttgart – Saison 2026/27
 
 </div>
 
-
 <div id="bundesligaFixtures">
 
 <div class="loading">
@@ -772,9 +836,7 @@ Bundesliga-Spiele werden geladen …
 
 </div>
 
-
 <br>
-
 
 <!-- CHAMPIONS LEAGUE -->
 
@@ -800,7 +862,6 @@ VfB Stuttgart – Königsklasse 2026/27
 
 </div>
 
-
 <div id="championsLeagueFixtures">
 
 <div class="loading">
@@ -813,10 +874,8 @@ Champions-League-Spiele werden geladen …
 
 </section>
 
-
-
 <!-- =========================
-     TABELLE
+TABELLE
 ========================= -->
 
 <section class="section" id="tabelle">
@@ -826,7 +885,6 @@ Bundesliga
 </h2>
 
 <div class="line"></div>
-
 
 <div class="card">
 
@@ -842,10 +900,304 @@ Tabelle wird geladen …
 
 </section>
 
+<!-- =========================
+KADER
+========================= -->
+
+<section class="section squad-section" id="kader">
+
+<h2>
+Kader 2026/27
+</h2>
+
+<div class="line"></div>
+
+<div class="notice">
+
+<b>
+VfB Stuttgart – Profikader 2026/27
+</b>
+
+<br>
+
+Alle Spieler nach Position sortiert.
+
+</div>
+
+<div class="squad-group">
+
+<h3 class="squad-title">
+TOR
+</h3>
+
+<div class="squad-grid">
+
+<div class="player-card">
+<div class="player-number">1</div>
+<div class="player-name">Fabian Bredlow</div>
+<div class="player-position">Torwart</div>
+</div>
+
+<div class="player-card">
+<div class="player-number">33</div>
+<div class="player-name">Marius Funk</div>
+<div class="player-position">Torwart</div>
+</div>
+
+<div class="player-card">
+<div class="player-number">41</div>
+<div class="player-name">Dennis Seimen</div>
+<div class="player-position">Torwart</div>
+</div>
+
+<div class="player-card">
+<div class="player-number">46</div>
+<div class="player-name">Stefan Drljaca</div>
+<div class="player-position">Torwart</div>
+</div>
+
+</div>
+
+</div>
+<!-- =========================
+ABWEHR
+========================= -->
+
+<div class="squad-group">
+
+<h3 class="squad-title">
+ABWEHR
+</h3>
+
+<div class="squad-grid">
+
+<div class="player-card">
+<div class="player-number">2</div>
+<div class="player-name">Ameen Al-Dakhil</div>
+<div class="player-position">Abwehr</div>
+</div>
+
+<div class="player-card">
+<div class="player-number">3</div>
+<div class="player-name">Ramon Hendriks</div>
+<div class="player-position">Abwehr</div>
+</div>
+
+<div class="player-card">
+<div class="player-number">4</div>
+<div class="player-name">Josha Vagnoman</div>
+<div class="player-position">Abwehr</div>
+</div>
+
+<div class="player-card">
+<div class="player-number">7</div>
+<div class="player-name">Maximilian Mittelstädt</div>
+<div class="player-position">Abwehr</div>
+</div>
+
+<div class="player-card">
+<div class="player-number">14</div>
+<div class="player-name">Luca Jaquez</div>
+<div class="player-position">Abwehr</div>
+</div>
+
+<div class="player-card">
+<div class="player-number">20</div>
+<div class="player-name">Leonidas Stergiou</div>
+<div class="player-position">Abwehr</div>
+</div>
+
+<div class="player-card">
+<div class="player-number">22</div>
+<div class="player-name">Lorenz Assignon</div>
+<div class="player-position">Abwehr</div>
+</div>
+
+<div class="player-card">
+<div class="player-number">23</div>
+<div class="player-name">Dan-Axel Zagadou</div>
+<div class="player-position">Abwehr</div>
+</div>
+
+<div class="player-card">
+<div class="player-number">24</div>
+<div class="player-name">Jeff Chabot</div>
+<div class="player-position">Abwehr</div>
+</div>
+
+<div class="player-card">
+<div class="player-number">29</div>
+<div class="player-name">Finn Jeltsch</div>
+<div class="player-position">Abwehr</div>
+</div>
+
+</div>
+</div>
 
 
 <!-- =========================
-     FANBEREICH
+MITTELFELD
+========================= -->
+
+<div class="squad-group">
+
+<h3 class="squad-title">
+MITTELFELD
+</h3>
+
+<div class="squad-grid">
+
+<div class="player-card">
+<div class="player-number">6</div>
+<div class="player-name">Angelo Stiller</div>
+<div class="player-position">Mittelfeld</div>
+</div>
+
+<div class="player-card">
+<div class="player-number">10</div>
+<div class="player-name">Chris Führich</div>
+<div class="player-position">Mittelfeld</div>
+</div>
+
+<div class="player-card">
+<div class="player-number">11</div>
+<div class="player-name">Bilal El Khannouss</div>
+<div class="player-position">Mittelfeld</div>
+</div>
+
+<div class="player-card">
+<div class="player-number">16</div>
+<div class="player-name">Atakan Karazor</div>
+<div class="player-position">Mittelfeld</div>
+</div>
+
+<div class="player-card">
+<div class="player-number">21</div>
+<div class="player-name">Grischa Prömel</div>
+<div class="player-position">Mittelfeld</div>
+</div>
+
+<div class="player-card">
+<div class="player-number">28</div>
+<div class="player-name">Nikolas Nartey</div>
+<div class="player-position">Mittelfeld</div>
+</div>
+
+<div class="player-card">
+<div class="player-number">39</div>
+<div class="player-name">Ertugrul Yigit</div>
+<div class="player-position">Mittelfeld</div>
+</div>
+
+<div class="player-card">
+<div class="player-number">43</div>
+<div class="player-name">Jarzinho Malanga</div>
+<div class="player-position">Mittelfeld</div>
+</div>
+
+</div>
+</div>
+
+
+<!-- =========================
+STURM
+========================= -->
+
+<div class="squad-group">
+
+<h3 class="squad-title">
+STURM
+</h3>
+
+<div class="squad-grid">
+
+<div class="player-card">
+<div class="player-number">8</div>
+<div class="player-name">Tiago Tomás</div>
+<div class="player-position">Sturm</div>
+</div>
+
+<div class="player-card">
+<div class="player-number">9</div>
+<div class="player-name">Ermedin Demirovic</div>
+<div class="player-position">Sturm</div>
+</div>
+
+<div class="player-card">
+<div class="player-number">17</div>
+<div class="player-name">Dzenan Pejcinovic</div>
+<div class="player-position">Sturm</div>
+</div>
+
+<div class="player-card">
+<div class="player-number">18</div>
+<div class="player-name">Jamie Leweling</div>
+<div class="player-position">Sturm</div>
+</div>
+
+<div class="player-card">
+<div class="player-number">25</div>
+<div class="player-name">Jeremy Arévalo</div>
+<div class="player-position">Sturm</div>
+</div>
+
+<div class="player-card">
+<div class="player-number">26</div>
+<div class="player-name">Deniz Undav</div>
+<div class="player-position">Sturm</div>
+</div>
+
+<div class="player-card">
+<div class="player-number">27</div>
+<div class="player-name">Badredine Bouanani</div>
+<div class="player-position">Sturm</div>
+</div>
+
+<div class="player-card">
+<div class="player-number">31</div>
+<div class="player-name">Justin Diehl</div>
+<div class="player-position">Sturm</div>
+</div>
+
+<div class="player-card">
+<div class="player-number">44</div>
+<div class="player-name">Leo Sauer</div>
+<div class="player-position">Sturm</div>
+</div>
+
+</div>
+</div>
+
+
+<!-- =========================
+TRAINER
+========================= -->
+
+<div class="squad-group">
+
+<h3 class="squad-title">
+TRAINER
+</h3>
+
+<div class="player-card coach-card">
+
+<div class="player-name">
+Sebastian Hoeneß
+</div>
+
+<div class="player-position">
+Cheftrainer
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+FANBEREICH
 ========================= -->
 
 <section class="section" id="fans">
@@ -856,9 +1208,7 @@ Fanbereich
 
 <div class="line"></div>
 
-
 <div class="fan-grid">
-
 
 <div class="fan">
 
@@ -867,10 +1217,8 @@ Fanbereich
 </h3>
 
 <p>
-
 Alles rund um die Cannstatter Kurve,
 Stimmung und Spieltage.
-
 </p>
 
 </div>
@@ -883,10 +1231,8 @@ Stimmung und Spieltage.
 </h3>
 
 <p>
-
 Stimme für deinen Man of the Match
 und weitere Fan-Abstimmungen.
-
 </p>
 
 </div>
@@ -899,26 +1245,21 @@ und weitere Fan-Abstimmungen.
 </h3>
 
 <p>
-
 Fotos, Videos und besondere Momente
 rund um den VfB.
-
 </p>
 
 </div>
-
 
 </div>
 
 </section>
 
-
 </main>
 
 
-
 <!-- =========================
-     FOOTER
+FOOTER
 ========================= -->
 
 <footer>
@@ -943,11 +1284,7 @@ Daten bereitgestellt von football-data.org
 </div>
 
 </footer>
-
-
-
-<script>
-
+   <script>
 
 /* =========================
    DASHBOARD LADEN
@@ -957,10 +1294,8 @@ async function loadDashboard(){
 
 try{
 
-
 const response =
 await fetch("/api/dashboard");
-
 
 if(!response.ok){
 
@@ -969,7 +1304,6 @@ throw new Error(
 );
 
 }
-
 
 const data =
 await response.json();
@@ -988,7 +1322,6 @@ data.updatedAt
 .toLocaleString("de-DE");
 
 
-
 /* =========================
    NEWS
 ========================= */
@@ -997,7 +1330,6 @@ const newsList =
 document.getElementById(
 "newsList"
 );
-
 
 if(
 data.news &&
@@ -1019,7 +1351,6 @@ news.category ||
 
 </span>
 
-
 <h3>
 
 ${escapeHTML(
@@ -1027,7 +1358,6 @@ news.title
 )}
 
 </h3>
-
 
 <p>
 
@@ -1038,7 +1368,6 @@ news.date ||
 
 </p>
 
-
 <p>
 
 ${escapeHTML(
@@ -1048,10 +1377,10 @@ news.summary ||
 
 </p>
 
-
 ${
 news.url
 ?
+
 `
 
 <a
@@ -1065,14 +1394,15 @@ ORIGINALMELDUNG →
 </a>
 
 `
+
 :
+
 ""
 }
 
 </article>
 
 `).join("");
-
 
 }else{
 
@@ -1082,14 +1412,12 @@ newsList.innerHTML =
 }
 
 
-
 /* =========================
    NÄCHSTES SPIEL
 ========================= */
 
 const game =
 data.nextGame;
-
 
 if(game){
 
@@ -1139,7 +1467,6 @@ game.competition ||
 }
 
 
-
 /* =========================
    BUNDESLIGA
 ========================= */
@@ -1148,7 +1475,6 @@ const bundesliga =
 document.getElementById(
 "bundesligaFixtures"
 );
-
 
 if(
 data.fixtures &&
@@ -1173,19 +1499,25 @@ game.date
 
 <div style="flex:1">
 
+
 <div class="team-line">
 
 ${
 game.homeLogo
 ?
+
 `
+
 <img
 class="team-logo"
 src="${escapeHTML(game.homeLogo)}"
 alt=""
 loading="lazy">
+
 `
+
 :
+
 ""
 }
 
@@ -1208,14 +1540,19 @@ style="margin-top:5px;"
 ${
 game.awayLogo
 ?
+
 `
+
 <img
 class="team-logo"
 src="${escapeHTML(game.awayLogo)}"
 alt=""
 loading="lazy">
+
 `
+
 :
+
 ""
 }
 
@@ -1255,14 +1592,12 @@ game.status
 
 `).join("");
 
-
 }else{
 
 bundesliga.innerHTML =
 '<div class="loading">Keine Bundesliga-Spiele verfügbar.</div>';
 
 }
-
 
 
 /* =========================
@@ -1273,7 +1608,6 @@ const champions =
 document.getElementById(
 "championsLeagueFixtures"
 );
-
 
 if(
 data.championsLeague &&
@@ -1304,14 +1638,19 @@ game.date
 ${
 game.homeLogo
 ?
+
 `
+
 <img
 class="team-logo"
 src="${escapeHTML(game.homeLogo)}"
 alt=""
 loading="lazy">
+
 `
+
 :
+
 ""
 }
 
@@ -1334,14 +1673,19 @@ style="margin-top:5px;"
 ${
 game.awayLogo
 ?
+
 `
+
 <img
 class="team-logo"
 src="${escapeHTML(game.awayLogo)}"
 alt=""
 loading="lazy">
+
 `
+
 :
+
 ""
 }
 
@@ -1362,7 +1706,6 @@ game.away
 
 </div>
 
-
 </div>
 
 
@@ -1379,7 +1722,6 @@ game.status
 
 `).join("");
 
-
 }else{
 
 champions.innerHTML = `
@@ -1395,7 +1737,6 @@ Keine Champions-League-Spiele verfügbar.
 }
 
 
-
 /* =========================
    TABELLE
 ========================= */
@@ -1404,7 +1745,6 @@ const table =
 document.getElementById(
 "table"
 );
-
 
 if(
 data.table &&
@@ -1429,19 +1769,25 @@ team.position
 
 <div style="flex:1">
 
+
 <div class="team-line">
 
 ${
 team.logo
 ?
+
 `
+
 <img
 class="team-logo"
 src="${escapeHTML(team.logo)}"
 alt=""
 loading="lazy">
+
 `
+
 :
+
 ""
 }
 
@@ -1474,7 +1820,6 @@ team.points
 
 `).join("");
 
-
 }else{
 
 table.innerHTML =
@@ -1485,9 +1830,7 @@ table.innerHTML =
 
 }catch(error){
 
-
 console.error(error);
-
 
 document.getElementById(
 "updated"
@@ -1522,8 +1865,11 @@ nicht erreichbar. Bitte später erneut versuchen.
 function formatStatus(status){
 
 if(!status){
+
 return "";
+
 }
+
 
 const statuses = {
 
@@ -1553,6 +1899,7 @@ CANCELLED:
 
 };
 
+
 return statuses[status] || status;
 
 }
@@ -1565,10 +1912,15 @@ return statuses[status] || status;
 function escapeHTML(value){
 
 return String(value ?? "")
+
 .replace(/&/g,"&amp;")
+
 .replace(/</g,"&lt;")
+
 .replace(/>/g,"&gt;")
+
 .replace(/"/g,"&quot;")
+
 .replace(/'/g,"&#039;");
 
 }
@@ -1590,10 +1942,10 @@ loadDashboard,
 5 * 60 * 1000
 );
 
-
 </script>
-
 
 </body>
 
 </html>
+   
+   
