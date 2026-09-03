@@ -41,6 +41,10 @@ text-decoration:none;
 color:inherit;
 }
 
+/* =========================
+TOP BAR
+========================= */
+
 .top{
 background:#080808;
 color:#fff;
@@ -50,6 +54,10 @@ display:flex;
 justify-content:space-between;
 gap:10px;
 }
+
+/* =========================
+HEADER
+========================= */
 
 .bar{
 position:sticky;
@@ -100,6 +108,10 @@ font-weight:800;
 .nav a:hover{
 color:#e30613;
 }
+
+/* =========================
+HERO
+========================= */
 
 .hero{
 background:
@@ -155,6 +167,10 @@ font-weight:900;
 margin-top:8px;
 }
 
+/* =========================
+LAYOUT
+========================= */
+
 .wrap{
 width:min(1150px,90%);
 margin:auto;
@@ -192,6 +208,10 @@ padding:20px;
 box-shadow:0 5px 20px #00000008;
 }
 
+/* =========================
+NEWS
+========================= */
+
 .news{
 padding:15px 0;
 border-bottom:1px solid #eee;
@@ -219,6 +239,10 @@ color:#666;
 font-size:12px;
 line-height:1.5;
 }
+
+/* =========================
+NEXT GAME
+========================= */
 
 .next{
 background:#111;
@@ -259,6 +283,10 @@ background:#e30613;
 border-radius:50%;
 }
 
+/* =========================
+NOTICE
+========================= */
+
 .notice{
 background:#fff1f1;
 border-left:4px solid #e30613;
@@ -266,6 +294,10 @@ padding:13px;
 font-size:12px;
 margin-bottom:18px;
 }
+
+/* =========================
+LOADING / ERROR
+========================= */
 
 .loading{
 color:#888;
@@ -280,6 +312,10 @@ padding:15px;
 border-radius:8px;
 font-size:12px;
 }
+
+/* =========================
+SPIEL
+========================= */
 
 .fixture{
 display:flex;
@@ -316,6 +352,10 @@ font-size:10px;
 font-weight:900;
 }
 
+/* =========================
+TEAM LOGOS
+========================= */
+
 .team-line{
 display:flex;
 align-items:center;
@@ -330,6 +370,10 @@ height:30px;
 object-fit:contain;
 flex-shrink:0;
 }
+
+/* =========================
+COMPETITION HEADER
+========================= */
 
 .competition-title{
 display:flex;
@@ -357,6 +401,10 @@ font-size:11px;
 font-weight:600;
 }
 
+/* =========================
+FAN AREA
+========================= */
+
 .fan-grid{
 display:grid;
 grid-template-columns:repeat(3,1fr);
@@ -380,6 +428,10 @@ color:#aaa;
 font-size:13px;
 line-height:1.5;
 }
+
+/* =========================
+KADER
+========================= */
 
 .squad-section{
 margin-top:20px;
@@ -436,9 +488,87 @@ font-weight:800;
 margin-top:4px;
 }
 
+.player-photo-wrap{
+height:185px;
+background:linear-gradient(180deg,#f8f8f8,#eeeeee);
+border-radius:12px;
+position:relative;
+overflow:hidden;
+display:flex;
+align-items:flex-end;
+justify-content:center;
+margin:-2px -2px 12px;
+}
+
+.player-photo{
+height:100%;
+width:100%;
+object-fit:contain;
+object-position:center bottom;
+}
+
+.player-number-badge{
+position:absolute;
+top:8px;
+left:8px;
+background:#e30613;
+color:#fff;
+border-radius:8px;
+padding:5px 8px;
+font-size:12px;
+font-weight:1000;
+}
+
+.player-stats{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:6px;
+margin-top:12px;
+padding-top:10px;
+border-top:1px solid #eee;
+}
+
+.player-stat{
+text-align:center;
+}
+
+.player-stat strong{
+display:block;
+font-size:16px;
+font-weight:1000;
+color:#151515;
+}
+
+.player-stat span{
+display:block;
+font-size:8px;
+color:#888;
+text-transform:uppercase;
+font-weight:800;
+margin-top:2px;
+}
+
+.player-card{
+overflow:hidden;
+}
+
+.player-name{
+margin-top:4px;
+}
+
+.player-meta{
+font-size:9px;
+color:#999;
+margin-top:3px;
+}
+
 .coach-card{
 max-width:350px;
 }
+
+/* =========================
+FOOTER
+========================= */
 
 footer{
 background:#111;
@@ -459,7 +589,15 @@ font-size:11px;
 color:#777;
 }
 
+/* =========================
+MOBILE
+========================= */
+
 @media(max-width:900px){
+
+.player-photo-wrap{
+height:175px;
+}
 
 .squad-grid{
 grid-template-columns:repeat(3,1fr);
@@ -468,6 +606,14 @@ grid-template-columns:repeat(3,1fr);
 }
 
 @media(max-width:760px){
+
+.player-photo-wrap{
+height:170px;
+}
+
+.player-stats{
+grid-template-columns:repeat(4,1fr);
+}
 
 .top{
 font-size:9px;
@@ -696,8 +842,6 @@ Aktuelle News
 Automatische Datenanbindung:
 </b>
 
-<br>
-
 Die Daten werden automatisch über unseren Server aktualisiert.
 
 </div>
@@ -735,6 +879,7 @@ Spiel wird geladen …
 </div>
 
 </section>
+
 
 <!-- =========================
 SPIELPLAN
@@ -820,6 +965,7 @@ Champions-League-Spiele werden geladen …
 
 </section>
 
+
 <!-- =========================
 TABELLE
 ========================= -->
@@ -846,6 +992,7 @@ Tabelle wird geladen …
 
 </section>
 
+
 <!-- =========================
 TRANSFERS
 ========================= -->
@@ -871,8 +1018,6 @@ Aktuelle Transfers des VfB Stuttgart.
 </div>
 
 <div class="grid">
-
-<!-- ZUGÄNGE -->
 
 <div class="card">
 
@@ -906,7 +1051,6 @@ Transfers werden geladen …
 
 </div>
 
-<!-- ABGÄNGE -->
 
 <div class="card">
 
@@ -944,6 +1088,7 @@ Transfers werden geladen …
 
 </section>
 
+
 <!-- =========================
 KADER
 ========================= -->
@@ -964,270 +1109,38 @@ VfB Stuttgart – Profikader 2026/27
 
 <br>
 
-Alle Spieler nach Position sortiert.
+Spieler mit Bild und aktuellen Saisonstatistiken.
 
 </div>
 
-<div class="squad-group">
+<div class="notice">
 
-<h3 class="squad-title">
-TOR
-</h3>
+<b>
+📊 Kaderstatistiken
+</b>
 
-<div class="squad-grid">
+<br>
 
-<div class="player-card">
-<div class="player-number">1</div>
-<div class="player-name">Fabian Bredlow</div>
-<div class="player-position">Torwart</div>
+Einsätze, Tore, Assists und Spielminuten werden automatisch geladen.
+
 </div>
 
-<div class="player-card">
-<div class="player-number">33</div>
-<div class="player-name">Marius Funk</div>
-<div class="player-position">Torwart</div>
-</div>
+<div id="squadPlayers">
 
-<div class="player-card">
-<div class="player-number">41</div>
-<div class="player-name">Dennis Seimen</div>
-<div class="player-position">Torwart</div>
-</div>
-
-<div class="player-card">
-<div class="player-number">46</div>
-<div class="player-name">Stefan Drljaca</div>
-<div class="player-position">Torwart</div>
+<div class="loading">
+Kader wird geladen …
 </div>
 
 </div>
 
-</div>
+<div class="competition" style="margin-top:18px;">
 
-<!-- ABWEHR -->
-
-<div class="squad-group">
-
-<h3 class="squad-title">
-ABWEHR
-</h3>
-
-<div class="squad-grid">
-
-<div class="player-card">
-<div class="player-number">2</div>
-<div class="player-name">Ameen Al-Dakhil</div>
-<div class="player-position">Abwehr</div>
-</div>
-
-<div class="player-card">
-<div class="player-number">3</div>
-<div class="player-name">Ramon Hendriks</div>
-<div class="player-position">Abwehr</div>
-</div>
-
-<div class="player-card">
-<div class="player-number">4</div>
-<div class="player-name">Josha Vagnoman</div>
-<div class="player-position">Abwehr</div>
-</div>
-
-<div class="player-card">
-<div class="player-number">7</div>
-<div class="player-name">Maximilian Mittelstädt</div>
-<div class="player-position">Abwehr</div>
-</div>
-
-<div class="player-card">
-<div class="player-number">14</div>
-<div class="player-name">Luca Jaquez</div>
-<div class="player-position">Abwehr</div>
-</div>
-
-<div class="player-card">
-<div class="player-number">20</div>
-<div class="player-name">Leonidas Stergiou</div>
-<div class="player-position">Abwehr</div>
-</div>
-
-<div class="player-card">
-<div class="player-number">22</div>
-<div class="player-name">Lorenz Assignon</div>
-<div class="player-position">Abwehr</div>
-</div>
-
-<div class="player-card">
-<div class="player-number">23</div>
-<div class="player-name">Dan-Axel Zagadou</div>
-<div class="player-position">Abwehr</div>
-</div>
-
-<div class="player-card">
-<div class="player-number">24</div>
-<div class="player-name">Jeff Chabot</div>
-<div class="player-position">Abwehr</div>
-</div>
-
-<div class="player-card">
-<div class="player-number">29</div>
-<div class="player-name">Finn Jeltsch</div>
-<div class="player-position">Abwehr</div>
-</div>
-
-</div>
-</div>
-
-<!-- MITTELFELD -->
-
-<div class="squad-group">
-
-<h3 class="squad-title">
-MITTELFELD
-</h3>
-
-<div class="squad-grid">
-
-<div class="player-card">
-<div class="player-number">6</div>
-<div class="player-name">Angelo Stiller</div>
-<div class="player-position">Mittelfeld</div>
-</div>
-
-<div class="player-card">
-<div class="player-number">10</div>
-<div class="player-name">Chris Führich</div>
-<div class="player-position">Mittelfeld</div>
-</div>
-
-<div class="player-card">
-<div class="player-number">11</div>
-<div class="player-name">Bilal El Khannouss</div>
-<div class="player-position">Mittelfeld</div>
-</div>
-
-<div class="player-card">
-<div class="player-number">16</div>
-<div class="player-name">Atakan Karazor</div>
-<div class="player-position">Mittelfeld</div>
-</div>
-
-<div class="player-card">
-<div class="player-number">21</div>
-<div class="player-name">Grischa Prömel</div>
-<div class="player-position">Mittelfeld</div>
-</div>
-
-<div class="player-card">
-<div class="player-number">28</div>
-<div class="player-name">Nikolas Nartey</div>
-<div class="player-position">Mittelfeld</div>
-</div>
-
-<div class="player-card">
-<div class="player-number">39</div>
-<div class="player-name">Ertugrul Yigit</div>
-<div class="player-position">Mittelfeld</div>
-</div>
-
-<div class="player-card">
-<div class="player-number">43</div>
-<div class="player-name">Jarzinho Malanga</div>
-<div class="player-position">Mittelfeld</div>
-</div>
-
-</div>
-</div>
-
-<!-- STURM -->
-
-<div class="squad-group">
-
-<h3 class="squad-title">
-STURM
-</h3>
-
-<div class="squad-grid">
-
-<div class="player-card">
-<div class="player-number">8</div>
-<div class="player-name">Tiago Tomás</div>
-<div class="player-position">Sturm</div>
-</div>
-
-<div class="player-card">
-<div class="player-number">9</div>
-<div class="player-name">Ermedin Demirovic</div>
-<div class="player-position">Sturm</div>
-</div>
-
-<div class="player-card">
-<div class="player-number">17</div>
-<div class="player-name">Dzenan Pejcinovic</div>
-<div class="player-position">Sturm</div>
-</div>
-
-<div class="player-card">
-<div class="player-number">18</div>
-<div class="player-name">Jamie Leweling</div>
-<div class="player-position">Sturm</div>
-</div>
-
-<div class="player-card">
-<div class="player-number">25</div>
-<div class="player-name">Jeremy Arévalo</div>
-<div class="player-position">Sturm</div>
-</div>
-
-<div class="player-card">
-<div class="player-number">26</div>
-<div class="player-name">Deniz Undav</div>
-<div class="player-position">Sturm</div>
-</div>
-
-<div class="player-card">
-<div class="player-number">27</div>
-<div class="player-name">Badredine Bouanani</div>
-<div class="player-position">Sturm</div>
-</div>
-
-<div class="player-card">
-<div class="player-number">31</div>
-<div class="player-name">Justin Diehl</div>
-<div class="player-position">Sturm</div>
-</div>
-
-<div class="player-card">
-<div class="player-number">44</div>
-<div class="player-name">Leo Sauer</div>
-<div class="player-position">Sturm</div>
-</div>
-
-</div>
-</div>
-
-<!-- TRAINER -->
-
-<div class="squad-group">
-
-<h3 class="squad-title">
-TRAINER
-</h3>
-
-<div class="player-card coach-card">
-
-<div class="player-name">
-Sebastian Hoeneß
-</div>
-
-<div class="player-position">
-Cheftrainer
-</div>
-
-</div>
+Statistik: Bundesliga 2026/27 · Quelle: offizieller VfB Stuttgart Kaderbereich
 
 </div>
 
 </section>
+
 
 <!-- =========================
 FANBEREICH
@@ -1256,6 +1169,7 @@ Stimmung und Spieltage.
 
 </div>
 
+
 <div class="fan">
 
 <h3>
@@ -1268,6 +1182,7 @@ und weitere Fan-Abstimmungen.
 </p>
 
 </div>
+
 
 <div class="fan">
 
@@ -1287,6 +1202,7 @@ rund um den VfB.
 </section>
 
 </main>
+
 
 <!-- =========================
 FOOTER
@@ -1315,6 +1231,7 @@ Daten bereitgestellt von football-data.org
 
 </footer>
 
+
 <script>
 
 /* =========================
@@ -1339,6 +1256,7 @@ throw new Error(
 const data =
 await response.json();
 
+
 /* =========================
    TRANSFERS
 ========================= */
@@ -1357,14 +1275,14 @@ if(data.transfers){
 
 if(arrivals){
 
-if(
+arrivals.innerHTML =
 data.transfers.arrivals &&
 data.transfers.arrivals.length
-){
 
-arrivals.innerHTML =
-data.transfers.arrivals
-.map(transfer => `
+?
+
+data.transfers.arrivals.map(
+transfer => `
 
 <div class="fixture">
 
@@ -1377,24 +1295,24 @@ transfer.player
 </strong>
 
 <div class="competition">
-
 ← ${escapeHTML(
 transfer.club
 )}
-
 </div>
 
 ${
 transfer.type
+
 ?
-`
-<div class="competition">
+
+`<div class="competition">
 ${escapeHTML(
 transfer.type
 )}
-</div>
-`
+</div>`
+
 :
+
 ""
 }
 
@@ -1402,28 +1320,26 @@ transfer.type
 
 </div>
 
-`)
-.join("");
+`
+).join("")
 
-}else{
+:
 
-arrivals.innerHTML =
 '<div class="loading">Keine Zugänge gefunden.</div>';
 
 }
 
-}
 
 if(departures){
 
-if(
+departures.innerHTML =
 data.transfers.departures &&
 data.transfers.departures.length
-){
 
-departures.innerHTML =
-data.transfers.departures
-.map(transfer => `
+?
+
+data.transfers.departures.map(
+transfer => `
 
 <div class="fixture">
 
@@ -1436,24 +1352,24 @@ transfer.player
 </strong>
 
 <div class="competition">
-
 → ${escapeHTML(
 transfer.club
 )}
-
 </div>
 
 ${
 transfer.type
+
 ?
-`
-<div class="competition">
+
+`<div class="competition">
 ${escapeHTML(
 transfer.type
 )}
-</div>
-`
+</div>`
+
 :
+
 ""
 }
 
@@ -1461,33 +1377,255 @@ transfer.type
 
 </div>
 
-`)
-.join("");
+`
+).join("")
 
-}else{
+:
 
-departures.innerHTML =
 '<div class="loading">Keine Abgänge gefunden.</div>';
 
 }
 
 }
 
+
+/* =========================
+   KADER
+========================= */
+
+const squadPlayers =
+document.getElementById(
+"squadPlayers"
+);
+
+if(squadPlayers){
+
+const squad =
+Array.isArray(data.squad)
+?
+data.squad
+:
+[];
+
+const groups = [
+
+[
+"TOR",
+"Torwart"
+],
+
+[
+"ABWEHR",
+"Abwehr"
+],
+
+[
+"MITTELFELD",
+"Mittelfeld"
+],
+
+[
+"STURM",
+"Sturm"
+]
+
+];
+
+
+if(squad.length){
+
+squadPlayers.innerHTML =
+groups.map(
+([title,position]) => {
+
+const players =
+squad.filter(
+player =>
+player.position === position
+);
+
+if(!players.length){
+return "";
 }
+
+return `
+
+<div class="squad-group">
+
+<h3 class="squad-title">
+${title}
+</h3>
+
+<div class="squad-grid">
+
+${players.map(
+player => `
+
+<article class="player-card">
+
+<div class="player-photo-wrap">
+
+<span class="player-number-badge">
+
+#${escapeHTML(
+player.number
+)}
+
+</span>
+
+${
+player.image
+
+?
+
+`
+
+<img
+class="player-photo"
+src="${escapeHTML(
+player.image
+)}"
+alt="${escapeHTML(
+player.name
+)}"
+loading="lazy">
+
+`
+
+:
+
+""
+}
+
+</div>
+
+
+<div class="player-name">
+
+${escapeHTML(
+player.name
+)}
+
+</div>
+
+
+<div class="player-position">
+
+${escapeHTML(
+player.position
+)}
+
+</div>
+
+
+<div class="player-stats">
+
+<div class="player-stat">
+
+<strong>
+${escapeHTML(
+player.appearances ?? 0
+)}
+</strong>
+
+<span>
+Einsätze
+</span>
+
+</div>
+
+
+<div class="player-stat">
+
+<strong>
+${escapeHTML(
+player.goals ?? 0
+)}
+</strong>
+
+<span>
+Tore
+</span>
+
+</div>
+
+
+<div class="player-stat">
+
+<strong>
+${escapeHTML(
+player.assists ?? 0
+)}
+</strong>
+
+<span>
+Assists
+</span>
+
+</div>
+
+
+<div class="player-stat">
+
+<strong>
+${escapeHTML(
+player.minutes ?? 0
+)}
+</strong>
+
+<span>
+Minuten
+</span>
+
+</div>
+
+</div>
+
+</article>
+
+`
+).join("")}
+
+</div>
+
+</div>
+
+`;
+
+}
+
+).join("");
+
+}else{
+
+squadPlayers.innerHTML =
+'<div class="loading">Kaderstatistiken momentan nicht verfügbar.</div>';
+
+}
+
+}
+
 
 /* =========================
    AKTUALISIERT
 ========================= */
 
-document.getElementById("updated")
+document.getElementById(
+"updated"
+)
+
 .textContent =
+
 "Stand: " +
+
 new Date(
 data.updatedAt
 )
+
 .toLocaleString(
 "de-DE"
 );
+
 
 /* =========================
    NEWS
@@ -1505,7 +1643,8 @@ data.news.length
 
 newsList.innerHTML =
 
-data.news.map(news => `
+data.news.map(
+news => `
 
 <article class="news">
 
@@ -1546,13 +1685,16 @@ news.summary ||
 
 ${
 news.url
+
 ?
 
 `
 
 <a
 class="btn"
-href="${escapeHTML(news.url)}"
+href="${escapeHTML(
+news.url
+)}"
 target="_blank"
 rel="noopener">
 
@@ -1569,7 +1711,8 @@ ORIGINALMELDUNG →
 
 </article>
 
-`).join("");
+`
+).join("");
 
 }else{
 
@@ -1577,6 +1720,7 @@ newsList.innerHTML =
 '<div class="loading">Keine News verfügbar.</div>';
 
 }
+
 
 /* =========================
    NÄCHSTES SPIEL
@@ -1590,6 +1734,7 @@ if(game){
 document.getElementById(
 "nextGame"
 )
+
 .innerHTML = `
 
 <div class="live">
@@ -1600,21 +1745,30 @@ NÄCHSTES SPIEL
 
 </div>
 
+
 <h3>
 
-${escapeHTML(game.home)}
+${escapeHTML(
+game.home
+)}
 
 –
 
-${escapeHTML(game.away)}
+${escapeHTML(
+game.away
+)}
 
 </h3>
 
+
 <p>
 
-${escapeHTML(game.date)}
+${escapeHTML(
+game.date
+)}
 
 </p>
+
 
 <div class="competition">
 
@@ -1628,6 +1782,7 @@ game.competition ||
 `;
 
 }
+
 
 /* =========================
    BUNDESLIGA
@@ -1645,9 +1800,11 @@ data.fixtures.length
 
 bundesliga.innerHTML =
 
-data.fixtures.map(game => `
+data.fixtures.map(
+game => `
 
 <div class="fixture">
+
 
 <div class="date">
 
@@ -1657,19 +1814,24 @@ game.date
 
 </div>
 
+
 <div style="flex:1">
+
 
 <div class="team-line">
 
 ${
 game.homeLogo
+
 ?
 
 `
 
 <img
 class="team-logo"
-src="${escapeHTML(game.homeLogo)}"
+src="${escapeHTML(
+game.homeLogo
+)}"
 alt=""
 loading="lazy">
 
@@ -1690,6 +1852,7 @@ game.home
 
 </div>
 
+
 <div
 class="team-line"
 style="margin-top:5px;"
@@ -1697,13 +1860,16 @@ style="margin-top:5px;"
 
 ${
 game.awayLogo
+
 ?
 
 `
 
 <img
 class="team-logo"
-src="${escapeHTML(game.awayLogo)}"
+src="${escapeHTML(
+game.awayLogo
+)}"
 alt=""
 loading="lazy">
 
@@ -1724,6 +1890,7 @@ game.away
 
 </div>
 
+
 <div class="competition">
 
 ${escapeHTML(
@@ -1735,6 +1902,7 @@ game.competition ||
 
 </div>
 
+
 <div class="status">
 
 ${formatStatus(
@@ -1743,9 +1911,11 @@ game.status
 
 </div>
 
+
 </div>
 
-`).join("");
+`
+).join("");
 
 }else{
 
@@ -1753,6 +1923,7 @@ bundesliga.innerHTML =
 '<div class="loading">Keine Bundesliga-Spiele verfügbar.</div>';
 
 }
+
 
 /* =========================
    CHAMPIONS LEAGUE
@@ -1770,9 +1941,11 @@ data.championsLeague.length
 
 champions.innerHTML =
 
-data.championsLeague.map(game => `
+data.championsLeague.map(
+game => `
 
 <div class="fixture">
+
 
 <div class="date">
 
@@ -1782,19 +1955,24 @@ game.date
 
 </div>
 
+
 <div style="flex:1">
+
 
 <div class="team-line">
 
 ${
 game.homeLogo
+
 ?
 
 `
 
 <img
 class="team-logo"
-src="${escapeHTML(game.homeLogo)}"
+src="${escapeHTML(
+game.homeLogo
+)}"
 alt=""
 loading="lazy">
 
@@ -1815,6 +1993,7 @@ game.home
 
 </div>
 
+
 <div
 class="team-line"
 style="margin-top:5px;"
@@ -1822,13 +2001,16 @@ style="margin-top:5px;"
 
 ${
 game.awayLogo
+
 ?
 
 `
 
 <img
 class="team-logo"
-src="${escapeHTML(game.awayLogo)}"
+src="${escapeHTML(
+game.awayLogo
+)}"
 alt=""
 loading="lazy">
 
@@ -1849,6 +2031,7 @@ game.away
 
 </div>
 
+
 <div class="competition">
 
 ⭐ Champions League
@@ -1856,6 +2039,7 @@ game.away
 </div>
 
 </div>
+
 
 <div class="status">
 
@@ -1865,9 +2049,11 @@ game.status
 
 </div>
 
+
 </div>
 
-`).join("");
+`
+).join("");
 
 }else{
 
@@ -1882,6 +2068,7 @@ Keine Champions-League-Spiele verfügbar.
 `;
 
 }
+
 
 /* =========================
    TABELLE
@@ -1899,9 +2086,11 @@ data.table.length
 
 table.innerHTML =
 
-data.table.map(team => `
+data.table.map(
+team => `
 
 <div class="fixture">
+
 
 <div class="date">
 
@@ -1911,19 +2100,24 @@ team.position
 
 </div>
 
+
 <div style="flex:1">
+
 
 <div class="team-line">
 
 ${
 team.logo
+
 ?
 
 `
 
 <img
 class="team-logo"
-src="${escapeHTML(team.logo)}"
+src="${escapeHTML(
+team.logo
+)}"
 alt=""
 loading="lazy">
 
@@ -1933,6 +2127,7 @@ loading="lazy">
 
 ""
 }
+
 
 <strong>
 
@@ -1946,6 +2141,7 @@ team.team
 
 </div>
 
+
 <div class="status">
 
 ${escapeHTML(
@@ -1956,9 +2152,11 @@ team.points
 
 </div>
 
+
 </div>
 
-`).join("");
+`
+).join("");
 
 }else{
 
@@ -1967,6 +2165,7 @@ table.innerHTML =
 
 }
 
+
 }catch(error){
 
 console.error(error);
@@ -1974,12 +2173,15 @@ console.error(error);
 document.getElementById(
 "updated"
 )
+
 .textContent =
 "Datenquelle nicht erreichbar";
+
 
 document.getElementById(
 "newsList"
 )
+
 .innerHTML = `
 
 <div class="error">
@@ -1995,6 +2197,7 @@ nicht erreichbar. Bitte später erneut versuchen.
 
 }
 
+
 /* =========================
    STATUS
 ========================= */
@@ -2006,6 +2209,7 @@ if(!status){
 return "";
 
 }
+
 
 const statuses = {
 
@@ -2035,9 +2239,11 @@ CANCELLED:
 
 };
 
+
 return statuses[status] || status;
 
 }
+
 
 /* =========================
    HTML SICHERN
@@ -2047,23 +2253,40 @@ function escapeHTML(value){
 
 return String(value ?? "")
 
-.replace(/&/g,"&amp;")
+.replace(
+/&/g,
+"&amp;"
+)
 
-.replace(/</g,"&lt;")
+.replace(
+/</g,
+"&lt;"
+)
 
-.replace(/>/g,"&gt;")
+.replace(
+/>/g,
+"&gt;"
+)
 
-.replace(/"/g,"&quot;")
+.replace(
+/"/g,
+"&quot;"
+)
 
-.replace(/'/g,"&#039;");
+.replace(
+/'/g,
+"&#039;"
+);
 
 }
+
 
 /* =========================
    START
 ========================= */
 
 loadDashboard();
+
 
 /* =========================
    AUTOMATISCHE AKTUALISIERUNG
