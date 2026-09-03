@@ -8,375 +8,141 @@ const TOKEN = process.env.FOOTBALL_DATA_TOKEN;
 
 const VFB_TEAM_ID = 10;
 
-const VFB_RSS_URL =
+const RSS_URL =
   "https://www.vfb.de/templates/generated/1/raw/de.xml";
+
+const CACHE_TIME = 6 * 60 * 60 * 1000;
 
 let cache = {
   data: null,
   time: 0
 };
 
-const CACHE_TIME =
-  6 * 60 * 60 * 1000;
+/* =========================
+   HTTP HELPER
+========================= */
 
-
-/* =========================================================
-   FOOTBALL-DATA.ORG API
-========================================================= */
-
-function apiRequest(endpoint) {
-
+function request(url, headers = {}) {
   return new Promise((resolve, reject) => {
+    const protocol = url.startsWith("https") ? https : http;
 
-    if (!TOKEN) {
-      reject(
-        new Error(
-          "FOOTBALL_DATA_TOKEN fehlt"
-        )
-      );
-
-      return;
-    }
-
-    const req = https.get(
-      "https://api.football-data.org/v4" + endpoint,
+    const req = protocol.get(
+      url,
       {
         headers: {
-          "X-Auth-Token": TOKEN,
-          "User-Agent": "Canstatt1893News/1.0"
+          "User-Agent": "Canstatt1893News/1.0",
+          ...headers
         }
       },
-      res => {
-
-        let body = "";
+      (res) => {
+        let data = "";
 
         res.on("data", chunk => {
-          body += chunk;
+          data += chunk;
         });
 
         res.on("end", () => {
-
-          let json;
-
-          try {
-            json = JSON.parse(body);
-          } catch {
+          if (res.statusCode >= 200 && res.statusCode < 300) {
+            resolve(data);
+          } else {
             reject(
               new Error(
-                "football-data.org lieferte kein gültiges JSON"
+                `HTTP ${res.statusCode} bei ${url}`
               )
             );
-
-            return;
           }
-
-          if (res.statusCode !== 200) {
-
-            reject(
-              new Error(
-                `football-data.org HTTP ${res.statusCode}: ${
-                  json.message ||
-                  JSON.stringify(json)
-                }`
-              )
-            );
-
-            return;
-          }
-
-          resolve(json);
-
         });
-
       }
     );
 
     req.on("error", reject);
+  });
+}
 
-    req.setTimeout(15000, () => {
+/* =========================
+   FOOTBALL-DATA.ORG
+========================= */
 
-      req.destroy(
-        new Error("API Timeout")
-      );
+async function apiRequest(endpoint) {
+  if (!TOKEN) {
+    throw new Error(
+      "FOOTBALL_DATA_TOKEN fehlt in den Render Environment Variables."
+    );
+  }
 
-    });
+  const url =
+    "https://api.football-data.org/v4" + endpoint;
 
+  const data = await request(url, {
+    "X-Auth-Token": TOKEN
   });
 
+  return JSON.parse(data);
 }
 
-
-/* =========================================================
-   DATUM FORMATIEREN
-========================================================= */
-
-function formatDate(dateString) {
-
-  if (!dateString) {
-    return "";
-  }
-
-  return new Date(
-    dateString
-  ).toLocaleString(
-    "de-DE",
-    {
-      timeZone: "Europe/Berlin",
-      day: "2-digit",
-      month: "2-digit",
-      year: "numeric",
-      hour: "2-digit",
-      minute: "2-digit"
-    }
-  );
-
-}
-
-
-/* =========================================================
-   SPIEL UMWANDELN
-========================================================= */
-
-function mapMatch(match) {
-
-  return {
-
-    id: match.id,
-
-    date:
-      formatDate(
-        match.utcDate
-      ),
-
-    rawDate:
-      match.utcDate,
-
-    home:
-      match.homeTeam?.name || "",
-
-    away:
-      match.awayTeam?.name || "",
-
-    homeLogo:
-      match.homeTeam?.crest || "",
-
-    awayLogo:
-      match.awayTeam?.crest || "",
-
-    competition:
-      match.competition?.name || "",
-
-    league:
-      match.competition?.name || "",
-
-    status:
-      match.status || "",
-
-    statusLong:
-      match.status || "",
-
-    homeGoals:
-      match.score?.fullTime?.home ?? null,
-
-    awayGoals:
-      match.score?.fullTime?.away ?? null,
-
-    venue:
-      match.venue || "",
-
-    matchday:
-      match.matchday || null
-
-  };
-
-}
-
-
-/* =========================================================
-   VFB SPIELE LADEN
-========================================================= */
+/* =========================
+   VFB SPIELE
+========================= */
 
 async function getVfbMatches() {
+  const data = await apiRequest(
+    `/teams/${VFB_TEAM_ID}/matches?competitions=BL1,CL&dateFrom=2026-07-01&dateTo=2027-06-30&limit=100`
+  );
 
-  const data =
-    await apiRequest(
-      `/teams/${VFB_TEAM_ID}/matches?competitions=BL1,CL&dateFrom=2026-07-01&dateTo=2027-06-30&limit=100`
-    );
-
-  return (data.matches || [])
-    .map(mapMatch)
-    .sort(
-      (a, b) =>
-        new Date(a.rawDate) -
-        new Date(b.rawDate)
-    );
-
+  return data.matches || [];
 }
 
-
-/* =========================================================
+/* =========================
    BUNDESLIGA TABELLE
-========================================================= */
+========================= */
 
 async function getBundesligaTable() {
+  const data = await apiRequest(
+    "/competitions/BL1/standings"
+  );
 
-  const data =
-    await apiRequest(
-      "/competitions/BL1/standings"
-    );
+  if (
+    data.standings &&
+    data.standings.length > 0
+  ) {
+    const total =
+      data.standings.find(
+        standing => standing.type === "TOTAL"
+      ) || data.standings[0];
 
-  const standings =
-    data.standings || [];
-
-  const total =
-    standings.find(
-      item =>
-        item.type === "TOTAL"
-    );
-
-  if (!total) {
-    return [];
+    return total.table || [];
   }
 
-  return (total.table || [])
-    .map(item => ({
-
-      position:
-        item.position,
-
-      team:
-        item.team?.name || "",
-
-      logo:
-        item.team?.crest || "",
-
-      played:
-        item.playedGames ?? 0,
-
-      wins:
-        item.won ?? 0,
-
-      draws:
-        item.draw ?? 0,
-
-      losses:
-        item.lost ?? 0,
-
-      goalsFor:
-        item.goalsFor ?? 0,
-
-      goalsAgainst:
-        item.goalsAgainst ?? 0,
-
-      goalDiff:
-        item.goalDifference ?? 0,
-
-      points:
-        item.points ?? 0,
-
-      form:
-        item.form || ""
-
-    }));
-
+  return [];
 }
 
+/* =========================
+   HTML ENTITIES
+========================= */
 
-/* =========================================================
-   HTML ENTITY DEKODIEREN
-========================================================= */
-
-function decodeHTML(text) {
-
-  if (!text) {
-    return "";
-  }
-
-  return String(text)
-
-    .replace(
-      /<!\[CDATA\[([\s\S]*?)\]\]>/g,
-      "$1"
-    )
-
-    .replace(
-      /<[^>]*>/g,
-      " "
-    )
-
-    .replace(
-      /&amp;/g,
-      "&"
-    )
-
-    .replace(
-      /&quot;/g,
-      '"'
-    )
-
-    .replace(
-      /&#39;/g,
-      "'"
-    )
-
-    .replace(
-      /&apos;/g,
-      "'"
-    )
-
-    .replace(
-      /&lt;/g,
-      "<"
-    )
-
-    .replace(
-      /&gt;/g,
-      ">"
-    )
-
-    .replace(
-      /&#(\d+);/g,
-      (_, code) =>
-        String.fromCharCode(
-          Number(code)
-        )
-    )
-
-    .replace(
-      /&#x([0-9a-f]+);/gi,
-      (_, code) =>
-        String.fromCharCode(
-          parseInt(code, 16)
-        )
-    )
-
-    .replace(
-      /\s+/g,
-      " "
-    )
-
-    .trim();
-
+function decodeHTML(text = "") {
+  return text
+    .replace(/&amp;/g, "&")
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&apos;/g, "'")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&#x27;/g, "'")
+    .replace(/&#x2F;/g, "/");
 }
 
+/* =========================
+   XML PARSER
+========================= */
 
-/* =========================================================
-   XML TAG AUSLESEN
-========================================================= */
+function getXMLValue(block, tag) {
+  const regex = new RegExp(
+    `<${tag}(?:\\s[^>]*)?>([\\s\\S]*?)<\\/${tag}>`,
+    "i"
+  );
 
-function getXMLValue(
-  xml,
-  tag
-) {
-
-  const regex =
-    new RegExp(
-      `<${tag}(?:\\s[^>]*)?>([\\s\\S]*?)<\\/${tag}>`,
-      "i"
-    );
-
-  const match =
-    xml.match(regex);
+  const match = block.match(regex);
 
   if (!match) {
     return "";
@@ -384,810 +150,337 @@ function getXMLValue(
 
   return decodeHTML(
     match[1]
+      .replace(/<!\[CDATA\[([\s\S]*?)\]\]>/gi, "$1")
+      .trim()
   );
-
 }
 
+/* =========================
+   VFB RSS NEWS
+========================= */
 
-/* =========================================================
-   OFFIZIELLE VFB NEWS
-========================================================= */
-
-function fetchVfbNews() {
-
-  return new Promise(
-    (resolve, reject) => {
-
-      const req =
-        https.get(
-          VFB_RSS_URL,
-          {
-            headers: {
-              "User-Agent":
-                "Mozilla/5.0 Canstatt1893News/1.0",
-              "Accept":
-                "application/rss+xml, application/xml, text/xml, */*"
-            }
-          },
-          res => {
-
-            let xml = "";
-
-            res.on(
-              "data",
-              chunk => {
-                xml += chunk;
-              }
-            );
-
-            res.on(
-              "end",
-              () => {
-
-                if (
-                  res.statusCode < 200 ||
-                  res.statusCode >= 300
-                ) {
-
-                  reject(
-                    new Error(
-                      `VfB RSS HTTP ${res.statusCode}`
-                    )
-                  );
-
-                  return;
-                }
-
-
-                /*
-                 * RSS besteht normalerweise aus
-                 * mehreren <item>-Elementen.
-                 */
-
-                const itemRegex =
-                  /<item\b[^>]*>([\s\S]*?)<\/item>/gi;
-
-                const items = [];
-
-                let match;
-
-
-                while (
-                  (match =
-                    itemRegex.exec(xml)) !== null
-                ) {
-
-                  const item =
-                    match[1];
-
-                  const title =
-                    getXMLValue(
-                      item,
-                      "title"
-                    );
-
-                  const link =
-                    getXMLValue(
-                      item,
-                      "link"
-                    );
-
-                  const pubDate =
-                    getXMLValue(
-                      item,
-                      "pubDate"
-                    );
-
-                  let description =
-                    getXMLValue(
-                      item,
-                      "description"
-                    );
-
-                  const category =
-                    getXMLValue(
-                      item,
-                      "category"
-                    );
-
-
-                  /*
-                   * Nur echte Meldungen übernehmen.
-                   */
-
-                  if (
-                    !title ||
-                    title.length < 5 ||
-                    !link
-                  ) {
-                    continue;
-                  }
-
-
-                  /*
-                   * Navigation / Archiv-Einträge
-                   * werden zusätzlich herausgefiltert.
-                   */
-
-                  const lowerTitle =
-                    title.toLowerCase();
-
-                  const blocked = [
-                    "news-archiv",
-                    "vfb magazine",
-                    "vfb radio",
-                    "vfb tippspiel",
-                    "listenansicht",
-                    "statistik",
-                    "zu-/abgänge",
-                    "mitgliedschaft",
-                    "praktikum",
-                    "aushilfen und werkstudenten"
-                  ];
-
-
-                  if (
-                    blocked.some(
-                      word =>
-                        lowerTitle.includes(word)
-                    )
-                  ) {
-                    continue;
-                  }
-
-
-                  /*
-                   * Beschreibung kürzen.
-                   */
-
-                  if (
-                    description.length > 300
-                  ) {
-
-                    description =
-                      description.substring(
-                        0,
-                        297
-                      ) + "...";
-
-                  }
-
-
-                  items.push({
-
-                    category:
-                      category ||
-                      "VfB aktuell",
-
-                    title,
-
-                    date:
-                      pubDate
-                        ? formatDate(pubDate)
-                        : "",
-
-                    summary:
-                      description,
-
-                    url:
-                      link
-
-                  });
-
-                }
-
-
-                /*
-                 * Falls der Feed keine
-                 * <item>-Elemente liefert,
-                 * nicht mit falschen Daten arbeiten.
-                 */
-
-                resolve(
-                  items.slice(0, 10)
-                );
-
-              }
-            );
-
-          }
-        );
-
-
-      req.on(
-        "error",
-        reject
-      );
-
-
-      req.setTimeout(
-        15000,
-        () => {
-
-          req.destroy(
-            new Error(
-              "VfB RSS Timeout"
-            )
-          );
-
-        }
-      );
-
-    }
-  );
-
-}
-
-
-/* =========================================================
-   NEWS LADEN
-========================================================= */
-
-async function getNews() {
-
+async function fetchVfbNews() {
   try {
+    const xml = await request(RSS_URL);
 
-    const news =
-      await fetchVfbNews();
+    const items = [];
+    const matches = xml.match(
+      /<item[\s\S]*?<\/item>/gi
+    ) || [];
+
+    const blockedTitles = [
+      "News-Archiv",
+      "VfB Magazine",
+      "VfB Tippspiel",
+      "VfB Radio",
+      "Praktikum",
+      "Aushilfen und Werkstudenten",
+      "Mitgliedschaft",
+      "Listenansicht",
+      "Statistik",
+      "Zu-/Abgänge"
+    ];
+
+    for (const item of matches) {
+      const title = getXMLValue(item, "title");
+      const link = getXMLValue(item, "link");
+      const description =
+        getXMLValue(item, "description");
+
+      const pubDate =
+        getXMLValue(item, "pubDate") ||
+        getXMLValue(item, "date");
+
+      if (!title || !link) {
+        continue;
+      }
+
+      if (
+        blockedTitles.some(
+          blocked =>
+            title.toLowerCase() ===
+            blocked.toLowerCase()
+        )
+      ) {
+        continue;
+      }
+
+      items.push({
+        title,
+        link,
+        description,
+        pubDate
+      });
+    }
 
     console.log(
       "VfB-News gefunden:",
-      news.length
+      items.length
     );
 
-    return news;
+    return items.slice(0, 10);
 
   } catch (error) {
-
     console.error(
-      "NEWS ERROR:",
+      "Fehler beim VfB RSS Feed:",
       error.message
     );
 
     return [];
-
   }
-
 }
 
-
-/* =========================================================
-   DASHBOARD AUFBAUEN
-========================================================= */
+/* =========================
+   DASHBOARD
+========================= */
 
 async function buildDashboard() {
-
-  console.log(
-    "Lade VfB-Spiele..."
-  );
-
-  const matches =
-    await getVfbMatches();
-
-  console.log(
-    "VfB-Spiele gefunden:",
-    matches.length
-  );
-
-
-  console.log(
-    "Lade Bundesliga-Tabelle..."
-  );
-
-  const table =
-    await getBundesligaTable();
-
-  console.log(
-    "Tabellenplätze:",
-    table.length
-  );
-
-
-  console.log(
-    "Lade offizielle VfB-News..."
-  );
-
-  const news =
-    await getNews();
-
-
-  const bundesliga =
-    matches.filter(
-      match =>
-        match.competition ===
-        "Bundesliga"
-    );
-
-
-  const championsLeague =
-    matches.filter(
-      match =>
-        match.competition ===
-          "UEFA Champions League" ||
-        match.competition ===
-          "Champions League"
-    );
-
-
-  const now =
-    new Date();
-
-
-  const nextGame =
-    matches.find(
-      match => {
-
-        const date =
-          new Date(
-            match.rawDate
-          );
-
-        return (
-          date >= now &&
-          (
-            match.status ===
-              "SCHEDULED" ||
-            match.status ===
-              "TIMED"
-          )
-        );
-
-      }
-    ) || null;
-
-
-  return {
-
-    updatedAt:
-      new Date().toISOString(),
-
-    news,
-
-    nextGame,
-
-    fixtures:
-      bundesliga,
-
-    championsLeague,
-
-    table,
-
-    live: [],
-
-    attribution:
-      "Data provided by football-data.org"
-
-  };
-
-}
-
-
-/* =========================================================
-   DASHBOARD CACHE
-========================================================= */
-
-async function getDashboard() {
-
   if (
     cache.data &&
-    Date.now() - cache.time <
-      CACHE_TIME
+    Date.now() - cache.time < CACHE_TIME
   ) {
-
     return cache.data;
-
   }
 
+  const [
+    matches,
+    table,
+    news
+  ] = await Promise.all([
+    getVfbMatches(),
+    getBundesligaTable(),
+    fetchVfbNews()
+  ]);
 
-  try {
-
-    const data =
-      await buildDashboard();
-
-
-    cache = {
-
-      data,
-
-      time:
-        Date.now()
-
-    };
-
-
-    return data;
-
-  } catch (error) {
-
-    console.error(
-      "API ERROR:",
-      error.message
-    );
-
-
-    return {
-
-      updatedAt:
-        new Date().toISOString(),
-
-      news: [],
-
-      nextGame: null,
-
-      fixtures: [],
-
-      championsLeague: [],
-
-      table: [],
-
-      live: [],
-
-      error:
-        error.message,
-
-      attribution:
-        "Data provided by football-data.org"
-
-    };
-
-  }
-
-}
-
-
-/* =========================================================
-   JSON ANTWORT
-========================================================= */
-
-function sendJSON(
-  res,
-  data
-) {
-
-  res.writeHead(
-    200,
-    {
-      "Content-Type":
-        "application/json; charset=utf-8",
-
-      "Cache-Control":
-        "no-store"
-    }
+  const bundesliga = matches.filter(
+    match =>
+      match.competition &&
+      match.competition.code === "BL1"
   );
 
-
-  res.end(
-    JSON.stringify(data)
+  const championsLeague = matches.filter(
+    match =>
+      match.competition &&
+      match.competition.code === "CL"
   );
 
-}
+  const now = new Date();
 
-
-/* =========================================================
-   DATEI AUSLIEFERN
-========================================================= */
-
-function serveFile(
-  res,
-  filename
-) {
-
-  const filePath =
-    path.join(
-      __dirname,
-      filename
-    );
-
-
-  console.log(
-    "Datei angefordert:",
-    filePath
-  );
-
-
-  if (
-    !fs.existsSync(filePath)
-  ) {
-
-    console.error(
-      "DATEI NICHT GEFUNDEN:",
-      filePath
-    );
-
-
-    res.writeHead(
-      404,
-      {
-        "Content-Type":
-          "text/plain; charset=utf-8"
+  const upcoming = matches
+    .filter(match => {
+      if (!match.utcDate) {
+        return false;
       }
+
+      return (
+        new Date(match.utcDate) >= now
+      );
+    })
+    .sort(
+      (a, b) =>
+        new Date(a.utcDate) -
+        new Date(b.utcDate)
     );
 
+  const nextGame =
+    upcoming.length > 0
+      ? upcoming[0]
+      : null;
 
-    res.end(
-      "Nicht gefunden"
-    );
-
-
-    return;
-
-  }
-
-
-  const ext =
-    path.extname(
-      filePath
-    );
-
-
-  const types = {
-
-    ".html":
-      "text/html; charset=utf-8",
-
-    ".css":
-      "text/css; charset=utf-8",
-
-    ".js":
-      "application/javascript; charset=utf-8",
-
-    ".json":
-      "application/json; charset=utf-8",
-
-    ".png":
-      "image/png",
-
-    ".jpg":
-      "image/jpeg",
-
-    ".jpeg":
-      "image/jpeg",
-
-    ".svg":
-      "image/svg+xml",
-
-    ".ico":
-      "image/x-icon"
-
+  const result = {
+    nextGame,
+    fixtures: bundesliga,
+    championsLeague,
+    table,
+    news,
+    attribution:
+      "Data provided by football-data.org"
   };
 
+  cache = {
+    data: result,
+    time: Date.now()
+  };
 
-  res.writeHead(
-    200,
-    {
-      "Content-Type":
-        types[ext] ||
-        "application/octet-stream"
-    }
-  );
-
-
-  fs.createReadStream(
-    filePath
-  ).pipe(res);
-
+  return result;
 }
 
+/* =========================
+   FILE SERVER
+========================= */
 
-/* =========================================================
+function serveFile(res, fileName) {
+  const filePath =
+    path.join(__dirname, fileName);
+
+  fs.readFile(filePath, (error, data) => {
+    if (error) {
+      res.writeHead(404, {
+        "Content-Type": "text/plain; charset=utf-8"
+      });
+
+      res.end("Datei nicht gefunden.");
+      return;
+    }
+
+    let contentType =
+      "text/plain; charset=utf-8";
+
+    if (fileName.endsWith(".html")) {
+      contentType =
+        "text/html; charset=utf-8";
+    }
+
+    if (fileName.endsWith(".css")) {
+      contentType =
+        "text/css; charset=utf-8";
+    }
+
+    if (fileName.endsWith(".js")) {
+      contentType =
+        "application/javascript; charset=utf-8";
+    }
+
+    res.writeHead(200, {
+      "Content-Type": contentType
+    });
+
+    res.end(data);
+  });
+}
+
+/* =========================
    SERVER
-========================================================= */
+========================= */
 
-const server =
-  http.createServer(
-    async (
-      req,
-      res
-    ) => {
+const server = http.createServer(
+  async (req, res) => {
 
+    const requestUrl = new URL(
+      req.url,
+      `http://${req.headers.host}`
+    );
+
+    const pathname =
+      requestUrl.pathname;
+
+    /* API */
+
+    if (pathname === "/api/dashboard") {
       try {
+        const dashboard =
+          await buildDashboard();
 
-        const pathname =
-          new URL(
-            req.url,
-            `http://${req.headers.host}`
-          ).pathname;
-
-
-        console.log(
-          "REQUEST:",
-          pathname
-        );
-
-
-        /* =========================
-           API
-        ========================= */
-
-        if (
-          pathname ===
-          "/api/dashboard"
-        ) {
-
-          const data =
-            await getDashboard();
-
-
-          sendJSON(
-            res,
-            data
-          );
-
-
-          return;
-
-        }
-
-
-        /* =========================
-           HEALTH CHECK
-        ========================= */
-
-        if (
-          pathname ===
-          "/health"
-        ) {
-
-          sendJSON(
-            res,
-            {
-
-              status:
-                "ok",
-
-              apiConfigured:
-                !!TOKEN,
-
-              cwd:
-                process.cwd(),
-
-              dirname:
-                __dirname,
-
-              indexExists:
-                fs.existsSync(
-                  path.join(
-                    __dirname,
-                    "index.html"
-                  )
-                )
-
-            }
-          );
-
-
-          return;
-
-        }
-
-
-        /* =========================
-           HOMEPAGE
-        ========================= */
-
-        if (
-          pathname === "/" ||
-          pathname ===
-            "/index.html"
-        ) {
-
-          serveFile(
-            res,
-            "index.html"
-          );
-
-
-          return;
-
-        }
-
-
-        /* =========================
-           FALLBACK
-        ========================= */
-
-        if (
-          !pathname.startsWith(
-            "/api/"
-          )
-        ) {
-
-          serveFile(
-            res,
-            "index.html"
-          );
-
-
-          return;
-
-        }
-
-
-        /* =========================
-           404
-        ========================= */
-
-        res.writeHead(
-          404,
-          {
-            "Content-Type":
-              "text/plain; charset=utf-8"
-          }
-        );
-
+        res.writeHead(200, {
+          "Content-Type":
+            "application/json; charset=utf-8",
+          "Cache-Control":
+            "public, max-age=300"
+        });
 
         res.end(
-          "Nicht gefunden"
+          JSON.stringify(dashboard)
         );
 
-
       } catch (error) {
-
         console.error(
-          "SERVER ERROR:",
+          "Dashboard-Fehler:",
           error
         );
 
-
-        res.writeHead(
-          500,
-          {
-            "Content-Type":
-              "application/json; charset=utf-8"
-          }
-        );
-
+        res.writeHead(500, {
+          "Content-Type":
+            "application/json; charset=utf-8"
+        });
 
         res.end(
           JSON.stringify({
             error:
+              "Dashboard konnte nicht geladen werden.",
+            message:
               error.message
           })
         );
-
       }
 
+      return;
     }
-  );
 
+    /* HEALTH */
 
-/* =========================================================
-   SERVER START
-========================================================= */
+    if (pathname === "/health") {
+      res.writeHead(200, {
+        "Content-Type":
+          "application/json; charset=utf-8"
+      });
+
+      res.end(
+        JSON.stringify({
+          status: "ok"
+        })
+      );
+
+      return;
+    }
+
+    /* WEBSITE */
+
+    if (
+      pathname === "/" ||
+      pathname === "/index.html"
+    ) {
+      serveFile(res, "index.html");
+      return;
+    }
+
+    /* Andere Dateien */
+
+    const safePath =
+      pathname.replace(/^\/+/, "");
+
+    if (
+      safePath &&
+      !safePath.includes("..")
+    ) {
+      const fullPath =
+        path.join(
+          __dirname,
+          safePath
+        );
+
+      fs.stat(
+        fullPath,
+        (error, stats) => {
+          if (
+            !error &&
+            stats.isFile()
+          ) {
+            serveFile(
+              res,
+              safePath
+            );
+          } else {
+            serveFile(
+              res,
+              "index.html"
+            );
+          }
+        }
+      );
+
+      return;
+    }
+
+    serveFile(res, "index.html");
+  }
+);
 
 server.listen(
   PORT,
   "0.0.0.0",
   () => {
-
     console.log(
-      `Server läuft auf Port ${PORT}`
+      `Canstatt 1893 News läuft auf Port ${PORT}`
     );
-
-    console.log(
-      "Football-Data Token vorhanden:",
-      !!TOKEN
-    );
-
-    console.log(
-      "Server-Verzeichnis:",
-      __dirname
-    );
-
-    console.log(
-      "index.html vorhanden:",
-      fs.existsSync(
-        path.join(
-          __dirname,
-          "index.html"
-        )
-      )
-    );
-
-    console.log(
-      "VfB RSS Feed:",
-      VFB_RSS_URL
-    );
-
   }
-); 
+);
