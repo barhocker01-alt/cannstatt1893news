@@ -15,8 +15,14 @@ let cache = {
 
 const CACHE_TIME = 6 * 60 * 60 * 1000;
 
+
+/* =========================
+   FOOTBALL-DATA API
+========================= */
+
 function apiRequest(endpoint) {
   return new Promise((resolve, reject) => {
+
     if (!TOKEN) {
       reject(new Error("FOOTBALL_DATA_TOKEN fehlt"));
       return;
@@ -30,6 +36,7 @@ function apiRequest(endpoint) {
         }
       },
       res => {
+
         let body = "";
 
         res.on("data", chunk => {
@@ -37,6 +44,7 @@ function apiRequest(endpoint) {
         });
 
         res.on("end", () => {
+
           let json;
 
           try {
@@ -69,36 +77,66 @@ function apiRequest(endpoint) {
     req.on("error", reject);
 
     req.setTimeout(15000, () => {
-      req.destroy(new Error("API Timeout"));
+      req.destroy(
+        new Error("API Timeout")
+      );
     });
+
   });
 }
+
+
+/* =========================
+   DATUM FORMATIEREN
+========================= */
 
 function formatDate(dateString) {
-  if (!dateString) return "";
 
-  return new Date(dateString).toLocaleString("de-DE", {
-    timeZone: "Europe/Berlin",
-    day: "2-digit",
-    month: "2-digit",
-    year: "numeric",
-    hour: "2-digit",
-    minute: "2-digit"
-  });
+  if (!dateString) {
+    return "";
+  }
+
+  return new Date(dateString).toLocaleString(
+    "de-DE",
+    {
+      timeZone: "Europe/Berlin",
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit"
+    }
+  );
 }
 
+
+/* =========================
+   SPIEL UMWANDELN
+========================= */
+
 function mapMatch(match) {
+
   return {
+
     id: match.id,
 
-    date: formatDate(match.utcDate),
+    date: formatDate(
+      match.utcDate
+    ),
+
     rawDate: match.utcDate,
 
-    home: match.homeTeam?.name || "",
-    away: match.awayTeam?.name || "",
+    home:
+      match.homeTeam?.name || "",
 
-    homeLogo: match.homeTeam?.crest || "",
-    awayLogo: match.awayTeam?.crest || "",
+    away:
+      match.awayTeam?.name || "",
+
+    homeLogo:
+      match.homeTeam?.crest || "",
+
+    awayLogo:
+      match.awayTeam?.crest || "",
 
     competition:
       match.competition?.name || "",
@@ -106,9 +144,11 @@ function mapMatch(match) {
     league:
       match.competition?.name || "",
 
-    status: match.status || "",
+    status:
+      match.status || "",
 
-    statusLong: match.status || "",
+    statusLong:
+      match.status || "",
 
     homeGoals:
       match.score?.fullTime?.home ?? null,
@@ -116,13 +156,23 @@ function mapMatch(match) {
     awayGoals:
       match.score?.fullTime?.away ?? null,
 
-    venue: match.venue || "",
+    venue:
+      match.venue || "",
 
-    matchday: match.matchday || null
+    matchday:
+      match.matchday || null
+
   };
+
 }
 
+
+/* =========================
+   VFB SPIELE LADEN
+========================= */
+
 async function getVfbMatches() {
+
   const data = await apiRequest(
     `/teams/${VFB_TEAM_ID}/matches?competitions=BL1,CL&dateFrom=2026-07-01&dateTo=2027-06-30&limit=100`
   );
@@ -134,138 +184,232 @@ async function getVfbMatches() {
         new Date(a.rawDate) -
         new Date(b.rawDate)
     );
+
 }
 
+
+/* =========================
+   BUNDESLIGA TABELLE
+========================= */
+
 async function getBundesligaTable() {
+
   const data = await apiRequest(
     "/competitions/BL1/standings"
   );
 
-  const standings = data.standings || [];
+  const standings =
+    data.standings || [];
 
-  const total = standings.find(
-    item => item.type === "TOTAL"
-  );
+  const total =
+    standings.find(
+      item =>
+        item.type === "TOTAL"
+    );
 
-  if (!total) return [];
+  if (!total) {
+    return [];
+  }
 
-  return (total.table || []).map(item => ({
-    rank: item.position,
+  return (total.table || [])
+    .map(item => ({
 
-    team:
-      item.team?.name || "",
+      /*
+       * WICHTIG:
+       * Die Webseite erwartet
+       * team.position
+       */
+      position:
+        item.position,
 
-    logo:
-      item.team?.crest || "",
+      team:
+        item.team?.name || "",
 
-    played:
-      item.playedGames ?? 0,
+      logo:
+        item.team?.crest || "",
 
-    wins:
-      item.won ?? 0,
+      played:
+        item.playedGames ?? 0,
 
-    draws:
-      item.draw ?? 0,
+      wins:
+        item.won ?? 0,
 
-    losses:
-      item.lost ?? 0,
+      draws:
+        item.draw ?? 0,
 
-    goalsFor:
-      item.goalsFor ?? 0,
+      losses:
+        item.lost ?? 0,
 
-    goalsAgainst:
-      item.goalsAgainst ?? 0,
+      goalsFor:
+        item.goalsFor ?? 0,
 
-    goalDiff:
-      item.goalDifference ?? 0,
+      goalsAgainst:
+        item.goalsAgainst ?? 0,
 
-    points:
-      item.points ?? 0,
+      goalDiff:
+        item.goalDifference ?? 0,
 
-    form:
-      item.form || ""
-  }));
+      points:
+        item.points ?? 0,
+
+      form:
+        item.form || ""
+
+    }));
+
 }
 
+
+/* =========================
+   VFB NEWS
+========================= */
+
 async function getNews() {
+
   try {
-    return await fetchVfbNews();
+
+    const result =
+      await fetchVfbNews();
+
+    return result;
+
   } catch (error) {
+
     console.error(
       "NEWS ERROR:",
       error.message
     );
 
     return [];
+
   }
+
 }
+
 
 function fetchVfbNews() {
-  return new Promise((resolve, reject) => {
-    https.get(
-      "https://www.vfb.de/de/1893/aktuell/neues/",
-      res => {
-        let html = "";
 
-        res.on("data", chunk => {
-          html += chunk;
-        });
+  return new Promise(
+    (resolve, reject) => {
 
-        res.on("end", () => {
-          const links = [];
+      https.get(
+        "https://www.vfb.de/de/1893/aktuell/neues/",
+        res => {
 
-          const regex =
-            /<a[^>]+href=["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi;
+          let html = "";
 
-          let match;
-
-          while (
-            (match = regex.exec(html)) !== null
-          ) {
-            let url = match[1];
-
-            let title = match[2]
-              .replace(/<[^>]*>/g, " ")
-              .replace(/\s+/g, " ")
-              .trim();
-
-            if (!title || title.length < 8) {
-              continue;
+          res.on(
+            "data",
+            chunk => {
+              html += chunk;
             }
+          );
 
-            if (url.startsWith("/")) {
-              url = "https://www.vfb.de" + url;
+          res.on(
+            "end",
+            () => {
+
+              const links = [];
+
+              const regex =
+                /<a[^>]+href=["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi;
+
+              let match;
+
+              while (
+                (match =
+                  regex.exec(html)) !== null
+              ) {
+
+                let url =
+                  match[1];
+
+                let title =
+                  match[2]
+                    .replace(
+                      /<[^>]*>/g,
+                      " "
+                    )
+                    .replace(
+                      /\s+/g,
+                      " "
+                    )
+                    .trim();
+
+                if (
+                  !title ||
+                  title.length < 8
+                ) {
+                  continue;
+                }
+
+                if (
+                  url.startsWith("/")
+                ) {
+                  url =
+                    "https://www.vfb.de" +
+                    url;
+                }
+
+                if (
+                  url.includes(
+                    "vfb.de"
+                  ) &&
+                  !links.some(
+                    item =>
+                      item.url === url
+                  )
+                ) {
+
+                  links.push({
+
+                    title,
+
+                    url
+
+                  });
+
+                }
+
+              }
+
+              resolve(
+                links.slice(0, 10)
+              );
+
             }
+          );
 
-            if (
-              url.includes("vfb.de") &&
-              !links.some(
-                item => item.url === url
-              )
-            ) {
-              links.push({
-                title,
-                url
-              });
-            }
-          }
+        }
+      ).on(
+        "error",
+        reject
+      );
 
-          resolve(links.slice(0, 10));
-        });
-      }
-    ).on("error", reject);
-  });
+    }
+  );
+
 }
 
-async function buildDashboard() {
-  console.log("Lade VfB-Spiele...");
 
-  const matches = await getVfbMatches();
+/* =========================
+   DASHBOARD AUFBAUEN
+========================= */
+
+async function buildDashboard() {
+
+  console.log(
+    "Lade VfB-Spiele..."
+  );
+
+  const matches =
+    await getVfbMatches();
 
   console.log(
     "VfB-Spiele gefunden:",
     matches.length
   );
+
 
   console.log(
     "Lade Bundesliga-Tabelle..."
@@ -279,12 +423,18 @@ async function buildDashboard() {
     table.length
   );
 
-  const news = await getNews();
 
-  const bundesliga = matches.filter(
-    match =>
-      match.competition === "Bundesliga"
-  );
+  const news =
+    await getNews();
+
+
+  const bundesliga =
+    matches.filter(
+      match =>
+        match.competition ===
+        "Bundesliga"
+    );
+
 
   const championsLeague =
     matches.filter(
@@ -295,23 +445,36 @@ async function buildDashboard() {
           "Champions League"
     );
 
-  const now = new Date();
+
+  const now =
+    new Date();
+
 
   const nextGame =
-    matches.find(match => {
-      const date =
-        new Date(match.rawDate);
+    matches.find(
+      match => {
 
-      return (
-        date >= now &&
-        (
-          match.status === "SCHEDULED" ||
-          match.status === "TIMED"
-        )
-      );
-    }) || null;
+        const date =
+          new Date(
+            match.rawDate
+          );
+
+        return (
+          date >= now &&
+          (
+            match.status ===
+              "SCHEDULED" ||
+            match.status ===
+              "TIMED"
+          )
+        );
+
+      }
+    ) || null;
+
 
   return {
+
     updatedAt:
       new Date().toISOString(),
 
@@ -319,7 +482,8 @@ async function buildDashboard() {
 
     nextGame,
 
-    fixtures: bundesliga,
+    fixtures:
+      bundesliga,
 
     championsLeague,
 
@@ -329,35 +493,54 @@ async function buildDashboard() {
 
     attribution:
       "Data provided by football-data.org"
+
   };
+
 }
 
+
+/* =========================
+   DASHBOARD CACHE
+========================= */
+
 async function getDashboard() {
+
   if (
     cache.data &&
     Date.now() - cache.time <
       CACHE_TIME
   ) {
+
     return cache.data;
+
   }
 
+
   try {
+
     const data =
       await buildDashboard();
 
     cache = {
+
       data,
-      time: Date.now()
+
+      time:
+        Date.now()
+
     };
 
     return data;
+
   } catch (error) {
+
     console.error(
       "API ERROR:",
       error.message
     );
 
     return {
+
       updatedAt:
         new Date().toISOString(),
 
@@ -373,43 +556,108 @@ async function getDashboard() {
 
       live: [],
 
-      error: error.message,
+      error:
+        error.message,
 
       attribution:
         "Data provided by football-data.org"
+
     };
+
   }
+
 }
 
-function sendJSON(res, data) {
-  res.writeHead(200, {
-    "Content-Type":
-      "application/json; charset=utf-8",
 
-    "Cache-Control":
-      "no-store"
-  });
+/* =========================
+   JSON ANTWORT
+========================= */
+
+function sendJSON(
+  res,
+  data
+) {
+
+  res.writeHead(
+    200,
+    {
+      "Content-Type":
+        "application/json; charset=utf-8",
+
+      "Cache-Control":
+        "no-store"
+    }
+  );
 
   res.end(
     JSON.stringify(data)
   );
+
 }
 
-function serveFile(res, filename) {
+
+/* =========================
+   DATEI AUSLIEFERN
+========================= */
+
+function serveFile(
+  res,
+  filename
+) {
+
+  /*
+   * __dirname zeigt direkt
+   * auf den Ordner,
+   * in dem server.js liegt.
+   */
 
   const filePath =
-    path.join(process.cwd(), filename);
+    path.join(
+      __dirname,
+      filename
+    );
 
-  if (!fs.existsSync(filePath)) {
-    res.writeHead(404);
-    res.end("Nicht gefunden");
+
+  console.log(
+    "Datei angefordert:",
+    filePath
+  );
+
+
+  if (
+    !fs.existsSync(filePath)
+  ) {
+
+    console.error(
+      "DATEI NICHT GEFUNDEN:",
+      filePath
+    );
+
+    res.writeHead(
+      404,
+      {
+        "Content-Type":
+          "text/plain; charset=utf-8"
+      }
+    );
+
+    res.end(
+      "Nicht gefunden"
+    );
+
     return;
+
   }
 
+
   const ext =
-    path.extname(filePath);
+    path.extname(
+      filePath
+    );
+
 
   const types = {
+
     ".html":
       "text/html; charset=utf-8",
 
@@ -417,18 +665,49 @@ function serveFile(res, filename) {
       "text/css; charset=utf-8",
 
     ".js":
-      "application/javascript; charset=utf-8"
+      "application/javascript; charset=utf-8",
+
+    ".json":
+      "application/json; charset=utf-8",
+
+    ".png":
+      "image/png",
+
+    ".jpg":
+      "image/jpeg",
+
+    ".jpeg":
+      "image/jpeg",
+
+    ".svg":
+      "image/svg+xml",
+
+    ".ico":
+      "image/x-icon"
+
   };
 
-  res.writeHead(200, {
-    "Content-Type":
-      types[ext] ||
-      "application/octet-stream"
-  });
 
-  fs.createReadStream(filePath)
-    .pipe(res);
+  res.writeHead(
+    200,
+    {
+      "Content-Type":
+        types[ext] ||
+        "application/octet-stream"
+    }
+  );
+
+
+  fs.createReadStream(
+    filePath
+  ).pipe(res);
+
 }
+
+
+/* =========================
+   SERVER
+========================= */
 
 const server =
   http.createServer(
@@ -436,35 +715,96 @@ const server =
 
       try {
 
+        /*
+         * URL sauber auslesen.
+         * Dadurch funktionieren
+         * auch URLs mit ?... dahinter.
+         */
+
+        const pathname =
+          new URL(
+            req.url,
+            `http://${req.headers.host}`
+          ).pathname;
+
+
+        console.log(
+          "REQUEST:",
+          pathname
+        );
+
+
+        /* =====================
+           API
+        ===================== */
+
         if (
-          req.url ===
+          pathname ===
           "/api/dashboard"
         ) {
 
           const data =
             await getDashboard();
 
-          sendJSON(res, data);
+          sendJSON(
+            res,
+            data
+          );
 
           return;
+
         }
 
+
+        /* =====================
+           HEALTH CHECK
+        ===================== */
+
         if (
-          req.url === "/health"
+          pathname ===
+          "/health"
         ) {
 
-          sendJSON(res, {
-            status: "ok",
-            apiConfigured:
-              !!TOKEN
-          });
+          sendJSON(
+            res,
+            {
+
+              status:
+                "ok",
+
+              apiConfigured:
+                !!TOKEN,
+
+              cwd:
+                process.cwd(),
+
+              dirname:
+                __dirname,
+
+              indexExists:
+                fs.existsSync(
+                  path.join(
+                    __dirname,
+                    "index.html"
+                  )
+                )
+
+            }
+          );
 
           return;
+
         }
 
+
+        /* =====================
+           HOMEPAGE
+        ===================== */
+
         if (
-          req.url === "/" ||
-          req.url === "/index.html"
+          pathname === "/" ||
+          pathname ===
+            "/index.html"
         ) {
 
           serveFile(
@@ -473,13 +813,52 @@ const server =
           );
 
           return;
+
         }
 
-        res.writeHead(404);
+
+        /* =====================
+           FALLBACK
+        ===================== */
+
+        /*
+         * Alles, was keine API ist,
+         * versucht die Homepage
+         * auszuliefern.
+         */
+
+        if (
+          !pathname.startsWith(
+            "/api/"
+          )
+        ) {
+
+          serveFile(
+            res,
+            "index.html"
+          );
+
+          return;
+
+        }
+
+
+        /* =====================
+           404
+        ===================== */
+
+        res.writeHead(
+          404,
+          {
+            "Content-Type":
+              "text/plain; charset=utf-8"
+          }
+        );
 
         res.end(
           "Nicht gefunden"
         );
+
 
       } catch (error) {
 
@@ -488,20 +867,32 @@ const server =
           error
         );
 
-        res.writeHead(500, {
-          "Content-Type":
-            "application/json"
-        });
+        res.writeHead(
+          500,
+          {
+            "Content-Type":
+              "application/json; charset=utf-8"
+          }
+        );
 
         res.end(
-          JSON.stringify({
-            error:
-              error.message
-          })
+          JSON.stringify(
+            {
+              error:
+                error.message
+            }
+          )
         );
+
       }
+
     }
   );
+
+
+/* =========================
+   SERVER START
+========================= */
 
 server.listen(
   PORT,
@@ -516,5 +907,21 @@ server.listen(
       "Football-Data Token vorhanden:",
       !!TOKEN
     );
+
+    console.log(
+      "Server-Verzeichnis:",
+      __dirname
+    );
+
+    console.log(
+      "index.html vorhanden:",
+      fs.existsSync(
+        path.join(
+          __dirname,
+          "index.html"
+        )
+      )
+    );
+
   }
 );
