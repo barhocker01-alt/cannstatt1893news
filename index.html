@@ -508,6 +508,225 @@ line-height:1.5;
 }
 
 
+/* =========================================================
+   FAN VOTING
+========================================================= */
+
+.fan-voting{
+position:relative;
+overflow:hidden;
+min-height:0;
+background:
+linear-gradient(
+145deg,
+#111 0%,
+#151515 55%,
+#090909 100%
+);
+border:1px solid #242424;
+box-shadow:
+0 10px 30px rgba(0,0,0,.18);
+}
+
+.fan-voting::before{
+content:"";
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:4px;
+background:#e30613;
+}
+
+.vote-header{
+display:flex;
+align-items:flex-start;
+justify-content:space-between;
+gap:15px;
+margin-bottom:8px;
+}
+
+.vote-kicker{
+display:block;
+color:#e30613;
+font-size:10px;
+font-weight:1000;
+letter-spacing:1.4px;
+margin-bottom:5px;
+}
+
+.vote-header h3{
+margin:0;
+font-size:21px;
+line-height:1.1;
+}
+
+.vote-live{
+background:#e30613;
+color:#fff;
+font-size:9px;
+font-weight:1000;
+letter-spacing:1px;
+padding:6px 9px;
+border-radius:20px;
+flex-shrink:0;
+}
+
+.vote-question{
+color:#ddd !important;
+font-size:14px !important;
+font-weight:700;
+margin:14px 0 17px;
+}
+
+.voting-options{
+display:flex;
+flex-direction:column;
+gap:9px;
+}
+
+.vote-option{
+width:100%;
+border:1px solid #292929;
+background:#181818;
+color:#fff;
+border-radius:9px;
+padding:11px 13px;
+text-align:left;
+font-family:inherit;
+transition:
+transform .15s ease,
+background .15s ease,
+border-color .15s ease;
+}
+
+.vote-option:hover{
+background:#202020;
+border-color:#e30613;
+transform:translateY(-1px);
+}
+
+.vote-option-top{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:10px;
+position:relative;
+z-index:2;
+}
+
+.vote-player{
+font-size:13px;
+font-weight:900;
+}
+
+.vote-percent{
+font-size:12px;
+font-weight:1000;
+color:#fff;
+}
+
+.vote-bar{
+height:5px;
+background:#292929;
+border-radius:20px;
+overflow:hidden;
+margin-top:8px;
+}
+
+.vote-bar-fill{
+height:100%;
+width:0%;
+background:#e30613;
+border-radius:20px;
+transition:width .5s ease;
+}
+
+.vote-button{
+margin-top:13px;
+width:100%;
+border:0;
+border-radius:9px;
+background:#e30613;
+color:#fff;
+padding:11px 15px;
+font-family:inherit;
+font-size:12px;
+font-weight:1000;
+cursor:pointer;
+transition:
+background .15s ease,
+transform .15s ease;
+}
+
+.vote-button:hover{
+background:#c90010;
+}
+
+.vote-button:active{
+transform:scale(.98);
+}
+
+.vote-button:disabled{
+opacity:.55;
+cursor:not-allowed;
+}
+
+.vote-loading{
+color:#999;
+font-size:12px;
+padding:10px 0;
+}
+
+.voting-message{
+margin-top:13px;
+font-size:12px;
+font-weight:800;
+color:#e30613;
+min-height:16px;
+}
+
+.voting-message.success{
+color:#67d68b;
+}
+
+.voting-message.error{
+color:#ff6670;
+}
+
+.voting-total{
+margin-top:8px;
+color:#777;
+font-size:10px;
+font-weight:700;
+}
+
+.voted-option{
+border-color:#444;
+cursor:default;
+}
+
+@media(max-width:800px){
+
+.fan-voting{
+padding:20px;
+}
+
+.vote-header h3{
+font-size:19px;
+}
+
+.vote-player{
+font-size:12px;
+}
+
+.vote-percent{
+font-size:11px;
+}
+
+}
+
+
 /* =========================
    KADER
 ========================= */
@@ -1407,16 +1626,55 @@ Stimmung und Spieltage.
 </div>
 
 
-<div class="fan">
+<div class="fan fan-voting">
+
+<div class="vote-header">
+
+<div>
+
+<span class="vote-kicker">
+🗳️ FAN-VOTING
+</span>
 
 <h3>
-🗳️ Fan-Voting
+Man of the Match
 </h3>
 
-<p>
-Stimme für deinen Man of the Match
-und weitere Fan-Abstimmungen.
+</div>
+
+<span class="vote-live">
+LIVE
+</span>
+
+</div>
+
+<p
+class="vote-question"
+id="voteQuestion"
+>
+Wer war dein bester VfB-Spieler?
 </p>
+
+<div
+id="votingOptions"
+class="voting-options"
+>
+
+<div class="vote-loading">
+Abstimmung wird geladen …
+</div>
+
+</div>
+
+<div
+id="votingMessage"
+class="voting-message"
+></div>
+
+<div
+id="votingTotal"
+class="voting-total"
+></div>
 
 </div>
 
@@ -1470,7 +1728,9 @@ Daten bereitgestellt von football-data.org
 </div>
 
 </footer>
-    <script>
+
+
+<script>
 
 const OFFICIAL_TIMES={
 
@@ -1707,9 +1967,7 @@ goalsFor:1,
 goalsAgainst:5,
 goalDiff:-4,
 points:0
-}
-
-];
+}];
 
 
 const CURRENT_VFB_RESULT={
@@ -1814,9 +2072,7 @@ if(nl){
 
 nl.innerHTML=
 news.length
-
 ?
-
 news.map(
 n=>{
 
@@ -1885,9 +2141,7 @@ ORIGINALMELDUNG →
 
 }
 ).join("")
-
 :
-
 '<div class="loading">Keine News verfügbar.</div>';
 
 }
@@ -1995,7 +2249,6 @@ d.squad
 }catch(e){
 
 console.error(e);
-
 
 const u=
 document.getElementById(
@@ -2803,8 +3056,6 @@ return t;
 );
 
 
-/* fehlende Teams ergänzen */
-
 const present=
 new Set(
 apiRows.map(
@@ -3202,7 +3453,6 @@ list
 
 el.innerHTML=
 list.length
-
 ?
 
 list.map(
@@ -3520,6 +3770,7 @@ Minuten
 }
 ).join("");
 
+}
 }
 
 
@@ -3839,10 +4090,482 @@ e
 
 
 /* =========================================================
+   FAN-VOTING
+========================================================= */
+
+let votingState = null;
+
+async function loadVoting(){
+
+const optionsEl =
+document.getElementById(
+"votingOptions"
+);
+
+const questionEl =
+document.getElementById(
+"voteQuestion"
+);
+
+if(!optionsEl){
+
+return;
+
+}
+
+try{
+
+const response =
+await fetch(
+"/api/voting",
+{
+cache:"no-store"
+}
+);
+
+if(!response.ok){
+
+throw new Error(
+"HTTP " +
+response.status
+);
+
+}
+
+const data =
+await response.json();
+
+if(!data.success){
+
+throw new Error(
+data.error ||
+"Voting konnte nicht geladen werden."
+);
+
+}
+
+votingState =
+data;
+
+if(questionEl){
+
+questionEl.textContent =
+data.voting?.question ||
+"Wer war dein bester VfB-Spieler?";
+
+}
+
+renderVoting();
+
+}catch(error){
+
+console.error(
+"Voting konnte nicht geladen werden:",
+error
+);
+
+optionsEl.innerHTML = `
+<div class="vote-loading">
+Abstimmung momentan nicht verfügbar.
+</div>
+`;
+
+}
+
+}
+
+
+function renderVoting(){
+
+if(!votingState){
+
+return;
+
+}
+
+const optionsEl =
+document.getElementById(
+"votingOptions"
+);
+
+const totalEl =
+document.getElementById(
+"votingTotal"
+);
+
+const messageEl =
+document.getElementById(
+"votingMessage"
+);
+
+if(!optionsEl){
+
+return;
+
+}
+
+const options =
+Array.isArray(
+votingState.voting?.options
+)
+?
+votingState.voting.options
+:
+[];
+
+const votes =
+votingState.votes ||
+{};
+
+const total =
+Number(
+votingState.totalVotes ||
+0
+);
+
+const hasVoted =
+Boolean(
+votingState.hasVoted
+);
+
+optionsEl.innerHTML =
+options.map(
+option => {
+
+const count =
+Number(
+votes[
+option.id
+] ||
+0
+);
+
+const percent =
+total > 0
+?
+Math.round(
+(
+count /
+total
+) *
+100
+)
+:
+0;
+
+return `
+
+<div
+class="vote-option ${
+hasVoted
+?
+"voted-option"
+:
+""
+}"
+>
+
+<div
+class="vote-option-top"
+>
+
+<span
+class="vote-player"
+>
+${escapeHTML(
+option.name
+)}
+</span>
+
+${
+hasVoted
+?
+`
+<span
+class="vote-percent"
+>
+${percent}%
+</span>
+`
+:
+""
+}
+
+</div>
+
+${
+hasVoted
+?
+`
+<div
+class="vote-bar"
+>
+
+<div
+class="vote-bar-fill"
+style="width:${percent}%"
+></div>
+
+</div>
+`
+:
+""
+}
+
+${
+!hasVoted
+?
+`
+<button
+class="vote-button"
+type="button"
+onclick="submitVoting('${escapeAttribute(option.id)}')"
+>
+FÜR ${escapeHTML(
+option.name
+)}
+ABSTIMMEN
+</button>
+`
+:
+""
+}
+
+</div>
+
+`;
+
+}
+).join("");
+
+if(totalEl){
+
+totalEl.textContent =
+total === 1
+?
+"1 Stimme insgesamt"
+:
+`${total.toLocaleString(
+"de-DE"
+)} Stimmen insgesamt`;
+
+}
+
+if(messageEl){
+
+messageEl.textContent =
+hasVoted
+?
+"✓ Danke für deine Stimme!"
+:
+"";
+
+messageEl.className =
+hasVoted
+?
+"voting-message success"
+:
+"voting-message";
+
+}
+
+}
+
+
+async function submitVoting(
+optionId
+){
+
+const messageEl =
+document.getElementById(
+"votingMessage"
+);
+
+if(!optionId){
+
+return;
+
+}
+
+const buttons =
+document.querySelectorAll(
+"#votingOptions .vote-button"
+);
+
+buttons.forEach(
+button => {
+
+button.disabled =
+true;
+
+button.textContent =
+"WIRD GESPEICHERT …";
+
+}
+);
+
+if(messageEl){
+
+messageEl.textContent =
+"Deine Stimme wird gespeichert …";
+
+messageEl.className =
+"voting-message";
+
+}
+
+try{
+
+const response =
+await fetch(
+"/api/voting",
+{
+method:"POST",
+
+headers:{
+"Content-Type":
+"application/json"
+},
+
+body:
+JSON.stringify({
+optionId
+})
+
+}
+);
+
+const data =
+await response.json();
+
+if(
+response.status ===
+409
+){
+
+votingState =
+data;
+
+renderVoting();
+
+if(messageEl){
+
+messageEl.textContent =
+"Du hast bereits abgestimmt.";
+
+messageEl.className =
+"voting-message error";
+
+}
+
+return;
+
+}
+
+if(
+!response.ok ||
+!data.success
+){
+
+throw new Error(
+data.error ||
+"Abstimmung fehlgeschlagen."
+);
+
+}
+
+votingState =
+data;
+
+renderVoting();
+
+if(messageEl){
+
+messageEl.textContent =
+"✓ Deine Stimme wurde gezählt!";
+
+messageEl.className =
+"voting-message success";
+
+}
+
+}catch(error){
+
+console.error(
+"Voting-Fehler:",
+error
+);
+
+if(messageEl){
+
+messageEl.textContent =
+"Leider ist etwas schiefgelaufen. Bitte versuche es erneut.";
+
+messageEl.className =
+"voting-message error";
+
+}
+
+buttons.forEach(
+button => {
+
+button.disabled =
+false;
+
+button.textContent =
+"ABSTIMMEN";
+
+}
+);
+
+}
+
+}
+
+
+function escapeAttribute(
+value
+){
+
+return String(
+value || ""
+)
+
+.replace(
+/&/g,
+"&amp;"
+)
+
+.replace(
+/"/g,
+"&quot;"
+)
+
+.replace(
+/'/g,
+"&#039;"
+)
+
+.replace(
+/</g,
+"&lt;"
+)
+
+.replace(
+/>/g,
+"&gt;"
+);
+
+}
+
+
+/* =========================================================
    START
 ========================================================= */
 
 loadDashboard();
+
+loadVoting();
 
 loadVisitorStats();
 
@@ -3868,7 +4591,3 @@ loadVisitorStats,
 </body>
 
 </html>
-
-  
-  
-  
