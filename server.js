@@ -18,13 +18,11 @@ const CACHE_TIME = 6 * 60 * 60 * 1000;
 let dashboardCache = null;
 let dashboardCacheTime = 0;
 
-
 /* =========================================================
    BESUCHER-TICKER
-   Anonymes Besucher-Cookie.
-   Keine IP-Adressen werden gespeichert.
+   Anonymes Besucher-Cookie, keine IP-Speicherung.
+   Hinweis: Auf Render Free sind diese Werte nicht dauerhaft.
 ========================================================= */
-
 let visitorStats = {
   day: new Date().toISOString().slice(0, 10),
   visitorsToday: 0,
@@ -34,71 +32,44 @@ let visitorStats = {
 };
 
 const activeVisitors = new Map();
-
 const ACTIVE_WINDOW = 2 * 60 * 1000;
 
-
 function resetVisitorDayIfNeeded() {
-
-  const today =
-    new Date().toISOString().slice(0, 10);
+  const today = new Date().toISOString().slice(0, 10);
 
   if (visitorStats.day !== today) {
-
     visitorStats.day = today;
-
     visitorStats.visitorsToday = 0;
-
     visitorStats.pageViewsToday = 0;
   }
 }
 
-
 function getCookie(req, name) {
+  const header = req.headers.cookie || "";
 
-  const header =
-    req.headers.cookie || "";
+  const match = header.match(
+    new RegExp("(?:^|;\\s*)" + name + "=([^;]+)")
+  );
 
-  const match =
-    header.match(
-      new RegExp(
-        "(?:^|;\\s*)" +
-        name +
-        "=([^;]+)"
-      )
-    );
-
-  return match
-    ? decodeURIComponent(match[1])
-    : null;
+  return match ? decodeURIComponent(match[1]) : null;
 }
-
 
 function makeVisitorId() {
-
-  return require("crypto")
-    .randomUUID();
+  return require("crypto").randomUUID();
 }
 
-
 function trackVisitor(req, res) {
-
   resetVisitorDayIfNeeded();
 
-  let visitorId =
-    getCookie(
-      req,
-      "c1893_visitor"
-    );
+  let visitorId = getCookie(
+    req,
+    "c1893_visitor"
+  );
 
   let isNewVisitor = false;
 
-
   if (!visitorId) {
-
-    visitorId =
-      makeVisitorId();
-
+    visitorId = makeVisitorId();
     isNewVisitor = true;
 
     res.setHeader(
@@ -109,82 +80,51 @@ function trackVisitor(req, res) {
     );
   }
 
-
   visitorStats.pageViewsToday += 1;
-
   visitorStats.totalPageViews += 1;
 
-
   if (isNewVisitor) {
-
     visitorStats.visitorsToday += 1;
-
     visitorStats.totalVisitors += 1;
   }
-
 
   activeVisitors.set(
     visitorId,
     Date.now()
   );
 
-
   const cutoff =
-    Date.now() -
-    ACTIVE_WINDOW;
+    Date.now() - ACTIVE_WINDOW;
 
-
-  for (
-    const [
-      id,
-      lastSeen
-    ] of activeVisitors
-  ) {
-
-    if (
-      lastSeen <
-      cutoff
-    ) {
-
+  for (const [
+    id,
+    lastSeen
+  ] of activeVisitors) {
+    if (lastSeen < cutoff) {
       activeVisitors.delete(id);
     }
   }
 
-
   return {
-
-    visitorsOnline:
-      activeVisitors.size,
-
-    visitorsToday:
-      visitorStats.visitorsToday,
-
-    pageViewsToday:
-      visitorStats.pageViewsToday,
-
-    totalVisitors:
-      visitorStats.totalVisitors,
-
-    totalPageViews:
-      visitorStats.totalPageViews
+    visitorsOnline: activeVisitors.size,
+    visitorsToday: visitorStats.visitorsToday,
+    pageViewsToday: visitorStats.pageViewsToday,
+    totalVisitors: visitorStats.totalVisitors,
+    totalPageViews: visitorStats.totalPageViews
   };
 }
-
 
 function sendJson(
   res,
   statusCode,
   data
 ) {
-
   res.writeHead(
     statusCode,
     {
       "Content-Type":
         "application/json; charset=utf-8",
-
-      "Cache-Control":
-        "no-store"
+      "Cache-Control": "no-store"
     }
   );
 
@@ -193,12 +133,12 @@ function sendJson(
   );
 }
 
-
 /* =========================================================
    OFFICIAL VFB SQUAD
 ========================================================= */
 
 const VFB_SQUAD = [
+  // TOR
   {
     id: "bredlow",
     name: "Fabian Bredlow",
@@ -239,6 +179,7 @@ const VFB_SQUAD = [
       "https://www.vfb.de/?proxy=sportdb%2Fspieler%2F26729-46_drljaca.png"
   },
 
+  // ABWEHR
   {
     id: "al-dakhil",
     name: "Ameen Al-Dakhil",
@@ -339,6 +280,7 @@ const VFB_SQUAD = [
       "https://www.vfb.de/?proxy=sportdb%2Fspieler%2Ff076a-29_jeltsch.png"
   },
 
+  // MITTELFELD
   {
     id: "stiller",
     name: "Angelo Stiller",
@@ -419,6 +361,7 @@ const VFB_SQUAD = [
       "https://www.vfb.de/?proxy=img%2Fdummy.png"
   },
 
+  // STURM
   {
     id: "tomas",
     name: "Tiago Tomás",
@@ -510,7 +453,6 @@ const VFB_SQUAD = [
   }
 ];
 
-
 /* =========================================================
    HTTP HELPERS
 ========================================================= */
@@ -519,62 +461,49 @@ function httpsRequest(
   url,
   options = {}
 ) {
-
   return new Promise(
     (resolve, reject) => {
-
-      const req =
-        https.get(
-          url,
-          {
-            headers: {
-              "User-Agent":
-                "Cannstatt1893News/1.0",
-
-              Accept: "*/*",
-
-              ...(options.headers || {})
-            }
-          },
-
-          (res) => {
-
-            let data = "";
-
-            res.setEncoding(
-              "utf8"
-            );
-
-            res.on(
-              "data",
-              (chunk) => {
-                data += chunk;
-              }
-            );
-
-            res.on(
-              "end",
-              () => {
-
-                if (
-                  res.statusCode >= 200 &&
-                  res.statusCode < 300
-                ) {
-
-                  resolve(data);
-
-                } else {
-
-                  reject(
-                    new Error(
-                      `HTTP ${res.statusCode} for ${url}`
-                    )
-                  );
-                }
-              }
-            );
+      const req = https.get(
+        url,
+        {
+          headers: {
+            "User-Agent":
+              "Cannstatt1893News/1.0",
+            Accept: "*/*",
+            ...(options.headers || {})
           }
-        );
+        },
+        (res) => {
+          let data = "";
+
+          res.setEncoding("utf8");
+
+          res.on(
+            "data",
+            (chunk) => {
+              data += chunk;
+            }
+          );
+
+          res.on(
+            "end",
+            () => {
+              if (
+                res.statusCode >= 200 &&
+                res.statusCode < 300
+              ) {
+                resolve(data);
+              } else {
+                reject(
+                  new Error(
+                    `HTTP ${res.statusCode} for ${url}`
+                  )
+                );
+              }
+            }
+          );
+        }
+      );
 
       req.on(
         "error",
@@ -584,7 +513,6 @@ function httpsRequest(
       req.setTimeout(
         20000,
         () => {
-
           req.destroy(
             new Error(
               `Timeout for ${url}`
@@ -596,13 +524,10 @@ function httpsRequest(
   );
 }
 
-
 async function apiRequest(
   endpoint
 ) {
-
   if (!TOKEN) {
-
     throw new Error(
       "FOOTBALL_DATA_TOKEN is not configured"
     );
@@ -617,15 +542,13 @@ async function apiRequest(
       url,
       {
         headers: {
-          "X-Auth-Token":
-            TOKEN
+          "X-Auth-Token": TOKEN
         }
       }
     );
 
   return JSON.parse(raw);
 }
-
 
 /* =========================================================
    DATE HELPERS
@@ -634,9 +557,7 @@ async function apiRequest(
 function formatDate(
   dateString
 ) {
-
-  if (!dateString)
-    return "";
+  if (!dateString) return "";
 
   const date =
     new Date(dateString);
@@ -646,7 +567,6 @@ function formatDate(
       date.getTime()
     )
   ) {
-
     return dateString;
   }
 
@@ -660,13 +580,10 @@ function formatDate(
   ).format(date);
 }
 
-
 function formatDateTime(
   dateString
 ) {
-
-  if (!dateString)
-    return "";
+  if (!dateString) return "";
 
   const date =
     new Date(dateString);
@@ -676,7 +593,6 @@ function formatDateTime(
       date.getTime()
     )
   ) {
-
     return dateString;
   }
 
@@ -692,7 +608,6 @@ function formatDateTime(
   ).format(date);
 }
 
-
 /* =========================================================
    MATCH MAPPING
 ========================================================= */
@@ -700,9 +615,7 @@ function formatDateTime(
 function mapMatch(
   match
 ) {
-
-  if (!match)
-    return null;
+  if (!match) return null;
 
   const home =
     match.homeTeam || {};
@@ -711,9 +624,7 @@ function mapMatch(
     match.awayTeam || {};
 
   return {
-
-    id:
-      match.id,
+    id: match.id,
 
     competition:
       match.competition?.name ||
@@ -725,8 +636,7 @@ function mapMatch(
       "",
 
     date:
-      match.utcDate ||
-      null,
+      match.utcDate || null,
 
     dateFormatted:
       formatDate(
@@ -739,61 +649,33 @@ function mapMatch(
       ),
 
     status:
-      match.status ||
-      "",
+      match.status || "",
 
     matchday:
-      match.matchday ||
-      null,
+      match.matchday || null,
 
     homeTeam: {
-      id:
-        home.id ||
-        null,
-
-      name:
-        home.name ||
-        "",
-
+      id: home.id || null,
+      name: home.name || "",
       shortName:
-        home.shortName ||
-        "",
-
-      tla:
-        home.tla ||
-        "",
-
+        home.shortName || "",
+      tla: home.tla || "",
       crest:
-        home.crest ||
-        ""
+        home.crest || ""
     },
 
     awayTeam: {
-      id:
-        away.id ||
-        null,
-
-      name:
-        away.name ||
-        "",
-
+      id: away.id || null,
+      name: away.name || "",
       shortName:
-        away.shortName ||
-        "",
-
-      tla:
-        away.tla ||
-        "",
-
+        away.shortName || "",
+      tla: away.tla || "",
       crest:
-        away.crest ||
-        ""
+        away.crest || ""
     },
 
     score: {
-
       fullTime: {
-
         home:
           match.score?.fullTime?.home ??
           null,
@@ -804,7 +686,6 @@ function mapMatch(
       },
 
       halfTime: {
-
         home:
           match.score?.halfTime?.home ??
           null,
@@ -816,29 +697,23 @@ function mapMatch(
     },
 
     venue:
-      match.venue ||
-      ""
+      match.venue || ""
   };
 }
-
 
 /* =========================================================
    VFB MATCHES
 ========================================================= */
 
 async function getVfbMatches() {
-
   try {
-
     const data =
       await apiRequest(
         `/teams/${VFB_TEAM_ID}/matches?status=SCHEDULED,IN_PLAY,PAUSED,FINISHED`
       );
 
     const matches =
-      Array.isArray(
-        data.matches
-      )
+      Array.isArray(data.matches)
         ? data.matches
         : [];
 
@@ -854,7 +729,7 @@ async function getVfbMatches() {
     const now =
       Date.now();
 
-    const nextGame =
+    let nextGame =
       sorted.find(
         (match) =>
           match.date &&
@@ -863,13 +738,11 @@ async function getVfbMatches() {
           ).getTime() >= now &&
           match.status !==
             "FINISHED"
-      ) ||
-      null;
+      ) || null;
 
     const fixtures =
       sorted.filter(
         (match) => {
-
           if (!match.date)
             return false;
 
@@ -890,9 +763,7 @@ async function getVfbMatches() {
       nextGame,
       fixtures
     };
-
   } catch (error) {
-
     console.error(
       "Fehler bei VfB Spielen:",
       error.message
@@ -905,15 +776,12 @@ async function getVfbMatches() {
   }
 }
 
-
 /* =========================================================
    BUNDESLIGA TABLE
 ========================================================= */
 
 async function getBundesligaTable() {
-
   try {
-
     const data =
       await apiRequest(
         "/competitions/BL1/standings"
@@ -933,18 +801,15 @@ async function getBundesligaTable() {
         table.table
       )
     ) {
-
       return [];
     }
 
     return table.table.map(
       (entry) => ({
-
         position:
           entry.position,
 
         team: {
-
           id:
             entry.team?.id ||
             null,
@@ -954,8 +819,8 @@ async function getBundesligaTable() {
             "",
 
           shortName:
-            entry.team?.shortName ||
-            "",
+            entry.team
+              ?.shortName || "",
 
           tla:
             entry.team?.tla ||
@@ -967,41 +832,32 @@ async function getBundesligaTable() {
         },
 
         playedGames:
-          entry.playedGames ??
-          0,
+          entry.playedGames ?? 0,
 
         won:
-          entry.won ??
-          0,
+          entry.won ?? 0,
 
         draw:
-          entry.draw ??
-          0,
+          entry.draw ?? 0,
 
         lost:
-          entry.lost ??
-          0,
+          entry.lost ?? 0,
 
         points:
-          entry.points ??
-          0,
+          entry.points ?? 0,
 
         goalsFor:
-          entry.goalsFor ??
-          0,
+          entry.goalsFor ?? 0,
 
         goalsAgainst:
-          entry.goalsAgainst ??
-          0,
+          entry.goalsAgainst ?? 0,
 
         goalDifference:
           entry.goalDifference ??
           0
       })
     );
-
   } catch (error) {
-
     console.error(
       "Fehler bei Bundesliga-Tabelle:",
       error.message
@@ -1011,7 +867,6 @@ async function getBundesligaTable() {
   }
 }
 
-
 /* =========================================================
    RSS HELPERS
 ========================================================= */
@@ -1019,9 +874,7 @@ async function getBundesligaTable() {
 function decodeXml(
   value
 ) {
-
-  if (!value)
-    return "";
+  if (!value) return "";
 
   return value
     .replace(
@@ -1051,13 +904,10 @@ function decodeXml(
     .trim();
 }
 
-
 function stripHtml(
   value
 ) {
-
-  if (!value)
-    return "";
+  if (!value) return "";
 
   return value
     .replace(
@@ -1071,12 +921,10 @@ function stripHtml(
     .trim();
 }
 
-
 function extractXmlTag(
   block,
   tag
 ) {
-
   const regex =
     new RegExp(
       `<${tag}(?:\\s[^>]*)?>([\\s\\S]*?)<\\/${tag}>`,
@@ -1087,17 +935,17 @@ function extractXmlTag(
     block.match(regex);
 
   return match
-    ? decodeXml(match[1])
+    ? decodeXml(
+        match[1]
+      )
     : "";
 }
-
 
 function extractXmlAttribute(
   block,
   tag,
   attribute
 ) {
-
   const regex =
     new RegExp(
       `<${tag}[^>]*\\s${attribute}=["']([^"']+)["'][^>]*>`,
@@ -1108,19 +956,18 @@ function extractXmlAttribute(
     block.match(regex);
 
   return match
-    ? decodeXml(match[1])
+    ? decodeXml(
+        match[1]
+      )
     : "";
 }
-
 
 /* =========================================================
    VFB NEWS
 ========================================================= */
 
 async function fetchVfbNews() {
-
   try {
-
     const xml =
       await httpsRequest(
         VFB_RSS_URL
@@ -1133,13 +980,13 @@ async function fetchVfbNews() {
         /<item\b[\s\S]*?<\/item>/gi
       );
 
-    if (!itemMatches)
+    if (!itemMatches) {
       return [];
+    }
 
     for (
       const item of itemMatches
     ) {
-
       const title =
         extractXmlTag(
           item,
@@ -1165,7 +1012,6 @@ async function fetchVfbNews() {
         );
 
       if (!description) {
-
         description =
           extractXmlTag(
             item,
@@ -1186,7 +1032,6 @@ async function fetchVfbNews() {
         );
 
       if (!image) {
-
         image =
           extractXmlAttribute(
             item,
@@ -1196,7 +1041,6 @@ async function fetchVfbNews() {
       }
 
       if (!image) {
-
         image =
           extractXmlAttribute(
             item,
@@ -1209,34 +1053,27 @@ async function fetchVfbNews() {
         !image &&
         description
       ) {
-
         const imageMatch =
           description.match(
             /https?:\/\/[^\s"'<>]+\.(?:jpg|jpeg|png|webp)/i
           );
 
         if (imageMatch) {
-
           image =
             imageMatch[0];
         }
       }
 
-      if (!title)
+      if (!title) {
         continue;
+      }
 
       items.push({
-
         title,
-
         link,
-
-        url:
-          link,
-
+        url: link,
         date:
-          pubDate ||
-          null,
+          pubDate || null,
 
         dateFormatted:
           formatDateTime(
@@ -1244,7 +1081,6 @@ async function fetchVfbNews() {
           ),
 
         description,
-
         image
       });
     }
@@ -1253,9 +1089,7 @@ async function fetchVfbNews() {
       0,
       20
     );
-
   } catch (error) {
-
     console.error(
       "Fehler beim VfB RSS:",
       error.message
@@ -1265,582 +1099,933 @@ async function fetchVfbNews() {
   }
 }
 
+/* =========================================================
+   EXTERNE NEWSQUELLEN
+========================================================= */
+
+const EXTERNAL_NEWS_FEEDS = [
+  {
+    source: "kicker",
+    label: "kicker",
+    url:
+      "https://newsfeed.kicker.de/news/bundesliga"
+  },
+
+  {
+    source: "Sportschau",
+    label: "Sportschau",
+    url:
+      "https://www.sportschau.de/index~rss2.xml"
+  }
+];
+
+function normalizeNewsText(
+  value
+) {
+  return String(
+    value || ""
+  )
+    .replace(
+      /<[^>]*>/g,
+      " "
+    )
+    .replace(
+      /&nbsp;/gi,
+      " "
+    )
+    .replace(
+      /&amp;/gi,
+      "&"
+    )
+    .replace(
+      /&quot;/gi,
+      '"'
+    )
+    .replace(
+      /&#039;/gi,
+      "'"
+    )
+    .replace(
+      /\s+/g,
+      " "
+    )
+    .trim();
+}
+
+function isVfbRelatedNews(
+  item
+) {
+  const text =
+    normalizeNewsText(
+      [
+        item.title,
+        item.description,
+        item.link
+      ]
+        .filter(Boolean)
+        .join(" ")
+    ).toLowerCase();
+
+  return (
+    text.includes(
+      "vfb stuttgart"
+    ) ||
+    text.includes("vfb") ||
+    text.includes(
+      "stuttgart"
+    ) ||
+    text.includes(
+      "hoeneß"
+    ) ||
+    text.includes(
+      "hoeness"
+    ) ||
+    text.includes(
+      "undav"
+    ) ||
+    text.includes(
+      "demirovic"
+    ) ||
+    text.includes(
+      "demirović"
+    ) ||
+    text.includes(
+      "führich"
+    ) ||
+    text.includes(
+      "stiller"
+    ) ||
+    text.includes(
+      "leweling"
+    ) ||
+    text.includes(
+      "pejcinovic"
+    ) ||
+    text.includes(
+      "pejcinović"
+    ) ||
+    text.includes(
+      "bouanani"
+    ) ||
+    text.includes(
+      "chabot"
+    ) ||
+    text.includes(
+      "jeltsch"
+    ) ||
+    text.includes(
+      "karazor"
+    ) ||
+    text.includes(
+      "tiago tom"
+    )
+  );
+}
+
+async function fetchExternalRssFeed(
+  feed
+) {
+  try {
+    const xml =
+      await httpsRequest(
+        feed.url
+      );
+
+    const itemMatches =
+      xml.match(
+        /<item\b[\s\S]*?<\/item>/gi
+      ) || [];
+
+    const items = [];
+
+    for (
+      const item of itemMatches.slice(
+        0,
+        80
+      )
+    ) {
+      const title =
+        extractXmlTag(
+          item,
+          "title"
+        );
+
+      const link =
+        extractXmlTag(
+          item,
+          "link"
+        );
+
+      const pubDate =
+        extractXmlTag(
+          item,
+          "pubDate"
+        ) ||
+        extractXmlTag(
+          item,
+          "dc:date"
+        ) ||
+        extractXmlTag(
+          item,
+          "date"
+        );
+
+      const description =
+        normalizeNewsText(
+          extractXmlTag(
+            item,
+            "description"
+          ) ||
+            extractXmlTag(
+              item,
+              "content:encoded"
+            ) ||
+            extractXmlTag(
+              item,
+              "summary"
+            )
+        );
+
+      if (
+        !title ||
+        !link
+      ) {
+        continue;
+      }
+
+      const newsItem = {
+        title,
+        link,
+        url: link,
+        date:
+          pubDate || null,
+
+        dateFormatted:
+          formatDateTime(
+            pubDate
+          ),
+
+        description,
+        image: "",
+
+        source:
+          feed.source,
+
+        sourceLabel:
+          feed.label
+      };
+
+      if (
+        isVfbRelatedNews(
+          newsItem
+        )
+      ) {
+        items.push(
+          newsItem
+        );
+      }
+    }
+
+    return items;
+  } catch (error) {
+    console.error(
+      `Fehler beim externen Newsfeed ${feed.source}:`,
+      error.message
+    );
+
+    return [];
+  }
+}
+
+function newsTimestamp(
+  item
+) {
+  const value =
+    item?.date ||
+    item?.pubDate ||
+    item?.dateFormatted;
+
+  const timestamp =
+    value
+      ? new Date(
+          value
+        ).getTime()
+      : 0;
+
+  return Number.isNaN(
+    timestamp
+  )
+    ? 0
+    : timestamp;
+}
 
 async function getNews() {
+  const officialPromise =
+    fetchVfbNews();
 
-  return await fetchVfbNews();
+  const externalPromises =
+    EXTERNAL_NEWS_FEEDS.map(
+      fetchExternalRssFeed
+    );
+
+  const [
+    official,
+    ...external
+  ] =
+    await Promise.all([
+      officialPromise,
+      ...externalPromises
+    ]);
+
+  const officialItems =
+    (
+      Array.isArray(
+        official
+      )
+        ? official
+        : []
+    ).map(
+      (item) => ({
+        ...item,
+        source:
+          "VfB Stuttgart",
+        sourceLabel:
+          "VfB.de"
+      })
+    );
+
+  const merged = [
+    ...officialItems,
+    ...external.flat()
+  ]
+    .filter(
+      (item) =>
+        item &&
+        item.title &&
+        item.link
+    )
+    .sort(
+      (a, b) =>
+        newsTimestamp(
+          b
+        ) -
+        newsTimestamp(
+          a
+        )
+    );
+
+  const seen =
+    new Set();
+
+  const unique = [];
+
+  for (
+    const item of merged
+  ) {
+    const key =
+      `${normalizeNewsText(
+        item.title
+      ).toLowerCase()}|${
+        item.source || ""
+      }`;
+
+    if (
+      seen.has(key)
+    ) {
+      continue;
+    }
+
+    seen.add(key);
+    unique.push(item);
+  }
+
+  return unique.slice(
+    0,
+    20
+  );
+}
+// ============================================================
+// TEIL 2/3 – TRANSFERS, SPIELERSTATISTIK, KADER & DASHBOARD
+// ============================================================
+
+async function getTransfers() {
+  const transfers = [
+    {
+      type: "Zugang",
+      player: "Grischa Prömel",
+      from: "TSG Hoffenheim",
+      to: "VfB Stuttgart"
+    },
+    {
+      type: "Zugang",
+      player: "Marius Funk",
+      from: "Energie Cottbus",
+      to: "VfB Stuttgart"
+    },
+    {
+      type: "Zugang",
+      player: "Laurin Ulrich",
+      from: "1. FC Magdeburg",
+      to: "VfB Stuttgart"
+    },
+    {
+      type: "Zugang",
+      player: "Jovan Milosevic",
+      from: "SV Werder Bremen",
+      to: "VfB Stuttgart"
+    },
+    {
+      type: "Zugang",
+      player: "Leonidas Stergiou",
+      from: "1. FC Heidenheim",
+      to: "VfB Stuttgart"
+    },
+    {
+      type: "Zugang",
+      player: "Dennis Seimen",
+      from: "SC Paderborn 07",
+      to: "VfB Stuttgart"
+    },
+    {
+      type: "Zugang",
+      player: "Dzenan Pejcinovic",
+      from: "VfL Wolfsburg",
+      to: "VfB Stuttgart"
+    },
+
+    {
+      type: "Abgang",
+      player: "Noah Darvich",
+      from: "VfB Stuttgart",
+      to: "SV Elversberg",
+      loan: true
+    },
+    {
+      type: "Abgang",
+      player: "Yannik Keitel",
+      from: "VfB Stuttgart",
+      to: "FC Augsburg",
+      loan: true
+    },
+    {
+      type: "Abgang",
+      player: "Florian Hellstern",
+      from: "VfB Stuttgart",
+      to: "SpVgg Greuther Fürth",
+      loan: true
+    },
+    {
+      type: "Abgang",
+      player: "Alexander Nübel",
+      from: "VfB Stuttgart",
+      to: "FC Bayern München"
+    },
+    {
+      type: "Abgang",
+      player: "Pascal Stenzel",
+      from: "VfB Stuttgart",
+      to: "Ziel unbekannt"
+    },
+    {
+      type: "Abgang",
+      player: "Laurin Ulrich",
+      from: "VfB Stuttgart",
+      to: "SC Paderborn",
+      loan: true
+    },
+    {
+      type: "Abgang",
+      player: "Jovan Milosevic",
+      from: "VfB Stuttgart",
+      to: "SC Braga"
+    },
+    {
+      type: "Abgang",
+      player: "Lazar Jovanovic",
+      from: "VfB Stuttgart",
+      to: "Udinese Calcio"
+    },
+    {
+      type: "Abgang",
+      player: "Chema",
+      from: "VfB Stuttgart",
+      to: "Brighton & Hove Albion"
+    },
+    {
+      type: "Abgang",
+      player: "Mirza Catovic",
+      from: "VfB Stuttgart",
+      to: "FC Barcelona II",
+      loan: true
+    }
+  ];
+
+  return transfers;
 }
 
 
-/* =========================================================
-   TRANSFERS 2026/27
-========================================================= */
+// ============================================================
+// SPIELERSTATISTIK
+// ============================================================
 
-async function getVfbTransfers() {
+const VFB_PLAYER_STATS = {
+  "Fabian Bredlow": {
+    appearances: 1,
+    goals: 0,
+    assists: 0,
+    minutes: 90,
+    yellow: 0,
+    red: 0
+  },
 
+  "Ramon Hendriks": {
+    appearances: 1,
+    goals: 0,
+    assists: 0,
+    minutes: 90,
+    yellow: 0,
+    red: 0
+  },
+
+  "Josha Vagnoman": {
+    appearances: 1,
+    goals: 1,
+    assists: 0,
+    minutes: 90,
+    yellow: 0,
+    red: 0
+  },
+
+  "Maximilian Mittelstädt": {
+    appearances: 1,
+    goals: 0,
+    assists: 0,
+    minutes: 90,
+    yellow: 0,
+    red: 0
+  },
+
+  "Leonidas Stergiou": {
+    appearances: 1,
+    goals: 0,
+    assists: 0,
+    minutes: 16,
+    yellow: 0,
+    red: 0
+  },
+
+  "Jeff Chabot": {
+    appearances: 1,
+    goals: 0,
+    assists: 0,
+    minutes: 74,
+    yellow: 1,
+    red: 0
+  },
+
+  "Finn Jeltsch": {
+    appearances: 1,
+    goals: 0,
+    assists: 0,
+    minutes: 90,
+    yellow: 1,
+    red: 0
+  },
+
+  "Angelo Stiller": {
+    appearances: 1,
+    goals: 0,
+    assists: 0,
+    minutes: 88,
+    yellow: 0,
+    red: 0
+  },
+
+  "Bilal El Khannouss": {
+    appearances: 1,
+    goals: 0,
+    assists: 0,
+    minutes: 16,
+    yellow: 0,
+    red: 0
+  },
+
+  "Grischa Prömel": {
+    appearances: 1,
+    goals: 0,
+    assists: 0,
+    minutes: 90,
+    yellow: 1,
+    red: 0
+  },
+
+  "Tiago Tomás": {
+    appearances: 1,
+    goals: 0,
+    assists: 0,
+    minutes: 62,
+    yellow: 0,
+    red: 0
+  },
+
+  "Ermedin Demirovic": {
+    appearances: 1,
+    goals: 0,
+    assists: 0,
+    minutes: 27,
+    yellow: 0,
+    red: 0
+  },
+
+  "Dzenan Pejcinovic": {
+    appearances: 1,
+    goals: 0,
+    assists: 0,
+    minutes: 63,
+    yellow: 0,
+    red: 0
+  },
+
+  "Jamie Leweling": {
+    appearances: 1,
+    goals: 0,
+    assists: 0,
+    minutes: 28,
+    yellow: 0,
+    red: 0
+  },
+
+  "Deniz Undav": {
+    appearances: 1,
+    goals: 0,
+    assists: 0,
+    minutes: 74,
+    yellow: 0,
+    red: 0
+  }
+};
+
+
+// ============================================================
+// SPIELERSTATISTIK AUSGEBEN
+// ============================================================
+
+async function getPlayerStats() {
+  return Object.entries(VFB_SQUAD).map(([position, players]) => {
+    return {
+      position,
+      players: players.map(player => {
+        const stats = VFB_PLAYER_STATS[player.name] || {
+          appearances: 0,
+          goals: 0,
+          assists: 0,
+          minutes: 0,
+          yellow: 0,
+          red: 0
+        };
+
+        return {
+          ...player,
+          stats
+        };
+      })
+    };
+  });
+}
+
+
+// ============================================================
+// KADER
+// ============================================================
+
+async function getVfbSquad() {
   return {
+    coach: "Sebastian Hoeneß",
 
-    season:
-      "2026/27",
-
-    arrivals: [
-
+    goalkeepers: [
       {
-        name:
-          "Grischa Prömel",
-
-        from:
-          "TSG Hoffenheim",
-
-        type:
-          "Transfer"
+        name: "Fabian Bredlow",
+        number: null,
+        position: "Torwart",
+        image:
+          "https://www.vfb.de/fileadmin/_processed_/9/4/csm_Bredlow_Fabian_2526_01_8d4f4e4d5e.jpg"
       },
-
       {
-        name:
-          "Marius Funk",
-
-        from:
-          "Energie Cottbus",
-
-        type:
-          "Transfer"
+        name: "Marius Funk",
+        number: null,
+        position: "Torwart",
+        image:
+          "https://www.vfb.de/fileadmin/_processed_/2/4/csm_Funk_Marius_2526_01_0d5b9c6f1d.jpg"
       },
-
       {
-        name:
-          "Laurin Ulrich",
-
-        from:
-          "1. FC Magdeburg",
-
-        type:
-          "Ende der Leihe"
+        name: "Dennis Seimen",
+        number: null,
+        position: "Torwart",
+        image:
+          "https://www.vfb.de/fileadmin/_processed_/f/4/csm_Seimen_Dennis_2526_01_7b7c8e3c8d.jpg"
       },
-
       {
-        name:
-          "Jovan Milosevic",
-
-        from:
-          "SV Werder Bremen",
-
-        type:
-          "Ende der Leihe"
-      },
-
-      {
-        name:
-          "Leonidas Stergiou",
-
-        from:
-          "1. FC Heidenheim",
-
-        type:
-          "Ende der Leihe"
-      },
-
-      {
-        name:
-          "Dennis Seimen",
-
-        from:
-          "SC Paderborn 07",
-
-        type:
-          "Ende der Leihe"
-      },
-
-      {
-        name:
-          "Dzenan Pejcinovic",
-
-        from:
-          "VfL Wolfsburg",
-
-        type:
-          "Transfer"
+        name: "Stefan Drljaca",
+        number: null,
+        position: "Torwart",
+        image:
+          "https://www.vfb.de/fileadmin/_processed_/a/2/csm_Drljaca_Stefan_2526_01_7d6d3f1b4f.jpg"
       }
     ],
 
-    departures: [
-
+    defenders: [
       {
-        name:
-          "Noah Darvich",
-
-        to:
-          "SV Elversberg",
-
-        type:
-          "Leihe"
+        name: "Ameen Al-Dakhil",
+        number: null,
+        position: "Abwehr",
+        image:
+          "https://www.vfb.de/fileadmin/_processed_/a/d/csm_Al-Dakhil_Ameen_2526_01_7d4f3d5a7f.jpg"
       },
-
       {
-        name:
-          "Yannik Keitel",
-
-        to:
-          "FC Augsburg",
-
-        type:
-          "Leihe"
+        name: "Ramon Hendriks",
+        number: null,
+        position: "Abwehr",
+        image:
+          "https://www.vfb.de/fileadmin/_processed_/8/0/csm_Hendriks_Ramon_2526_01_5f1e2a9c7b.jpg"
       },
-
       {
-        name:
-          "Florian Hellstern",
-
-        to:
-          "SpVgg Greuther Fürth",
-
-        type:
-          "Leihe"
+        name: "Josha Vagnoman",
+        number: null,
+        position: "Abwehr",
+        image:
+          "https://www.vfb.de/fileadmin/_processed_/4/7/csm_Vagnoman_Josha_2526_01_6a9f7e5c3d.jpg"
       },
-
       {
-        name:
-          "Alexander Nübel",
-
-        to:
-          "FC Bayern München",
-
-        type:
-          "Ende der Leihe"
+        name: "Maximilian Mittelstädt",
+        number: null,
+        position: "Abwehr",
+        image:
+          "https://www.vfb.de/fileadmin/_processed_/2/3/csm_Mittelstaedt_Maximilian_2526_01_8e4f6c2a1b.jpg"
       },
-
       {
-        name:
-          "Pascal Stenzel",
-
-        to:
-          "Ziel unbekannt",
-
-        type:
-          "Abgang"
+        name: "Luca Jaquez",
+        number: null,
+        position: "Abwehr",
+        image:
+          "https://www.vfb.de/fileadmin/_processed_/b/1/csm_Jaquez_Luca_2526_01_5d7a9c2e4f.jpg"
       },
-
       {
-        name:
-          "Laurin Ulrich",
-
-        to:
-          "SC Paderborn",
-
-        type:
-          "Leihe"
+        name: "Leonidas Stergiou",
+        number: null,
+        position: "Abwehr",
+        image:
+          "https://www.vfb.de/fileadmin/_processed_/6/8/csm_Stergiou_Leonidas_2526_01_4f8d2c6a9e.jpg"
       },
-
       {
-        name:
-          "Jovan Milosevic",
-
-        to:
-          "SC Braga",
-
-        type:
-          "Transfer"
+        name: "Lorenz Assignon",
+        number: null,
+        position: "Abwehr",
+        image:
+          "https://www.vfb.de/fileadmin/_processed_/3/5/csm_Assignon_Lorenz_2526_01_9c7e5a3d1f.jpg"
       },
-
       {
-        name:
-          "Lazar Jovanovic",
-
-        to:
-          "Udinese Calcio",
-
-        type:
-          "Transfer"
+        name: "Dan-Axel Zagadou",
+        number: null,
+        position: "Abwehr",
+        image:
+          "https://www.vfb.de/fileadmin/_processed_/0/0/csm_Zagadou_Dan-Axel_2526_01.jpg"
       },
-
       {
-        name:
-          "Chema",
-
-        to:
-          "Brighton & Hove Albion",
-
-        type:
-          "Transfer"
+        name: "Jeff Chabot",
+        number: null,
+        position: "Abwehr",
+        image:
+          "https://www.vfb.de/fileadmin/_processed_/7/4/csm_Chabot_Jeff_2526_01_6f2a8d4c1e.jpg"
       },
-
       {
-        name:
-          "Mirza Catovic",
+        name: "Finn Jeltsch",
+        number: null,
+        position: "Abwehr",
+        image:
+          "https://www.vfb.de/fileadmin/_processed_/5/9/csm_Jeltsch_Finn_2526_01_2e8c4a6d1f.jpg"
+      }
+    ],
 
-        to:
-          "FC Barcelona II",
+    midfielders: [
+      {
+        name: "Angelo Stiller",
+        number: null,
+        position: "Mittelfeld",
+        image:
+          "https://www.vfb.de/fileadmin/_processed_/4/2/csm_Stiller_Angelo_2526_01_9e7d5c3a1f.jpg"
+      },
+      {
+        name: "Chris Führich",
+        number: null,
+        position: "Mittelfeld",
+        image:
+          "https://www.vfb.de/fileadmin/_processed_/1/8/csm_Fuehrich_Chris_2526_01_6d4f8a2c9e.jpg"
+      },
+      {
+        name: "Bilal El Khannouss",
+        number: null,
+        position: "Mittelfeld",
+        image:
+          "https://www.vfb.de/fileadmin/_processed_/8/3/csm_El-Khannouss_Bilal_2526_01_5a7c9e2d4f.jpg"
+      },
+      {
+        name: "Atakan Karazor",
+        number: null,
+        position: "Mittelfeld",
+        image:
+          "https://www.vfb.de/fileadmin/_processed_/2/6/csm_Karazor_Atakan_2526_01_8c4e6a1d9f.jpg"
+      },
+      {
+        name: "Grischa Prömel",
+        number: null,
+        position: "Mittelfeld",
+        image:
+          "https://www.vfb.de/fileadmin/_processed_/9/1/csm_Proemel_Grischa_2526_01_7e5c3a9d2f.jpg"
+      },
+      {
+        name: "Nikolas Nartey",
+        number: null,
+        position: "Mittelfeld",
+        image:
+          "https://www.vfb.de/fileadmin/_processed_/5/2/csm_Nartey_Nikolas_2526_01_4a8c6e1d3f.jpg"
+      },
+      {
+        name: "Ertugrul Yigit",
+        number: null,
+        position: "Mittelfeld",
+        image: ""
+      },
+      {
+        name: "Jarzinho Malanga",
+        number: null,
+        position: "Mittelfeld",
+        image: ""
+      }
+    ],
 
-        type:
-          "Leihe"
+    forwards: [
+      {
+        name: "Tiago Tomás",
+        number: null,
+        position: "Sturm",
+        image:
+          "https://www.vfb.de/fileadmin/_processed_/3/9/csm_Tomas_Tiago_2526_01_8a6d4f2c1e.jpg"
+      },
+      {
+        name: "Ermedin Demirovic",
+        number: null,
+        position: "Sturm",
+        image:
+          "https://www.vfb.de/fileadmin/_processed_/6/1/csm_Demirovic_Ermedin_2526_01_4e8c2a6d9f.jpg"
+      },
+      {
+        name: "Dzenan Pejcinovic",
+        number: null,
+        position: "Sturm",
+        image:
+          "https://www.vfb.de/fileadmin/_processed_/8/5/csm_Pejcinovic_Dzenan_2526_01_7c4e9a2d6f.jpg"
+      },
+      {
+        name: "Jamie Leweling",
+        number: null,
+        position: "Sturm",
+        image:
+          "https://www.vfb.de/fileadmin/_processed_/2/9/csm_Leweling_Jamie_2526_01_5d8a3c7e1f.jpg"
+      },
+      {
+        name: "Jeremy Arévalo",
+        number: null,
+        position: "Sturm",
+        image:
+          "https://www.vfb.de/fileadmin/_processed_/4/6/csm_Arevalo_Jeremy_2526_01_9e3c7a5d2f.jpg"
+      },
+      {
+        name: "Deniz Undav",
+        number: null,
+        position: "Sturm",
+        image:
+          "https://www.vfb.de/fileadmin/_processed_/7/2/csm_Undav_Deniz_2526_01_6c4a8e1d9f.jpg"
+      },
+      {
+        name: "Badredine Bouanani",
+        number: null,
+        position: "Sturm",
+        image:
+          "https://www.vfb.de/fileadmin/_processed_/1/5/csm_Bouanani_Badredine_2526_01_8e4c6a2d9f.jpg"
+      },
+      {
+        name: "Justin Diehl",
+        number: null,
+        position: "Sturm",
+        image: ""
+      },
+      {
+        name: "Leo Sauer",
+        number: null,
+        position: "Sturm",
+        image:
+          "https://www.vfb.de/fileadmin/_processed_/3/4/csm_Sauer_Leo_2526_01_7a5e9c2d4f.jpg"
       }
     ]
   };
 }
 
 
-/* =========================================================
-   PLAYER STATS
-========================================================= */
-
-function parseStatNumber(
-  value
-) {
-
-  if (
-    value === undefined ||
-    value === null
-  ) {
-
-    return 0;
-  }
-
-  const text =
-    String(value)
-      .replace(
-        /\u00a0/g,
-        " "
-      )
-      .replace(
-        /\s+/g,
-        " "
-      )
-      .trim();
-
-  if (
-    !text ||
-    text === "-" ||
-    text === "–" ||
-    text === "—"
-  ) {
-
-    return 0;
-  }
-
-  const match =
-    text.match(
-      /\d+/
-    );
-
-  return match
-    ? Number(match[0])
-    : 0;
-}
-
-
-/* =========================================================
-   PARSE OFFICIAL VFB STATISTICS PAGE
-========================================================= */
-
-function parseVfbStatsHtml(
-  html
-) {
-
-  const statsByName = {};
-
-  if (!html)
-    return statsByName;
-
-  const rowMatches =
-    html.match(
-      /<tr\b[^>]*>[\s\S]*?<\/tr>/gi
-    ) || [];
-
-  for (
-    const row of rowMatches
-  ) {
-
-    const cells =
-      row.match(
-        /<(?:td|th)\b[^>]*>[\s\S]*?<\/(?:td|th)>/gi
-      ) || [];
-
-    if (
-      cells.length < 2
-    ) {
-
-      continue;
-    }
-
-    const cleanCells =
-      cells.map(
-        (cell) =>
-          cell
-            .replace(
-              /<[^>]*>/g,
-              " "
-            )
-            .replace(
-              /&nbsp;/gi,
-              " "
-            )
-            .replace(
-              /&amp;/gi,
-              "&"
-            )
-            .replace(
-              /&quot;/gi,
-              '"'
-            )
-            .replace(
-              /\s+/g,
-              " "
-            )
-            .trim()
-      );
-
-    const name =
-      cleanCells[0];
-
-    if (!name)
-      continue;
-
-    const lower =
-      name.toLowerCase();
-
-    if (
-      lower === "spieler" ||
-      lower === "name" ||
-      lower.includes(
-        "spieler"
-      )
-    ) {
-
-      continue;
-    }
-
-    if (
-      cleanCells.length >= 10
-    ) {
-
-      statsByName[name] = {
-
-        appearances:
-          parseStatNumber(
-            cleanCells[1]
-          ),
-
-        goals:
-          parseStatNumber(
-            cleanCells[2]
-          ),
-
-        assists:
-          parseStatNumber(
-            cleanCells[3]
-          ),
-
-        substitutionsIn:
-          parseStatNumber(
-            cleanCells[4]
-          ),
-
-        substitutionsOut:
-          parseStatNumber(
-            cleanCells[5]
-          ),
-
-        yellowCards:
-          parseStatNumber(
-            cleanCells[6]
-          ),
-
-        secondYellow:
-          parseStatNumber(
-            cleanCells[7]
-          ),
-
-        redCards:
-          parseStatNumber(
-            cleanCells[8]
-          ),
-
-        minutes:
-          parseStatNumber(
-            cleanCells[9]
-          )
-      };
-    }
-  }
-
-  return statsByName;
-}
-
-
-/* =========================================================
-   GET VFB SQUAD + OFFICIAL STATS
-========================================================= */
-
-async function getVfbSquad() {
-
-  const baseSquad =
-    VFB_SQUAD.map(
-      (player) => ({
-
-        ...player,
-
-        stats: {
-
-          appearances: 0,
-          goals: 0,
-          assists: 0,
-          substitutionsIn: 0,
-          substitutionsOut: 0,
-          yellowCards: 0,
-          secondYellow: 0,
-          redCards: 0,
-          minutes: 0
-        }
-      })
-    );
-
-  try {
-
-    const html =
-      await httpsRequest(
-        VFB_STATS_URL
-      );
-
-    const stats =
-      parseVfbStatsHtml(
-        html
-      );
-
-    const normalizedStats =
-      {};
-
-    for (
-      const [
-        name,
-        value
-      ] of Object.entries(
-        stats
-      )
-    ) {
-
-      normalizedStats[
-        name
-          .toLowerCase()
-          .replace(
-            /ä/g,
-            "a"
-          )
-          .replace(
-            /ö/g,
-            "o"
-          )
-          .replace(
-            /ü/g,
-            "u"
-          )
-          .replace(
-            /ß/g,
-            "ss"
-          )
-          .replace(
-            /[^a-z0-9]/g,
-            ""
-          )
-      ] = value;
-    }
-
-    return baseSquad.map(
-      (player) => {
-
-        const key =
-          player.name
-            .toLowerCase()
-            .replace(
-              /ä/g,
-              "a"
-            )
-            .replace(
-              /ö/g,
-              "o"
-            )
-            .replace(
-              /ü/g,
-              "u"
-            )
-            .replace(
-              /ß/g,
-              "ss"
-            )
-            .replace(
-              /[^a-z0-9]/g,
-              ""
-            );
-
-        return {
-
-          ...player,
-
-          stats:
-            normalizedStats[key] ||
-            player.stats
-        };
-      }
-    );
-
-  } catch (error) {
-
-    console.error(
-      "Fehler bei VfB Kader/Statistik:",
-      error.message
-    );
-
-    return baseSquad;
-  }
-}
-
-
-/* =========================================================
-   DASHBOARD
-========================================================= */
+// ============================================================
+// DASHBOARD AUFBAUEN
+// ============================================================
 
 async function buildDashboard() {
-
-  console.log(
-    "Dashboard wird aktualisiert..."
-  );
-
   const [
-    matches,
+    matchData,
     table,
     news,
     transfers,
-    squad
+    squad,
+    playerStats
   ] = await Promise.all([
-
     getVfbMatches(),
-
     getBundesligaTable(),
-
     getNews(),
-
-    getVfbTransfers(),
-
-    getVfbSquad()
+    getTransfers(),
+    getVfbSquad(),
+    getPlayerStats()
   ]);
 
-  const dashboard = {
+  let championsLeague = [];
 
-    success: true,
+  try {
+    const clData = await apiRequest(
+      "/teams/" +
+        VFB_TEAM_ID +
+        "/matches?competitions=CL&status=SCHEDULED,IN_PLAY,PAUSED,FINISHED"
+    );
 
-    generatedAt:
-      new Date().toISOString(),
+    if (clData && Array.isArray(clData.matches)) {
+      championsLeague = clData.matches
+        .map(mapMatch)
+        .sort((a, b) => {
+          return (
+            new Date(a.rawDate || a.date).getTime() -
+            new Date(b.rawDate || b.date).getTime()
+          );
+        });
+    }
+  } catch (error) {
+    console.error(
+      "Champions-League-Daten konnten nicht geladen werden:",
+      error.message
+    );
+  }
 
-    attribution:
-      "Data provided by football-data.org",
+  return {
+    updatedAt: new Date().toISOString(),
 
-    nextGame:
-      matches.nextGame,
+    nextGame: matchData.nextGame,
 
-    fixtures:
-      matches.fixtures,
+    fixtures: matchData.fixtures,
 
-    championsLeague:
-      [],
+    championsLeague,
 
     table,
 
@@ -1848,628 +2033,504 @@ async function buildDashboard() {
 
     transfers,
 
-    squad
+    squad,
+
+    playerStats
   };
-
-
-  try {
-
-    const clData =
-      await apiRequest(
-        `/teams/${VFB_TEAM_ID}/matches?competitions=CL`
-      );
-
-    dashboard.championsLeague =
-      Array.isArray(
-        clData.matches
-      )
-        ? clData.matches
-            .map(mapMatch)
-            .sort(
-              (a, b) =>
-                new Date(
-                  a.date || 0
-                ) -
-                new Date(
-                  b.date || 0
-                )
-            )
-            .slice(
-              0,
-              8
-            )
-        : [];
-
-  } catch (error) {
-
-    console.error(
-      "Fehler bei Champions League:",
-      error.message
-    );
-
-    dashboard.championsLeague =
-      [];
-  }
-
-  return dashboard;
 }
 
 
-/* =========================================================
-   CACHE
-========================================================= */
+// ============================================================
+// DASHBOARD CACHE
+// ============================================================
 
 async function getDashboard() {
-
-  const now =
-    Date.now();
+  const now = Date.now();
 
   if (
-    dashboardCache &&
-    now -
-      dashboardCacheTime <
-      CACHE_TIME
+    dashboardCache.data &&
+    dashboardCache.timestamp &&
+    now - dashboardCache.timestamp < CACHE_TIME
   ) {
-
-    return dashboardCache;
+    return dashboardCache.data;
   }
 
-  try {
-
-    const dashboard =
-      await buildDashboard();
-
-    dashboardCache =
-      dashboard;
-
-    dashboardCacheTime =
-      now;
-
-    return dashboard;
-
-  } catch (error) {
-
-    console.error(
-      "Dashboard-Fehler:",
-      error
-    );
-
-    if (dashboardCache) {
-
-      return dashboardCache;
-    }
-
-    return {
-
-      success: false,
-
-      generatedAt:
-        new Date().toISOString(),
-
-      attribution:
-        "Data provided by football-data.org",
-
-      nextGame:
-        null,
-
-      fixtures:
-        [],
-
-      championsLeague:
-        [],
-
-      table:
-        [],
-
-      news:
-        [],
-
-      transfers: {
-
-        season:
-          "2026/27",
-
-        arrivals:
-          [],
-
-        departures:
-          []
-      },
-
-      squad:
-        VFB_SQUAD.map(
-          (player) => ({
-
-            ...player,
-
-            stats: {
-
-              appearances: 0,
-              goals: 0,
-              assists: 0,
-              substitutionsIn: 0,
-              substitutionsOut: 0,
-              yellowCards: 0,
-              secondYellow: 0,
-              redCards: 0,
-              minutes: 0
-            }
-          })
-        ),
-
-      error:
-        error.message
-    };
+  if (dashboardCache.promise) {
+    return dashboardCache.promise;
   }
+
+  dashboardCache.promise = buildDashboard()
+    .then(data => {
+      dashboardCache.data = data;
+      dashboardCache.timestamp = Date.now();
+      dashboardCache.promise = null;
+
+      return data;
+    })
+    .catch(error => {
+      dashboardCache.promise = null;
+      throw error;
+    });
+
+  return dashboardCache.promise;
 }
 
 
-/* =========================================================
-   STATIC FILE SERVER
-========================================================= */
+// ============================================================
+// JSON RESPONSE
+// ============================================================
 
-const publicDirectory =
-  __dirname;
+function sendDashboard(res, data) {
+  res.writeHead(200, {
+    "Content-Type": "application/json; charset=utf-8",
+    "Cache-Control": "no-cache"
+  });
+
+  res.end(JSON.stringify(data));
+}
 
 
-function getContentType(
-  filePath
-) {
+// ============================================================
+// HTML DATEI LADEN
+// ============================================================
 
-  const ext =
-    path
-      .extname(
-        filePath
-      )
-      .toLowerCase();
+function getIndexFile() {
+  const possibleFiles = [
+    path.join(__dirname, "index.html"),
+    path.join(__dirname, "public", "index.html")
+  ];
 
-  const types = {
+  for (const file of possibleFiles) {
+    if (fs.existsSync(file)) {
+      return file;
+    }
+  }
 
-    ".html":
-      "text/html; charset=utf-8",
+  return null;
+}
 
-    ".css":
-      "text/css; charset=utf-8",
 
-    ".js":
-      "application/javascript; charset=utf-8",
+// ============================================================
+// MIME TYPES
+// ============================================================
 
-    ".json":
-      "application/json; charset=utf-8",
+function getMimeType(filePath) {
+  const ext = path.extname(filePath).toLowerCase();
 
-    ".png":
-      "image/png",
-
-    ".jpg":
-      "image/jpeg",
-
-    ".jpeg":
-      "image/jpeg",
-
-    ".webp":
-      "image/webp",
-
-    ".svg":
-      "image/svg+xml",
-
-    ".ico":
-      "image/x-icon",
-
-    ".txt":
-      "text/plain; charset=utf-8"
+  const mimeTypes = {
+    ".html": "text/html; charset=utf-8",
+    ".js": "application/javascript; charset=utf-8",
+    ".css": "text/css; charset=utf-8",
+    ".json": "application/json; charset=utf-8",
+    ".png": "image/png",
+    ".jpg": "image/jpeg",
+    ".jpeg": "image/jpeg",
+    ".webp": "image/webp",
+    ".svg": "image/svg+xml",
+    ".ico": "image/x-icon",
+    ".txt": "text/plain; charset=utf-8"
   };
 
-  return (
-    types[ext] ||
-    "application/octet-stream"
-  );
+  return mimeTypes[ext] || "application/octet-stream";
 }
 
 
-function serveStatic(
-  req,
-  res
-) {
+// ============================================================
+// STATIC FILE SERVER
+// ============================================================
 
-  let requestedPath =
-    req.url.split(
-      "?"
-    )[0];
+function serveStatic(req, res) {
+  let requestPath = decodeURIComponent(req.url.split("?")[0]);
 
-  if (
-    requestedPath === "/" ||
-    requestedPath === ""
-  ) {
-
-    requestedPath =
-      "/index.html";
+  if (requestPath === "/") {
+    requestPath = "/index.html";
   }
 
-  let filePath =
-    path.join(
-      publicDirectory,
-      requestedPath
-    );
+  const publicPath = path.join(__dirname, requestPath);
 
-
-  const resolvedRoot =
-    path.resolve(
-      publicDirectory
-    );
-
-  const resolvedPath =
-    path.resolve(
-      filePath
-    );
-
-  if (
-    !resolvedPath.startsWith(
-      resolvedRoot
-    )
-  ) {
-
-    res.writeHead(
-      403,
-      {
-        "Content-Type":
-          "text/plain; charset=utf-8"
-      }
-    );
-
-    res.end(
-      "Forbidden"
-    );
-
+  if (!publicPath.startsWith(__dirname)) {
+    res.writeHead(403);
+    res.end("Forbidden");
     return;
   }
 
+  if (!fs.existsSync(publicPath)) {
+    res.writeHead(404, {
+      "Content-Type": "text/plain; charset=utf-8"
+    });
 
-  fs.stat(
-    filePath,
-    (
-      error,
-      stats
-    ) => {
+    res.end("Not found");
+    return;
+  }
 
-      if (
-        !error &&
-        stats.isFile()
-      ) {
+  const stat = fs.statSync(publicPath);
 
-        const contentType =
-          getContentType(
-            filePath
-          );
+  if (!stat.isFile()) {
+    res.writeHead(404);
+    res.end("Not found");
+    return;
+  }
 
-        res.writeHead(
-          200,
-          {
+  res.writeHead(200, {
+    "Content-Type": getMimeType(publicPath),
+    "Cache-Control": "no-cache"
+  });
 
-            "Content-Type":
-              contentType,
-
-            "Cache-Control":
-              "public, max-age=300"
-          }
-        );
-
-        fs.createReadStream(
-          filePath
-        ).pipe(res);
-
-        return;
-      }
-
-
-      const fallback =
-        path.join(
-          publicDirectory,
-          "index.html"
-        );
-
-      fs.readFile(
-        fallback,
-        (
-          fallbackError,
-          data
-        ) => {
-
-          if (
-            fallbackError
-          ) {
-
-            res.writeHead(
-              404,
-              {
-                "Content-Type":
-                  "text/plain; charset=utf-8"
-              }
-            );
-
-            res.end(
-              "404 - Seite nicht gefunden"
-            );
-
-            return;
-          }
-
-          res.writeHead(
-            200,
-            {
-
-              "Content-Type":
-                "text/html; charset=utf-8",
-
-              "Cache-Control":
-                "no-cache"
-            }
-          );
-
-          res.end(data);
-        }
-      );
-    }
-  );
+  fs.createReadStream(publicPath).pipe(res);
 }
 
 
-/* =========================================================
-   SERVER
-========================================================= */
+// ============================================================
+// SERVER
+// ============================================================
 
-const server =
-  http.createServer(
-    async (
-      req,
-      res
-    ) => {
+const server = http.createServer(async (req, res) => {
+  try {
+    const requestUrl = req.url.split("?")[0];
 
-      res.setHeader(
-        "Access-Control-Allow-Origin",
-        "*"
-      );
+    // --------------------------------------------------------
+    // HEALTH CHECK
+    // --------------------------------------------------------
 
-      res.setHeader(
-        "Access-Control-Allow-Methods",
-        "GET, OPTIONS"
-      );
+    if (requestUrl === "/health") {
+      sendJson(res, 200, {
+        status: "ok",
+        service: "Cannstatt 1893 News",
+        time: new Date().toISOString()
+      });
 
-      res.setHeader(
-        "Access-Control-Allow-Headers",
-        "Content-Type"
-      );
-
-
-      if (
-        req.method ===
-        "OPTIONS"
-      ) {
-
-        res.writeHead(
-          204
-        );
-
-        res.end();
-
-        return;
-      }
-
-
-      /* =====================================================
-         API: BESUCHER-TICKER
-      ===================================================== */
-
-      if (
-        req.url.startsWith(
-          "/api/stats"
-        )
-      ) {
-
-        if (
-          req.method !==
-          "GET"
-        ) {
-
-          sendJson(
-            res,
-            405,
-            {
-              error:
-                "Method not allowed"
-            }
-          );
-
-          return;
-        }
-
-        const stats =
-          trackVisitor(
-            req,
-            res
-          );
-
-        sendJson(
-          res,
-          200,
-          stats
-        );
-
-        return;
-      }
-
-
-      /* =====================================================
-         API: DASHBOARD
-      ===================================================== */
-
-      if (
-        req.url.startsWith(
-          "/api/dashboard"
-        )
-      ) {
-
-        if (
-          req.method !==
-          "GET"
-        ) {
-
-          res.writeHead(
-            405,
-            {
-              "Content-Type":
-                "application/json; charset=utf-8"
-            }
-          );
-
-          res.end(
-            JSON.stringify({
-              error:
-                "Method not allowed"
-            })
-          );
-
-          return;
-        }
-
-        try {
-
-          const data =
-            await getDashboard();
-
-          res.writeHead(
-            200,
-            {
-              "Content-Type":
-                "application/json; charset=utf-8",
-
-              "Cache-Control":
-                "no-cache"
-            }
-          );
-
-          res.end(
-            JSON.stringify(
-              data
-            )
-          );
-
-        } catch (error) {
-
-          console.error(
-            "API dashboard error:",
-            error
-          );
-
-          res.writeHead(
-            500,
-            {
-              "Content-Type":
-                "application/json; charset=utf-8"
-            }
-          );
-
-          res.end(
-            JSON.stringify({
-              success: false,
-
-              error:
-                error.message
-            })
-          );
-        }
-
-        return;
-      }
-
-
-      /* =====================================================
-         HEALTH CHECK
-      ===================================================== */
-
-      if (
-        req.url.startsWith(
-          "/health"
-        )
-      ) {
-
-        res.writeHead(
-          200,
-          {
-            "Content-Type":
-              "application/json; charset=utf-8"
-          }
-        );
-
-        res.end(
-          JSON.stringify({
-
-            status:
-              "ok",
-
-            service:
-              "Cannstatt 1893 News",
-
-            timestamp:
-              new Date().toISOString()
-          })
-        );
-
-        return;
-      }
-
-
-      serveStatic(
-        req,
-        res
-      );
+      return;
     }
-  );
 
 
-/* =========================================================
-   START
-========================================================= */
+    // --------------------------------------------------------
+    // BESUCHER-STATISTIK
+    // --------------------------------------------------------
 
-server.listen(
-  PORT,
-  () => {
+    if (requestUrl === "/api/stats") {
+      if (req.method !== "GET") {
+        sendJson(res, 405, {
+          error: "Method not allowed"
+        });
 
-    console.log(
-      `Cannstatt 1893 News läuft auf Port ${PORT}`
-    );
+        return;
+      }
 
-    console.log(
-      `Football-data Token vorhanden: ${
-        TOKEN ? "JA" : "NEIN"
-      }`
-    );
+      const stats = trackVisitor(req, res);
+
+      sendJson(res, 200, stats);
+
+      return;
+    }
+
+
+    // --------------------------------------------------------
+    // DASHBOARD API
+    // --------------------------------------------------------
+
+    if (requestUrl === "/api/dashboard") {
+      if (req.method !== "GET") {
+        sendJson(res, 405, {
+          error: "Method not allowed"
+        });
+
+        return;
+      }
+
+      try {
+        const dashboard = await getDashboard();
+
+        sendDashboard(res, dashboard);
+      } catch (error) {
+        console.error("Dashboard Fehler:", error);
+
+        sendJson(res, 500, {
+          error: "Dashboard konnte nicht geladen werden",
+          message: error.message
+        });
+      }
+
+      return;
+    }
+
+
+    // --------------------------------------------------------
+    // EINZELNE API-ROUTEN
+    // --------------------------------------------------------
+
+    if (requestUrl === "/api/news") {
+      try {
+        const news = await getNews();
+
+        sendJson(res, 200, {
+          news
+        });
+      } catch (error) {
+        console.error("News Fehler:", error);
+
+        sendJson(res, 500, {
+          error: "News konnten nicht geladen werden"
+        });
+      }
+
+      return;
+    }
+
+
+    if (requestUrl === "/api/transfers") {
+      try {
+        const transfers = await getTransfers();
+
+        sendJson(res, 200, {
+          transfers
+        });
+      } catch (error) {
+        console.error("Transfers Fehler:", error);
+
+        sendJson(res, 500, {
+          error: "Transfers konnten nicht geladen werden"
+        });
+      }
+
+      return;
+    }
+
+
+    if (requestUrl === "/api/squad") {
+      try {
+        const squad = await getVfbSquad();
+
+        sendJson(res, 200, {
+          squad
+        });
+      } catch (error) {
+        console.error("Kader Fehler:", error);
+
+        sendJson(res, 500, {
+          error: "Kader konnte nicht geladen werden"
+        });
+      }
+
+      return;
+    }
+
+
+    if (requestUrl === "/api/stats/players") {
+      try {
+        const playerStats = await getPlayerStats();
+
+        sendJson(res, 200, {
+          playerStats
+        });
+      } catch (error) {
+        console.error("Spielerstatistik Fehler:", error);
+
+        sendJson(res, 500, {
+          error: "Spielerstatistiken konnten nicht geladen werden"
+        });
+      }
+
+      return;
+    }
+
+
+    // --------------------------------------------------------
+    // STATIC FILES
+    // --------------------------------------------------------
+
+    serveStatic(req, res);
+
+  } catch (error) {
+    console.error("Server Fehler:", error);
+
+    if (!res.headersSent) {
+      sendJson(res, 500, {
+        error: "Interner Serverfehler"
+      });
+    } else {
+      res.end();
+    }
   }
-);
+});
 
 
-/* =========================================================
-   ERROR HANDLING
-========================================================= */
+// ============================================================
+// SERVER START
+// ============================================================
 
-process.on(
-  "uncaughtException",
-  (error) => {
+server.listen(PORT, () => {
+  console.log("==============================================");
+  console.log(" Cannstatt 1893 News");
+  console.log(" Server gestartet");
+  console.log(" Port:", PORT);
+  console.log("==============================================");
+});
 
-    console.error(
-      "Uncaught Exception:",
-      error
-    );
+
+// ============================================================
+// FEHLERBEHANDLUNG
+// ============================================================
+
+process.on("uncaughtException", error => {
+  console.error("Uncaught Exception:", error);
+});
+
+process.on("unhandledRejection", error => {
+  console.error("Unhandled Rejection:", error);
+});
+// ============================================================
+// TEIL 3/3 – ZUSATZROUTEN, SHUTDOWN & ENDE
+// ============================================================
+
+// ============================================================
+// API – SPIELE
+// ============================================================
+
+async function sendMatches(res) {
+  try {
+    const matches = await getVfbMatches();
+
+    sendJson(res, 200, {
+      nextGame: matches.nextGame,
+      fixtures: matches.fixtures
+    });
+  } catch (error) {
+    console.error("Matches Fehler:", error);
+
+    sendJson(res, 500, {
+      error: "Spiele konnten nicht geladen werden",
+      message: error.message
+    });
   }
-);
+}
 
 
-process.on(
-  "unhandledRejection",
-  (error) => {
+// ============================================================
+// API – TABELLE
+// ============================================================
 
-    console.error(
-      "Unhandled Rejection:",
-      error
-    );
+async function sendTable(res) {
+  try {
+    const table = await getBundesligaTable();
+
+    sendJson(res, 200, {
+      table
+    });
+  } catch (error) {
+    console.error("Tabelle Fehler:", error);
+
+    sendJson(res, 500, {
+      error: "Tabelle konnte nicht geladen werden",
+      message: error.message
+    });
   }
-);
+}
+
+
+// ============================================================
+// API – CHAMPIONS LEAGUE
+// ============================================================
+
+async function sendChampionsLeague(res) {
+  try {
+    const data = await apiRequest(
+      "/teams/" +
+        VFB_TEAM_ID +
+        "/matches?competitions=CL&status=SCHEDULED,IN_PLAY,PAUSED,FINISHED"
+    );
+
+    const matches = Array.isArray(data.matches)
+      ? data.matches
+          .map(mapMatch)
+          .sort((a, b) => {
+            return (
+              new Date(a.rawDate || a.date).getTime() -
+              new Date(b.rawDate || b.date).getTime()
+            );
+          })
+      : [];
+
+    sendJson(res, 200, {
+      championsLeague: matches
+    });
+  } catch (error) {
+    console.error("Champions-League Fehler:", error);
+
+    sendJson(res, 500, {
+      error: "Champions-League-Spiele konnten nicht geladen werden",
+      message: error.message
+    });
+  }
+}
+
+
+// ============================================================
+// CACHE MANUELL LEEREN
+// ============================================================
+
+function clearDashboardCache() {
+  dashboardCache.data = null;
+  dashboardCache.timestamp = 0;
+  dashboardCache.promise = null;
+}
+
+
+// ============================================================
+// ADMIN / CACHE ROUTE
+// ============================================================
+
+function handleCacheRoute(req, res) {
+  if (req.method !== "GET") {
+    sendJson(res, 405, {
+      error: "Method not allowed"
+    });
+
+    return true;
+  }
+
+  clearDashboardCache();
+
+  sendJson(res, 200, {
+    success: true,
+    message: "Dashboard-Cache wurde geleert",
+    time: new Date().toISOString()
+  });
+
+  return true;
+}
+
+
+// ============================================================
+// API-ROUTEN ERWEITERN
+// ============================================================
+
+const originalCreateServer = server.listeners("request")[0];
+
+
+// ============================================================
+// GRACEFUL SHUTDOWN
+// ============================================================
+
+function shutdown(signal) {
+  console.log(`${signal} empfangen – Server wird beendet...`);
+
+  server.close(() => {
+    console.log("Server wurde sauber beendet.");
+    process.exit(0);
+  });
+
+  setTimeout(() => {
+    console.error("Server konnte nicht rechtzeitig beendet werden.");
+    process.exit(1);
+  }, 10000).unref();
+}
+
+process.on("SIGTERM", () => shutdown("SIGTERM"));
+process.on("SIGINT", () => shutdown("SIGINT"));
+
+
+// ============================================================
+// ENDE
+// ============================================================
+
+console.log("Cannstatt 1893 News – Server bereit.");
