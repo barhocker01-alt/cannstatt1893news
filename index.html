@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="de">
+
 <head>
 
 <meta charset="utf-8">
@@ -10,10 +11,13 @@ content="width=device-width,initial-scale=1">
 <meta name="theme-color"
 content="#e30613">
 
-<meta name="description"
+<meta
+name="description"
 content="Cannstatt 1893 News – unabhängige VfB Stuttgart Fanpage">
 
-<title>Cannstatt 1893 News – VfB Stuttgart</title>
+<title>
+Cannstatt 1893 News – VfB Stuttgart
+</title>
 
 <style>
 
@@ -37,6 +41,10 @@ text-decoration:none;
 color:inherit;
 }
 
+/* =========================
+TOP BAR
+========================= */
+
 .top{
 background:#080808;
 color:#fff;
@@ -46,6 +54,10 @@ display:flex;
 justify-content:space-between;
 gap:10px;
 }
+
+/* =========================
+HEADER
+========================= */
 
 .bar{
 position:sticky;
@@ -97,6 +109,10 @@ font-weight:800;
 color:#e30613;
 }
 
+/* =========================
+HERO
+========================= */
+
 .hero{
 background:
 linear-gradient(
@@ -105,6 +121,7 @@ linear-gradient(
 #350000 55%,
 #750000 100%
 );
+
 color:white;
 padding:70px 5%;
 }
@@ -150,6 +167,10 @@ font-weight:900;
 margin-top:8px;
 }
 
+/* =========================
+LAYOUT
+========================= */
+
 .wrap{
 width:min(1150px,90%);
 margin:auto;
@@ -187,6 +208,10 @@ padding:20px;
 box-shadow:0 5px 20px #00000008;
 }
 
+/* =========================
+NEWS
+========================= */
+
 .news{
 padding:15px 0;
 border-bottom:1px solid #eee;
@@ -215,9 +240,9 @@ font-size:12px;
 line-height:1.5;
 }
 
-.news-summary{
-color:#555;
-}
+/* =========================
+NEXT GAME
+========================= */
 
 .next{
 background:#111;
@@ -258,6 +283,10 @@ background:#e30613;
 border-radius:50%;
 }
 
+/* =========================
+NOTICE
+========================= */
+
 .notice{
 background:#fff1f1;
 border-left:4px solid #e30613;
@@ -265,6 +294,10 @@ padding:13px;
 font-size:12px;
 margin-bottom:18px;
 }
+
+/* =========================
+LOADING / ERROR
+========================= */
 
 .loading{
 color:#888;
@@ -279,6 +312,10 @@ padding:15px;
 border-radius:8px;
 font-size:12px;
 }
+
+/* =========================
+SPIEL
+========================= */
 
 .fixture{
 display:flex;
@@ -313,8 +350,11 @@ margin-top:3px;
 margin-left:auto;
 font-size:10px;
 font-weight:900;
-white-space:nowrap;
 }
+
+/* =========================
+TEAM LOGOS
+========================= */
 
 .team-line{
 display:flex;
@@ -330,6 +370,10 @@ height:30px;
 object-fit:contain;
 flex-shrink:0;
 }
+
+/* =========================
+COMPETITION HEADER
+========================= */
 
 .competition-title{
 display:flex;
@@ -357,6 +401,10 @@ font-size:11px;
 font-weight:600;
 }
 
+/* =========================
+FAN AREA
+========================= */
+
 .fan-grid{
 display:grid;
 grid-template-columns:repeat(3,1fr);
@@ -379,6 +427,14 @@ margin-top:0;
 color:#aaa;
 font-size:13px;
 line-height:1.5;
+}
+
+/* =========================
+KADER
+========================= */
+
+.squad-section{
+margin-top:20px;
 }
 
 .squad-group{
@@ -409,6 +465,14 @@ overflow:hidden;
 
 .player-card:hover{
 transform:translateY(-3px);
+box-shadow:0 8px 25px #00000012;
+}
+
+.player-number{
+font-size:28px;
+font-weight:1000;
+color:#e30613;
+line-height:1;
 }
 
 .player-name{
@@ -454,7 +518,6 @@ border-radius:8px;
 padding:5px 8px;
 font-size:12px;
 font-weight:1000;
-z-index:2;
 }
 
 .player-stats{
@@ -474,6 +537,7 @@ text-align:center;
 display:block;
 font-size:16px;
 font-weight:1000;
+color:#151515;
 }
 
 .player-stat span{
@@ -483,6 +547,16 @@ color:#888;
 text-transform:uppercase;
 font-weight:800;
 margin-top:2px;
+}
+
+.player-meta{
+font-size:9px;
+color:#999;
+margin-top:3px;
+}
+
+.coach-card{
+max-width:350px;
 }
 
 /* =========================
@@ -499,18 +573,18 @@ overflow-x:auto;
 .table-row{
 display:grid;
 grid-template-columns:
-34px
-minmax(180px,1fr)
-42px
-42px
-42px
-42px
-70px
-60px
-55px;
+32px
+minmax(170px,1fr)
+38px
+38px
+38px
+38px
+62px
+52px
+52px;
 gap:6px;
 align-items:center;
-min-width:600px;
+min-width:570px;
 }
 
 .table-header{
@@ -523,7 +597,7 @@ color:#777;
 }
 
 .table-row{
-padding:12px 5px;
+padding:12px 0;
 border-bottom:1px solid #eee;
 }
 
@@ -551,20 +625,40 @@ font-weight:1000;
 color:#e30613;
 }
 
-.vfb-row{
+.table-row.vfb-row{
 background:#fff1f1;
-border-radius:9px;
+border-left:3px solid #e30613;
+padding-left:7px;
 }
 
-.vfb-row .table-team strong{
-color:#e30613;
+@media(max-width:760px){
+
+.table-header,
+.table-row{
+grid-template-columns:
+32px
+minmax(145px,1fr)
+36px
+36px
+36px
+36px
+52px
+52px
+52px;
+
+min-width:500px;
+gap:4px;
 }
 
-.table-note{
+.table-cell{
 font-size:10px;
-color:#888;
-margin-top:12px;
 }
+
+}
+
+/* =========================
+FOOTER
+========================= */
 
 footer{
 background:#111;
@@ -585,6 +679,10 @@ font-size:11px;
 color:#777;
 }
 
+/* =========================
+MOBILE
+========================= */
+
 @media(max-width:900px){
 
 .player-photo-wrap{
@@ -599,29 +697,12 @@ grid-template-columns:repeat(3,1fr);
 
 @media(max-width:760px){
 
-.table-header,
-.table-row{
-grid-template-columns:
-30px
-minmax(145px,1fr)
-35px
-35px
-35px
-35px
-58px
-50px
-48px;
-
-min-width:520px;
-gap:4px;
-}
-
-.table-cell{
-font-size:10px;
-}
-
 .player-photo-wrap{
 height:170px;
+}
+
+.player-stats{
+grid-template-columns:repeat(4,1fr);
 }
 
 .top{
@@ -729,6 +810,10 @@ font-size:10px;
 
 <body>
 
+<!-- =========================
+TOP
+========================= -->
+
 <div class="top">
 
 <span>
@@ -740,6 +825,10 @@ Daten werden geladen …
 </span>
 
 </div>
+
+<!-- =========================
+HEADER
+========================= -->
 
 <header class="bar">
 
@@ -763,16 +852,37 @@ DEINE VFB FANPAGE AUS STUTTGART
 
 <nav class="nav">
 
-<a href="#news">News</a>
-<a href="#spiele">Spiele</a>
-<a href="#tabelle">Tabelle</a>
-<a href="#transfers">Transfers</a>
-<a href="#kader">Kader</a>
-<a href="#fans">Fans</a>
+<a href="#news">
+News
+</a>
+
+<a href="#spiele">
+Spiele
+</a>
+
+<a href="#tabelle">
+Tabelle
+</a>
+
+<a href="#transfers">
+Transfers
+</a>
+
+<a href="#kader">
+Kader
+</a>
+
+<a href="#fans">
+Fans
+</a>
 
 </nav>
 
 </header>
+
+<!-- =========================
+HERO
+========================= -->
 
 <section class="hero">
 
@@ -784,7 +894,9 @@ VFB STUTTGART · SAISON 2026/27
 
 <h1>
 WEISS. ROT.<br>
-<span>CANNSTATT.</span>
+<span>
+CANNSTATT.
+</span>
 </h1>
 
 <p>
@@ -801,6 +913,10 @@ AKTUELLE NEWS ↓
 </section>
 
 <main class="wrap">
+
+<!-- =========================
+NEWS
+========================= -->
 
 <section class="section" id="news">
 
@@ -853,6 +969,10 @@ Spiel wird geladen …
 </div>
 
 </section>
+
+<!-- =========================
+SPIELPLAN
+========================= -->
 
 <section class="section" id="spiele">
 
@@ -930,23 +1050,17 @@ Champions-League-Spiele werden geladen …
 
 </section>
 
+<!-- =========================
+TABELLE
+========================= -->
+
 <section class="section" id="tabelle">
 
 <h2>
-Bundesliga Tabelle
+Bundesliga
 </h2>
 
 <div class="line"></div>
-
-<div class="notice">
-
-<b>
-Aktueller Stand:
-</b>
-
-Nach dem 1. Spieltag der Saison 2026/27.
-
-</div>
 
 <div class="card">
 
@@ -962,10 +1076,14 @@ Tabelle wird geladen …
 
 </section>
 
+<!-- =========================
+TRANSFERS
+========================= -->
+
 <section class="section" id="transfers">
 
 <h2>
-Transfers 2026/27
+Transfers
 </h2>
 
 <div class="line"></div>
@@ -975,7 +1093,7 @@ Transfers 2026/27
 <div class="card">
 
 <h3>
-⬆️ Zugänge
+Zugänge
 </h3>
 
 <div id="transferArrivals">
@@ -991,7 +1109,7 @@ Transfers werden geladen …
 <div class="card">
 
 <h3>
-⬇️ Abgänge
+Abgänge
 </h3>
 
 <div id="transferDepartures">
@@ -1008,25 +1126,17 @@ Transfers werden geladen …
 
 </section>
 
+<!-- =========================
+KADER
+========================= -->
+
 <section class="section" id="kader">
 
 <h2>
-VfB Kader 2026/27
+Kader 2026/27
 </h2>
 
 <div class="line"></div>
-
-<div class="notice">
-
-<b>
-VfB Stuttgart Kader & Statistiken
-</b>
-
-<br>
-
-Spieler, Positionen und Spielminuten werden automatisch geladen.
-
-</div>
 
 <div id="squadPlayers">
 
@@ -1036,18 +1146,16 @@ Kader wird geladen …
 
 </div>
 
-<div class="competition" style="margin-top:18px;">
-
-Statistik: Bundesliga 2026/27 · Quelle: offizieller VfB Stuttgart Kaderbereich
-
-</div>
-
 </section>
+
+<!-- =========================
+FANS
+========================= -->
 
 <section class="section" id="fans">
 
 <h2>
-Fanbereich
+Cannstatt
 </h2>
 
 <div class="line"></div>
@@ -1057,12 +1165,12 @@ Fanbereich
 <div class="fan">
 
 <h3>
-📣 Fan-Ticker
+🔴⚪ VfB im Herzen
 </h3>
 
 <p>
-Alles rund um die Cannstatter Kurve,
-Stimmung und Spieltage.
+Cannstatt 1893 News ist eine unabhängige
+Fanpage rund um den VfB Stuttgart.
 </p>
 
 </div>
@@ -1070,12 +1178,12 @@ Stimmung und Spieltage.
 <div class="fan">
 
 <h3>
-🗳️ Fan-Voting
+🏟️ Neckarstadion
 </h3>
 
 <p>
-Stimme für deinen Man of the Match
-und weitere Fan-Abstimmungen.
+Alles rund um Spieltage, Mannschaft,
+Fans und die weiß-rote Kurve.
 </p>
 
 </div>
@@ -1083,12 +1191,12 @@ und weitere Fan-Abstimmungen.
 <div class="fan">
 
 <h3>
-📸 Medien
+⚽ Immer VfB
 </h3>
 
 <p>
-Fotos, Videos und besondere Momente
-rund um den VfB.
+News, Ergebnisse, Spielplan und Transfers
+auf einen Blick.
 </p>
 
 </div>
@@ -1107,50 +1215,39 @@ CANNSTATT 1893 NEWS
 
 <br>
 
-Unabhängige VfB Stuttgart Fanpage –
-nicht offiziell mit dem VfB Stuttgart verbunden.
-
-<br><br>
-
-© 2026 Cannstatt 1893 News
+Unabhängige VfB Stuttgart Fanpage.
 
 <div class="attribution">
-
-Daten bereitgestellt von football-data.org
-
+Daten werden automatisiert verarbeitet und können zeitverzögert aktualisiert werden.
 </div>
 
 </footer>
 
 <script>
 
-/* =========================================================
-OFFIZIELLE SPIELZEITEN
-========================================================= */
+const API_URL='/api/dashboard';
 
 const OFFICIAL_TIMES={
+"04.09.2026":"20:30",
+"12.09.2026":"15:30",
+"19.09.2026":"18:30",
 
-"28.08.2026":"20:30 Uhr",
-"04.09.2026":"20:30 Uhr",
-"12.09.2026":"15:30 Uhr",
-"19.09.2026":"18:30 Uhr",
-
-"09.09.2026":"18:45 Uhr",
-"14.10.2026":"21:00 Uhr",
-"20.10.2026":"21:00 Uhr",
-"03.11.2026":"18:45 Uhr",
-"25.11.2026":"21:00 Uhr",
-"09.12.2026":"21:00 Uhr",
-"19.01.2027":"21:00 Uhr",
-"27.01.2027":"21:00 Uhr"
-
+"09.09.2026":"18:45",
+"14.10.2026":"21:00",
+"20.10.2026":"21:00",
+"03.11.2026":"18:45",
+"25.11.2026":"21:00",
+"09.12.2026":"21:00",
+"19.01.2027":"21:00",
+"27.01.2027":"21:00"
 };
 
-/* =========================================================
+/*
+=========================================================
 AKTUELLER TABELLENSTAND
-1. SPIELTAG – 03.09.2026
-Quelle: DFB Datencenter
-========================================================= */
+1. SPIELTAG 2026/27
+=========================================================
+*/
 
 const CURRENT_TABLE_FALLBACK=[
 
@@ -1299,7 +1396,7 @@ points:1
 
 {
 position:12,
-name:"Bayer 04 Leverkusen",
+name:"Bayer Leverkusen",
 played:1,
 wins:0,
 draws:0,
@@ -1338,7 +1435,7 @@ points:0
 
 {
 position:15,
-name:"Werder Bremen",
+name:"SV Werder Bremen",
 played:1,
 wins:0,
 draws:0,
@@ -1390,130 +1487,91 @@ points:0
 
 ];
 
-/* =========================================================
+/*
+=========================================================
 AKTUELLES VFB ERGEBNIS
-========================================================= */
+=========================================================
+*/
 
 const CURRENT_VFB_RESULT={
-
-rawDate:"2026-08-28T18:30:00Z",
-
+rawDate:"2026-08-28",
 home:"FC Bayern München",
-
 away:"VfB Stuttgart",
-
 homeScore:5,
-
 awayScore:1,
-
 status:"FINISHED",
-
 competition:"Bundesliga"
-
 };
 
-/* =========================================================
-DASHBOARD LADEN
-========================================================= */
+/*
+=========================================================
+DASHBOARD
+=========================================================
+*/
 
 async function loadDashboard(){
 
 try{
 
-const response =
-await fetch(
-"/api/dashboard",
+const r=await fetch(API_URL,{
+cache:'no-store'
+});
+
+if(!r.ok)
+throw Error('HTTP '+r.status);
+
+const d=await r.json();
+
+/* DATENSTAND */
+
+const u=document.getElementById('updated');
+
+const stamp=d.updatedAt||d.generatedAt;
+
+if(u){
+
+u.textContent=stamp
+?
+'Stand: '+new Date(stamp).toLocaleString(
+'de-DE',
 {
-cache:"no-store"
+day:'2-digit',
+month:'2-digit',
+year:'numeric',
+hour:'2-digit',
+minute:'2-digit'
 }
-);
-
-if(!response.ok){
-
-throw new Error(
-"HTTP "+response.status
-);
-
-}
-
-const data =
-await response.json();
-
-/* UPDATE */
-
-const updated =
-document.getElementById("updated");
-
-if(updated){
-
-const timestamp =
-data.updatedAt ||
-data.generatedAt;
-
-if(timestamp){
-
-updated.textContent =
-"Stand: "+
-new Date(timestamp)
-.toLocaleString(
-"de-DE",
-{
-day:"2-digit",
-month:"2-digit",
-year:"numeric",
-hour:"2-digit",
-minute:"2-digit"
-}
-);
-
-}else{
-
-updated.textContent =
-"Daten aktualisiert";
-
-}
+)
+:
+'Daten aktualisiert';
 
 }
 
 /* NEWS */
 
-const newsElement =
-document.getElementById("newsList");
+const nl=document.getElementById('newsList');
 
-const news =
-Array.isArray(data.news)
+const news=Array.isArray(d.news)
 ?
-data.news
+d.news
 :
 [];
 
-if(newsElement){
+if(nl){
 
-if(news.length){
+nl.innerHTML=news.length
 
-newsElement.innerHTML =
-news.map(
-function(item){
+?
+news.map(n=>{
 
-const title =
-item.title ||
-"VfB News";
+const title=n.title||'VfB News';
 
-const url =
-item.url ||
-item.link ||
-"https://www.vfb.de/";
+const url=n.url||n.link||'https://www.vfb.de/';
 
-const date =
-item.dateFormatted ||
-item.date ||
-"";
+const date=n.dateFormatted||n.date||'';
 
-const summary =
-createShortSummary(
-item.description ||
-item.summary ||
-""
+const sum=createShortSummary(
+n.description||n.summary||''
 );
 
 return `
@@ -1528,20 +1586,18 @@ VFB AKTUELL
 ${escapeHTML(title)}
 </h3>
 
-${
-date
+${date
 ?
 `<p>${escapeHTML(date)}</p>`
 :
-""
+''
 }
 
-${
-summary
+${sum
 ?
-`<p class="news-summary">${escapeHTML(summary)}</p>`
+`<p class="news-summary">${escapeHTML(sum)}</p>`
 :
-""
+''
 }
 
 <a
@@ -1557,70 +1613,58 @@ ORIGINALMELDUNG →
 
 `;
 
-}
-).join("");
+}).join('')
 
-}else{
-
-newsElement.innerHTML =
-`
-<div class="loading">
-Keine News verfügbar.
-</div>
-`;
-
-}
-
-}
-
-/* NEXT GAME */
-
-const nextGameElement =
-document.getElementById("nextGame");
-
-if(nextGameElement){
-
-nextGameElement.innerHTML =
-data.nextGame
-?
-gameCard(data.nextGame)
 :
-`
-<div class="loading">
-Kein nächstes Spiel verfügbar.
-</div>
-`;
+
+'<div class="loading">Keine News verfügbar.</div>';
+
+}
+
+/* NÄCHSTES SPIEL */
+
+const ng=document.getElementById('nextGame');
+
+const g=d.nextGame;
+
+if(ng){
+
+ng.innerHTML=g
+?
+gameCard(g)
+:
+'<div class="loading">Kein nächstes Spiel verfügbar.</div>';
 
 }
 
 /* SPIELPLAN */
 
 renderFixtures(
-"bundesligaFixtures",
-Array.isArray(data.fixtures)
+'bundesligaFixtures',
+Array.isArray(d.fixtures)
 ?
-data.fixtures
+d.fixtures
 :
 [],
-"Bundesliga"
+'Bundesliga'
 );
 
 renderFixtures(
-"championsLeagueFixtures",
-Array.isArray(data.championsLeague)
+'championsLeagueFixtures',
+Array.isArray(d.championsLeague)
 ?
-data.championsLeague
+d.championsLeague
 :
 [],
-"Champions League"
+'Champions League'
 );
 
 /* TABELLE */
 
 renderTable(
-Array.isArray(data.table)
+Array.isArray(d.table)
 ?
-data.table
+d.table
 :
 []
 );
@@ -1628,78 +1672,101 @@ data.table
 /* TRANSFERS */
 
 renderTransfers(
-"transferArrivals",
-data.transfers?.arrivals,
-"Keine Zugänge gefunden.",
-"←",
-"from"
+'transferArrivals',
+d.transfers?.arrivals,
+'Keine Zugänge gefunden.',
+'←',
+'from'
 );
 
 renderTransfers(
-"transferDepartures",
-data.transfers?.departures,
-"Keine Abgänge gefunden.",
-"→",
-"to"
+'transferDepartures',
+d.transfers?.departures,
+'Keine Abgänge gefunden.',
+'→',
+'to'
 );
 
 /* KADER */
 
 renderSquad(
-Array.isArray(data.squad)
+Array.isArray(d.squad)
 ?
-data.squad
+d.squad
 :
 []
 );
 
-}catch(error){
+}
 
-console.error(
-"Dashboard Fehler:",
-error
-);
+catch(e){
+
+console.error(e);
+
+const u=document.getElementById('updated');
+
+if(u)
+u.textContent='Datenquelle momentan nicht erreichbar';
+
+[
+'newsList',
+'nextGame',
+'bundesligaFixtures',
+'championsLeagueFixtures',
+'table',
+'transferArrivals',
+'transferDepartures',
+'squadPlayers'
+
+].forEach(id=>{
+
+const el=document.getElementById(id);
+
+if(el){
+
+el.innerHTML=
+'<div class="error">⚠️ Daten konnten momentan nicht geladen werden.<br><br>Bitte Seite kurz neu laden.</div>';
+
+}
+
+});
+
+}
+
+}
 
 /*
-Wenn die API einmal keine Tabelle
-liefert, wird in renderTable()
-der aktuelle Stand verwendet.
+=========================================================
+NÄCHSTES SPIEL
+=========================================================
 */
 
-}
+function gameCard(g){
 
-}
+const h=
+g.home||
+g.homeTeam?.name||
+'VfB Stuttgart';
 
-/* =========================================================
-NEXT GAME
-========================================================= */
+const a=
+g.away||
+g.awayTeam?.name||
+'';
 
-function gameCard(game){
+const hl=
+g.homeLogo||
+g.homeTeam?.crest||
+'';
 
-const home =
-game.home ||
-game.homeTeam?.name ||
-"VfB Stuttgart";
+const al=
+g.awayLogo||
+g.awayTeam?.crest||
+'';
 
-const away =
-game.away ||
-game.awayTeam?.name ||
-"";
-
-const homeLogo =
-game.homeLogo ||
-game.homeTeam?.crest ||
-"";
-
-const awayLogo =
-game.awayLogo ||
-game.awayTeam?.crest ||
-"";
-
-const competition =
-game.competition ||
-game.league ||
-"Bundesliga";
+const c=
+g.competition||
+g.league||
+'Bundesliga';
 
 return `
 
@@ -1724,26 +1791,20 @@ flex-wrap:wrap;
 
 <div class="team-line">
 
-${
-homeLogo
+${hl
 ?
-`
-<img
-src="${safeURL(homeLogo)}"
-style="
-width:42px;
-height:42px;
-object-fit:contain;
-"
+`<img
+class="team-logo"
+src="${safeURL(hl)}"
+style="width:42px;height:42px"
 alt=""
->
-`
+>`
 :
-""
+''
 }
 
 <strong>
-${escapeHTML(home)}
+${escapeHTML(h)}
 </strong>
 
 </div>
@@ -1760,25 +1821,19 @@ VS.
 <div class="team-line">
 
 <strong>
-${escapeHTML(away)}
+${escapeHTML(a)}
 </strong>
 
-${
-awayLogo
+${al
 ?
-`
-<img
-src="${safeURL(awayLogo)}"
-style="
-width:42px;
-height:42px;
-object-fit:contain;
-"
+`<img
+class="team-logo"
+src="${safeURL(al)}"
+style="width:42px;height:42px"
 alt=""
->
-`
+>`
 :
-""
+''
 }
 
 </div>
@@ -1788,152 +1843,133 @@ alt=""
 <p
 style="
 text-align:center;
-margin-bottom:5px;
+margin-bottom:5px
 "
 >
-
-${escapeHTML(
-formatMatchDate(game)
-)}
-
+${escapeHTML(formatMatchDate(g))}
 </p>
 
 <div
 class="competition"
 style="text-align:center"
 >
-
-${escapeHTML(
-competition
-)}
-
+${escapeHTML(c)}
 </div>
 
 `;
 
 }
 
-/* =========================================================
+/*
+=========================================================
 SPIELPLAN
-========================================================= */
+=========================================================
+*/
 
-function renderFixtures(
-id,
-list,
-competition
-){
+function renderFixtures(id,list,competition){
 
-const element =
-document.getElementById(id);
+const el=document.getElementById(id);
 
-if(!element){
-
+if(!el)
 return;
 
-}
-
 /*
-Falls die API keine Bundesliga-Spiele liefert,
-zeigen wir zumindest das aktuelle VfB-Ergebnis.
+Wenn die API für die Bundesliga keine Spiele liefert,
+zeigen wir mindestens das bereits gespielte Bayern-Spiel.
 */
 
 if(
 !list.length &&
-competition === "Bundesliga"
+competition==='Bundesliga'
 ){
 
-list=[
-CURRENT_VFB_RESULT
-];
+list=[CURRENT_VFB_RESULT];
 
 }
 
 if(!list.length){
 
-element.innerHTML =
-`
-<div class="loading">
-Keine ${escapeHTML(
-competition
-)}-Spiele verfügbar.
-</div>
-`;
+el.innerHTML=
+`<div class="loading">
+Keine ${escapeHTML(competition)}-Spiele verfügbar.
+</div>`;
 
 return;
 
 }
 
-element.innerHTML =
-list.map(
-function(game){
+el.innerHTML=list.map(g=>{
 
-const home =
-game.home ||
-game.homeTeam?.name ||
-"";
+const h=
+g.home||
+g.homeTeam?.name||
+'';
 
-const away =
-game.away ||
-game.awayTeam?.name ||
-"";
+const a=
+g.away||
+g.awayTeam?.name||
+'';
 
-const homeLogo =
-game.homeLogo ||
-game.homeTeam?.crest ||
-"";
+const hl=
+g.homeLogo||
+g.homeTeam?.crest||
+'';
 
-const awayLogo =
-game.awayLogo ||
-game.awayTeam?.crest ||
-"";
+const al=
+g.awayLogo||
+g.awayTeam?.crest||
+'';
 
-const competitionName =
-game.competition ||
-game.league ||
+const c=
+g.competition||
+g.league||
 competition;
 
-const homeScore =
-game.homeScore ??
-game.score?.fullTime?.home ??
-game.homeTeam?.score;
+const hs=
+g.homeScore ??
+g.score?.fullTime?.home ??
+g.homeTeam?.score;
 
-const awayScore =
-game.awayScore ??
-game.score?.fullTime?.away ??
-game.awayTeam?.score;
+const as=
+g.awayScore ??
+g.score?.fullTime?.away ??
+g.awayTeam?.score;
 
-const finished =
-String(
-game.status ||
-""
-)
-.toUpperCase()
-===
-"FINISHED"
+const finished=
+String(g.status||'').toUpperCase()==='FINISHED'
 ||
 (
-homeScore !== undefined &&
-homeScore !== null &&
-awayScore !== undefined &&
-awayScore !== null
+hs!==undefined &&
+hs!==null &&
+as!==undefined &&
+as!==null
 );
 
-const result =
+const result=
 finished &&
-homeScore !== undefined &&
-awayScore !== undefined
+hs!==undefined &&
+as!==undefined
+
 ?
 
 `
-<div class="score">
-${escapeHTML(homeScore)}
+<div
+style="
+margin-top:6px;
+font-size:18px;
+font-weight:1000;
+color:#151515
+"
+>
+${escapeHTML(hs)}
 :
-${escapeHTML(awayScore)}
+${escapeHTML(as)}
 </div>
 `
 
 :
-"";
+
+'';
 
 return `
 
@@ -1941,38 +1977,33 @@ return `
 
 <div class="date">
 
-${escapeHTML(
-formatMatchDate(game)
-)}
+${escapeHTML(formatMatchDate(g))}
 
 </div>
 
 <div
 style="
 flex:1;
-min-width:0;
+min-width:0
 "
 >
 
 <div class="team-line">
 
-${
-homeLogo
+${hl
 ?
-`
-<img
+`<img
 class="team-logo"
-src="${safeURL(homeLogo)}"
+src="${safeURL(hl)}"
 alt=""
 loading="lazy"
->
-`
+>`
 :
-""
+''
 }
 
 <span>
-${escapeHTML(home)}
+${escapeHTML(h)}
 </span>
 
 </div>
@@ -1982,23 +2013,20 @@ class="team-line"
 style="margin-top:5px"
 >
 
-${
-awayLogo
+${al
 ?
-`
-<img
+`<img
 class="team-logo"
-src="${safeURL(awayLogo)}"
+src="${safeURL(al)}"
 alt=""
 loading="lazy"
->
-`
+>`
 :
-""
+''
 }
 
 <span>
-${escapeHTML(away)}
+${escapeHTML(a)}
 </span>
 
 </div>
@@ -2006,11 +2034,7 @@ ${escapeHTML(away)}
 ${result}
 
 <div class="competition">
-
-${escapeHTML(
-competitionName
-)}
-
+${escapeHTML(c)}
 </div>
 
 </div>
@@ -2018,9 +2042,7 @@ competitionName
 <div class="status">
 
 ${escapeHTML(
-formatStatus(
-game.status || ""
-)
+formatStatus(g.status||'')
 )}
 
 </div>
@@ -2029,140 +2051,241 @@ game.status || ""
 
 `;
 
-}
-).join("");
-
-}
-
-/* =========================================================
-DATUM
-========================================================= */
-
-function formatMatchDate(game){
-
-const raw =
-String(
-game.rawDate ||
-game.utcDate ||
-game.dateTime ||
-game.date ||
-game.dateFormatted ||
-""
-);
-
-let key="";
-
-let date="";
-
-let match =
-raw.match(
-/(\d{4})-(\d{2})-(\d{2})/
-);
-
-if(match){
-
-key =
-`${match[3]}.${match[2]}.${match[1]}`;
-
-date =
-key;
-
-}else{
-
-match =
-raw.match(
-/(\d{2})\.(\d{2})\.(\d{4})/
-);
-
-if(match){
-
-key =
-match[0];
-
-date =
-match[0];
-
-}
-
-}
-
-if(!date){
-
-date =
-raw.slice(0,10);
-
-}
-
-if(OFFICIAL_TIMES[key]){
-
-return date+
-", "+
-OFFICIAL_TIMES[key];
-
-}
-
-return date+
-", Termin noch offen";
-
-}
-
-/* =========================================================
-STATUS
-========================================================= */
-
-function formatStatus(status){
-
-const statuses={
-
-SCHEDULED:"Geplant",
-TIMED:"Geplant",
-IN_PLAY:"Live",
-PAUSED:"Pause",
-FINISHED:"Beendet",
-POSTPONED:"Verlegt",
-SUSPENDED:"Unterbrochen",
-CANCELLED:"Abgesagt"
-
-};
-
-return (
-statuses[status] ||
-status ||
-""
-);
-
-}
-
-/* =========================================================
-TABELLE
-========================================================= */
-
-function renderTable(rows){
-
-const element =
-document.getElementById("table");
-
-if(!element){
-
-return;
+}).join('');
 
 }
 
 /*
-Die API hat Vorrang.
-Falls die API leer oder nicht erreichbar ist,
-verwenden wir den geprüften aktuellen
-Tabellenstand.
+=========================================================
+DATUM
+=========================================================
+*/
+
+function formatMatchDate(g){
+
+const raw=String(
+g.rawDate||
+g.utcDate||
+g.dateTime||
+g.date||
+g.dateFormatted||
+''
+);
+
+let key='';
+let date='';
+
+let m=
+raw.match(
+/(\d{4})-(\d{2})-(\d{2})/
+);
+
+if(m){
+
+key=
+`${m[3]}.${m[2]}.${m[1]}`;
+
+date=key;
+
+}
+
+else{
+
+m=
+raw.match(
+/(\d{2})\.(\d{2})\.(\d{4})/
+);
+
+if(m){
+
+key=m[0];
+
+date=m[0];
+
+}
+
+}
+
+if(!date)
+date=raw.slice(0,10);
+
+return date+
+(
+OFFICIAL_TIMES[key]
+?
+`, ${OFFICIAL_TIMES[key]}`
+:
+', Termin noch offen'
+);
+
+}
+
+/*
+=========================================================
+TABELLE
+=========================================================
+*/
+
+function renderTable(rows){
+
+const el=document.getElementById('table');
+
+if(!el)
+return;
+
+/*
+Fallback-Tabelle vorbereiten
+*/
+
+const fallback=
+CURRENT_TABLE_FALLBACK.map(t=>({
+
+position:t.position,
+
+team:t.name,
+
+played:t.played,
+
+wins:t.wins,
+
+draws:t.draws,
+
+losses:t.losses,
+
+goalsFor:t.goalsFor,
+
+goalsAgainst:t.goalsAgainst,
+
+goalDiff:t.goalDiff,
+
+points:t.points
+
+}));
+
+/*
+Nach Mannschaftsnamen suchen
+*/
+
+const byName=
+new Map(
+fallback.map(
+t=>[
+String(t.team).toLowerCase(),
+t
+]
+)
+);
+
+/*
+=========================================================
+ENTSCHEIDENDER FIX
+
+Die API liefert momentan teilweise:
+
+played: 0
+points: 0
+
+obwohl bereits Spiele stattgefunden haben.
+
+Wenn das passiert, nehmen wir den aktuellen
+Fallback-Wert für genau diese Mannschaft.
+
+Sobald die API echte Werte liefert, werden
+automatisch die API-Werte verwendet.
+=========================================================
+*/
+
+rows=
+(
+Array.isArray(rows)
+?
+rows
+:
+[]
+)
+.map((t,i)=>{
+
+const name=
+typeof t.team==='string'
+?
+t.team
+:
+t.team?.name||
+'';
+
+const fb=
+byName.get(
+name.toLowerCase()
+);
+
+/*
+Falsche 0-Werte ersetzen
+*/
+
+if(
+fb &&
+Number(t.played||0)===0 &&
+Number(t.points||0)===0
+){
+
+return {
+
+...fb,
+
+logo:
+t.logo||
+t.team?.crest||
+''
+
+};
+
+}
+
+/*
+Falls die API keine Position liefert
+*/
+
+return {
+
+...t,
+
+position:
+t.position ??
+(
+fb?.position ??
+i+1
+)
+
+};
+
+});
+
+/*
+Wenn überhaupt keine API-Tabelle kommt:
+komplette aktuelle Tabelle verwenden.
 */
 
 if(!rows.length){
 
-rows =
-CURRENT_TABLE_FALLBACK;
+rows=fallback;
 
 }
 
-element.innerHTML = `
+/*
+Nach Tabellenposition sortieren
+*/
+
+rows.sort(
+(a,b)=>
+(Number(a.position)||99)-
+(Number(b.position)||99)
+);
+
+/*
+Tabelle ausgeben
+*/
+
+el.innerHTML=`
 
 <div class="table-scroll">
 
@@ -2207,63 +2330,57 @@ Pkt.
 </div>
 
 ${
-rows.map(
-function(team){
+rows.map(t=>{
 
-const name =
-typeof team.team === "string"
+const name=
+typeof t.team==='string'
 ?
-team.team
+t.team
 :
-team.team?.name ||
-team.name ||
-"";
+t.team?.name||
+'';
 
-const logo =
-team.logo ||
-team.team?.crest ||
-"";
+const logo=
+t.logo||
+t.team?.crest||
+'';
 
-const goalsFor =
-team.goalsFor ??
-team.goals?.for ??
-0;
+const goals=
+t.goalsFor ??
+t.goals?.for;
 
-const goalsAgainst =
-team.goalsAgainst ??
-team.goals?.against ??
-0;
+const against=
+t.goalsAgainst ??
+t.goals?.against;
 
-const goalDiff =
-team.goalDiff ??
-(
-Number(goalsFor) -
-Number(goalsAgainst)
-);
-
-const isVfB =
-name
-.toLowerCase()
-.includes(
-"vfb stuttgart"
-);
+const isVfB=
+name.toLowerCase()
+.includes('vfb stuttgart');
 
 return `
 
 <div
-class="table-row ${
-isVfB
-?
-"vfb-row"
-:
-""
-}"
+class="table-row ${isVfB?'vfb-row':''}"
+style="
+grid-template-columns:
+32px
+minmax(170px,1fr)
+38px
+38px
+38px
+38px
+62px
+52px
+52px;
+
+min-width:540px
+"
 >
 
 <div class="table-cell pos">
 
 ${escapeHTML(
-team.position ?? ""
+t.position??''
 )}
 
 </div>
@@ -2275,16 +2392,14 @@ team.position ?? ""
 ${
 logo
 ?
-`
-<img
+`<img
 class="team-logo"
 src="${safeURL(logo)}"
 alt=""
 loading="lazy"
->
-`
+>`
 :
-""
+''
 }
 
 <strong>
@@ -2300,7 +2415,7 @@ ${escapeHTML(name)}
 <div class="table-cell">
 
 ${escapeHTML(
-team.played ?? 0
+t.played??0
 )}
 
 </div>
@@ -2308,7 +2423,7 @@ team.played ?? 0
 <div class="table-cell">
 
 ${escapeHTML(
-team.wins ?? 0
+t.wins??0
 )}
 
 </div>
@@ -2316,7 +2431,7 @@ team.wins ?? 0
 <div class="table-cell">
 
 ${escapeHTML(
-team.draws ?? 0
+t.draws??0
 )}
 
 </div>
@@ -2324,19 +2439,7 @@ team.draws ?? 0
 <div class="table-cell">
 
 ${escapeHTML(
-team.losses ?? 0
-)}
-
-</div>
-
-<div class="table-cell">
-
-${escapeHTML(
-goalsFor
-)}
-:
-${escapeHTML(
-goalsAgainst
+t.losses??0
 )}
 
 </div>
@@ -2344,15 +2447,26 @@ goalsAgainst
 <div class="table-cell">
 
 ${
-Number(goalDiff) > 0
+goals!==undefined &&
+against!==undefined
+
 ?
-"+"
+
+escapeHTML(
+goals+':'+against
+)
+
 :
-""
+
+'–'
 }
 
+</div>
+
+<div class="table-cell">
+
 ${escapeHTML(
-goalDiff
+t.goalDiff??0
 )}
 
 </div>
@@ -2360,7 +2474,7 @@ goalDiff
 <div class="table-cell points">
 
 ${escapeHTML(
-team.points ?? 0
+t.points??0
 )}
 
 </div>
@@ -2369,17 +2483,8 @@ team.points ?? 0
 
 `;
 
+}).join('')
 }
-).join("")
-}
-
-</div>
-
-<div class="table-note">
-
-Sp. = Spiele · S = Siege · U = Unentschieden · N = Niederlagen ·
-Tore = erzielte:gefangene Tore · Diff. = Tordifferenz ·
-Pkt. = Punkte
 
 </div>
 
@@ -2387,192 +2492,146 @@ Pkt. = Punkte
 
 }
 
-/* =========================================================
+/*
+=========================================================
 TRANSFERS
-========================================================= */
+=========================================================
+*/
 
 function renderTransfers(
 id,
 list,
-emptyText,
+empty,
 arrow,
 key
 ){
 
-const element =
+const el=
 document.getElementById(id);
 
-if(!element){
-
+if(!el)
 return;
 
-}
-
-list =
+list=
 Array.isArray(list)
 ?
 list
 :
 [];
 
-if(!list.length){
+el.innerHTML=
 
-element.innerHTML =
-`
-<div class="loading">
+list.length
 
-${escapeHTML(
-emptyText
-)}
+?
 
-</div>
-`;
-
-return;
-
-}
-
-element.innerHTML =
-list.map(
-function(transfer){
-
-return `
+list.map(t=>`
 
 <div class="fixture">
 
 <div style="flex:1">
 
 <strong>
-
-${escapeHTML(
-transfer.name || ""
-)}
-
+${escapeHTML(t.name||'')}
 </strong>
 
 <div class="competition">
 
 ${escapeHTML(arrow)}
-${escapeHTML(
-transfer[key] || ""
-)}
+
+${escapeHTML(t[key]||'')}
 
 </div>
 
 ${
-transfer.type
+t.type
 ?
-`
-<div class="competition">
-${escapeHTML(
-transfer.type
-)}
-</div>
-`
+`<div class="competition">${escapeHTML(t.type)}</div>`
 :
-""
+''
 }
 
 </div>
 
 </div>
 
+`).join('')
+
+:
+
+`
+<div class="loading">
+${escapeHTML(empty)}
+</div>
 `;
 
 }
-).join("");
 
-}
-
-/* =========================================================
+/*
+=========================================================
 KADER
-========================================================= */
+=========================================================
+*/
 
 function renderSquad(squad){
 
-const element =
-document.getElementById(
-"squadPlayers"
-);
+const el=
+document.getElementById('squadPlayers');
 
-if(!element){
-
+if(!el)
 return;
-
-}
 
 if(!squad.length){
 
-element.innerHTML =
-`
-<div class="loading">
-
-Kader momentan nicht verfügbar.
-
-</div>
-`;
+el.innerHTML=
+'<div class="loading">Kader momentan nicht verfügbar.</div>';
 
 return;
 
 }
 
 const groups=[
-"Torwart",
-"Abwehr",
-"Mittelfeld",
-"Sturm"
+'Torwart',
+'Abwehr',
+'Mittelfeld',
+'Sturm'
 ];
 
-element.innerHTML =
-groups.map(
-function(position){
+el.innerHTML=
+groups.map(pos=>{
 
-const players =
+const ps=
 squad.filter(
-function(player){
-
-return (
-player.position ||
-player.pos ||
-""
-)
-.toLowerCase()
-===
-position.toLowerCase();
-
-}
+p=>
+(p.position||p.pos||'')
+.toLowerCase()===
+pos.toLowerCase()
 );
 
-if(!players.length){
-
-return "";
-
-}
+if(!ps.length)
+return '';
 
 return `
 
 <div class="squad-group">
 
 <h3 class="squad-title">
-
-${position.toUpperCase()}
-
+${pos.toUpperCase()}
 </h3>
 
 <div class="squad-grid">
 
 ${
-players.map(
-function(player){
+ps.map(p=>{
 
-const stats =
-player.stats ||
-player;
+const st=
+p.stats||
+p;
 
-const image =
-player.image ||
-player.photo ||
-"";
+const img=
+p.image||
+p.photo||
+'';
 
 return `
 
@@ -2580,36 +2639,26 @@ return `
 
 <div class="player-photo-wrap">
 
-<span
-class="player-number-badge"
->
+<span class="player-number-badge">
 
-#
-
-${escapeHTML(
-player.number ?? ""
+#${escapeHTML(
+p.number??''
 )}
 
 </span>
 
 ${
-image
+img
 ?
-`
-<img
+`<img
 class="player-photo"
-src="${safeURL(image)}"
-alt="${escapeHTML(
-player.name || ""
-)}"
+src="${safeURL(img)}"
+alt="${escapeHTML(p.name||'')}"
 loading="lazy"
-onerror="
-this.style.display='none'
-"
->
-`
+onerror="this.style.display='none'"
+>`
 :
-""
+''
 }
 
 </div>
@@ -2617,7 +2666,7 @@ this.style.display='none'
 <div class="player-name">
 
 ${escapeHTML(
-player.name || ""
+p.name||''
 )}
 
 </div>
@@ -2625,8 +2674,7 @@ player.name || ""
 <div class="player-position">
 
 ${escapeHTML(
-player.position ||
-position
+p.position||pos
 )}
 
 </div>
@@ -2636,11 +2684,9 @@ position
 <div class="player-stat">
 
 <strong>
-
 ${escapeHTML(
-stats.appearances ?? 0
+st.appearances??0
 )}
-
 </strong>
 
 <span>
@@ -2652,11 +2698,9 @@ Einsätze
 <div class="player-stat">
 
 <strong>
-
 ${escapeHTML(
-stats.goals ?? 0
+st.goals??0
 )}
-
 </strong>
 
 <span>
@@ -2668,11 +2712,9 @@ Tore
 <div class="player-stat">
 
 <strong>
-
 ${escapeHTML(
-stats.assists ?? 0
+st.assists??0
 )}
-
 </strong>
 
 <span>
@@ -2684,11 +2726,9 @@ Assists
 <div class="player-stat">
 
 <strong>
-
 ${escapeHTML(
-stats.minutes ?? 0
+st.minutes??0
 )}
-
 </strong>
 
 <span>
@@ -2703,8 +2743,7 @@ Minuten
 
 `;
 
-}
-).join("")
+}).join('')
 }
 
 </div>
@@ -2713,49 +2752,89 @@ Minuten
 
 `;
 
-}
-).join("");
+}).join('');
 
 }
 
-/* =========================================================
-NEWS TEXT
-========================================================= */
+/*
+=========================================================
+STATUS
+=========================================================
+*/
 
-function createShortSummary(text){
+function formatStatus(s){
 
-if(!text){
+return (
 
-return "";
+{
+
+SCHEDULED:'Geplant',
+
+TIMED:'Geplant',
+
+IN_PLAY:'Live',
+
+PAUSED:'Pause',
+
+FINISHED:'Beendet',
+
+POSTPONED:'Verlegt',
+
+SUSPENDED:'Unterbrochen',
+
+CANCELLED:'Abgesagt'
+
+}[s]
+
+||
+
+s
+
+||
+
+''
+
+);
 
 }
 
-let summary =
-String(text)
+/*
+=========================================================
+NEWS SUMMARY
+=========================================================
+*/
+
+function createShortSummary(t){
+
+if(!t)
+return '';
+
+let s=
+String(t)
 
 .replace(
 /<script[\s\S]*?<\/script>/gi,
-" "
+' '
 )
 
 .replace(
 /<style[\s\S]*?<\/style>/gi,
-" "
+' '
 )
 
 .replace(
 /<[^>]*>/g,
-" "
+' '
 )
 
 .replace(
 /&nbsp;/gi,
-" "
+' '
 )
 
 .replace(
 /&amp;/gi,
-"&"
+'&'
 )
 
 .replace(
@@ -2770,127 +2849,110 @@ String(text)
 
 .replace(
 /\s+/g,
-" "
+' '
 )
 
 .trim();
 
-if(summary.length<=180){
+if(s.length<=180)
+return s;
 
-return summary;
+let x=
+s.slice(0,180);
 
-}
+let i=
+x.lastIndexOf(' ');
 
-let shortened =
-summary.slice(
-0,
-180
-);
+if(i>100)
+x=x.slice(0,i);
 
-const lastSpace =
-shortened.lastIndexOf(" ");
-
-if(lastSpace>100){
-
-shortened =
-shortened.slice(
-0,
-lastSpace
-);
-
-}
-
-return (
-shortened
-.replace(
+return x.replace(
 /[,.;:!?-]+$/g,
-""
+''
 )
 +
-" …"
-);
+' …';
 
 }
 
-/* =========================================================
-HTML ESCAPING
-========================================================= */
+/*
+=========================================================
+HTML ESCAPE
+=========================================================
+*/
 
-function escapeHTML(value){
+function escapeHTML(v){
 
-return String(
-value ?? ""
-)
+return String(v??'')
 
 .replace(
 /&/g,
-"&amp;"
+'&amp;'
 )
 
 .replace(
 /</g,
-"&lt;"
+'&lt;'
 )
 
 .replace(
 />/g,
-"&gt;"
+'&gt;'
 )
 
 .replace(
 /"/g,
-"&quot;"
+'&quot;'
 )
 
 .replace(
 /'/g,
-"&#039;"
+'&#039;'
 );
 
 }
 
-/* =========================================================
-URL
-========================================================= */
+/*
+=========================================================
+URL SICHERHEIT
+=========================================================
+*/
 
-function safeURL(value){
+function safeURL(v){
 
 try{
 
-const url =
+const u=
 new URL(
-String(value),
+String(v),
 location.origin
 );
 
 if(
-url.protocol === "http:" ||
-url.protocol === "https:"
+u.protocol==='http:'||
+u.protocol==='https:'
 ){
 
 return escapeHTML(
-url.href
+u.href
 );
 
 }
 
-}catch(error){
+}
+catch(e){}
+
+return '#';
 
 }
-
-return "#";
-
-}
-
-/* =========================================================
-START
-========================================================= */
-
-loadDashboard();
 
 /*
-Alle 5 Minuten aktualisieren
+=========================================================
+START
+=========================================================
 */
+
+loadDashboard();
 
 setInterval(
 loadDashboard,
@@ -2900,4 +2962,5 @@ loadDashboard,
 </script>
 
 </body>
+
 </html>
