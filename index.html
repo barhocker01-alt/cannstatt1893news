@@ -1,328 +1,3151 @@
 <!doctype html>
 <html lang="de">
+
 <head>
+
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#e30613">
-<meta name="description" content="Cannstatt 1893 News – unabhängige VfB Stuttgart Fanpage">
-<title>Cannstatt 1893 News – VfB Stuttgart</title>
+
+<meta name="viewport"
+content="width=device-width,initial-scale=1">
+
+<meta name="theme-color"
+content="#e30613">
+
+<meta
+name="description"
+content="Cannstatt 1893 News – unabhängige VfB Stuttgart Fanpage">
+
+<title>
+Cannstatt 1893 News – VfB Stuttgart
+</title>
+
 <style>
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f4f4f4;color:#151515;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}a{text-decoration:none;color:inherit}.top{background:#080808;color:#fff;padding:8px 5%;font-size:11px;display:flex;justify-content:space-between;gap:10px}.visitor-ticker{display:flex;align-items:center;gap:5px;font-weight:800;white-space:nowrap}.visitor-live-dot{width:7px;height:7px;border-radius:50%;background:#e30613;display:inline-block}.visitor-separator{opacity:.45;margin:0 3px}.bar{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid #ddd;padding:12px 5%;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 12px #0001}.brand{display:flex;align-items:center;gap:10px;font-weight:1000}.crest{width:44px;height:44px;border-radius:9px;background:#e30613;color:#fff;display:grid;place-items:center;font-weight:1000}.brand small{display:block;color:#777;font-size:9px;letter-spacing:1px;margin-top:2px}.nav{display:flex;gap:24px;font-size:13px;font-weight:800}.nav a:hover{color:#e30613}.hero{background:linear-gradient(90deg,#050505 0%,#350000 55%,#750000 100%);color:white;padding:70px 5%}.hero-inner{max-width:1150px;margin:auto}.hero-kicker{font-size:12px;font-weight:900;letter-spacing:2px;color:#ff4048}.hero h1{margin:12px 0;font-size:clamp(45px,8vw,85px);line-height:.9;letter-spacing:-5px}.hero h1 span{color:#ff2630}.hero p{max-width:650px;color:#ddd;font-size:17px;line-height:1.6}.btn{display:inline-block;background:#e30613;color:#fff;padding:12px 17px;border-radius:8px;font-size:12px;font-weight:900;margin-top:8px}.wrap{width:min(1150px,90%);margin:auto}.section{padding:42px 0}.section h2{margin:0;text-transform:uppercase;font-size:30px;letter-spacing:-1px}.line{width:45px;height:4px;background:#e30613;margin:8px 0 18px}.grid{display:grid;grid-template-columns:1.3fr .9fr;gap:18px}.card{background:#fff;border:1px solid #ddd;border-radius:14px;padding:20px;box-shadow:0 5px 20px #00000008}.news{padding:15px 0;border-bottom:1px solid #eee}.news:last-child{border-bottom:0}.tag{color:#e30613;font-size:10px;font-weight:900;text-transform:uppercase}.news h3{margin:5px 0;font-size:17px}.news p{margin:5px 0;color:#666;font-size:12px;line-height:1.5}.news-meta{color:#999;font-size:10px;margin-top:7px}.next{background:#111;color:white;border-radius:12px;padding:20px}.next-label{color:#ff2630;font-size:10px;font-weight:900;letter-spacing:1px}.next h3{font-size:24px;margin:10px 0}.next p{color:#ccc}.live{display:flex;align-items:center;gap:7px;color:#ff2630;font-size:11px;font-weight:900}.dot{width:8px;height:8px;background:#e30613;border-radius:50%}.notice{background:#fff1f1;border-left:4px solid #e30613;padding:13px;font-size:12px;margin-bottom:18px}.loading{color:#888;font-size:13px;padding:20px 0}.error{color:#a00000;background:#fff0f0;padding:15px;border-radius:8px;font-size:12px}.fixture{display:flex;align-items:center;gap:15px;padding:14px 0;border-bottom:1px solid #eee}.fixture:last-child{border-bottom:0}.date{min-width:105px;color:#e30613;font-size:12px;font-weight:900}.fixture strong{font-size:14px}.competition{color:#888;font-size:11px;margin-top:3px}.status{margin-left:auto;font-size:10px;font-weight:900}.team-line{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:800}.team-logo{width:30px;height:30px;object-fit:contain;flex-shrink:0}.competition-title{display:flex;align-items:center;gap:10px;margin-top:10px;margin-bottom:8px;padding-bottom:10px;border-bottom:2px solid #eee}.competition-title .icon{font-size:24px}.competition-title h3{margin:0;font-size:20px;font-weight:1000}.competition-title span{color:#777;font-size:11px;font-weight:600}.fan-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.fan{background:#111;color:white;padding:25px;border-radius:13px;min-height:140px}.fan h3{margin-top:0}.fan p{color:#aaa;font-size:13px;line-height:1.5}.fan-voting{position:relative;overflow:hidden;background:linear-gradient(145deg,#111,#151515 55%,#090909);border:1px solid #242424}.fan-voting:before{content:"";position:absolute;top:0;left:0;width:100%;height:4px;background:#e30613}.vote-header{display:flex;align-items:flex-start;justify-content:space-between;gap:15px;margin-bottom:8px}.vote-kicker{display:block;color:#e30613;font-size:10px;font-weight:1000;letter-spacing:1.4px;margin-bottom:5px}.vote-header h3{margin:0;font-size:21px;line-height:1.1}.vote-live{background:#e30613;color:#fff;font-size:9px;font-weight:1000;letter-spacing:1px;padding:6px 9px;border-radius:20px}.vote-question{color:#ddd!important;font-size:14px!important;font-weight:700;margin:14px 0 17px}.voting-options{display:flex;flex-direction:column;gap:9px}.vote-option{width:100%;border:1px solid #292929;background:#181818;color:#fff;border-radius:9px;padding:11px 13px;text-align:left}.vote-option:hover{background:#202020;border-color:#e30613}.vote-option-top{display:flex;align-items:center;justify-content:space-between;gap:10px}.vote-player{font-size:13px;font-weight:900}.vote-percent{font-size:12px;font-weight:1000}.vote-bar{height:5px;background:#292929;border-radius:20px;overflow:hidden;margin-top:8px}.vote-bar-fill{height:100%;width:0;background:#e30613;border-radius:20px;transition:width .5s}.vote-button{margin-top:13px;width:100%;border:0;border-radius:9px;background:#e30613;color:#fff;padding:11px 15px;font-family:inherit;font-size:12px;font-weight:1000;cursor:pointer}.vote-button:disabled{opacity:.55;cursor:not-allowed}.voting-message{margin-top:13px;font-size:12px;font-weight:800;color:#e30613;min-height:16px}.voting-message.success{color:#67d68b}.voting-message.error{color:#ff6670}.voting-total{margin-top:8px;color:#777;font-size:10px;font-weight:700}.squad-group{margin-top:28px}.squad-title{font-size:20px;font-weight:900;margin:0 0 14px}.squad-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.player-card{background:#fff;border:1px solid #ddd;border-radius:14px;padding:14px;box-shadow:0 5px 20px #00000008;overflow:hidden}.player-photo-wrap{height:185px;background:linear-gradient(180deg,#f8f8f8,#eee);border-radius:12px;position:relative;overflow:hidden;display:flex;align-items:flex-end;justify-content:center;margin:-2px -2px 12px}.player-photo{height:100%;width:100%;object-fit:contain;object-position:center bottom}.player-number-badge{position:absolute;top:8px;left:8px;background:#e30613;color:#fff;border-radius:8px;padding:5px 8px;font-size:12px;font-weight:1000}.player-name{font-size:15px;font-weight:900;margin-top:4px}.player-position{font-size:10px;color:#777;text-transform:uppercase;font-weight:800;margin-top:4px}.player-meta{font-size:9px;color:#999;margin-top:3px}.player-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:12px;padding-top:10px;border-top:1px solid #eee}.player-stat{text-align:center}.player-stat strong{display:block;font-size:16px;font-weight:1000}.player-stat span{display:block;font-size:8px;color:#888;text-transform:uppercase;font-weight:800;margin-top:2px}.table-scroll{width:100%;overflow-x:auto}.table-header,.table-row{display:grid;grid-template-columns:32px minmax(170px,1fr) 38px 38px 38px 38px 62px 52px 52px;gap:6px;align-items:center;min-width:570px}.table-header{padding:0 0 10px;border-bottom:2px solid #111;font-size:9px;font-weight:900;text-transform:uppercase;color:#777}.table-row{padding:12px 0;border-bottom:1px solid #eee}.table-cell{text-align:center;font-size:12px}.table-cell.pos{font-weight:900}.table-team{min-width:0}.table-team strong{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.points{font-weight:1000;color:#e30613}footer{background:#111;color:#999;padding:40px 5%;margin-top:20px;font-size:12px;line-height:1.7}footer b{color:white}.attribution{margin-top:12px;font-size:11px;color:#777}@media(max-width:900px){.player-photo-wrap{height:175px}.squad-grid{grid-template-columns:repeat(3,1fr)}}@media(max-width:760px){.top{font-size:9px;flex-wrap:wrap;justify-content:center}.visitor-ticker{order:3;width:100%;justify-content:center;font-size:9px}.nav{display:none}.bar{padding:10px 5%}.hero{padding:55px 5%}.hero h1{font-size:55px;letter-spacing:-3px}.hero p{font-size:15px}.grid{grid-template-columns:1fr}.fan-grid{grid-template-columns:1fr}.squad-grid{grid-template-columns:repeat(2,1fr)}.section{padding:32px 0}.date{min-width:80px;font-size:10px}.team-line{font-size:13px}.team-logo{width:25px;height:25px}.table-header,.table-row{grid-template-columns:32px minmax(145px,1fr) 38px 38px 38px 38px 52px 52px;min-width:475px;gap:4px}.table-cell{font-size:10px}}@media(max-width:430px){.hero h1{font-size:46px}.brand{font-size:13px}.crest{width:38px;height:38px}.fixture{padding:13px 0}.date{min-width:70px}.fixture strong{font-size:12px}.competition{font-size:10px}}
+
+/* =========================
+   GRUNDLAGEN
+========================= */
+
+*{
+box-sizing:border-box;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+margin:0;
+background:#f4f4f4;
+color:#151515;
+font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
+
+a{
+text-decoration:none;
+color:inherit;
+}
+
+
+/* =========================
+   TOP BAR
+========================= */
+
+.top{
+background:#080808;
+color:#fff;
+padding:8px 5%;
+font-size:11px;
+display:flex;
+justify-content:space-between;
+gap:10px;
+}
+
+
+/* =========================
+   BESUCHER-TICKER
+========================= */
+
+.visitor-ticker{
+display:flex;
+align-items:center;
+gap:5px;
+font-weight:800;
+white-space:nowrap;
+}
+
+.visitor-live-dot{
+width:7px;
+height:7px;
+border-radius:50%;
+background:#e30613;
+box-shadow:0 0 0 3px #e3061333;
+display:inline-block;
+animation:visitorPulse 1.8s infinite;
+}
+
+.visitor-separator{
+opacity:.45;
+margin:0 3px;
+}
+
+@keyframes visitorPulse{
+
+0%,100%{
+opacity:1;
+transform:scale(1);
+}
+
+50%{
+opacity:.45;
+transform:scale(.8);
+}
+
+}
+
+@media(max-width:800px){
+
+.top{
+font-size:9px;
+padding:7px 4%;
+flex-wrap:wrap;
+justify-content:center;
+text-align:center;
+}
+
+.visitor-ticker{
+order:3;
+width:100%;
+justify-content:center;
+font-size:9px;
+}
+
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.bar{
+position:sticky;
+top:0;
+z-index:20;
+background:#fff;
+border-bottom:1px solid #ddd;
+padding:12px 5%;
+display:flex;
+align-items:center;
+justify-content:space-between;
+box-shadow:0 2px 12px #0001;
+}
+
+.brand{
+display:flex;
+align-items:center;
+gap:10px;
+font-weight:1000;
+}
+
+.crest{
+width:44px;
+height:44px;
+border-radius:9px;
+background:#e30613;
+color:#fff;
+display:grid;
+place-items:center;
+font-weight:1000;
+}
+
+.brand small{
+display:block;
+color:#777;
+font-size:9px;
+letter-spacing:1px;
+margin-top:2px;
+}
+
+.nav{
+display:flex;
+gap:24px;
+font-size:13px;
+font-weight:800;
+}
+
+.nav a:hover{
+color:#e30613;
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+
+background:
+linear-gradient(
+90deg,
+#050505 0%,
+#350000 55%,
+#750000 100%
+);
+
+color:white;
+padding:70px 5%;
+}
+
+.hero-inner{
+max-width:1150px;
+margin:auto;
+}
+
+.hero-kicker{
+font-size:12px;
+font-weight:900;
+letter-spacing:2px;
+color:#ff4048;
+}
+
+.hero h1{
+margin:12px 0;
+font-size:clamp(45px,8vw,85px);
+line-height:.9;
+letter-spacing:-5px;
+}
+
+.hero h1 span{
+color:#ff2630;
+}
+
+.hero p{
+max-width:650px;
+color:#ddd;
+font-size:17px;
+line-height:1.6;
+}
+
+.btn{
+display:inline-block;
+background:#e30613;
+color:#fff;
+padding:12px 17px;
+border-radius:8px;
+font-size:12px;
+font-weight:900;
+margin-top:8px;
+}
+
+
+/* =========================
+   LAYOUT
+========================= */
+
+.wrap{
+width:min(1150px,90%);
+margin:auto;
+}
+
+.section{
+padding:42px 0;
+}
+
+.section h2{
+margin:0;
+text-transform:uppercase;
+font-size:30px;
+letter-spacing:-1px;
+}
+
+.line{
+width:45px;
+height:4px;
+background:#e30613;
+margin:8px 0 18px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:1.3fr .9fr;
+gap:18px;
+}
+
+.card{
+background:#fff;
+border:1px solid #ddd;
+border-radius:14px;
+padding:20px;
+box-shadow:0 5px 20px #00000008;
+}
+
+
+/* =========================
+   NEWS
+========================= */
+
+.news{
+padding:15px 0;
+border-bottom:1px solid #eee;
+}
+
+.news:last-child{
+border-bottom:0;
+}
+
+.tag{
+color:#e30613;
+font-size:10px;
+font-weight:900;
+text-transform:uppercase;
+}
+
+.news h3{
+margin:5px 0;
+font-size:17px;
+}
+
+.news p{
+margin:5px 0;
+color:#666;
+font-size:12px;
+line-height:1.5;
+}
+
+
+/* =========================
+   NEXT GAME
+========================= */
+
+.next{
+background:#111;
+color:white;
+border-radius:12px;
+padding:20px;
+}
+
+.next-label{
+color:#ff2630;
+font-size:10px;
+font-weight:900;
+letter-spacing:1px;
+}
+
+.next h3{
+font-size:24px;
+margin:10px 0;
+}
+
+.next p{
+color:#ccc;
+}
+
+.live{
+display:flex;
+align-items:center;
+gap:7px;
+color:#ff2630;
+font-size:11px;
+font-weight:900;
+}
+
+.dot{
+width:8px;
+height:8px;
+background:#e30613;
+border-radius:50%;
+}
+
+
+/* =========================
+   NOTICE
+========================= */
+
+.notice{
+background:#fff1f1;
+border-left:4px solid #e30613;
+padding:13px;
+font-size:12px;
+margin-bottom:18px;
+}
+
+
+/* =========================
+   LOADING / ERROR
+========================= */
+
+.loading{
+color:#888;
+font-size:13px;
+padding:20px 0;
+}
+
+.error{
+color:#a00000;
+background:#fff0f0;
+padding:15px;
+border-radius:8px;
+font-size:12px;
+}
+
+
+/* =========================
+   SPIEL
+========================= */
+
+.fixture{
+display:flex;
+align-items:center;
+gap:15px;
+padding:14px 0;
+border-bottom:1px solid #eee;
+}
+
+.fixture:last-child{
+border-bottom:0;
+}
+
+.date{
+min-width:105px;
+color:#e30613;
+font-size:12px;
+font-weight:900;
+}
+
+.fixture strong{
+font-size:14px;
+}
+
+.competition{
+color:#888;
+font-size:11px;
+margin-top:3px;
+}
+
+.status{
+margin-left:auto;
+font-size:10px;
+font-weight:900;
+}
+
+
+/* =========================
+   TEAM LOGOS
+========================= */
+
+.team-line{
+display:flex;
+align-items:center;
+gap:8px;
+font-size:14px;
+font-weight:800;
+}
+
+.team-logo{
+width:30px;
+height:30px;
+object-fit:contain;
+flex-shrink:0;
+}
+
+
+/* =========================
+   COMPETITION HEADER
+========================= */
+
+.competition-title{
+display:flex;
+align-items:center;
+gap:10px;
+margin-top:10px;
+margin-bottom:8px;
+padding-bottom:10px;
+border-bottom:2px solid #eee;
+}
+
+.competition-title .icon{
+font-size:24px;
+}
+
+.competition-title h3{
+margin:0;
+font-size:20px;
+font-weight:1000;
+}
+
+.competition-title span{
+color:#777;
+font-size:11px;
+font-weight:600;
+}
+
+
+/* =========================
+   FAN AREA
+========================= */
+
+.fan-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:15px;
+}
+
+.fan{
+background:#111;
+color:white;
+padding:25px;
+border-radius:13px;
+min-height:140px;
+}
+
+.fan h3{
+margin-top:0;
+}
+
+.fan p{
+color:#aaa;
+font-size:13px;
+line-height:1.5;
+}
+
+
+/* =========================
+   FAN-VOTING
+========================= */
+
+.fan-voting{
+position:relative;
+overflow:hidden;
+min-height:0;
+background:
+linear-gradient(
+145deg,
+#111 0%,
+#151515 55%,
+#090909 100%
+);
+border:1px solid #242424;
+box-shadow:
+0 10px 30px rgba(0,0,0,.18);
+}
+
+.fan-voting::before{
+content:"";
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:4px;
+background:#e30613;
+}
+
+.vote-header{
+display:flex;
+align-items:flex-start;
+justify-content:space-between;
+gap:15px;
+margin-bottom:8px;
+}
+
+.vote-kicker{
+display:block;
+color:#e30613;
+font-size:10px;
+font-weight:1000;
+letter-spacing:1.4px;
+margin-bottom:5px;
+}
+
+.vote-header h3{
+margin:0;
+font-size:21px;
+line-height:1.1;
+}
+
+.vote-live{
+background:#e30613;
+color:#fff;
+font-size:9px;
+font-weight:1000;
+letter-spacing:1px;
+padding:6px 9px;
+border-radius:20px;
+flex-shrink:0;
+}
+
+.vote-question{
+color:#ddd !important;
+font-size:14px !important;
+font-weight:700;
+margin:14px 0 17px;
+}
+
+.voting-options{
+display:flex;
+flex-direction:column;
+gap:9px;
+}
+
+.vote-option{
+width:100%;
+border:1px solid #292929;
+background:#181818;
+color:#fff;
+border-radius:9px;
+padding:11px 13px;
+text-align:left;
+font-family:inherit;
+transition:
+transform .15s ease,
+background .15s ease,
+border-color .15s ease;
+}
+
+.vote-option:hover{
+background:#202020;
+border-color:#e30613;
+transform:translateY(-1px);
+}
+
+.vote-option-top{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:10px;
+position:relative;
+z-index:2;
+}
+
+.vote-player{
+font-size:13px;
+font-weight:900;
+}
+
+.vote-percent{
+font-size:12px;
+font-weight:1000;
+color:#fff;
+}
+
+.vote-bar{
+height:5px;
+background:#292929;
+border-radius:20px;
+overflow:hidden;
+margin-top:8px;
+}
+
+.vote-bar-fill{
+height:100%;
+width:0%;
+background:#e30613;
+border-radius:20px;
+transition:width .5s ease;
+}
+
+.vote-button{
+margin-top:13px;
+width:100%;
+border:0;
+border-radius:9px;
+background:#e30613;
+color:#fff;
+padding:11px 15px;
+font-family:inherit;
+font-size:12px;
+font-weight:1000;
+cursor:pointer;
+transition:
+background .15s ease,
+transform .15s ease;
+}
+
+.vote-button:hover{
+background:#c90010;
+}
+
+.vote-button:active{
+transform:scale(.98);
+}
+
+.vote-button:disabled{
+opacity:.55;
+cursor:not-allowed;
+}
+
+.vote-loading{
+color:#999;
+font-size:12px;
+padding:10px 0;
+}
+
+.voting-message{
+margin-top:13px;
+font-size:12px;
+font-weight:800;
+color:#e30613;
+min-height:16px;
+}
+
+.voting-message.success{
+color:#67d68b;
+}
+
+.voting-message.error{
+color:#ff6670;
+}
+
+.voting-total{
+margin-top:8px;
+color:#777;
+font-size:10px;
+font-weight:700;
+}
+
+.voted-option{
+border-color:#444;
+cursor:default;
+}
+
+@media(max-width:800px){
+
+.fan-voting{
+padding:20px;
+}
+
+.vote-header h3{
+font-size:19px;
+}
+
+.vote-player{
+font-size:12px;
+}
+
+.vote-percent{
+font-size:11px;
+}
+
+}
+
+
+/* =========================
+   KADER
+========================= */
+
+.squad-section{
+margin-top:20px;
+}
+
+.squad-group{
+margin-top:28px;
+}
+
+.squad-title{
+font-size:20px;
+font-weight:900;
+margin:0 0 14px;
+}
+
+.squad-grid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:14px;
+}
+
+.player-card{
+background:#fff;
+border:1px solid #ddd;
+border-radius:14px;
+padding:17px;
+box-shadow:0 5px 20px #00000008;
+transition:.2s;
+}
+
+.player-card:hover{
+transform:translateY(-3px);
+box-shadow:0 8px 25px #00000012;
+}
+
+.player-number{
+font-size:28px;
+font-weight:1000;
+color:#e30613;
+line-height:1;
+}
+
+.player-name{
+font-size:15px;
+font-weight:900;
+margin-top:10px;
+}
+
+.player-position{
+font-size:10px;
+color:#777;
+text-transform:uppercase;
+font-weight:800;
+margin-top:4px;
+}
+
+.player-photo-wrap{
+height:185px;
+background:linear-gradient(
+180deg,
+#f8f8f8,
+#eeeeee
+);
+border-radius:12px;
+position:relative;
+overflow:hidden;
+display:flex;
+align-items:flex-end;
+justify-content:center;
+margin:-2px -2px 12px;
+}
+
+.player-photo{
+height:100%;
+width:100%;
+object-fit:contain;
+object-position:center bottom;
+}
+
+.player-number-badge{
+position:absolute;
+top:8px;
+left:8px;
+background:#e30613;
+color:#fff;
+border-radius:8px;
+padding:5px 8px;
+font-size:12px;
+font-weight:1000;
+}
+
+.player-stats{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:6px;
+margin-top:12px;
+padding-top:10px;
+border-top:1px solid #eee;
+}
+
+.player-stat{
+text-align:center;
+}
+
+.player-stat strong{
+display:block;
+font-size:16px;
+font-weight:1000;
+color:#151515;
+}
+
+.player-stat span{
+display:block;
+font-size:8px;
+color:#888;
+text-transform:uppercase;
+font-weight:800;
+margin-top:2px;
+}
+
+.player-card{
+overflow:hidden;
+}
+
+.player-name{
+margin-top:4px;
+}
+
+.player-meta{
+font-size:9px;
+color:#999;
+margin-top:3px;
+}
+
+.coach-card{
+max-width:350px;
+}
+
+
+/* =========================
+   TABELLE
+========================= */
+
+.table-scroll{
+width:100%;
+overflow-x:auto;
+-webkit-overflow-scrolling:touch;
+}
+
+.table-header,
+.table-row{
+display:grid;
+grid-template-columns:
+32px
+minmax(170px,1fr)
+38px
+38px
+38px
+38px
+62px
+52px
+52px;
+gap:6px;
+align-items:center;
+min-width:570px;
+}
+
+.table-header{
+padding:0 0 10px;
+border-bottom:2px solid #111;
+font-size:9px;
+font-weight:900;
+text-transform:uppercase;
+color:#777;
+}
+
+.table-row{
+padding:12px 0;
+border-bottom:1px solid #eee;
+}
+
+.table-cell{
+text-align:center;
+font-size:12px;
+}
+
+.table-cell.pos{
+font-weight:900;
+}
+
+.table-team{
+min-width:0;
+}
+
+.table-team strong{
+overflow:hidden;
+text-overflow:ellipsis;
+white-space:nowrap;
+}
+
+.points{
+font-weight:1000;
+color:#e30613;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+background:#111;
+color:#999;
+padding:40px 5%;
+margin-top:20px;
+font-size:12px;
+line-height:1.7;
+}
+
+footer b{
+color:white;
+}
+
+.attribution{
+margin-top:12px;
+font-size:11px;
+color:#777;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:900px){
+
+.player-photo-wrap{
+height:175px;
+}
+
+.squad-grid{
+grid-template-columns:repeat(3,1fr);
+}
+
+}
+
+@media(max-width:760px){
+
+.player-photo-wrap{
+height:170px;
+}
+
+.player-stats{
+grid-template-columns:repeat(4,1fr);
+}
+
+.top{
+font-size:9px;
+}
+
+.nav{
+display:none;
+}
+
+.bar{
+padding:10px 5%;
+}
+
+.hero{
+padding:55px 5%;
+}
+
+.hero h1{
+font-size:55px;
+letter-spacing:-3px;
+}
+
+.hero p{
+font-size:15px;
+}
+
+.grid{
+grid-template-columns:1fr;
+}
+
+.fan-grid{
+grid-template-columns:1fr;
+}
+
+.squad-grid{
+grid-template-columns:repeat(2,1fr);
+}
+
+.section{
+padding:32px 0;
+}
+
+.fixture{
+align-items:center;
+gap:10px;
+}
+
+.date{
+min-width:80px;
+font-size:10px;
+}
+
+.team-line{
+font-size:13px;
+}
+
+.team-logo{
+width:25px;
+height:25px;
+}
+
+.status{
+margin-left:auto;
+}
+
+.table-header,
+.table-row{
+grid-template-columns:
+32px
+minmax(145px,1fr)
+38px
+38px
+38px
+38px
+52px
+52px;
+
+min-width:475px;
+gap:4px;
+}
+
+.table-cell{
+font-size:10px;
+}
+
+}
+
+@media(max-width:430px){
+
+.hero h1{
+font-size:46px;
+}
+
+.brand{
+font-size:13px;
+}
+
+.crest{
+width:38px;
+height:38px;
+}
+
+.fixture{
+padding:13px 0;
+}
+
+.date{
+min-width:70px;
+}
+
+.fixture strong{
+font-size:12px;
+}
+
+.competition{
+font-size:10px;
+}
+
+}
+
 </style>
+
 </head>
+
+
 <body>
-<div class="top"><span>⚪🔴 CANNSTATT 1893 NEWS · UNABHÄNGIGE FANPAGE</span><div class="visitor-ticker"><span class="visitor-live-dot"></span><span id="visitorOnline">0</span> Besucher gerade online <span class="visitor-separator">·</span><span id="visitorToday">0</span> Besucher heute <span class="visitor-separator">·</span><span id="visitorViews">0</span> Seitenaufrufe</div><span id="updated">Daten werden geladen …</span></div>
 
-<header class="bar"><a class="brand" href="#"><span class="crest">VfB</span><span>CANNSTATT 1893 NEWS<small>DEINE VFB FANPAGE AUS STUTTGART</small></span></a><nav class="nav"><a href="#news">News</a><a href="#spiele">Spiele</a><a href="#tabelle">Tabelle</a><a href="#transfers">Transfers</a><a href="#kader">Kader</a><a href="#fans">Fans</a></nav></header>
 
-<section class="hero"><div class="hero-inner"><div class="hero-kicker">VFB STUTTGART · SAISON 2026/27</div><h1>CANNSTATT <span>1893</span><br>NEWS</h1><p>Unabhängige VfB Stuttgart Fanpage mit aktuellen News, Spielen, Tabelle, Transfers, Kader und Fan-Voting.</p><a class="btn" href="#news">ZU DEN NEWS →</a></div></section>
+<!-- =========================
+TOP
+========================= -->
+
+<div class="top">
+
+<span>
+⚪🔴 CANNSTATT 1893 NEWS · UNABHÄNGIGE FANPAGE
+</span>
+
+<div class="visitor-ticker" aria-live="polite">
+
+<span class="visitor-live-dot"></span>
+
+<span id="visitorOnline">
+0
+</span>
+
+Besucher gerade online
+
+<span class="visitor-separator">
+·
+</span>
+
+<span id="visitorToday">
+0
+</span>
+
+Besucher heute
+
+<span class="visitor-separator">
+·
+</span>
+
+<span id="visitorViews">
+0
+</span>
+
+Seitenaufrufe
+
+</div>
+
+<span id="updated">
+Daten werden geladen …
+</span>
+
+</div>
+
+
+<!-- =========================
+HEADER
+========================= -->
+
+<header class="bar">
+
+<a class="brand" href="#">
+
+<span class="crest">
+VfB
+</span>
+
+<span>
+
+CANNSTATT 1893 NEWS
+
+<small>
+DEINE VFB FANPAGE AUS STUTTGART
+</small>
+
+</span>
+
+</a>
+
+
+<nav class="nav">
+
+<a href="#news">
+News
+</a>
+
+<a href="#spiele">
+Spiele
+</a>
+
+<a href="#tabelle">
+Tabelle
+</a>
+
+<a href="#transfers">
+Transfers
+</a>
+
+<a href="#kader">
+Kader
+</a>
+
+<a href="#fans">
+Fans
+</a>
+
+</nav>
+
+</header>
+
+
+<!-- =========================
+HERO
+========================= -->
+
+<section class="hero">
+
+<div class="hero-inner">
+
+<div class="hero-kicker">
+VFB STUTTGART · SAISON 2026/27
+</div>
+
+<h1>
+CANNSTATT <span>1893</span><br>
+NEWS
+</h1>
+
+<p>
+Unabhängige VfB Stuttgart Fanpage
+mit aktuellen News, Spielen,
+Tabelle, Transfers, Kader und
+Fan-Voting.
+</p>
+
+<a class="btn" href="#news">
+ZU DEN NEWS →
+</a>
+
+</div>
+
+</section>
+
 
 <main class="wrap">
 
-<section class="section" id="news">
-<h2>Aktuelle News</h2><div class="line"></div>
+
+<!-- =========================
+NEWS
+========================= -->
+
+<section
+class="section"
+id="news"
+>
+
+<h2>
+Aktuelle News
+</h2>
+
+<div class="line"></div>
+
+
 <div class="grid">
-<div class="card"><div id="newsList" class="loading">Dateien werden geladen …</div></div>
-<div><div class="next"><div class="next-label">NÄCHSTES SPIEL</div><h3 id="nextGame">Dateien werden geladen …</h3><p id="nextGameInfo">Bitte kurz warten.</p><div class="live" id="nextGameStatus"></div></div></div>
+
+
+<div class="card">
+
+<div id="newsList">
+
+<div class="loading">
+Dateien werden geladen …
 </div>
+
+</div>
+
+</div>
+
+
+<div>
+
+<div class="next">
+
+<div class="next-label">
+NÄCHSTES SPIEL
+</div>
+
+<h3 id="nextGame">
+Dateien werden geladen …
+</h3>
+
+<p id="nextGameInfo">
+Bitte kurz warten.
+</p>
+
+<div
+class="live"
+id="nextGameStatus"
+></div>
+
+</div>
+
+</div>
+
+</div>
+
 </section>
 
-<section class="section" id="spiele">
-<h2>Spiele</h2><div class="line"></div>
-<div class="card"><div id="fixturesList" class="loading">Dateien werden geladen …</div></div>
+
+<!-- =========================
+SPIELE
+========================= -->
+
+<section
+class="section"
+id="spiele"
+>
+
+<h2>
+Spiele
+</h2>
+
+<div class="line"></div>
+
+
+<div class="card">
+
+<div
+id="fixturesList"
+class="loading"
+>
+Dateien werden geladen …
+</div>
+
+</div>
+
 </section>
 
-<section class="section" id="tabelle">
-<h2>Bundesliga-Tabelle</h2><div class="line"></div>
-<div class="card"><div class="table-scroll"><div id="tableList" class="loading">Dateien werden geladen …</div></div></div>
+
+<!-- =========================
+TABELLE
+========================= -->
+
+<section
+class="section"
+id="tabelle"
+>
+
+<h2>
+Bundesliga-Tabelle
+</h2>
+
+<div class="line"></div>
+
+
+<div class="card">
+
+<div class="table-scroll">
+
+<div
+id="tableList"
+class="loading"
+>
+Dateien werden geladen …
+</div>
+
+</div>
+
+</div>
+
 </section>
 
-<section class="section" id="transfers">
-<h2>Transfers</h2><div class="line"></div>
+
+<!-- =========================
+TRANSFERS
+========================= -->
+
+<section
+class="section"
+id="transfers"
+>
+
+<h2>
+Transfers
+</h2>
+
+<div class="line"></div>
+
+
 <div class="grid">
+
+
 <div class="card">
-<div class="competition-title"><span class="icon">⬆️</span><div><h3>Zugänge</h3><span>Sommer 2026</span></div></div>
-<div id="transfersIn" class="loading">Dateien werden geladen …</div>
+
+<div class="competition-title">
+
+<span class="icon">
+⬆️
+</span>
+
+<div>
+
+<h3>
+Zugänge
+</h3>
+
+<span>
+Sommer 2026
+</span>
+
 </div>
+
+</div>
+
+
+<div
+id="transfersIn"
+class="loading"
+>
+Dateien werden geladen …
+</div>
+
+</div>
+
+
 <div class="card">
-<div class="competition-title"><span class="icon">⬇️</span><div><h3>Abgänge</h3><span>Sommer 2026</span></div></div>
-<div id="transfersOut" class="loading">Dateien werden geladen …</div>
+
+<div class="competition-title">
+
+<span class="icon">
+⬇️
+</span>
+
+<div>
+
+<h3>
+Abgänge
+</h3>
+
+<span>
+Sommer 2026
+</span>
+
 </div>
+
 </div>
+
+
+<div
+id="transfersOut"
+class="loading"
+>
+Dateien werden geladen …
+</div>
+
+</div>
+
+
+</div>
+
 </section>
 
-<section class="section" id="kader">
-<h2>VfB-Kader</h2><div class="line"></div>
-<div id="squadPlayers"><div class="loading">Dateien werden geladen …</div></div>
+
+<!-- =========================
+KADER
+========================= -->
+
+<section
+class="section"
+id="kader"
+>
+
+<h2>
+VfB-Kader
+</h2>
+
+<div class="line"></div>
+
+
+<div id="squadPlayers">
+
+<div class="loading">
+Dateien werden geladen …
+</div>
+
+</div>
+
 </section>
 
-<section class="section" id="fans">
-<h2>Fanbereich</h2><div class="line"></div>
+
+<!-- =========================
+FANS
+========================= -->
+
+<section
+class="section"
+id="fans"
+>
+
+<h2>
+Fanbereich
+</h2>
+
+<div class="line"></div>
+
+
 <div class="fan-grid">
 
+
 <div class="fan">
-<h3>📣 Fan-Ticker</h3>
-<p>Alles rund um die Cannstatter Kurve, Stimmung und Spieltage.</p>
+
+<h3>
+📣 Fan-Ticker
+</h3>
+
+<p>
+Alles rund um die Cannstatter Kurve,
+Stimmung und Spieltage.
+</p>
+
 </div>
+
 
 <div class="fan fan-voting">
+
 <div class="vote-header">
-<div><span class="vote-kicker">🗳️ FAN-VOTING</span><h3>Man of the Match</h3></div>
-<span class="vote-live">LIVE</span>
+
+<div>
+
+<span class="vote-kicker">
+🗳️ FAN-VOTING
+</span>
+
+<h3>
+Man of the Match
+</h3>
+
 </div>
-<p class="vote-question" id="voteQuestion">Wer war dein bester VfB-Spieler?</p>
-<div id="votingOptions" class="voting-options"><div class="vote-loading">Abstimmung wird geladen …</div></div>
-<div id="votingMessage" class="voting-message"></div>
-<div id="votingTotal" class="voting-total"></div>
+
+<span class="vote-live">
+LIVE
+</span>
+
 </div>
+
+
+<p
+class="vote-question"
+id="voteQuestion"
+>
+Wer war dein bester VfB-Spieler?
+</p>
+
+
+<div
+id="votingOptions"
+class="voting-options"
+>
+
+<div class="vote-loading">
+Abstimmung wird geladen …
+</div>
+
+</div>
+
+
+<div
+id="votingMessage"
+class="voting-message"
+></div>
+
+
+<div
+id="votingTotal"
+class="voting-total"
+></div>
+
+</div>
+
 
 <div class="fan">
-<h3>📸 Medien</h3>
-<p>Fotos, Videos und besondere Momente rund um den VfB.</p>
-</div>
+
+<h3>
+📸 Medien
+</h3>
+
+<p>
+Fotos, Videos und besondere Momente
+rund um den VfB.
+</p>
 
 </div>
+
+
+</div>
+
 </section>
+
 
 </main>
 
+
+<!-- =========================
+FOOTER
+========================= -->
+
 <footer>
+
 <div class="wrap">
-<b>CANNSTATT 1893 NEWS</b><br>
-Unabhängige VfB Stuttgart Fanpage. Kein offizielles Angebot des VfB Stuttgart.
-<div class="attribution">Daten werden über die angebundenen Fußball- und VfB-Quellen geladen.</div>
+
+<b>
+CANNSTATT 1893 NEWS
+</b>
+
+<br>
+
+Unabhängige VfB Stuttgart Fanpage.
+Kein offizielles Angebot des VfB Stuttgart.
+
+<div class="attribution">
+
+Daten werden über die angebundenen
+Fußball- und VfB-Quellen geladen.
+
 </div>
+
+</div>
+
 </footer>
 
+
 <script>
-const esc=v=>String(v??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#039;");
-const url=v=>{try{const u=new URL(String(v),location.origin);return ["http:","https:"].includes(u.protocol)?esc(u.href):"#"}catch{return "#"}};
-const date=v=>{if(!v)return "";const d=new Date(v);return Number.isNaN(d.getTime())?esc(v):d.toLocaleDateString("de-DE",{day:"2-digit",month:"2-digit",year:"numeric"})};
-const status=s=>({SCHEDULED:"Geplant",TIMED:"Geplant",IN_PLAY:"Live",PAUSED:"Pause",FINISHED:"Beendet",POSTPONED:"Verlegt",SUSPENDED:"Unterbrochen",CANCELLED:"Abgesagt"}[s]||s||"");
-const teamName=t=>t?.name||t?.team?.name||"";
-const teamLogo=t=>t?.crest||t?.logo||t?.team?.crest||"";
 
-function renderNews(news){
-const el=document.getElementById("newsList");
-if(!el)return;
-if(!news.length){el.innerHTML='<div class="loading">Keine News verfügbar.</div>';return}
-el.innerHTML=news.slice(0,12).map(n=>`<article class="news"><div class="tag">VfB Stuttgart</div><h3>${esc(n.title||n.name||"Ohne Titel")}</h3><p>${esc(n.summary||n.description||n.content||"")}</p><div class="news-meta">${date(n.date||n.pubDate||n.publishedAt||n.isoDate)}${n.link?` · <a href="${url(n.link)}" target="_blank" rel="noopener">ORIGINALMELDUNG →</a>`:""}</div></article>`).join("")
+
+/* =========================================================
+   HILFSFUNKTIONEN
+========================================================= */
+
+function escapeHTML(
+v
+){
+
+return String(
+v ?? ""
+)
+
+.replace(
+/&/g,
+"&amp;"
+)
+
+.replace(
+/</g,
+"&lt;"
+)
+
+.replace(
+/>/g,
+"&gt;"
+)
+
+.replace(
+/"/g,
+"&quot;"
+)
+
+.replace(
+/'/g,
+"&#039;"
+);
+
 }
 
-function renderFixtures(fixtures){
-const el=document.getElementById("fixturesList");
-if(!el)return;
-if(!fixtures.length){el.innerHTML='<div class="loading">Keine Spiele verfügbar.</div>';return}
-el.innerHTML=fixtures.slice(0,12).map(f=>{
-const h=teamName(f.homeTeam||f.home),a=teamName(f.awayTeam||f.away),hs=f.score?.fullTime?.home??f.homeScore,as=f.score?.fullTime?.away??f.awayScore;
-return `<div class="fixture"><div class="date">${date(f.utcDate||f.date||f.rawDate)}</div><div style="flex:1"><div class="team-line">${teamLogo(f.homeTeam||f.home)?`<img class="team-logo" src="${url(teamLogo(f.homeTeam||f.home))}" alt="" loading="lazy">`:""}<strong>${esc(h)}</strong></div><div class="team-line">${teamLogo(f.awayTeam||f.away)?`<img class="team-logo" src="${url(teamLogo(f.awayTeam||f.away))}" alt="" loading="lazy">`:""}<strong>${esc(a)}</strong></div><div class="competition">${esc(f.competition?.name||f.competition||"")}</div></div><div class="status">${hs!==undefined&&as!==undefined?esc(`${hs}:${as}`):esc(status(f.status))}</div></div>`
-}).join("")
+
+function safeURL(
+v
+){
+
+try{
+
+const u=
+new URL(
+String(v),
+location.origin
+);
+
+if(
+u.protocol==="http:" ||
+u.protocol==="https:"
+){
+
+return escapeHTML(
+u.href
+);
+
 }
 
-function renderNext(fixtures){
-const el=document.getElementById("nextGame"),info=document.getElementById("nextGameInfo"),st=document.getElementById("nextGameStatus");
-const f=fixtures.find(x=>["SCHEDULED","TIMED"].includes(x.status))||fixtures[0];
-if(!f){el.textContent="Keine Daten";info.textContent="";st.textContent="";return}
-el.textContent=`${teamName(f.homeTeam||f.home)} – ${teamName(f.awayTeam||f.away)}`;
-info.textContent=`${date(f.utcDate||f.date||f.rawDate)} · ${f.competition?.name||f.competition||""}`;
-st.innerHTML=f.status==="IN_PLAY"?'<span class="dot"></span> LIVE':esc(status(f.status))
+}catch(e){}
+
+return "#";
+
 }
 
-function renderTable(table){
-const el=document.getElementById("tableList");
-if(!el)return;
-const rows=table.map(t=>{
-const name=t.team?.name||t.name||"",logo=t.team?.crest||t.logo||"",gf=t.goalsFor??t.goals?.for,ga=t.goalsAgainst??t.goals?.against;
-return `<div class="table-row"><div class="table-cell pos">${esc(t.position??"")}</div><div class="table-team"><div class="team-line">${logo?`<img class="team-logo" src="${url(logo)}" alt="" loading="lazy">`:""}<strong>${esc(name)}</strong></div></div><div class="table-cell">${esc(t.played??t.playedGames??0)}</div><div class="table-cell">${esc(t.wins??0)}</div><div class="table-cell">${esc(t.draws??0)}</div><div class="table-cell">${esc(t.losses??0)}</div><div class="table-cell">${gf!==undefined&&ga!==undefined?esc(`${gf}:${ga}`):"–"}</div><div class="table-cell">${esc(t.goalDifference??t.goalDiff??0)}</div><div class="table-cell points">${esc(t.points??0)}</div></div>`
-}).join("");
-el.innerHTML=`<div class="table-header"><div>Pos</div><div>Team</div><div>Sp</div><div>S</div><div>U</div><div>N</div><div>TD</div><div>Diff</div><div>Pkt</div></div>${rows||'<div class="loading">Tabelle nicht verfügbar.</div>'}`
+
+function formatDate(
+v
+){
+
+if(!v){
+
+return "";
+
 }
 
-function renderTransfers(id,list,arrow,key){
-const el=document.getElementById(id);
-if(!el)return;
-el.innerHTML=list.length?list.map(t=>`<div class="fixture"><div style="flex:1"><strong>${esc(t.name||"")}</strong><div class="competition">${esc(arrow)} ${esc(t[key]||"")}</div>${t.type?`<div class="competition">${esc(t.type)}</div>`:""}</div></div>`).join(""):`<div class="loading">Keine Transfers verfügbar.</div>`
+const d=
+new Date(v);
+
+if(
+Number.isNaN(
+d.getTime()
+)
+){
+
+return escapeHTML(
+v
+);
+
 }
 
-function renderSquad(squad){
-const el=document.getElementById("squadPlayers");
-if(!el)return;
-const groups=["Torwart","Abwehr","Mittelfeld","Sturm"];
-if(!squad.length){el.innerHTML='<div class="loading">Kader momentan nicht verfügbar.</div>';return}
-el.innerHTML=groups.map(pos=>{
-const ps=squad.filter(p=>String(p.position||p.pos||"").toLowerCase()===pos.toLowerCase());
-if(!ps.length)return"";
-return `<div class="squad-group"><h3 class="squad-title">${pos.toUpperCase()}</h3><div class="squad-grid">${ps.map(p=>{
-const st=p.stats||p,img=p.image||p.photo||"";
-return `<article class="player-card"><div class="player-photo-wrap"><span class="player-number-badge">#${esc(p.number??"")}</span>${img?`<img class="player-photo" src="${url(img)}" alt="${esc(p.name||"")}" loading="lazy" onerror="this.style.display='none'">`:""}</div><div class="player-name">${esc(p.name||"")}</div><div class="player-position">${esc(p.position||pos)}</div><div class="player-stats"><div class="player-stat"><strong>${esc(st.appearances??0)}</strong><span>Einsätze</span></div><div class="player-stat"><strong>${esc(st.goals??0)}</strong><span>Tore</span></div><div class="player-stat"><strong>${esc(st.assists??0)}</strong><span>Assists</span></div><div class="player-stat"><strong>${esc(st.minutes??0)}</strong><span>Minuten</span></div></div></article>`
-}).join("")}</div></div>`
-}).join("")
+return d.toLocaleDateString(
+"de-DE",
+{
+day:"2-digit",
+month:"2-digit",
+year:"numeric"
 }
-   async function loadDashboard(){
+);
 
-  const updated =
-    document.getElementById("updated");
+}
 
-  try{
 
-    const response =
-      await fetch(
-        "/api/dashboard",
-        {
-          cache:"no-store"
-        }
-      );
+function formatStatus(
+s
+){
 
-    if(!response.ok){
-      throw new Error(
-        "HTTP " + response.status
-      );
-    }
+return (
 
-    const data =
-      await response.json();
+{
 
-    /*
-      Dashboard-Daten möglichst flexibel
-      aus dem Server-Response lesen.
-    */
+SCHEDULED:
+"Geplant",
 
-    const news =
-      Array.isArray(data.news)
-        ? data.news
-        : Array.isArray(data.articles)
-          ? data.articles
-          : [];
+TIMED:
+"Geplant",
 
-    const fixtures =
-      Array.isArray(data.fixtures)
-        ? data.fixtures
-        : Array.isArray(data.matches)
-          ? data.matches
-          : [];
+IN_PLAY:
+"Live",
 
-    const table =
-      Array.isArray(data.table)
-        ? data.table
-        : Array.isArray(data.standings)
-          ? data.standings
-          : [];
+PAUSED:
+"Pause",
 
-    const transfers =
-      data.transfers || {};
+FINISHED:
+"Beendet",
 
-    const incoming =
-      Array.isArray(transfers.in)
-        ? transfers.in
-        : Array.isArray(transfers.incoming)
-          ? transfers.incoming
-          : [];
+POSTPONED:
+"Verlegt",
 
-    const outgoing =
-      Array.isArray(transfers.out)
-        ? transfers.out
-        : Array.isArray(transfers.outgoing)
-          ? transfers.outgoing
-          : [];
+SUSPENDED:
+"Unterbrochen",
 
-    const squad =
-      Array.isArray(data.squad)
-        ? data.squad
-        : Array.isArray(data.players)
-          ? data.players
-          : [];
+CANCELLED:
+"Abgesagt"
 
-    renderNews(news);
+}[s]
 
-    renderFixtures(fixtures);
+||
 
-    renderNext(fixtures);
+s
 
-    renderTable(table);
+||
 
-    renderTransfers(
-      "transfersIn",
-      incoming,
-      "←",
-      "from"
-    );
+""
 
-    renderTransfers(
-      "transfersOut",
-      outgoing,
-      "→",
-      "to"
-    );
+);
 
-    renderSquad(squad);
+}
 
-    if(updated){
 
-      updated.textContent =
-        "Aktualisiert: " +
-        new Date().toLocaleTimeString(
-          "de-DE",
-          {
-            hour:"2-digit",
-            minute:"2-digit"
-          }
-        );
+function normalizeTeamName(
+name
+){
 
-    }
+return String(
+name || ""
+)
+.toLowerCase()
+.trim();
 
-  }catch(error){
+}
 
-    console.error(
-      "Dashboard konnte nicht geladen werden:",
-      error
-    );
 
-    if(updated){
+/* =========================================================
+   DASHBOARD
+========================================================= */
 
-      updated.textContent =
-        "Daten momentan nicht verfügbar";
+async function loadDashboard(){
 
-    }
+try{
 
-    /*
-      Nur die Bereiche auf Fehler setzen,
-      die tatsächlich noch geladen werden.
-    */
+const response=
+await fetch(
+"/api/dashboard",
+{
+cache:"no-store"
+}
+);
 
-    const ids = [
-      "newsList",
-      "fixturesList",
-      "tableList",
-      "transfersIn",
-      "transfersOut",
-      "squadPlayers"
-    ];
 
-    ids.forEach(id => {
+if(
+!response.ok
+){
 
-      const el =
-        document.getElementById(id);
+throw new Error(
+"HTTP "+
+response.status
+);
 
-      if(
-        el &&
-        (
-          el.classList.contains("loading") ||
-          el.textContent.includes(
-            "Dateien werden geladen"
-          )
-        )
-      ){
+}
 
-        el.innerHTML =
-          '<div class="error">' +
-          'Daten konnten momentan nicht geladen werden.' +
-          '</div>';
 
-      }
+const data=
+await response.json();
 
-    });
 
-  }
+/*
+   Die bestehende API-Struktur
+   wird unverändert verwendet.
+*/
+
+
+if(
+Array.isArray(
+data.news
+)
+){
+
+renderNews(
+data.news
+);
+
+}else{
+
+renderNews(
+[]
+);
+
+}
+
+
+if(
+Array.isArray(
+data.fixtures
+)
+){
+
+renderFixtures(
+data.fixtures
+);
+
+renderNextGame(
+data.fixtures
+);
+
+}else{
+
+renderFixtures(
+[]
+);
+
+renderNextGame(
+[]
+);
+
+}
+
+
+if(
+Array.isArray(
+data.table
+)
+){
+
+renderTable(
+data.table
+);
+
+}else{
+
+renderTable(
+[]
+);
+
+}
+
+
+if(
+data.transfers
+){
+
+renderTransfers(
+"transfersIn",
+data.transfers.in || [],
+"←",
+"from",
+"Keine Zugänge verfügbar."
+);
+
+renderTransfers(
+"transfersOut",
+data.transfers.out || [],
+"→",
+"to",
+"Keine Abgänge verfügbar."
+);
+
+}else{
+
+renderTransfers(
+"transfersIn",
+[],
+"←",
+"from",
+"Keine Zugänge verfügbar."
+);
+
+renderTransfers(
+"transfersOut",
+[],
+"→",
+"to",
+"Keine Abgänge verfügbar."
+);
+
+}
+
+
+if(
+Array.isArray(
+data.squad
+)
+){
+
+renderSquad(
+data.squad
+);
+
+}else{
+
+renderSquad(
+[]
+);
+
+}
+
+
+const updated=
+document.getElementById(
+"updated"
+);
+
+
+if(updated){
+
+updated.textContent=
+"Daten aktualisiert: "+
+new Date().toLocaleTimeString(
+"de-DE",
+{
+hour:"2-digit",
+minute:"2-digit"
+}
+);
+
+}
+
+
+}catch(error){
+
+console.error(
+"Dashboard-Fehler:",
+error
+);
+
+
+const updated=
+document.getElementById(
+"updated"
+);
+
+
+if(updated){
+
+updated.textContent=
+"Daten momentan nicht verfügbar";
+
+}
+
+}
+
+}
+
+
+/* =========================================================
+   NEWS
+========================================================= */
+
+function renderNews(
+news
+){
+
+const el=
+document.getElementById(
+"newsList"
+);
+
+if(!el){
+
+return;
+
+}
+
+
+if(
+!Array.isArray(news) ||
+!news.length
+){
+
+el.innerHTML=
+`
+
+<div class="loading">
+Keine News verfügbar.
+</div>
+
+`;
+
+return;
+
+}
+
+
+el.innerHTML=
+news
+.slice(
+0,
+10
+)
+.map(
+n=>{
+
+const title=
+n.title ||
+n.name ||
+"";
+
+const summary=
+n.summary ||
+n.description ||
+"";
+
+const published=
+n.date ||
+n.pubDate ||
+n.publishedAt ||
+n.isoDate ||
+"";
+
+const link=
+n.link ||
+n.url ||
+"";
+
+
+return `
+
+<article class="news">
+
+<div class="tag">
+VfB Stuttgart
+</div>
+
+
+<h3>
+${escapeHTML(title)}
+</h3>
+
+
+<p>
+${escapeHTML(summary)}
+</p>
+
+
+<div
+style="
+color:#999;
+font-size:10px;
+margin-top:7px;
+"
+>
+
+${escapeHTML(
+formatDate(
+published
+)
+)}
+
+${
+link
+?
+`
+·
+<a
+href="${safeURL(link)}"
+target="_blank"
+rel="noopener"
+style="color:#e30613;font-weight:900"
+>
+ORIGINALMELDUNG →
+</a>
+`
+:
+""
+}
+
+</div>
+
+</article>
+
+`;
+
+}
+)
+.join("");
+
+}
+
+
+/* =========================================================
+   SPIELE
+========================================================= */
+
+function renderFixtures(
+fixtures
+){
+
+const el=
+document.getElementById(
+"fixturesList"
+);
+
+if(!el){
+
+return;
+
+}
+
+
+if(
+!Array.isArray(fixtures) ||
+!fixtures.length
+){
+
+el.innerHTML=
+`
+
+<div class="loading">
+Keine Spiele verfügbar.
+</div>
+
+`;
+
+return;
+
+}
+
+
+el.innerHTML=
+fixtures
+.slice(
+0,
+12
+)
+.map(
+f=>{
+
+const home=
+f.homeTeam ||
+f.home ||
+{};
+
+const away=
+f.awayTeam ||
+f.away ||
+{};
+
+
+const homeName=
+home.name ||
+"";
+
+const awayName=
+away.name ||
+"";
+
+
+const homeLogo=
+home.crest ||
+home.logo ||
+"";
+
+const awayLogo=
+away.crest ||
+away.logo ||
+"";
+
+
+const homeScore=
+f.score?.fullTime?.home ??
+f.homeScore;
+
+const awayScore=
+f.score?.fullTime?.away ??
+f.awayScore;
+
+
+const competition=
+f.competition?.name ||
+f.competition ||
+"";
+
+
+return `
+
+<div class="fixture">
+
+<div class="date">
+
+${escapeHTML(
+formatDate(
+f.utcDate ||
+f.date
+)
+)}
+
+</div>
+
+
+<div
+style="
+flex:1;
+"
+>
+
+<div class="team-line">
+
+${
+homeLogo
+?
+`
+<img
+class="team-logo"
+src="${safeURL(homeLogo)}"
+alt=""
+loading="lazy"
+>
+`
+:
+""
+}
+
+<strong>
+${escapeHTML(homeName)}
+</strong>
+
+</div>
+
+
+<div class="team-line">
+
+${
+awayLogo
+?
+`
+<img
+class="team-logo"
+src="${safeURL(awayLogo)}"
+alt=""
+loading="lazy"
+>
+`
+:
+""
+}
+
+<strong>
+${escapeHTML(awayName)}
+</strong>
+
+</div>
+
+
+<div class="competition">
+
+${escapeHTML(
+competition
+)}
+
+</div>
+
+</div>
+
+
+<div class="status">
+
+${
+homeScore !== undefined &&
+awayScore !== undefined
+?
+escapeHTML(
+homeScore+
+":"+
+awayScore
+)
+:
+escapeHTML(
+formatStatus(
+f.status
+)
+)
+}
+
+</div>
+
+</div>
+
+`;
+
+}
+)
+.join("");
+
+}
+
+
+/* =========================================================
+   NÄCHSTES SPIEL
+========================================================= */
+
+function renderNextGame(
+fixtures
+){
+
+const game=
+Array.isArray(fixtures)
+?
+fixtures.find(
+f=>
+f.status==="SCHEDULED" ||
+f.status==="TIMED"
+)
+:
+null;
+
+
+const el=
+document.getElementById(
+"nextGame"
+);
+
+const info=
+document.getElementById(
+"nextGameInfo"
+);
+
+const live=
+document.getElementById(
+"nextGameStatus"
+);
+
+
+if(!el){
+
+return;
+
+}
+
+
+if(!game){
+
+el.textContent=
+"Kein kommendes Spiel";
+
+if(info){
+
+info.textContent=
+"Spielplan momentan nicht verfügbar.";
+
+}
+
+if(live){
+
+live.textContent="";
+
+}
+
+return;
+
+}
+
+
+const home=
+game.homeTeam ||
+game.home ||
+{};
+
+const away=
+game.awayTeam ||
+game.away ||
+{};
+
+
+el.textContent=
+(
+home.name ||
+"VfB Stuttgart"
+)
++
+" – "
++
+(
+away.name ||
+""
+);
+
+
+if(info){
+
+info.textContent=
+formatDate(
+game.utcDate ||
+game.date
+)
++
+" · "
++
+(
+game.competition?.name ||
+game.competition ||
+""
+);
+
+}
+
+
+if(live){
+
+live.textContent=
+formatStatus(
+game.status
+);
+
+}
+
+}
+
+
+/* =========================================================
+   TABELLE
+========================================================= */
+
+function renderTable(
+table
+){
+
+const el=
+document.getElementById(
+"tableList"
+);
+
+if(!el){
+
+return;
+
+}
+
+
+if(
+!Array.isArray(table) ||
+!table.length
+){
+
+el.innerHTML=
+`
+
+<div class="loading">
+Tabelle momentan nicht verfügbar.
+</div>
+
+`;
+
+return;
+
+}
+
+
+const header=
+`
+
+<div class="table-header">
+
+<div>
+Pos
+</div>
+
+<div>
+Team
+</div>
+
+<div>
+Sp
+</div>
+
+<div>
+S
+</div>
+
+<div>
+U
+</div>
+
+<div>
+N
+</div>
+
+<div>
+TD
+</div>
+
+<div>
+Diff
+</div>
+
+<div>
+Pkt
+</div>
+
+</div>
+`;
+
+
+const rows=
+table
+.map(
+t=>{
+
+const name=
+t.team?.name ||
+t.name ||
+"";
+
+
+const logo=
+t.team?.crest ||
+t.logo ||
+"";
+
+
+const goals=
+t.goalsFor ??
+t.goals?.for;
+
+const against=
+t.goalsAgainst ??
+t.goals?.against;
+
+
+const isVfB=
+normalizeTeamName(
+name
+).includes(
+"vfb stuttgart"
+);
+
+
+return `
+
+<div
+class="table-row ${isVfB?"vfb-row":""}"
+style="
+grid-template-columns:
+32px
+minmax(170px,1fr)
+38px
+38px
+38px
+38px
+62px
+52px
+52px;
+min-width:540px
+"
+>
+
+<div class="table-cell pos">
+
+${escapeHTML(
+t.position ?? ""
+)}
+
+</div>
+
+
+<div class="table-team">
+
+<div class="team-line">
+
+${
+logo
+?
+`
+<img
+class="team-logo"
+src="${safeURL(logo)}"
+alt=""
+loading="lazy"
+>
+`
+:
+""
+}
+
+<strong>
+
+${escapeHTML(name)}
+
+</strong>
+
+</div>
+
+</div>
+
+
+<div class="table-cell">
+
+${escapeHTML(
+t.played ??
+0
+)}
+
+</div>
+
+
+<div class="table-cell">
+
+${escapeHTML(
+t.wins ??
+0
+)}
+
+</div>
+
+
+<div class="table-cell">
+
+${escapeHTML(
+t.draws ??
+0
+)}
+
+</div>
+
+
+<div class="table-cell">
+
+${escapeHTML(
+t.losses ??
+0
+)}
+
+</div>
+
+
+<div class="table-cell">
+
+${
+goals!==undefined &&
+against!==undefined
+
+?
+
+escapeHTML(
+goals+
+":"+
+against
+)
+
+:
+
+"–"
+}
+
+</div>
+
+
+<div class="table-cell">
+
+${escapeHTML(
+t.goalDiff ??
+t.goalDifference ??
+0
+)}
+
+</div>
+
+
+<div class="table-cell points">
+
+${escapeHTML(
+t.points ??
+0
+)}
+
+</div>
+
+
+</div>
+
+`;
+
+}
+)
+.join("");
+
+
+el.innerHTML=
+header+
+rows;
+
+}
+
+
+/* =========================================================
+   TRANSFERS
+========================================================= */
+
+function renderTransfers(
+id,
+list,
+arrow,
+key,
+empty
+){
+
+const el=
+document.getElementById(
+id
+);
+
+if(!el){
+
+return;
+
+}
+
+
+list=
+Array.isArray(list)
+?
+list
+:
+[];
+
+
+el.innerHTML=
+list.length
+?
+
+list
+.map(
+t=>`
+
+<div class="fixture">
+
+<div
+style="
+flex:1
+"
+>
+
+<strong>
+
+${escapeHTML(
+t.name ||
+""
+)}
+
+</strong>
+
+
+<div class="competition">
+
+${escapeHTML(
+arrow
+)}
+
+${escapeHTML(
+t[key] ||
+""
+)}
+
+</div>
+
+
+${
+t.type
+?
+`
+
+<div class="competition">
+
+${escapeHTML(
+t.type
+)}
+
+</div>
+
+`
+:
+""
+}
+
+</div>
+
+</div>
+
+`
+)
+.join("")
+
+:
+
+`
+
+<div class="loading">
+
+${escapeHTML(
+empty
+)}
+
+</div>
+
+`;
+
+}
+
+
+/* =========================================================
+   KADER
+========================================================= */
+
+function renderSquad(
+squad
+){
+
+const el=
+document.getElementById(
+"squadPlayers"
+);
+
+if(!el){
+
+return;
+
+}
+
+
+if(
+!Array.isArray(squad) ||
+!squad.length
+){
+
+el.innerHTML=
+`
+
+<div class="loading">
+
+Kader momentan nicht verfügbar.
+
+</div>
+
+`;
+
+return;
+
+}
+
+
+const groups=[
+"Torwart",
+"Abwehr",
+"Mittelfeld",
+"Sturm"
+];
+
+
+el.innerHTML=
+groups
+.map(
+pos=>{
+
+const ps=
+squad.filter(
+p=>
+(
+p.position ||
+p.pos ||
+""
+)
+.toLowerCase()
+===
+pos.toLowerCase()
+);
+
+
+if(!ps.length){
+
+return "";
+
+}
+
+
+return `
+
+<div class="squad-group">
+
+<h3 class="squad-title">
+
+${pos.toUpperCase()}
+
+</h3>
+
+
+<div class="squad-grid">
+
+
+${
+ps.map(
+p=>{
+
+const st=
+p.stats ||
+p;
+
+
+const img=
+p.image ||
+p.photo ||
+"";
+
+
+return `
+
+<article
+class="player-card"
+>
+
+
+<div
+class="player-photo-wrap"
+>
+
+
+<span
+class="player-number-badge"
+>
+
+#
+
+${escapeHTML(
+p.number ??
+""
+)}
+
+</span>
+
+
+${
+img
+?
+
+`
+<img
+class="player-photo"
+src="${safeURL(img)}"
+alt="${escapeHTML(
+p.name ||
+""
+)}"
+loading="lazy"
+onerror="this.style.display='none'"
+>
+`
+
+:
+
+""
+}
+
+
+</div>
+
+
+<div class="player-name">
+
+${escapeHTML(
+p.name ||
+""
+)}
+
+</div>
+
+
+<div class="player-position">
+
+${escapeHTML(
+p.position ||
+pos
+)}
+
+</div>
+
+
+<div class="player-stats">
+
+
+<div class="player-stat">
+
+<strong>
+
+${escapeHTML(
+st.appearances ??
+0
+)}
+
+</strong>
+
+<span>
+Einsätze
+</span>
+
+</div>
+
+
+<div class="player-stat">
+
+<strong>
+
+${escapeHTML(
+st.goals ??
+0
+)}
+
+</strong>
+
+<span>
+Tore
+</span>
+
+</div>
+
+
+<div class="player-stat">
+
+<strong>
+
+${escapeHTML(
+st.assists ??
+0
+)}
+
+</strong>
+
+<span>
+Assists
+</span>
+
+</div>
+
+
+<div class="player-stat">
+
+<strong>
+
+${escapeHTML(
+st.minutes ??
+0
+)}
+
+</strong>
+
+<span>
+Minuten
+</span>
+
+</div>
+
+
+</div>
+
+
+</article>
+
+`;
+
+}
+)
+.join("")
+}
+
+
+</div>
+
+</div>
+
+`;
+
+}
+)
+.join("");
 
 }
 
@@ -331,411 +3154,523 @@ return `<article class="player-card"><div class="player-photo-wrap"><span class=
    FAN-VOTING
 ========================================================= */
 
-let votingState = null;
+let votingState=
+null;
 
 
 async function loadVoting(){
 
-  const optionsEl =
-    document.getElementById(
-      "votingOptions"
-    );
+const optionsEl=
+document.getElementById(
+"votingOptions"
+);
 
-  const questionEl =
-    document.getElementById(
-      "voteQuestion"
-    );
+const questionEl=
+document.getElementById(
+"voteQuestion"
+);
 
-  if(!optionsEl){
-    return;
-  }
 
-  try{
+if(!optionsEl){
 
-    const response =
-      await fetch(
-        "/api/voting",
-        {
-          cache:"no-store"
-        }
-      );
+return;
 
-    if(!response.ok){
+}
 
-      throw new Error(
-        "HTTP " +
-        response.status
-      );
 
-    }
+try{
 
-    const data =
-      await response.json();
+const response=
+await fetch(
+"/api/voting",
+{
+cache:"no-store"
+}
+);
 
-    if(!data.success){
 
-      throw new Error(
-        data.error ||
-        "Voting konnte nicht geladen werden."
-      );
+if(!response.ok){
 
-    }
+throw new Error(
+"HTTP "+
+response.status
+);
 
-    votingState =
-      data;
+}
 
-    if(questionEl){
 
-      questionEl.textContent =
-        data.voting?.question ||
-        "Wer war dein bester VfB-Spieler?";
+const data=
+await response.json();
 
-    }
 
-    renderVoting();
+if(!data.success){
 
-  }catch(error){
+throw new Error(
+data.error ||
+"Voting konnte nicht geladen werden."
+);
 
-    console.error(
-      "Voting konnte nicht geladen werden:",
-      error
-    );
+}
 
-    optionsEl.innerHTML =
-      '<div class="loading">' +
-      'Abstimmung momentan nicht verfügbar.' +
-      '</div>';
 
-  }
+votingState=
+data;
+
+
+if(questionEl){
+
+questionEl.textContent=
+data.voting?.question ||
+"Wer war dein bester VfB-Spieler?";
+
+}
+
+
+renderVoting();
+
+
+}catch(error){
+
+console.error(
+"Voting konnte nicht geladen werden:",
+error
+);
+
+
+optionsEl.innerHTML=
+`
+
+<div class="vote-loading">
+
+Abstimmung momentan nicht verfügbar.
+
+</div>
+
+`;
+
+}
 
 }
 
 
 function renderVoting(){
 
-  if(!votingState){
-    return;
-  }
+if(!votingState){
 
-  const optionsEl =
-    document.getElementById(
-      "votingOptions"
-    );
+return;
 
-  const totalEl =
-    document.getElementById(
-      "votingTotal"
-    );
-
-  const messageEl =
-    document.getElementById(
-      "votingMessage"
-    );
-
-  if(!optionsEl){
-    return;
-  }
-
-  const options =
-    Array.isArray(
-      votingState.voting?.options
-    )
-      ? votingState.voting.options
-      : [];
-
-  const votes =
-    votingState.votes || {};
-
-  const total =
-    Number(
-      votingState.totalVotes || 0
-    );
-
-  const hasVoted =
-    Boolean(
-      votingState.hasVoted
-    );
-
-  optionsEl.innerHTML =
-    options.map(option => {
-
-      const count =
-        Number(
-          votes[option.id] || 0
-        );
-
-      const percent =
-        total > 0
-          ? Math.round(
-              (count / total) * 100
-            )
-          : 0;
-
-      return `
-        <div class="vote-option">
-
-          <div class="vote-option-top">
-
-            <span class="vote-player">
-              ${esc(option.name)}
-            </span>
-
-            ${
-              hasVoted
-                ? `
-                  <span class="vote-percent">
-                    ${percent}%
-                  </span>
-                `
-                : ""
-            }
-
-          </div>
-
-          ${
-            hasVoted
-              ? `
-                <div class="vote-bar">
-                  <div
-                    class="vote-bar-fill"
-                    style="width:${percent}%"
-                  ></div>
-                </div>
-              `
-              : ""
-          }
-
-          ${
-            !hasVoted
-              ? `
-                <button
-                  class="vote-button"
-                  type="button"
-                  data-option="${esc(option.id)}"
-                >
-                  FÜR ${esc(option.name)}
-                  ABSTIMMEN
-                </button>
-              `
-              : ""
-          }
-
-        </div>
-      `;
-
-    }).join("");
+}
 
 
-  /*
-    Buttons nach dem Rendern verbinden.
-    Dadurch vermeiden wir Probleme mit
-    onclick-Attributen und Sonderzeichen.
-  */
+const optionsEl=
+document.getElementById(
+"votingOptions"
+);
 
-  document
-    .querySelectorAll(
-      "#votingOptions .vote-button"
-    )
-    .forEach(button => {
+const totalEl=
+document.getElementById(
+"votingTotal"
+);
 
-      button.addEventListener(
-        "click",
-        () => {
-
-          submitVoting(
-            button.dataset.option
-          );
-
-        }
-      );
-
-    });
+const messageEl=
+document.getElementById(
+"votingMessage"
+);
 
 
-  if(totalEl){
+if(!optionsEl){
 
-    totalEl.textContent =
-      total === 1
-        ? "1 Stimme insgesamt"
-        : `${total.toLocaleString(
-            "de-DE"
-          )} Stimmen insgesamt`;
+return;
 
-  }
+}
 
 
-  if(messageEl){
+const options=
+Array.isArray(
+votingState.voting?.options
+)
+?
+votingState.voting.options
+:
+[];
 
-    if(hasVoted){
 
-      messageEl.textContent =
-        "✓ Danke für deine Stimme!";
+const votes=
+votingState.votes ||
+{};
 
-      messageEl.className =
-        "voting-message success";
 
-    }else{
+const total=
+Number(
+votingState.totalVotes ||
+0
+);
 
-      messageEl.textContent = "";
 
-      messageEl.className =
-        "voting-message";
+const hasVoted=
+Boolean(
+votingState.hasVoted
+);
 
-    }
 
-  }
+optionsEl.innerHTML=
+options
+.map(
+option=>{
+
+const count=
+Number(
+votes[
+option.id
+] ||
+0
+);
+
+
+const percent=
+total>0
+?
+Math.round(
+(
+count /
+total
+) *
+100
+)
+:
+0;
+
+
+return `
+
+<div
+class="vote-option ${
+hasVoted
+?
+"voted-option"
+:
+""
+}"
+>
+
+
+<div
+class="vote-option-top"
+>
+
+<span
+class="vote-player"
+>
+
+${escapeHTML(
+option.name
+)}
+
+</span>
+
+
+${
+hasVoted
+?
+`
+
+<span
+class="vote-percent"
+>
+
+${percent}%
+
+</span>
+
+`
+:
+""
+}
+
+</div>
+
+
+${
+hasVoted
+?
+`
+
+<div class="vote-bar">
+
+<div
+class="vote-bar-fill"
+style="width:${percent}%"
+></div>
+
+</div>
+
+`
+:
+""
+}
+
+
+${
+!hasVoted
+?
+`
+
+<button
+class="vote-button"
+type="button"
+data-option="${escapeHTML(
+option.id
+)}"
+>
+
+FÜR
+
+${escapeHTML(
+option.name
+)}
+
+ABSTIMMEN
+
+</button>
+
+`
+:
+""
+}
+
+
+</div>
+
+`;
+
+}
+)
+.join("");
+
+
+document
+.querySelectorAll(
+"#votingOptions .vote-button"
+)
+.forEach(
+button=>{
+
+button.addEventListener(
+"click",
+()=>{
+
+submitVoting(
+button.dataset.option
+);
+
+}
+);
+
+}
+);
+
+
+if(totalEl){
+
+totalEl.textContent=
+total===1
+?
+"1 Stimme insgesamt"
+:
+`${total.toLocaleString(
+"de-DE"
+)} Stimmen insgesamt`;
+
+}
+
+
+if(messageEl){
+
+messageEl.textContent=
+hasVoted
+?
+"✓ Danke für deine Stimme!"
+:
+"";
+
+
+messageEl.className=
+hasVoted
+?
+"voting-message success"
+:
+"voting-message";
+
+}
 
 }
 
 
 async function submitVoting(
-  optionId
+optionId
 ){
 
-  if(!optionId){
-    return;
-  }
+if(!optionId){
 
-  const buttons =
-    document.querySelectorAll(
-      "#votingOptions .vote-button"
-    );
-
-  const messageEl =
-    document.getElementById(
-      "votingMessage"
-    );
-
-  buttons.forEach(button => {
-
-    button.disabled =
-      true;
-
-    button.textContent =
-      "WIRD GESPEICHERT …";
-
-  });
-
-
-  if(messageEl){
-
-    messageEl.textContent =
-      "Deine Stimme wird gespeichert …";
-
-    messageEl.className =
-      "voting-message";
-
-  }
-
-
-  try{
-
-    const response =
-      await fetch(
-        "/api/voting",
-        {
-          method:"POST",
-          headers:{
-            "Content-Type":
-              "application/json"
-          },
-          body:
-            JSON.stringify({
-              optionId:optionId
-            })
-        }
-      );
-
-    const data =
-      await response.json();
-
-
-    if(
-      response.status === 409
-    ){
-
-      votingState =
-        data;
-
-      renderVoting();
-
-      if(messageEl){
-
-        messageEl.textContent =
-          "Du hast bereits abgestimmt.";
-
-        messageEl.className =
-          "voting-message error";
-
-      }
-
-      return;
-
-    }
-
-
-    if(
-      !response.ok ||
-      !data.success
-    ){
-
-      throw new Error(
-        data.error ||
-        "Abstimmung fehlgeschlagen."
-      );
-
-    }
-
-
-    votingState =
-      data;
-
-    renderVoting();
-
-
-    if(messageEl){
-
-      messageEl.textContent =
-        "✓ Deine Stimme wurde gezählt!";
-
-      messageEl.className =
-        "voting-message success";
-
-    }
-
-  }catch(error){
-
-    console.error(
-      "Voting-Fehler:",
-      error
-    );
-
-
-    if(messageEl){
-
-      messageEl.textContent =
-        "Leider ist etwas schiefgelaufen. Bitte versuche es erneut.";
-
-      messageEl.className =
-        "voting-message error";
-
-    }
-
-
-    buttons.forEach(button => {
-
-      button.disabled =
-        false;
-
-      button.textContent =
-        "ABSTIMMEN";
-
-    });
-
-  }
+return;
 
 }
 
+
+const buttons=
+document.querySelectorAll(
+"#votingOptions .vote-button"
+);
+
+
+const messageEl=
+document.getElementById(
+"votingMessage"
+);
+
+
+buttons.forEach(
+button=>{
+
+button.disabled=
+true;
+
+button.textContent=
+"WIRD GESPEICHERT …";
+
+}
+);
+
+
+if(messageEl){
+
+messageEl.textContent=
+"Deine Stimme wird gespeichert …";
+
+messageEl.className=
+"voting-message";
+
+}
+
+
+try{
+
+const response=
+await fetch(
+"/api/voting",
+{
+
+method:"POST",
+
+headers:{
+"Content-Type":
+"application/json"
+},
+
+body:
+JSON.stringify({
+optionId
+})
+
+}
+);
+
+
+const data=
+await response.json();
+
+
+if(
+response.status===409
+){
+
+votingState=
+data;
+
+renderVoting();
+
+
+if(messageEl){
+
+messageEl.textContent=
+"Du hast bereits abgestimmt.";
+
+messageEl.className=
+"voting-message error";
+
+}
+
+
+return;
+
+}
+
+
+if(
+!response.ok ||
+!data.success
+){
+
+throw new Error(
+data.error ||
+"Abstimmung fehlgeschlagen."
+);
+
+}
+
+
+votingState=
+data;
+
+renderVoting();
+
+
+if(messageEl){
+
+messageEl.textContent=
+"✓ Deine Stimme wurde gezählt!";
+
+messageEl.className=
+"voting-message success";
+
+}
+
+
+}catch(error){
+
+console.error(
+"Voting-Fehler:",
+error
+);
+
+
+if(messageEl){
+
+messageEl.textContent=
+"Leider ist etwas schiefgelaufen. Bitte versuche es erneut.";
+
+messageEl.className=
+"voting-message error";
+
+}
+
+
+buttons.forEach(
+button=>{
+
+button.disabled=
+false;
+
+button.textContent=
+"ABSTIMMEN";
+
+}
+);
+
+}
+
+}
+<script>
 
 /* =========================================================
    BESUCHERSTATISTIK
@@ -743,88 +3678,94 @@ async function submitVoting(
 
 async function loadVisitorStats(){
 
-  try{
+try{
 
-    const response =
-      await fetch(
-        "/api/stats",
-        {
-          cache:"no-store"
-        }
-      );
-
-    if(!response.ok){
-
-      throw new Error(
-        "HTTP " +
-        response.status
-      );
-
-    }
-
-    const data =
-      await response.json();
+const response=
+await fetch(
+"/api/stats",
+{
+cache:"no-store"
+}
+);
 
 
-    const online =
-      document.getElementById(
-        "visitorOnline"
-      );
+if(!response.ok){
 
-    const today =
-      document.getElementById(
-        "visitorToday"
-      );
+throw new Error(
+"HTTP "+
+response.status
+);
 
-    const views =
-      document.getElementById(
-        "visitorViews"
-      );
+}
 
 
-    if(online){
-
-      online.textContent =
-        Number(
-          data.visitorsOnline || 0
-        ).toLocaleString(
-          "de-DE"
-        );
-
-    }
+const data=
+await response.json();
 
 
-    if(today){
+const online=
+document.getElementById(
+"visitorOnline"
+);
 
-      today.textContent =
-        Number(
-          data.visitorsToday || 0
-        ).toLocaleString(
-          "de-DE"
-        );
+const today=
+document.getElementById(
+"visitorToday"
+);
 
-    }
+const views=
+document.getElementById(
+"visitorViews"
+);
 
 
-    if(views){
+if(online){
 
-      views.textContent =
-        Number(
-          data.pageViewsToday || 0
-        ).toLocaleString(
-          "de-DE"
-        );
+online.textContent=
+Number(
+data.visitorsOnline ||
+0
+).toLocaleString(
+"de-DE"
+);
 
-    }
+}
 
-  }catch(error){
 
-    console.warn(
-      "Besucherstatistik nicht verfügbar:",
-      error
-    );
+if(today){
 
-  }
+today.textContent=
+Number(
+data.visitorsToday ||
+0
+).toLocaleString(
+"de-DE"
+);
+
+}
+
+
+if(views){
+
+views.textContent=
+Number(
+data.pageViewsToday ||
+0
+).toLocaleString(
+"de-DE"
+);
+
+}
+
+
+}catch(error){
+
+console.warn(
+"Besucherstatistik nicht verfügbar:",
+error
+);
+
+}
 
 }
 
@@ -840,36 +3781,43 @@ loadVoting();
 loadVisitorStats();
 
 
+/* =========================================================
+   AUTOMATISCHE AKTUALISIERUNG
+========================================================= */
+
+
 /*
-  Dashboard alle 5 Minuten aktualisieren
+   Dashboard alle 5 Minuten
 */
 
 setInterval(
-  loadDashboard,
-  300000
+loadDashboard,
+300000
 );
 
 
 /*
-  Voting regelmäßig aktualisieren,
-  damit neue Stimmen sichtbar werden.
+   Voting jede Minute aktualisieren
 */
 
 setInterval(
-  loadVoting,
-  60000
+loadVoting,
+60000
 );
 
 
 /*
-  Besucherstatistik alle 30 Sekunden
+   Besucherstatistik alle 30 Sekunden
 */
 
 setInterval(
-  loadVisitorStats,
-  30000
+loadVisitorStats,
+30000
 );
 
 </script>
+
+
 </body>
+
 </html>
