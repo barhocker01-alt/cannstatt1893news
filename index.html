@@ -35,6 +35,7 @@ gap:5px;
 font-weight:800;
 white-space:nowrap
 }
+
 .visitor-live-dot{
 width:7px;
 height:7px;
@@ -44,10 +45,12 @@ box-shadow:0 0 0 3px #e3061333;
 display:inline-block;
 animation:visitorPulse 1.8s infinite
 }
+
 .visitor-separator{
 opacity:.45;
 margin:0 3px
 }
+
 @keyframes visitorPulse{
 0%,100%{opacity:1;transform:scale(1)}
 50%{opacity:.45;transform:scale(.8)}
@@ -88,6 +91,7 @@ align-items:center;
 gap:10px;
 font-weight:1000
 }
+
 .crest{
 width:44px;
 height:44px;
@@ -98,6 +102,7 @@ display:grid;
 place-items:center;
 font-weight:1000
 }
+
 .brand small{
 display:block;
 color:#777;
@@ -112,6 +117,7 @@ gap:24px;
 font-size:13px;
 font-weight:800
 }
+
 .nav a:hover{color:#e30613}
 
 .hero{
@@ -144,6 +150,7 @@ font-size:clamp(45px,8vw,85px);
 line-height:.9;
 letter-spacing:-5px
 }
+
 .hero h1 span{color:#ff2630}
 
 .hero p{
@@ -199,10 +206,13 @@ padding:20px;
 box-shadow:0 5px 20px #00000008
 }
 
+/* NEWS */
+
 .news{
-padding:15px 0;
+padding:12px 0;
 border-bottom:1px solid #eee
 }
+
 .news:last-child{border-bottom:0}
 
 .tag{
@@ -213,15 +223,20 @@ text-transform:uppercase
 }
 
 .news h3{
-margin:5px 0;
-font-size:17px
+margin:4px 0;
+font-size:15px;
+line-height:1.3
 }
 
 .news p{
-margin:5px 0;
+margin:3px 0;
 color:#666;
-font-size:12px;
-line-height:1.5
+font-size:11px;
+line-height:1.4;
+display:-webkit-box;
+-webkit-line-clamp:2;
+-webkit-box-orient:vertical;
+overflow:hidden
 }
 
 .news-source{
@@ -238,8 +253,10 @@ font-weight:900
 .refresh-info{
 font-size:9px;
 color:#888;
-margin-top:8px
+margin-top:6px
 }
+
+/* NEXT GAME */
 
 .next{
 background:#111;
@@ -256,7 +273,7 @@ letter-spacing:1px
 }
 
 .next h3{
-font-size:24px;
+font-size:23px;
 margin:10px 0
 }
 
@@ -300,6 +317,8 @@ border-radius:8px;
 font-size:12px
 }
 
+/* SPIELE */
+
 .fixture{
 display:flex;
 align-items:center;
@@ -336,6 +355,8 @@ font-weight:1000;
 font-size:15px;
 margin-left:auto
 }
+
+/* LOGOS */
 
 .team-line{
 display:flex;
@@ -376,6 +397,8 @@ font-size:11px;
 font-weight:600
 }
 
+/* FAN AREA */
+
 .fan-grid{
 display:grid;
 grid-template-columns:repeat(3,1fr);
@@ -398,6 +421,8 @@ font-size:13px;
 line-height:1.5
 }
 
+/* KADER */
+
 .squad-section{margin-top:20px}
 
 .squad-group{margin-top:28px}
@@ -418,7 +443,7 @@ gap:14px
 background:#fff;
 border:1px solid #ddd;
 border-radius:14px;
-padding:17px;
+padding:12px;
 box-shadow:0 5px 20px #00000008;
 transition:.2s;
 overflow:hidden
@@ -427,27 +452,6 @@ overflow:hidden
 .player-card:hover{
 transform:translateY(-3px);
 box-shadow:0 8px 25px #00000012
-}
-
-.player-number{
-font-size:28px;
-font-weight:1000;
-color:#e30613;
-line-height:1
-}
-
-.player-name{
-font-size:15px;
-font-weight:900;
-margin-top:4px
-}
-
-.player-position{
-font-size:10px;
-color:#777;
-text-transform:uppercase;
-font-weight:800;
-margin-top:4px
 }
 
 .player-photo-wrap{
@@ -481,31 +485,18 @@ font-size:12px;
 font-weight:1000
 }
 
-.player-stats{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:6px;
-margin-top:12px;
-padding-top:10px;
-border-top:1px solid #eee
+.player-name{
+font-size:15px;
+font-weight:900;
+margin-top:4px
 }
 
-.player-stat{text-align:center}
-
-.player-stat strong{
-display:block;
-font-size:16px;
-font-weight:1000;
-color:#151515
-}
-
-.player-stat span{
-display:block;
-font-size:8px;
-color:#888;
+.player-position{
+font-size:10px;
+color:#777;
 text-transform:uppercase;
 font-weight:800;
-margin-top:2px
+margin-top:4px
 }
 
 .player-meta{
@@ -514,7 +505,34 @@ color:#999;
 margin-top:3px
 }
 
-.coach-card{max-width:350px}
+.player-stats{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:4px;
+margin-top:10px;
+padding-top:9px;
+border-top:1px solid #eee
+}
+
+.player-stat{text-align:center}
+
+.player-stat strong{
+display:block;
+font-size:14px;
+font-weight:1000;
+color:#151515
+}
+
+.player-stat span{
+display:block;
+font-size:7px;
+color:#888;
+text-transform:uppercase;
+font-weight:800;
+margin-top:2px
+}
+
+/* TABELLE */
 
 .table-scroll{
 width:100%;
@@ -533,11 +551,10 @@ minmax(170px,1fr)
 38px
 38px
 62px
-52px
 52px;
 gap:6px;
 align-items:center;
-min-width:570px
+min-width:540px
 }
 
 .table-header{
@@ -588,6 +605,41 @@ font-weight:1000;
 color:#e30613
 }
 
+/* TRANSFERS */
+
+.transfer-item{
+display:flex;
+align-items:center;
+gap:12px;
+padding:12px 0;
+border-bottom:1px solid #eee
+}
+
+.transfer-item:last-child{border-bottom:0}
+
+.transfer-icon{
+width:34px;
+height:34px;
+border-radius:50%;
+display:grid;
+place-items:center;
+font-weight:1000;
+background:#f5f5f5
+}
+
+.transfer-name{
+font-size:14px;
+font-weight:900
+}
+
+.transfer-detail{
+font-size:10px;
+color:#777;
+margin-top:3px
+}
+
+/* FOOTER */
+
 footer{
 background:#111;
 color:#999;
@@ -604,6 +656,8 @@ margin-top:12px;
 font-size:11px;
 color:#777
 }
+
+/* MATCHCENTER */
 
 .match-clickable{
 cursor:pointer;
@@ -693,21 +747,55 @@ font-size:15px
 }
 
 .match-team img{
-width:46px;
-height:46px;
+width:50px;
+height:50px;
 object-fit:contain;
 display:block;
 margin:0 auto 7px
 }
 
 .match-score-number{
-font-size:32px;
+font-size:34px;
 font-weight:1000
+}
+
+.match-subtitle{
+font-size:10px;
+color:#888;
+margin-top:4px
+}
+
+.match-stats{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:10px;
+margin-top:15px
+}
+
+.match-stat-box{
+background:#f7f7f7;
+border-radius:10px;
+padding:12px;
+text-align:center
+}
+
+.match-stat-box strong{
+display:block;
+font-size:17px;
+font-weight:1000
+}
+
+.match-stat-box span{
+font-size:8px;
+color:#777;
+text-transform:uppercase;
+font-weight:800
 }
 
 .match-events{
 border-top:1px solid #eee;
-padding-top:15px
+padding-top:15px;
+margin-top:18px
 }
 
 .match-event{
@@ -722,6 +810,30 @@ font-size:12px
 color:#888;
 font-size:12px;
 padding:15px 0
+}
+
+.lineup-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:15px;
+margin-top:18px
+}
+
+.lineup-box{
+background:#f7f7f7;
+padding:15px;
+border-radius:12px
+}
+
+.lineup-box h4{
+margin:0 0 10px;
+font-size:12px
+}
+
+.lineup-player{
+font-size:11px;
+padding:5px 0;
+border-bottom:1px solid #e5e5e5
 }
 
 @media(max-width:900px){
@@ -795,6 +907,14 @@ gap:4px
 }
 
 .table-cell{font-size:10px}
+
+.match-stats{
+grid-template-columns:repeat(2,1fr)
+}
+
+.lineup-grid{
+grid-template-columns:1fr
+}
 }
 
 @media(max-width:430px){
@@ -826,6 +946,7 @@ grid-template-columns:repeat(2,1fr)
 <body>
 
 <div class="top">
+
 <div>⚽ CANNSTATT 1893 NEWS</div>
 
 <div class="visitor-ticker">
@@ -837,15 +958,20 @@ grid-template-columns:repeat(2,1fr)
 </div>
 
 <div>UNABHÄNGIG · SCHWARZ-ROT</div>
+
 </div>
 
 <header class="bar">
+
 <a class="brand" href="#top">
+
 <div class="crest">VfB</div>
+
 <div>
 <div>CANNSTATT 1893</div>
 <small>VfB STUTTGART NEWS</small>
 </div>
+
 </a>
 
 <nav class="nav">
@@ -856,13 +982,18 @@ grid-template-columns:repeat(2,1fr)
 <a href="#kader">Kader</a>
 <a href="#fans">Fans</a>
 </nav>
+
 </header>
 
 <main id="top">
 
 <section class="hero">
+
 <div class="hero-inner">
-<div class="hero-kicker">VfB STUTTGART · CANNSTATT 1893</div>
+
+<div class="hero-kicker">
+VfB STUTTGART · CANNSTATT 1893
+</div>
 
 <h1>
 SCHWARZ<br>
@@ -875,45 +1006,65 @@ Spielplan, Tabelle, Transfers, Kader und allem,
 was rund um den VfB wichtig ist.
 </p>
 
-<a class="btn" href="#news">AKTUELLE NEWS →</a>
+<a class="btn" href="#news">
+AKTUELLE NEWS →
+</a>
+
 </div>
+
 </section>
 
 <section class="section" id="news">
+
 <div class="wrap">
 
 <h2>News</h2>
 <div class="line"></div>
 
 <div class="notice">
+
 <b>🔴 LIVE-UPDATE:</b>
-Die News werden automatisch aktualisiert.
-Zusätzlich werden aktuelle VfB-Meldungen von kicker eingebunden,
-wenn die Quelle erreichbar ist.
+Aktuelle VfB-News inklusive kicker werden automatisch
+geladen und alle 10 Minuten aktualisiert.
+
 <div class="refresh-info" id="refreshInfo">
 Automatische Aktualisierung alle 10 Minuten.
 </div>
+
 </div>
 
 <div class="grid">
 
 <div class="card">
+
 <div id="newsList">
 <div class="loading">News werden geladen …</div>
 </div>
+
 </div>
 
 <div class="next" id="nextGame">
-<div class="next-label">NÄCHSTES SPIEL</div>
+
+<div class="next-label">
+NÄCHSTES SPIEL
+</div>
+
 <h3>VfB Stuttgart</h3>
-<p>Daten werden geladen …</p>
+
+<p>
+Daten werden geladen …
+</p>
+
 </div>
 
 </div>
+
 </div>
+
 </section>
 
 <section class="section" id="spiele">
+
 <div class="wrap">
 
 <h2>Spiele</h2>
@@ -922,11 +1073,14 @@ Automatische Aktualisierung alle 10 Minuten.
 <div class="card">
 
 <div class="competition-title">
+
 <div class="icon">🇩🇪</div>
+
 <div>
 <h3>Bundesliga</h3>
 <span>Spielplan 2026/27</span>
 </div>
+
 </div>
 
 <div id="bundesligaFixtures">
@@ -934,11 +1088,14 @@ Automatische Aktualisierung alle 10 Minuten.
 </div>
 
 <div class="competition-title">
+
 <div class="icon">⭐</div>
+
 <div>
 <h3>Champions League</h3>
 <span>Ligaphase 2026/27</span>
 </div>
+
 </div>
 
 <div id="championsLeagueFixtures">
@@ -946,16 +1103,20 @@ Automatische Aktualisierung alle 10 Minuten.
 </div>
 
 </div>
+
 </div>
+
 </section>
 
 <section class="section" id="tabelle">
+
 <div class="wrap">
 
 <h2>Tabelle</h2>
 <div class="line"></div>
 
 <div class="card">
+
 <div class="table-scroll">
 
 <div class="table-header">
@@ -974,11 +1135,15 @@ Automatische Aktualisierung alle 10 Minuten.
 </div>
 
 </div>
+
 </div>
+
 </div>
+
 </section>
 
 <section class="section" id="transfers">
+
 <div class="wrap">
 
 <h2>Transfers</h2>
@@ -987,24 +1152,33 @@ Automatische Aktualisierung alle 10 Minuten.
 <div class="grid">
 
 <div class="card">
+
 <h3>🟢 Zugänge</h3>
+
 <div id="transferArrivals">
 <div class="loading">Transfers werden geladen …</div>
 </div>
+
 </div>
 
 <div class="card">
+
 <h3>🔴 Abgänge</h3>
+
 <div id="transferDepartures">
 <div class="loading">Transfers werden geladen …</div>
 </div>
+
 </div>
 
 </div>
+
 </div>
+
 </section>
 
 <section class="section" id="kader">
+
 <div class="wrap">
 
 <h2>Kader</h2>
@@ -1015,9 +1189,11 @@ Automatische Aktualisierung alle 10 Minuten.
 </div>
 
 </div>
+
 </section>
 
 <section class="section" id="fans">
+
 <div class="wrap">
 
 <h2>Fans</h2>
@@ -1050,13 +1226,17 @@ Eine Tradition, die Generationen verbindet.
 </div>
 
 </div>
+
 </div>
+
 </section>
 
 </main>
 
 <footer>
+
 <div class="wrap">
+
 <b>CANNSTATT 1893 NEWS</b><br>
 Unabhängige VfB Stuttgart Fanpage.
 
@@ -1064,54 +1244,63 @@ Unabhängige VfB Stuttgart Fanpage.
 Keine offizielle Seite des VfB Stuttgart.
 Vereinsnamen, Logos und Marken gehören ihren jeweiligen Rechteinhabern.
 </div>
+
 </div>
+
 </footer>
 
 <div class="match-modal" id="matchModal">
+
 <div class="match-modal-box">
 
 <div class="match-modal-head">
-<h3 id="matchModalTitle">Matchcenter</h3>
-<button class="match-close" id="matchClose">×</button>
+
+<h3 id="matchModalTitle">
+Matchcenter
+</h3>
+
+<button class="match-close" id="matchClose">
+×
+</button>
+
 </div>
 
-<div class="match-modal-body" id="matchModalBody">
-</div>
+<div class="match-modal-body" id="matchModalBody"></div>
 
 </div>
+
 </div>
 
 <script>
+
 (function(){
 
 "use strict";
-
-/* =========================
-   KONFIGURATION
-========================= */
 
 const REFRESH_MS = 10 * 60 * 1000;
 
 let lastRefresh = 0;
 let refreshing = false;
 
-const API_ENDPOINT = "/api/dashboard?t=" + Date.now();
-
 /* =========================
    HILFSFUNKTIONEN
 ========================= */
 
 function escapeHtml(value){
+
 return String(value ?? "")
 .replace(/&/g,"&amp;")
 .replace(/</g,"&lt;")
 .replace(/>/g,"&gt;")
 .replace(/"/g,"&quot;")
 .replace(/'/g,"&#039;");
+
 }
 
 function safeArray(value){
+
 return Array.isArray(value) ? value : [];
+
 }
 
 function formatDate(value){
@@ -1120,13 +1309,17 @@ if(!value) return "";
 
 const d = new Date(value);
 
-if(Number.isNaN(d.getTime())) return String(value);
+if(Number.isNaN(d.getTime()))
+return String(value);
 
-return d.toLocaleDateString("de-DE",{
+return d.toLocaleDateString(
+"de-DE",
+{
 day:"2-digit",
 month:"2-digit",
 year:"numeric"
-});
+}
+);
 
 }
 
@@ -1136,17 +1329,27 @@ if(!value) return "";
 
 const d = new Date(value);
 
-if(Number.isNaN(d.getTime())) return String(value);
+if(Number.isNaN(d.getTime()))
+return String(value);
 
-return d.toLocaleDateString("de-DE",{
+return d.toLocaleDateString(
+"de-DE",
+{
 day:"2-digit",
 month:"2-digit",
 year:"numeric"
-}) + " · " +
-d.toLocaleTimeString("de-DE",{
+}
+)
++
+" · "
++
+d.toLocaleTimeString(
+"de-DE",
+{
 hour:"2-digit",
 minute:"2-digit"
-});
+}
+);
 
 }
 
@@ -1163,7 +1366,7 @@ return String(name || "")
 }
 
 /* =========================
-   VEREINSLOGOS
+   LOGOS
 ========================= */
 
 const TEAM_LOGOS = {
@@ -1301,14 +1504,20 @@ const TEAM_LOGOS = {
 
 function logoForTeam(name){
 
-if(TEAM_LOGOS[name]) return TEAM_LOGOS[name];
+if(TEAM_LOGOS[name])
+return TEAM_LOGOS[name];
 
-const key = normalizeTeamName(name);
+const key =
+normalizeTeamName(name);
 
 for(const team in TEAM_LOGOS){
 
-if(normalizeTeamName(team) === key){
+if(
+normalizeTeamName(team) === key
+){
+
 return TEAM_LOGOS[team];
+
 }
 
 }
@@ -1317,180 +1526,265 @@ return "";
 
 }
 
-function teamLogo(name, className="team-logo"){
+function teamLogo(name,className="team-logo"){
 
-const src = logoForTeam(name);
+const src =
+logoForTeam(name);
 
 if(!src) return "";
 
-return `<img class="${className}" src="${src}" alt="${escapeHtml(name)}" loading="lazy" onerror="this.style.display='none'">`;
+return `
+<img
+class="${className}"
+src="${src}"
+alt="${escapeHtml(name)}"
+loading="lazy"
+onerror="this.style.display='none'"
+>
+`;
 
 }
 
 /* =========================
-   FALLBACK SPIELPLAN
+   FALLBACK BUNDESLIGA
 ========================= */
 
 const FALLBACK_BUNDESLIGA = [
 
 ["2026-08-28T20:30:00","Bayern München","VfB Stuttgart","5:1","Beendet"],
+
 ["2026-09-04T20:30:00","VfB Stuttgart","1. FC Köln","4:1","Beendet"],
+
 ["2026-09-12T15:30:00","TSG Hoffenheim","VfB Stuttgart","","15:30"],
+
 ["2026-09-19T18:30:00","VfB Stuttgart","Borussia Dortmund","","18:30"],
+
 ["2026-09-26T15:30:00","SC Freiburg","VfB Stuttgart","","15:30"],
+
 ["2026-10-03T15:30:00","VfB Stuttgart","FC Augsburg","","15:30"],
+
 ["2026-10-17T15:30:00","RB Leipzig","VfB Stuttgart","","15:30"],
+
 ["2026-10-24T15:30:00","VfB Stuttgart","Eintracht Frankfurt","","15:30"],
+
 ["2026-10-31T15:30:00","Werder Bremen","VfB Stuttgart","","15:30"],
+
 ["2026-11-07T15:30:00","VfB Stuttgart","Bayer Leverkusen","","15:30"],
+
 ["2026-11-21T15:30:00","1. FSV Mainz 05","VfB Stuttgart","","15:30"],
+
 ["2026-11-28T15:30:00","VfB Stuttgart","FC Schalke 04","","15:30"],
+
 ["2026-12-05T15:30:00","Borussia Mönchengladbach","VfB Stuttgart","","15:30"],
+
 ["2026-12-12T15:30:00","VfB Stuttgart","Hamburger SV","","15:30"],
+
 ["2026-12-19T15:30:00","1. FC Union Berlin","VfB Stuttgart","","15:30"],
+
 ["2027-01-09T15:30:00","VfB Stuttgart","SC Paderborn","","15:30"],
+
 ["2027-01-16T15:30:00","SV Elversberg","VfB Stuttgart","","15:30"],
+
 ["2027-01-23T15:30:00","VfB Stuttgart","RB Leipzig","","15:30"],
+
 ["2027-01-30T15:30:00","Eintracht Frankfurt","VfB Stuttgart","","15:30"],
+
 ["2027-02-06T15:30:00","VfB Stuttgart","SC Freiburg","","15:30"],
+
 ["2027-02-13T15:30:00","Borussia Dortmund","VfB Stuttgart","","15:30"],
+
 ["2027-02-20T15:30:00","VfB Stuttgart","TSG Hoffenheim","","15:30"],
+
 ["2027-02-27T15:30:00","FC Augsburg","VfB Stuttgart","","15:30"],
+
 ["2027-03-06T15:30:00","VfB Stuttgart","Bayern München","","15:30"],
+
 ["2027-03-13T15:30:00","1. FC Köln","VfB Stuttgart","","15:30"],
+
 ["2027-03-20T15:30:00","VfB Stuttgart","Werder Bremen","","15:30"],
+
 ["2027-04-03T15:30:00","Bayer Leverkusen","VfB Stuttgart","","15:30"],
+
 ["2027-04-10T15:30:00","VfB Stuttgart","1. FSV Mainz 05","","15:30"],
+
 ["2027-04-17T15:30:00","FC Schalke 04","VfB Stuttgart","","15:30"],
+
 ["2027-04-24T15:30:00","VfB Stuttgart","Borussia Mönchengladbach","","15:30"],
+
 ["2027-05-01T15:30:00","Hamburger SV","VfB Stuttgart","","15:30"],
+
 ["2027-05-08T15:30:00","VfB Stuttgart","1. FC Union Berlin","","15:30"],
+
 ["2027-05-15T15:30:00","SC Paderborn","VfB Stuttgart","","15:30"],
+
 ["2027-05-22T15:30:00","VfB Stuttgart","SV Elversberg","","15:30"]
 
 ];
 
+/* =========================
+   FALLBACK CHAMPIONS LEAGUE
+========================= */
+
 const FALLBACK_CL = [
 
 ["2026-09-09T18:45:00","VfB Stuttgart","Viking Stavanger","","18:45"],
+
 ["2026-10-14T21:00:00","Slovan Bratislava","VfB Stuttgart","","21:00"],
+
 ["2026-10-20T21:00:00","VfB Stuttgart","Atlético Madrid","","21:00"],
+
 ["2026-11-03T18:45:00","Galatasaray","VfB Stuttgart","","18:45"],
+
 ["2026-11-25T21:00:00","Inter Mailand","VfB Stuttgart","","21:00"],
+
 ["2026-12-09T21:00:00","VfB Stuttgart","LOSC Lille","","21:00"],
+
 ["2027-01-19T21:00:00","VfB Stuttgart","Club Brügge","","21:00"],
+
 ["2027-01-27T21:00:00","PSV Eindhoven","VfB Stuttgart","","21:00"]
 
 ];
 
 /* =========================
-   FALLBACK TABELLE
+   TABELLE
 ========================= */
 
 const FALLBACK_TABLE = [
 
 ["SC Freiburg",2,2,0,0,5,1,6],
+
 ["Borussia Dortmund",2,2,0,0,5,2,6],
+
 ["SV Elversberg",2,2,0,0,7,5,6],
+
 ["Bayern München",2,1,1,0,5,1,4],
+
 ["Bayer Leverkusen",2,1,0,1,6,3,3],
+
 ["FC Augsburg",1,1,0,0,3,0,3],
+
 ["RB Leipzig",2,1,0,1,4,3,3],
+
 ["VfB Stuttgart",2,1,0,1,5,6,3],
+
 ["Werder Bremen",2,1,0,1,4,5,3],
+
 ["1. FC Köln",2,1,0,1,4,6,3],
+
 ["Eintracht Frankfurt",1,0,1,0,3,3,1],
+
 ["1. FSV Mainz 05",1,0,1,0,0,0,1],
+
 ["SC Paderborn",2,0,1,1,0,1,1],
+
 ["FC Schalke 04",2,0,1,1,0,3,1],
+
 ["1. FC Union Berlin",2,0,1,1,3,7,1],
+
 ["TSG Hoffenheim",2,0,0,2,4,6,0],
+
 ["Hamburger SV",1,0,0,1,0,2,0],
+
 ["Borussia Mönchengladbach",2,0,0,2,3,7,0]
 
 ];
 
 /* =========================
-   FALLBACK TRANSFERS
+   TRANSFERS
 ========================= */
 
 const FALLBACK_TRANSFERS = {
 
 arrivals:[
+
 {
 name:"Grischa Prömel",
 from:"TSG Hoffenheim",
 type:"Transfer"
 },
+
 {
 name:"Dzenan Pejcinovic",
 from:"VfL Wolfsburg",
 type:"Transfer"
 },
+
 {
 name:"Marius Funk",
 from:"FC Ingolstadt",
 type:"Transfer"
 },
+
 {
 name:"Noah Darvich",
 from:"FC Barcelona",
 type:"Rückkehr"
 },
+
 {
 name:"Yannik Keitel",
 from:"SC Freiburg",
 type:"Rückkehr"
 }
+
 ],
 
 departures:[
+
 {
 name:"Noah Darvich",
 to:"SV Elversberg",
 type:"Leihe"
 },
+
 {
 name:"Yannik Keitel",
 to:"FC Augsburg",
 type:"Leihe"
 },
+
 {
 name:"Florian Hellstern",
 to:"SpVgg Greuther Fürth",
 type:"Leihe"
 },
+
 {
 name:"Alexander Nübel",
 to:"FC Bayern München",
 type:"Leihende"
 },
+
 {
 name:"Pascal Stenzel",
 to:"Abgang",
 type:"Abgang"
 },
+
 {
 name:"Jovan Milosevic",
 to:"Abgang",
 type:"Abgang"
 },
+
 {
 name:"Lazar Jovanovic",
 to:"Abgang",
 type:"Abgang"
 },
+
 {
 name:"Chema",
 to:"Abgang",
 type:"Abgang"
 }
+
 ]
 
 };
 
 /* =========================
-   FALLBACK KADER
+   KADER
 ========================= */
 
 const FALLBACK_SQUAD = [
@@ -1498,53 +1792,347 @@ const FALLBACK_SQUAD = [
 {
 group:"TOR",
 players:[
-["Fabian Bredlow","1","Torwart"],
-["Marius Funk","33","Torwart"],
-["Dennis Seimen","41","Torwart"],
-["Stefan Drljaca","30","Torwart"]
+
+{
+name:"Fabian Bredlow",
+number:"1",
+position:"Torwart",
+photo:"https://www.vfb.de/fileadmin/_processed_/c/1/csm_Fabian_Bredlow_2526_01_5e6b5c7b4a.jpg",
+appearances:2,
+minutes:180,
+goals:0,
+assists:0
+},
+
+{
+name:"Marius Funk",
+number:"33",
+position:"Torwart",
+photo:"https://www.vfb.de/fileadmin/_processed_/6/7/csm_Marius_Funk_2526_01_4f3bdbf2d6.jpg",
+appearances:0,
+minutes:0,
+goals:0,
+assists:0
+},
+
+{
+name:"Dennis Seimen",
+number:"41",
+position:"Torwart",
+photo:"https://www.vfb.de/fileadmin/_processed_/7/2/csm_Dennis_Seimen_2526_01_3a4a4f8d8c.jpg",
+appearances:0,
+minutes:0,
+goals:0,
+assists:0
+},
+
+{
+name:"Stefan Drljaca",
+number:"46",
+position:"Torwart",
+photo:"https://www.vfb.de/fileadmin/_processed_/d/5/csm_Stefan_Drljaca_2526_01_6e2e3c5f0e.jpg",
+appearances:0,
+minutes:0,
+goals:0,
+assists:0
+}
+
 ]
 },
 
 {
 group:"ABWEHR",
 players:[
-["Ameen Al-Dakhil","2","Innenverteidiger"],
-["Ramon Hendriks","3","Innenverteidiger"],
-["Josha Vagnoman","4","Rechtsverteidiger"],
-["Maximilian Mittelstädt","7","Linksverteidiger"],
-["Luca Jaquez","29","Innenverteidiger"],
-["Leonidas Stergiou","20","Innenverteidiger"],
-["Lorenz Assignon","25","Rechtsverteidiger"],
-["Dan-Axel Zagadou","23","Innenverteidiger"],
-["Jeff Chabot","24","Innenverteidiger"],
-["Finn Jeltsch","29","Innenverteidiger"]
+
+{
+name:"Ameen Al-Dakhil",
+number:"2",
+position:"Innenverteidiger",
+photo:"",
+appearances:2,
+minutes:180,
+goals:0,
+assists:0
+},
+
+{
+name:"Ramon Hendriks",
+number:"3",
+position:"Innenverteidiger",
+photo:"",
+appearances:2,
+minutes:180,
+goals:0,
+assists:0
+},
+
+{
+name:"Josha Vagnoman",
+number:"4",
+position:"Rechtsverteidiger",
+photo:"",
+appearances:2,
+minutes:170,
+goals:0,
+assists:0
+},
+
+{
+name:"Maximilian Mittelstädt",
+number:"7",
+position:"Linksverteidiger",
+photo:"",
+appearances:2,
+minutes:180,
+goals:0,
+assists:0
+},
+
+{
+name:"Luca Jaquez",
+number:"14",
+position:"Innenverteidiger",
+photo:"",
+appearances:1,
+minutes:90,
+goals:0,
+assists:0
+},
+
+{
+name:"Leonidas Stergiou",
+number:"20",
+position:"Innenverteidiger",
+photo:"",
+appearances:1,
+minutes:45,
+goals:0,
+assists:0
+},
+
+{
+name:"Lorenz Assignon",
+number:"22",
+position:"Rechtsverteidiger",
+photo:"",
+appearances:2,
+minutes:165,
+goals:0,
+assists:1
+},
+
+{
+name:"Dan-Axel Zagadou",
+number:"23",
+position:"Innenverteidiger",
+photo:"",
+appearances:0,
+minutes:0,
+goals:0,
+assists:0
+},
+
+{
+name:"Jeff Chabot",
+number:"24",
+position:"Innenverteidiger",
+photo:"",
+appearances:2,
+minutes:180,
+goals:0,
+assists:0
+},
+
+{
+name:"Finn Jeltsch",
+number:"29",
+position:"Innenverteidiger",
+photo:"",
+appearances:2,
+minutes:135,
+goals:0,
+assists:0
+}
+
 ]
 },
 
 {
 group:"MITTELFELD",
 players:[
-["Angelo Stiller","6","Mittelfeld"],
-["Chris Führich","27","Mittelfeld"],
-["Bilal El Khannouss","11","Offensives Mittelfeld"],
-["Atakan Karazor","16","Mittelfeld"],
-["Grischa Prömel","29","Mittelfeld"],
-["Nikolas Nartey","28","Mittelfeld"],
-["Ertugrul Yigit","36","Mittelfeld"],
-["Jarzinho Malanga","47","Mittelfeld"]
+
+{
+name:"Angelo Stiller",
+number:"6",
+position:"Mittelfeld",
+photo:"",
+appearances:2,
+minutes:180,
+goals:1,
+assists:1
+},
+
+{
+name:"Chris Führich",
+number:"10",
+position:"Mittelfeld",
+photo:"",
+appearances:2,
+minutes:150,
+goals:1,
+assists:1
+},
+
+{
+name:"Bilal El Khannouss",
+number:"11",
+position:"Offensives Mittelfeld",
+photo:"",
+appearances:2,
+minutes:155,
+goals:1,
+assists:1
+},
+
+{
+name:"Atakan Karazor",
+number:"16",
+position:"Mittelfeld",
+photo:"",
+appearances:2,
+minutes:180,
+goals:0,
+assists:0
+},
+
+{
+name:"Grischa Prömel",
+number:"21",
+position:"Mittelfeld",
+photo:"",
+appearances:2,
+minutes:80,
+goals:0,
+assists:0
+},
+
+{
+name:"Nikolas Nartey",
+number:"28",
+position:"Mittelfeld",
+photo:"",
+appearances:0,
+minutes:0,
+goals:0,
+assists:0
+},
+
+{
+name:"Ertugrul Yigit",
+number:"36",
+position:"Mittelfeld",
+photo:"",
+appearances:0,
+minutes:0,
+goals:0,
+assists:0
+},
+
+{
+name:"Jarzinho Malanga",
+number:"47",
+position:"Mittelfeld",
+photo:"",
+appearances:1,
+minutes:20,
+goals:0,
+assists:0
+}
+
 ]
 },
 
 {
 group:"STURM",
 players:[
-["Tiago Tomás","11","Stürmer"],
-["Ermedin Demirovic","9","Stürmer"],
-["Dzenan Pejcinovic","17","Stürmer"],
-["Jamie Leweling","18","Flügel"],
-["Deniz Undav","26","Stürmer"],
-["Justin Diehl","25","Stürmer"],
-["Leo Sauer","24","Flügel"]
+
+{
+name:"Tiago Tomás",
+number:"8",
+position:"Stürmer",
+photo:"",
+appearances:2,
+minutes:130,
+goals:1,
+assists:0
+},
+
+{
+name:"Ermedin Demirovic",
+number:"9",
+position:"Stürmer",
+photo:"",
+appearances:2,
+minutes:160,
+goals:2,
+assists:0
+},
+
+{
+name:"Dzenan Pejcinovic",
+number:"17",
+position:"Stürmer",
+photo:"",
+appearances:1,
+minutes:25,
+goals:0,
+assists:0
+},
+
+{
+name:"Jamie Leweling",
+number:"18",
+position:"Flügel",
+photo:"",
+appearances:2,
+minutes:145,
+goals:1,
+assists:1
+},
+
+{
+name:"Deniz Undav",
+number:"26",
+position:"Stürmer",
+photo:"",
+appearances:2,
+minutes:150,
+goals:1,
+assists:0
+},
+
+{
+name:"Justin Diehl",
+number:"25",
+position:"Flügel",
+photo:"",
+appearances:1,
+minutes:30,
+goals:0,
+assists:0
+},
+
+{
+name:"Leo Sauer",
+number:"44",
+position:"Flügel",
+photo:"",
+appearances:1,
+minutes:35,
+goals:0,
+assists:0
+}
+
 ]
 }
 
@@ -1557,22 +2145,22 @@ players:[
 const FALLBACK_NEWS = [
 
 {
-title:"VfB Stuttgart startet mit Sieg in die neue Saison",
-description:"Der VfB ist erfolgreich in die Bundesliga-Saison 2026/27 gestartet.",
+title:"VfB Stuttgart gewinnt 4:1 gegen Köln",
+description:"Starker Heimsieg: Der VfB holt drei Punkte und verbessert sich in der Tabelle.",
 source:"VfB",
 url:"#"
 },
 
 {
-title:"VfB empfängt Viking Stavanger in der Champions League",
-description:"Am 9. September wartet das erste Champions-League-Spiel der neuen Saison.",
+title:"VfB empfängt Viking Stavanger",
+description:"Am 9. September startet der VfB in die Champions-League-Ligaphase.",
 source:"VfB",
 url:"#"
 },
 
 {
-title:"kicker: Aktuelle Nachrichten rund um den VfB Stuttgart",
-description:"Aktuelle Meldungen, Personalien und Entwicklungen rund um den VfB.",
+title:"kicker: Aktuelle Nachrichten zum VfB",
+description:"Personalien, Spielberichte und aktuelle Entwicklungen rund um den VfB Stuttgart.",
 source:"KICKER",
 url:"https://www.kicker.de/vfb-stuttgart/team-news"
 }
@@ -1580,16 +2168,18 @@ url:"https://www.kicker.de/vfb-stuttgart/team-news"
 ];
 
 /* =========================
-   NEWS RENDERING
+   NEWS
 ========================= */
 
 function renderNews(news){
 
-const box = document.getElementById("newsList");
+const box =
+document.getElementById("newsList");
 
 if(!box) return;
 
-const items = safeArray(news);
+const items =
+safeArray(news);
 
 if(!items.length){
 
@@ -1604,47 +2194,82 @@ Die News-Quelle ist momentan nicht erreichbar.
 `;
 
 return;
+
 }
 
-box.innerHTML = items.slice(0,12).map(item => {
+box.innerHTML =
+items.slice(0,10).map(item => {
 
-const title = escapeHtml(item.title || "VfB Stuttgart");
-const description = escapeHtml(
+const title =
+escapeHtml(
+item.title ||
+"VfB Stuttgart"
+);
+
+const description =
+escapeHtml(
 item.description ||
 item.summary ||
 "Neue Meldung rund um den VfB Stuttgart."
 );
 
-const source = escapeHtml(
+const source =
+escapeHtml(
 item.source ||
 item.publisher ||
 "VfB"
 );
 
-const url = item.url || item.link || "#";
+const url =
+item.url ||
+item.link ||
+"#";
 
 return `
+
 <article class="news">
+
 <div class="tag">
 VfB Stuttgart
-<span class="news-source">${source}</span>
+<span class="news-source">
+${source}
+</span>
 </div>
 
 <h3>
-<a href="${escapeHtml(url)}"
+<a
+href="${escapeHtml(url)}"
 target="_blank"
-rel="noopener noreferrer">
+rel="noopener noreferrer"
+>
 ${title}
 </a>
 </h3>
 
-<p>${description}</p>
+<p>
+${description}
+</p>
 
-${item.published_at || item.pubDate || item.date
-? `<div class="refresh-info">${escapeHtml(formatDateTime(item.published_at || item.pubDate || item.date))}</div>`
-: ""}
+${
+item.published_at ||
+item.pubDate ||
+item.date
+?
+`<div class="refresh-info">
+${escapeHtml(
+formatDateTime(
+item.published_at ||
+item.pubDate ||
+item.date
+)
+)}
+</div>`
+:
+""
+}
 
 </article>
+
 `;
 
 }).join("");
@@ -1652,14 +2277,15 @@ ${item.published_at || item.pubDate || item.date
 }
 
 /* =========================
-   KICKER NEWS
+   KICKER
 ========================= */
 
 async function fetchKickerNews(){
 
 try{
 
-const response = await fetch(
+const response =
+await fetch(
 "/api/kicker-news?t=" + Date.now(),
 {
 cache:"no-store"
@@ -1668,10 +2294,14 @@ cache:"no-store"
 
 if(response.ok){
 
-const data = await response.json();
+const data =
+await response.json();
 
-const news = safeArray(
-data.news || data.items || data
+const news =
+safeArray(
+data.news ||
+data.items ||
+data
 );
 
 if(news.length){
@@ -1687,11 +2317,12 @@ source:"KICKER"
 
 }catch(error){
 
-console.warn("Kicker API nicht erreichbar",error);
+console.warn(
+"Kicker API nicht erreichbar",
+error
+);
 
 }
-
-/* Fallback über öffentliche CORS-Proxy-Anfrage */
 
 try{
 
@@ -1701,9 +2332,11 @@ const target =
 const proxy =
 "https://api.allorigins.win/raw?url=" +
 encodeURIComponent(target) +
-"&t=" + Date.now();
+"&t=" +
+Date.now();
 
-const response = await fetch(
+const response =
+await fetch(
 proxy,
 {
 cache:"no-store"
@@ -1712,15 +2345,24 @@ cache:"no-store"
 
 if(response.ok){
 
-const html = await response.text();
+const html =
+await response.text();
 
-const parser = new DOMParser();
-const doc = parser.parseFromString(html,"text/html");
+const parser =
+new DOMParser();
 
-const links = [...doc.querySelectorAll("a")];
+const doc =
+parser.parseFromString(
+html,
+"text/html"
+);
+
+const links =
+[
+...doc.querySelectorAll("a")
+];
 
 const result = [];
-
 const seen = new Set();
 
 for(const link of links){
@@ -1730,61 +2372,81 @@ const text =
 .replace(/\s+/g," ")
 .trim();
 
-const href = link.href || "";
+const href =
+link.href || "";
 
 if(
 text.length < 20 ||
 !href.includes("kicker.de")
 ){
+
 continue;
+
 }
 
 if(
-!/(vfb|stuttgart|undav|demirovic|stiller|führich|karazor|vagnoman|prömel)/i.test(text)
+!/(vfb|stuttgart|undav|demirovic|stiller|führich|karazor|vagnoman|prömel)/i
+.test(text)
 ){
+
 continue;
+
 }
 
-if(seen.has(text)) continue;
+if(seen.has(text))
+continue;
 
 seen.add(text);
 
 result.push({
+
 title:text,
-description:"Aktuelle Meldung von kicker zum VfB Stuttgart.",
+
+description:
+"Aktuelle Meldung von kicker zum VfB Stuttgart.",
+
 source:"KICKER",
+
 url:href
+
 });
 
-if(result.length >= 8) break;
+if(result.length >= 8)
+break;
 
 }
 
-if(result.length) return result;
+if(result.length)
+return result;
 
 }
 
 }catch(error){
 
-console.warn("Kicker HTML Abruf fehlgeschlagen",error);
+console.warn(
+"Kicker HTML Abruf fehlgeschlagen",
+error
+);
 
 }
-
-/* Google-News-RSS als weiterer Fallback */
 
 try{
 
 const rssTarget =
 "https://news.google.com/rss/search?q=" +
-encodeURIComponent("site:kicker.de/vfb-stuttgart VfB Stuttgart") +
+encodeURIComponent(
+"site:kicker.de/vfb-stuttgart VfB Stuttgart"
+) +
 "&hl=de&gl=DE&ceid=DE:de";
 
 const proxy =
 "https://api.allorigins.win/raw?url=" +
 encodeURIComponent(rssTarget) +
-"&t=" + Date.now();
+"&t=" +
+Date.now();
 
-const response = await fetch(
+const response =
+await fetch(
 proxy,
 {
 cache:"no-store"
@@ -1793,47 +2455,68 @@ cache:"no-store"
 
 if(response.ok){
 
-const xmlText = await response.text();
+const xmlText =
+await response.text();
 
 const xml =
-new DOMParser().parseFromString(
+new DOMParser()
+.parseFromString(
 xmlText,
 "application/xml"
 );
 
-const items = [...xml.querySelectorAll("item")];
+const items =
+[
+...xml.querySelectorAll("item")
+];
 
 const result = [];
 
 for(const item of items.slice(0,10)){
 
 const title =
-item.querySelector("title")?.textContent?.trim() || "";
+item.querySelector("title")
+?.textContent
+?.trim() ||
+"";
 
 const link =
-item.querySelector("link")?.textContent?.trim() || "";
+item.querySelector("link")
+?.textContent
+?.trim() ||
+"";
 
 const description =
-item.querySelector("description")?.textContent?.trim() || "";
+item.querySelector("description")
+?.textContent
+?.trim() ||
+"";
 
-if(!title) continue;
+if(!title)
+continue;
 
 result.push({
+
 title,
 description,
 source:"KICKER",
 url:link
+
 });
 
 }
 
-if(result.length) return result;
+if(result.length)
+return result;
 
 }
 
 }catch(error){
 
-console.warn("Kicker RSS Abruf fehlgeschlagen",error);
+console.warn(
+"Kicker RSS Abruf fehlgeschlagen",
+error
+);
 
 }
 
@@ -1841,17 +2524,14 @@ return [];
 
 }
 
-/* =========================
-   NEWS GESAMT
-========================= */
-
 async function loadNews(apiData){
 
 let news = [];
 
 if(apiData){
 
-news = safeArray(
+news =
+safeArray(
 apiData.news ||
 apiData.data?.news
 );
@@ -1860,20 +2540,24 @@ apiData.data?.news
 
 if(!news.length){
 
-news = FALLBACK_NEWS.slice();
+news =
+FALLBACK_NEWS.slice();
 
 }
 
 try{
 
-const kickerNews = await fetchKickerNews();
+const kickerNews =
+await fetchKickerNews();
 
 if(kickerNews.length){
 
 const existingTitles =
 new Set(
 news.map(x =>
-String(x.title || "").toLowerCase()
+String(
+x.title || ""
+).toLowerCase()
 )
 );
 
@@ -1881,7 +2565,9 @@ for(const item of kickerNews){
 
 if(
 !existingTitles.has(
-String(item.title || "").toLowerCase()
+String(
+item.title || ""
+).toLowerCase()
 )
 ){
 
@@ -1895,7 +2581,10 @@ news.push(item);
 
 }catch(error){
 
-console.warn("Kicker konnte nicht geladen werden",error);
+console.warn(
+"Kicker konnte nicht geladen werden",
+error
+);
 
 }
 
@@ -1904,7 +2593,7 @@ renderNews(news);
 }
 
 /* =========================
-   SPIELE RENDERING
+   FIXTURES
 ========================= */
 
 function normalizeFixture(item){
@@ -1912,108 +2601,167 @@ function normalizeFixture(item){
 if(Array.isArray(item)){
 
 return {
+
 date:item[0],
 home:item[1],
 away:item[2],
 score:item[3] || "",
 status:item[4] || ""
+
 };
 
 }
 
 return {
-date:item.date || item.kickoff || item.start || "",
-home:item.home || item.homeTeam || item.team1 || "",
-away:item.away || item.awayTeam || item.team2 || "",
-score:item.score || "",
-status:item.status || item.time || ""
+
+date:
+item.date ||
+item.kickoff ||
+item.start ||
+"",
+
+home:
+item.home ||
+item.homeTeam ||
+item.team1 ||
+"",
+
+away:
+item.away ||
+item.awayTeam ||
+item.team2 ||
+"",
+
+score:
+item.score ||
+"",
+
+status:
+item.status ||
+item.time ||
+""
+
 };
 
 }
 
 function fixtureDate(fixture){
 
-const value = fixture.date;
+const value =
+fixture.date;
 
-if(!value) return null;
+if(!value)
+return null;
 
-const d = new Date(value);
+const d =
+new Date(value);
 
-if(Number.isNaN(d.getTime())) return null;
+if(Number.isNaN(d.getTime()))
+return null;
 
 return d;
 
 }
 
-function renderFixtures(elementId, fixtures, competition){
+function renderFixtures(
+elementId,
+fixtures,
+competition
+){
 
-const box = document.getElementById(elementId);
+const box =
+document.getElementById(elementId);
 
-if(!box) return;
+if(!box)
+return;
 
 const normalized =
-safeArray(fixtures).map(normalizeFixture);
+safeArray(fixtures)
+.map(normalizeFixture);
 
 if(!normalized.length){
 
 box.innerHTML =
-`<div class="loading">Keine Spiele verfügbar.</div>`;
+`<div class="loading">
+Keine Spiele verfügbar.
+</div>`;
 
 return;
 
 }
 
-const now = new Date();
+const now =
+new Date();
 
 box.innerHTML =
-normalized.map((fixture,index) => {
+normalized.map(
+(fixture,index) => {
 
-const d = fixtureDate(fixture);
+const d =
+fixtureDate(fixture);
 
 let dateText = "";
 
 if(d){
 
 dateText =
-d.toLocaleDateString("de-DE",{
+d.toLocaleDateString(
+"de-DE",
+{
 weekday:"short",
 day:"2-digit",
 month:"2-digit",
 year:"numeric"
-});
+}
+);
 
 }else{
 
-dateText = escapeHtml(fixture.date);
+dateText =
+escapeHtml(
+fixture.date
+);
 
 }
 
 let status =
 fixture.status || "";
 
-let score =
+const score =
 fixture.score || "";
 
-if(d && d < now && !score){
+if(
+d &&
+d < now &&
+!score
+){
 
-status = status || "Beendet";
+status =
+status ||
+"Beendet";
 
 }
 
-const isFinished =
-!!score ||
-/beendet|finished|final|won|lost|draw/i.test(status);
-
 const matchId =
-competition.toLowerCase().replace(/\s+/g,"-") +
-"-" + index;
+competition
+.toLowerCase()
+.replace(/\s+/g,"-") +
+"-" +
+index;
 
 const scoreHtml =
 score
-? `<span class="fixture-score">${escapeHtml(score)}</span>`
-: `<span class="status">${escapeHtml(status)}</span>`;
+?
+`<span class="fixture-score">
+${escapeHtml(score)}
+</span>`
+:
+`<span class="status">
+${escapeHtml(status)}
+</span>`;
 
 return `
+
 <div
 class="fixture match-clickable"
 data-match-id="${escapeHtml(matchId)}"
@@ -2024,18 +2772,27 @@ data-score="${escapeHtml(score)}"
 data-competition="${escapeHtml(competition)}"
 >
 
-<div class="date">${dateText}</div>
+<div class="date">
+${dateText}
+</div>
 
 <div style="flex:1">
 
 <div class="team-line">
 ${teamLogo(fixture.home)}
-<strong>${escapeHtml(fixture.home)}</strong>
+<strong>
+${escapeHtml(fixture.home)}
+</strong>
 </div>
 
-<div class="team-line" style="margin-top:5px">
+<div
+class="team-line"
+style="margin-top:5px"
+>
 ${teamLogo(fixture.away)}
-<strong>${escapeHtml(fixture.away)}</strong>
+<strong>
+${escapeHtml(fixture.away)}
+</strong>
 </div>
 
 <div class="competition">
@@ -2051,52 +2808,67 @@ Matchcenter öffnen
 ${scoreHtml}
 
 </div>
+
 `;
 
 }).join("");
 
 }
 
-/* =========================
-   NÄCHSTES SPIEL
-========================= */
-
 function renderNextGame(fixtures){
 
-const box = document.getElementById("nextGame");
+const box =
+document.getElementById("nextGame");
 
-if(!box) return;
+if(!box)
+return;
 
 const list =
 safeArray(fixtures)
 .map(normalizeFixture)
 .filter(f => {
 
-const d = fixtureDate(f);
+const d =
+fixtureDate(f);
 
-return d && d >= new Date();
+return d &&
+d >= new Date();
 
 })
-.sort((a,b) =>
-fixtureDate(a) - fixtureDate(b)
+.sort(
+(a,b) =>
+fixtureDate(a) -
+fixtureDate(b)
 );
 
 if(!list.length){
 
 box.innerHTML = `
-<div class="next-label">NÄCHSTES SPIEL</div>
+
+<div class="next-label">
+NÄCHSTES SPIEL
+</div>
+
 <h3>VfB Stuttgart</h3>
-<p>Kein kommendes Spiel gefunden.</p>
+
+<p>
+Kein kommendes Spiel gefunden.
+</p>
+
 `;
 
 return;
 
 }
 
-const f = list[0];
-const d = fixtureDate(f);
+const f =
+list[0];
+
+const d =
+fixtureDate(f);
 
 box.innerHTML = `
+
 <div class="next-label">
 NÄCHSTES SPIEL
 </div>
@@ -2113,17 +2885,37 @@ ${escapeHtml(f.away)}
 ${formatDateTime(d)}
 </p>
 
-<div style="display:flex;gap:14px;align-items:center;margin-top:15px">
-${teamLogo(f.home,"team-logo")}
-<span style="font-weight:900">VS</span>
-${teamLogo(f.away,"team-logo")}
+<div
+style="
+display:flex;
+gap:14px;
+align-items:center;
+margin-top:15px
+"
+>
+
+${teamLogo(
+f.home,
+"team-logo"
+)}
+
+<span style="font-weight:900">
+VS
+</span>
+
+${teamLogo(
+f.away,
+"team-logo"
+)}
+
 </div>
+
 `;
 
 }
 
 /* =========================
-   TABELLE
+   TABELLE RENDER
 ========================= */
 
 function normalizeTableRow(row){
@@ -2131,6 +2923,7 @@ function normalizeTableRow(row){
 if(Array.isArray(row)){
 
 return {
+
 team:row[0],
 played:row[1],
 wins:row[2],
@@ -2139,59 +2932,104 @@ losses:row[4],
 gf:row[5],
 ga:row[6],
 points:row[7]
+
 };
 
 }
 
 return {
-team:row.team || row.name || "",
-played:row.played ?? row.sp ?? 0,
-wins:row.wins ?? row.s ?? 0,
-draws:row.draws ?? row.u ?? 0,
-losses:row.losses ?? row.n ?? 0,
-gf:row.gf ?? row.goalsFor ?? 0,
-ga:row.ga ?? row.goalsAgainst ?? 0,
-points:row.points ?? row.pk ?? 0
+
+team:
+row.team ||
+row.name ||
+"",
+
+played:
+row.played ??
+row.sp ??
+0,
+
+wins:
+row.wins ??
+row.s ??
+0,
+
+draws:
+row.draws ??
+row.u ??
+0,
+
+losses:
+row.losses ??
+row.n ??
+0,
+
+gf:
+row.gf ??
+row.goalsFor ??
+0,
+
+ga:
+row.ga ??
+row.goalsAgainst ??
+0,
+
+points:
+row.points ??
+row.pk ??
+0
+
 };
 
 }
 
 function renderTable(table){
 
-const box = document.getElementById("table");
+const box =
+document.getElementById("table");
 
-if(!box) return;
+if(!box)
+return;
 
 const rows =
-safeArray(table).map(normalizeTableRow);
+safeArray(table)
+.map(normalizeTableRow);
 
 if(!rows.length){
 
 box.innerHTML =
-`<div class="loading">Keine Tabellendaten verfügbar.</div>`;
+`<div class="loading">
+Keine Tabellendaten verfügbar.
+</div>`;
 
 return;
 
 }
 
 box.innerHTML =
-rows.map((row,index) => {
+rows.map(
+(row,index) => {
 
 const diff =
 Number(row.gf || 0) -
 Number(row.ga || 0);
 
 const diffText =
-diff > 0 ? "+" + diff : String(diff);
+diff > 0
+? "+" + diff
+: String(diff);
 
 const isVfb =
 normalizeTeamName(row.team) ===
 normalizeTeamName("VfB Stuttgart");
 
 return `
+
 <div
 class="table-row"
-${isVfb ? 'style="font-weight:900;background:#fff7f7"' : ""}
+${isVfb
+? 'style="font-weight:900;background:#fff7f7"'
+: ""}
 >
 
 <div class="table-cell pos">
@@ -2199,25 +3037,48 @@ ${index + 1}
 </div>
 
 <div class="table-cell table-team">
+
 <div class="table-team-inner">
 
-${teamLogo(row.team,"table-team-logo")}
+${teamLogo(
+row.team,
+"table-team-logo"
+)}
 
 <strong>
 ${escapeHtml(row.team)}
 </strong>
 
 </div>
-</div>
-
-<div class="table-cell">${row.played}</div>
-<div class="table-cell">${row.wins}</div>
-<div class="table-cell">${row.draws}</div>
-<div class="table-cell">${row.losses}</div>
-<div class="table-cell">${diffText}</div>
-<div class="table-cell points">${row.points}</div>
 
 </div>
+
+<div class="table-cell">
+${row.played}
+</div>
+
+<div class="table-cell">
+${row.wins}
+</div>
+
+<div class="table-cell">
+${row.draws}
+</div>
+
+<div class="table-cell">
+${row.losses}
+</div>
+
+<div class="table-cell">
+${diffText}
+</div>
+
+<div class="table-cell points">
+${row.points}
+</div>
+
+</div>
+
 `;
 
 }).join("");
@@ -2225,16 +3086,20 @@ ${escapeHtml(row.team)}
 }
 
 /* =========================
-   TRANSFERS
+   TRANSFERS RENDER
 ========================= */
 
 function renderTransfers(data){
 
 const arrivalsBox =
-document.getElementById("transferArrivals");
+document.getElementById(
+"transferArrivals"
+);
 
 const departuresBox =
-document.getElementById("transferDepartures");
+document.getElementById(
+"transferDepartures"
+);
 
 if(arrivalsBox){
 
@@ -2243,17 +3108,58 @@ safeArray(data?.arrivals);
 
 arrivalsBox.innerHTML =
 arrivals.length
-? arrivals.map(item => `
-<div class="news">
-<div class="tag">ZUGANG</div>
-<h3>${escapeHtml(item.name || item.player || "")}</h3>
-<p>
-${item.from ? "von " + escapeHtml(item.from) : ""}
-${item.type ? " · " + escapeHtml(item.type) : ""}
-</p>
+
+?
+
+arrivals.map(item => `
+
+<div class="transfer-item">
+
+<div class="transfer-icon">
+🟢
 </div>
+
+<div>
+
+<div class="transfer-name">
+${escapeHtml(
+item.name ||
+item.player ||
+""
+)}
+</div>
+
+<div class="transfer-detail">
+${
+item.from
+?
+"von " +
+escapeHtml(item.from)
+:
+""
+}
+
+${
+item.type
+?
+" · " +
+escapeHtml(item.type)
+:
+""
+}
+</div>
+
+</div>
+
+</div>
+
 `).join("")
-: `<div class="loading">Keine Zugänge verfügbar.</div>`;
+
+:
+
+`<div class="loading">
+Keine Zugänge verfügbar.
+</div>`;
 
 }
 
@@ -2264,43 +3170,99 @@ safeArray(data?.departures);
 
 departuresBox.innerHTML =
 departures.length
-? departures.map(item => `
-<div class="news">
-<div class="tag">ABGANG</div>
-<h3>${escapeHtml(item.name || item.player || "")}</h3>
-<p>
-${item.to ? "zu " + escapeHtml(item.to) : ""}
-${item.type ? " · " + escapeHtml(item.type) : ""}
-</p>
+
+?
+
+departures.map(item => `
+
+<div class="transfer-item">
+
+<div class="transfer-icon">
+🔴
 </div>
+
+<div>
+
+<div class="transfer-name">
+${escapeHtml(
+item.name ||
+item.player ||
+""
+)}
+</div>
+
+<div class="transfer-detail">
+${
+item.to
+?
+"zu " +
+escapeHtml(item.to)
+:
+""
+}
+
+${
+item.type
+?
+" · " +
+escapeHtml(item.type)
+:
+""
+}
+</div>
+
+</div>
+
+</div>
+
 `).join("")
-: `<div class="loading">Keine Abgänge verfügbar.</div>`;
+
+:
+
+`<div class="loading">
+Keine Abgänge verfügbar.
+</div>`;
 
 }
 
 }
 
 /* =========================
-   KADER
+   SPIELER FOTO FALLBACK
 ========================= */
 
-function playerPhotoUrl(name){
+function fallbackPlayerPhoto(name){
 
-const encoded =
-encodeURIComponent(name);
+const slug =
+String(name || "")
+toLowerCase()
+.replace(/ä/g,"ae")
+.replace(/ö/g,"oe")
+.replace(/ü/g,"ue")
+.replace(/ß/g,"ss")
+.replace(/[^a-z0-9]+/g,"-")
+.replace(/^-|-$/g,"");
 
 return `
-https://img.a.transfermarkt.technology/portrait/medium/${encoded}.jpg
+https://www.vfb.de/fileadmin/_processed_/
+spieler/${slug}.jpg
 `;
 
 }
 
+/* =========================
+   KADER RENDER
+========================= */
+
 function renderSquad(data){
 
 const box =
-document.getElementById("squadPlayers");
+document.getElementById(
+"squadPlayers"
+);
 
-if(!box) return;
+if(!box)
+return;
 
 let groups = [];
 
@@ -2331,39 +3293,72 @@ players:data
 if(!groups.length){
 
 box.innerHTML =
-`<div class="loading">Kein Kader verfügbar.</div>`;
+`<div class="loading">
+Kein Kader verfügbar.
+</div>`;
 
 return;
 
 }
 
 box.innerHTML =
-groups.map(group => {
+groups.map(
+group => {
 
 const players =
 safeArray(group.players);
 
 return `
+
 <div class="squad-group">
 
 <h3 class="squad-title">
-${escapeHtml(group.group || group.name || "KADER")}
+${escapeHtml(
+group.group ||
+group.name ||
+"KADER"
+)}
 </h3>
 
 <div class="squad-grid">
 
-${players.map(player => {
+${players.map(
+player => {
 
 let name = "";
 let number = "";
 let position = "";
 let photo = "";
+let appearances = 0;
+let minutes = 0;
+let goals = 0;
+let assists = 0;
 
 if(Array.isArray(player)){
 
-name = player[0] || "";
-number = player[1] || "";
-position = player[2] || "";
+name =
+player[0] || "";
+
+number =
+player[1] || "";
+
+position =
+player[2] || "";
+
+photo =
+player[3] || "";
+
+appearances =
+Number(player[4] || 0);
+
+minutes =
+Number(player[5] || 0);
+
+goals =
+Number(player[6] || 0);
+
+assists =
+Number(player[7] || 0);
 
 }else{
 
@@ -2388,16 +3383,49 @@ player.image ||
 player.imageUrl ||
 "";
 
+appearances =
+Number(
+player.appearances ??
+player.apps ??
+player.einsätze ??
+player.einsaetze ??
+0
+);
+
+minutes =
+Number(
+player.minutes ??
+player.playingMinutes ??
+player.minuten ??
+0
+);
+
+goals =
+Number(
+player.goals ??
+player.tore ??
+0
+);
+
+assists =
+Number(
+player.assists ??
+player.assist ??
+player.assistsTotal ??
+0
+);
+
 }
 
 if(!photo){
 
 photo =
-`https://www.google.com/s2/favicons?domain=vfb.de&sz=128`;
+fallbackPlayerPhoto(name);
 
 }
 
 return `
+
 <div class="player-card">
 
 <div class="player-photo-wrap">
@@ -2407,14 +3435,18 @@ class="player-photo"
 src="${escapeHtml(photo)}"
 alt="${escapeHtml(name)}"
 loading="lazy"
-onerror="this.src='https://www.google.com/s2/favicons?domain=vfb.de&sz=128'"
+onerror="this.style.display='none';this.parentElement.classList.add('no-photo')"
 >
 
-${number
-? `<div class="player-number-badge">
+${
+number
+?
+`<div class="player-number-badge">
 #${escapeHtml(number)}
 </div>`
-: ""}
+:
+""
+}
 
 </div>
 
@@ -2426,13 +3458,40 @@ ${escapeHtml(name)}
 ${escapeHtml(position)}
 </div>
 
+<div class="player-stats">
+
+<div class="player-stat">
+<strong>${appearances}</strong>
+<span>Einsätze</span>
 </div>
+
+<div class="player-stat">
+<strong>${minutes}'</strong>
+<span>Minuten</span>
+</div>
+
+<div class="player-stat">
+<strong>${goals}</strong>
+<span>Tore</span>
+</div>
+
+<div class="player-stat">
+<strong>${assists}</strong>
+<span>Assists</span>
+</div>
+
+</div>
+
+</div>
+
 `;
 
 }).join("")}
 
 </div>
+
 </div>
+
 `;
 
 }).join("");
@@ -2443,82 +3502,447 @@ ${escapeHtml(position)}
    MATCHCENTER
 ========================= */
 
-const MATCH_INDEX = new Map();
+function getMatchApiData(){
+
+return null;
+
+}
+
+function renderStatBox(
+label,
+home,
+away
+){
+
+return `
+
+<div class="match-stat-box">
+
+<strong>
+${escapeHtml(home)}
+&nbsp;:&nbsp;
+${escapeHtml(away)}
+</strong>
+
+<span>
+${escapeHtml(label)}
+</span>
+
+</div>
+
+`;
+
+}
 
 function openMatchModal(data){
 
 const modal =
-document.getElementById("matchModal");
+document.getElementById(
+"matchModal"
+);
 
 const title =
-document.getElementById("matchModalTitle");
+document.getElementById(
+"matchModalTitle"
+);
 
 const body =
-document.getElementById("matchModalBody");
+document.getElementById(
+"matchModalBody"
+);
 
-if(!modal || !body) return;
+if(!modal || !body)
+return;
 
-const home = data.home || "";
-const away = data.away || "";
-const score = data.score || "";
-const competition = data.competition || "Spiel";
+const home =
+data.home || "";
+
+const away =
+data.away || "";
+
+const score =
+data.score || "";
+
+const competition =
+data.competition ||
+"Spiel";
+
+const stats =
+data.stats || {};
+
+const events =
+safeArray(
+data.events
+);
+
+const lineupHome =
+safeArray(
+data.lineupHome ||
+data.homeLineup
+);
+
+const lineupAway =
+safeArray(
+data.lineupAway ||
+data.awayLineup
+);
 
 title.textContent =
 `${home} – ${away}`;
+
+let eventsHtml = "";
+
+if(events.length){
+
+eventsHtml = `
+
+<div class="match-events">
+
+<h4>
+Spielereignisse
+</h4>
+
+${events.map(event => `
+
+<div class="match-event">
+
+<span>
+${escapeHtml(
+event.minute ||
+event.time ||
+""
+)}
+'
+&nbsp;
+${escapeHtml(
+event.type ||
+""
+)}
+</span>
+
+<strong>
+${escapeHtml(
+event.player ||
+event.name ||
+""
+)}
+${
+event.assist
+?
+" · Assist: " +
+escapeHtml(event.assist)
+:
+""
+}
+</strong>
+
+</div>
+
+`).join("")}
+
+</div>
+
+`;
+
+}else if(score){
+
+eventsHtml = `
+
+<div class="match-events">
+
+<h4>
+Spielereignisse
+</h4>
+
+<div class="match-empty">
+Für dieses Spiel sind momentan keine
+weiteren Ereignisse verfügbar.
+</div>
+
+</div>
+
+`;
+
+}
+
+let statsHtml = "";
+
+const hasStats =
+stats &&
+Object.keys(stats).length > 0;
+
+if(hasStats){
+
+statsHtml = `
+
+<div class="match-stats">
+
+${
+stats.possession
+?
+renderStatBox(
+"Ballbesitz",
+stats.possession.home || "-",
+stats.possession.away || "-"
+)
+:
+""
+}
+
+${
+stats.shots
+?
+renderStatBox(
+"Schüsse",
+stats.shots.home || "-",
+stats.shots.away || "-"
+)
+:
+""
+}
+
+${
+stats.shotsOnTarget
+?
+renderStatBox(
+"Schüsse aufs Tor",
+stats.shotsOnTarget.home || "-",
+stats.shotsOnTarget.away || "-"
+)
+:
+""
+}
+
+${
+stats.corners
+?
+renderStatBox(
+"Ecken",
+stats.corners.home || "-",
+stats.corners.away || "-"
+)
+:
+""
+}
+
+${
+stats.fouls
+?
+renderStatBox(
+"Fouls",
+stats.fouls.home || "-",
+stats.fouls.away || "-"
+)
+:
+""
+}
+
+${
+stats.offsides
+?
+renderStatBox(
+"Abseits",
+stats.offsides.home || "-",
+stats.offsides.away || "-"
+)
+:
+""
+}
+
+${
+stats.yellowCards
+?
+renderStatBox(
+"Gelbe Karten",
+stats.yellowCards.home || "-",
+stats.yellowCards.away || "-"
+)
+:
+""
+}
+
+${
+stats.redCards
+?
+renderStatBox(
+"Rote Karten",
+stats.redCards.home || "-",
+stats.redCards.away || "-"
+)
+:
+""
+}
+
+${
+stats.xg
+?
+renderStatBox(
+"xG",
+stats.xg.home || "-",
+stats.xg.away || "-"
+)
+:
+""
+}
+
+</div>
+
+`;
+
+}
+
+let lineupHtml = "";
+
+if(
+lineupHome.length ||
+lineupAway.length
+){
+
+function lineupPlayers(players){
+
+return players.map(player => {
+
+const name =
+typeof player === "string"
+?
+player
+:
+player.name ||
+player.player ||
+"";
+
+const number =
+typeof player === "object"
+?
+player.number ||
+""
+:
+"";
+
+return `
+
+<div class="lineup-player">
+
+${
+number
+?
+"#" +
+escapeHtml(number) +
+" "
+:
+""
+}
+
+${escapeHtml(name)}
+
+</div>
+
+`;
+
+}).join("");
+
+}
+
+lineupHtml = `
+
+<div class="lineup-grid">
+
+<div class="lineup-box">
+
+<h4>
+${escapeHtml(home)}
+</h4>
+
+${lineupPlayers(lineupHome)}
+
+</div>
+
+<div class="lineup-box">
+
+<h4>
+${escapeHtml(away)}
+</h4>
+
+${lineupPlayers(lineupAway)}
+
+</div>
+
+</div>
+
+`;
+
+}
 
 body.innerHTML = `
 
 <div class="match-score">
 
 <div class="match-team">
-${teamLogo(home,"team-logo")}
-<div>${escapeHtml(home)}</div>
+
+${teamLogo(
+home,
+"team-logo"
+)}
+
+<div>
+${escapeHtml(home)}
+</div>
+
 </div>
 
 <div>
 
 <div class="match-score-number">
-${score ? escapeHtml(score) : "–"}
+${score
+? escapeHtml(score)
+: "–"}
 </div>
 
-<div style="font-size:10px;color:#888;margin-top:4px">
+<div class="match-subtitle">
 ${escapeHtml(competition)}
+</div>
+
+<div class="match-subtitle">
+${escapeHtml(
+formatDateTime(data.date)
+)}
 </div>
 
 </div>
 
 <div class="match-team">
-${teamLogo(away,"team-logo")}
-<div>${escapeHtml(away)}</div>
+
+${teamLogo(
+away,
+"team-logo"
+)}
+
+<div>
+${escapeHtml(away)}
 </div>
 
 </div>
 
-<div class="match-events">
-
-<div class="match-event">
-<span>📅 Datum</span>
-<strong>${escapeHtml(formatDateTime(data.date))}</strong>
 </div>
 
-<div class="match-event">
-<span>🏆 Wettbewerb</span>
-<strong>${escapeHtml(competition)}</strong>
-</div>
+${statsHtml}
 
-${score
-? `<div class="match-event">
-<span>⚽ Ergebnis</span>
-<strong>${escapeHtml(score)}</strong>
+${eventsHtml}
+
+${lineupHtml}
+
+${
+!statsHtml &&
+!eventsHtml &&
+!lineupHtml
+?
+`<div class="match-empty">
+Noch keine zusätzlichen Matchcenter-Daten verfügbar.
 </div>`
-: `<div class="match-empty">
-Das Spiel hat noch nicht begonnen.
-Weitere Matchcenter-Daten werden ergänzt,
-sobald sie von der API geliefert werden.
-</div>`
+:
+""
 }
 
-</div>
 `;
 
 modal.classList.add("open");
@@ -2528,7 +3952,9 @@ modal.classList.add("open");
 function closeMatchModal(){
 
 const modal =
-document.getElementById("matchModal");
+document.getElementById(
+"matchModal"
+);
 
 if(modal){
 
@@ -2538,28 +3964,51 @@ modal.classList.remove("open");
 
 }
 
-document.addEventListener("click",function(event){
+document.addEventListener(
+"click",
+function(event){
 
 const match =
-event.target.closest(".match-clickable");
+event.target.closest(
+".match-clickable"
+);
 
-if(!match) return;
+if(!match)
+return;
 
 openMatchModal({
-home:match.dataset.home,
-away:match.dataset.away,
-date:match.dataset.date,
-score:match.dataset.score,
-competition:match.dataset.competition
-});
+
+home:
+match.dataset.home,
+
+away:
+match.dataset.away,
+
+date:
+match.dataset.date,
+
+score:
+match.dataset.score,
+
+competition:
+match.dataset.competition
 
 });
 
-document.getElementById("matchClose")
-?.addEventListener("click",closeMatchModal);
+});
 
-document.getElementById("matchModal")
-?.addEventListener("click",function(event){
+document.getElementById(
+"matchClose"
+)?.addEventListener(
+"click",
+closeMatchModal
+);
+
+document.getElementById(
+"matchModal"
+)?.addEventListener(
+"click",
+function(event){
 
 if(event.target === this){
 
@@ -2569,7 +4018,9 @@ closeMatchModal();
 
 });
 
-document.addEventListener("keydown",function(event){
+document.addEventListener(
+"keydown",
+function(event){
 
 if(event.key === "Escape"){
 
@@ -2589,11 +4040,13 @@ try{
 
 const response =
 await fetch(
-"/api/dashboard?t=" + Date.now(),
+"/api/dashboard?t=" +
+Date.now(),
 {
 cache:"no-store",
 headers:{
-"Cache-Control":"no-cache"
+"Cache-Control":
+"no-cache"
 }
 }
 );
@@ -2601,7 +4054,8 @@ headers:{
 if(!response.ok){
 
 throw new Error(
-"HTTP " + response.status
+"HTTP " +
+response.status
 );
 
 }
@@ -2622,12 +4076,16 @@ return null;
 }
 
 /* =========================
-   DATEN AUS API
+   API DATEN
 ========================= */
 
-function extractApiFixtures(data,key){
+function extractApiFixtures(
+data,
+key
+){
 
-if(!data) return [];
+if(!data)
+return [];
 
 return safeArray(
 data[key] ||
@@ -2639,7 +4097,8 @@ data.fixtures?.[key]
 
 function extractApiTable(data){
 
-if(!data) return [];
+if(!data)
+return [];
 
 return safeArray(
 data.table ||
@@ -2650,7 +4109,8 @@ data.data?.table
 
 function extractApiTransfers(data){
 
-if(!data) return null;
+if(!data)
+return null;
 
 return (
 data.transfers ||
@@ -2662,7 +4122,8 @@ null
 
 function extractApiSquad(data){
 
-if(!data) return [];
+if(!data)
+return [];
 
 return safeArray(
 data.squad ||
@@ -2673,12 +4134,13 @@ data.data?.squad
 }
 
 /* =========================
-   DASHBOARD LADEN
+   START REFRESH
 ========================= */
 
 async function refreshDashboard(){
 
-if(refreshing) return;
+if(refreshing)
+return;
 
 refreshing = true;
 
@@ -2700,42 +4162,62 @@ apiData,
 );
 
 const table =
-extractApiTable(apiData);
+extractApiTable(
+apiData
+);
 
 const transfers =
-extractApiTransfers(apiData);
+extractApiTransfers(
+apiData
+);
 
 const squad =
-extractApiSquad(apiData);
+extractApiSquad(
+apiData
+);
 
 const bundesligaData =
 bundesliga.length
-? bundesliga
-: FALLBACK_BUNDESLIGA;
+?
+bundesliga
+:
+FALLBACK_BUNDESLIGA;
 
 const championsData =
 championsLeague.length
-? championsLeague
-: FALLBACK_CL;
+?
+championsLeague
+:
+FALLBACK_CL;
 
 const tableData =
 table.length
-? table
-: FALLBACK_TABLE;
+?
+table
+:
+FALLBACK_TABLE;
 
 const transferData =
 transfers &&
 (
-safeArray(transfers.arrivals).length ||
-safeArray(transfers.departures).length
+safeArray(
+transfers.arrivals
+).length ||
+safeArray(
+transfers.departures
+).length
 )
-? transfers
-: FALLBACK_TRANSFERS;
+?
+transfers
+:
+FALLBACK_TRANSFERS;
 
 const squadData =
 squad.length
-? squad
-: FALLBACK_SQUAD;
+?
+squad
+:
+FALLBACK_SQUAD;
 
 renderFixtures(
 "bundesligaFixtures",
@@ -2754,24 +4236,36 @@ renderNextGame([
 ...championsData
 ]);
 
-renderTable(tableData);
+renderTable(
+tableData
+);
 
-renderTransfers(transferData);
+renderTransfers(
+transferData
+);
 
-renderSquad(squadData);
+renderSquad(
+squadData
+);
 
-await loadNews(apiData);
+await loadNews(
+apiData
+);
 
-lastRefresh = Date.now();
+lastRefresh =
+Date.now();
 
 const info =
-document.getElementById("refreshInfo");
+document.getElementById(
+"refreshInfo"
+);
 
 if(info){
 
 info.textContent =
 "Zuletzt aktualisiert: " +
-new Date().toLocaleTimeString(
+new Date()
+.toLocaleTimeString(
 "de-DE",
 {
 hour:"2-digit",
@@ -2790,9 +4284,9 @@ error
 );
 
 /*
-WICHTIG:
-Auch bei einem unerwarteten Fehler
-werden die lokalen Daten angezeigt.
+Fallback:
+Die Seite bleibt auch dann gefüllt,
+wenn die API nicht erreichbar ist.
 */
 
 renderFixtures(
@@ -2812,15 +4306,22 @@ renderNextGame([
 ...FALLBACK_CL
 ]);
 
-renderTable(FALLBACK_TABLE);
+renderTable(
+FALLBACK_TABLE
+);
 
-renderTransfers(FALLBACK_TRANSFERS);
+renderTransfers(
+FALLBACK_TRANSFERS
+);
 
-renderSquad(FALLBACK_SQUAD);
+renderSquad(
+FALLBACK_SQUAD
+);
 
 await loadNews(null);
 
-lastRefresh = Date.now();
+lastRefresh =
+Date.now();
 
 }finally{
 
@@ -2831,30 +4332,39 @@ refreshing = false;
 }
 
 /* =========================
-   BESUCHER-TICKER
+   BESUCHER
 ========================= */
 
 function updateVisitorCount(){
 
 const el =
-document.getElementById("visitorCount");
+document.getElementById(
+"visitorCount"
+);
 
-if(!el) return;
+if(!el)
+return;
 
 const base = 1893;
 
 const variation =
 Math.floor(
-Math.sin(Date.now()/900000) * 85
+Math.sin(
+Date.now()/900000
+) * 85
 );
 
 const random =
-Math.floor(Math.random()*40);
+Math.floor(
+Math.random()*40
+);
 
 el.textContent =
 String(
 Math.max(
-base + variation + random,
+base +
+variation +
+random,
 1800
 )
 );
@@ -2875,15 +4385,19 @@ updateVisitorCount,
 function shouldRefresh(){
 
 return (
-Date.now() - lastRefresh >= REFRESH_MS
+Date.now() -
+lastRefresh >=
+REFRESH_MS
 );
 
 }
 
-setInterval(function(){
+setInterval(
+function(){
 
 if(
-document.visibilityState === "visible" &&
+document.visibilityState ===
+"visible" &&
 shouldRefresh()
 ){
 
@@ -2891,14 +4405,17 @@ refreshDashboard();
 
 }
 
-},60000);
+},
+60000
+);
 
 document.addEventListener(
 "visibilitychange",
 function(){
 
 if(
-document.visibilityState === "visible" &&
+document.visibilityState ===
+"visible" &&
 shouldRefresh()
 ){
 
@@ -2913,7 +4430,8 @@ refreshDashboard();
 ========================= */
 
 if(
-document.readyState === "loading"
+document.readyState ===
+"loading"
 ){
 
 document.addEventListener(
@@ -2928,7 +4446,5 @@ refreshDashboard();
 }
 
 })();
-</script>
 
-</body>
-</html>
+</script>
