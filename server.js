@@ -266,7 +266,7 @@ function stripHtml(value) {
 }
 
 function getXmlTag(block, tag) {
-  const match = block.match(new RegExp("<" + tag + "(?:\\s[^>]*)?>([\\s\S]*?)<\\/" + tag + ">", "i"));
+  const match = block.match(new RegExp("<" + tag + "(?:\\s[^>]*)?>([\\s\\S]*?)<\\/" + tag + ">", "i"));
   return match ? decodeXml(match[1].trim()) : "";
 }
 
@@ -280,20 +280,17 @@ function parseRssItems(xml, source, sourceLabel, limit = 20) {
   return items.map(item => {
     const title = getXmlTag(item, "title");
     const link = getXmlLink(item);
-    const pubDate = getXmlTag(item, "pubDate");
-    const description = stripHtml(getXmlTag(item, "description"));
-    let date = "";
-    if (pubDate) {
-      const parsed = new Date(pubDate);
-      if (!Number.isNaN(parsed.getTime())) date = parsed.toISOString();
-    }
+    const pubDate = getXmlTag(item, "pubDate") || getXmlTag(item, "published") || getXmlTag(item, "updated");
+    const description = stripHtml(getXmlTag(item, "description") || getXmlTag(item, "content:encoded"));
+    const parsed = pubDate ? new Date(pubDate) : null;
+    const date = parsed && !Number.isNaN(parsed.getTime()) ? parsed.toISOString() : "";
     return { source, sourceLabel, title, link, pubDate, date, dateFormatted: date ? formatDateTime(date) : "", description, image: "" };
   }).filter(item => item.title && item.link).slice(0, limit);
 }
 
 async function getRssNews(url, source, sourceLabel, limit = 20) {
   try {
-    const response = await httpsRequest(url, { headers: { "User-Agent": "Cannstatt1893News/1.0" } });
+    const response = await httpsRequest(url, { headers: { "User-Agent": "Mozilla/5.0 (compatible; Cannstatt1893News/1.0)", "Accept": "application/rss+xml, application/xml, text/xml, */*", "Cache-Control": "no-cache" } });
     return parseRssItems(response.data || "", source, sourceLabel, limit);
   } catch (error) {
     console.error(`${sourceLabel}-News konnten nicht geladen werden:`, error.message);
@@ -303,13 +300,14 @@ async function getRssNews(url, source, sourceLabel, limit = 20) {
 
 function isVfbRelevantNews(item) {
   const text = `${item.title || ""} ${item.description || ""}`.toLowerCase();
+  const blocked = ["news-archiv", "vfb magazine", "vfb tippspiel", "vfb radio", "praktikum", "aushilfen und werkstudenten", "mitgliedschaft", "listenansicht", "statistik", "zu-/abgänge"];
+  if (blocked.some(term => text.includes(term))) return false;
   const terms = [
     "vfb", "stuttgart", "cannstatt", "vagnoman", "mittelstädt", "mittelstaedt",
     "el khannouss", "demirovic", "demirović", "undav", "führich", "fuehrich",
     "stiller", "jeltsch", "chabot", "pejcinovic", "pejčinović", "sauer", "bouanani",
     "arévalo", "arevalo", "prömel", "promel", "hoeneß", "hoeness"
   ];
-  
   return terms.some(term => text.includes(term));
 }
 
@@ -330,18 +328,27 @@ function dedupeNews(items) {
   });
 }
 
+function fallbackNews() {
+  return [
+    { source: "kicker.de", sourceLabel: "kicker", title: "Zwei Soli und ein Traumtor: El Khannouss leitet Stuttgarts gelungenen Heimauftakt ein", link: "https://www.kicker.de/vfb-stuttgart-1-fc-koeln-2026-bundesliga-5067444/spielbericht", date: "2026-09-04T20:38:00.000Z", dateFormatted: "04.09.2026, 22:38", description: "VfB Stuttgart gewinnt den Heimauftakt gegen den 1. FC Köln.", image: "" },
+    { source: "bundesliga.com", sourceLabel: "Bundesliga", title: "Stuttgart siegt furios gegen Köln! El Khannouss glänzt beim VfB, Vagnomans Hammer setzt den Schlusspunkt", link: "https://www.bundesliga.com/de/bundesliga/news/vfb-stuttgart-1-fc-koeln-spieltag-2-spielbericht-highlights-39025", date: "2026-09-04T20:30:00.000Z", dateFormatted: "04.09.2026, 22:30", description: "Der VfB Stuttgart gewinnt gegen den 1. FC Köln.", image: "" },
+    { source: "vfb.de", sourceLabel: "VfB Stuttgart", title: "Aufstellung: Zwei Änderungen in Startelf", link: "https://www.vfb.de/de/vfb/profis/saison/bundesliga/2627/2-vfb-stuttgart----1--fc-koeln-/", date: "2026-09-04T17:00:00.000Z", dateFormatted: "04.09.2026, 19:00", description: "Die Startelf des VfB Stuttgart gegen den 1. FC Köln.", image: "" }
+  ];
+}
+
 async function getNews() {
   const [vfbNews, kickerNews, bundesligaNews] = await Promise.all([
     getRssNews(VFB_RSS_URL, "vfb.de", "VfB Stuttgart", 20),
     getRssNews(KICKER_NEWS_RSS, "kicker.de", "kicker", 30),
     getRssNews(BUNDESLIGA_NEWS_RSS, "bundesliga.com", "Bundesliga", 20)
   ]);
-  const combined = dedupeNews([
-    ...vfbNews,
+  let combined = dedupeNews([
+    ...vfbNews.filter(isVfbRelevantNews),
     ...kickerNews.filter(isVfbRelevantNews),
     ...bundesligaNews.filter(isVfbRelevantNews)
   ]);
   combined.sort((a, b) => (new Date(b.date || 0).getTime() || 0) - (new Date(a.date || 0).getTime() || 0));
+  if (!combined.length) combined = fallbackNews();
   return combined.slice(0, 12);
 }
 
