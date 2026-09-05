@@ -309,7 +309,7 @@ function isVfbRelevantNews(item) {
     "stiller", "jeltsch", "chabot", "pejcinovic", "pejčinović", "sauer", "bouanani",
     "arévalo", "arevalo", "prömel", "promel", "hoeneß", "hoeness"
   ];
-    ];
+  
   return terms.some(term => text.includes(term));
 }
 
