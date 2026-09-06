@@ -1,55 +1,34 @@
 <!doctype html>
 <html lang="de">
-
 <head>
-
 <meta charset="utf-8">
-
 <meta name="viewport"
 content="width=device-width,initial-scale=1">
-
 <meta name="theme-color"
 content="#e30613">
-
 <meta
 name="description"
 content="Cannstatt 1893 News – unabhängige VfB Stuttgart Fanpage">
-
 <title>
 Cannstatt 1893 News – VfB Stuttgart
 </title>
-
 <style>
-
-/* =========================
-   GRUNDLAGEN
-========================= */
-
 *{
 box-sizing:border-box;
 }
-
 html{
 scroll-behavior:smooth;
 }
-
 body{
 margin:0;
 background:#f4f4f4;
 color:#151515;
 font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
 }
-
 a{
 text-decoration:none;
 color:inherit;
 }
-
-
-/* =========================
-   TOP BAR
-========================= */
-
 .top{
 background:#080808;
 color:#fff;
@@ -59,12 +38,6 @@ display:flex;
 justify-content:space-between;
 gap:10px;
 }
-
-
-/* =========================
-   BESUCHER-TICKER
-========================= */
-
 .visitor-ticker{
 display:flex;
 align-items:center;
@@ -72,7 +45,6 @@ gap:5px;
 font-weight:800;
 white-space:nowrap;
 }
-
 .visitor-live-dot{
 width:7px;
 height:7px;
@@ -82,28 +54,21 @@ box-shadow:0 0 0 3px #e3061333;
 display:inline-block;
 animation:visitorPulse 1.8s infinite;
 }
-
 .visitor-separator{
 opacity:.45;
 margin:0 3px;
 }
-
 @keyframes visitorPulse{
-
 0%,100%{
 opacity:1;
 transform:scale(1);
 }
-
 50%{
 opacity:.45;
 transform:scale(.8);
 }
-
 }
-
 @media(max-width:800px){
-
 .top{
 font-size:9px;
 padding:7px 4%;
@@ -111,21 +76,13 @@ flex-wrap:wrap;
 justify-content:center;
 text-align:center;
 }
-
 .visitor-ticker{
 order:3;
 width:100%;
 justify-content:center;
 font-size:9px;
 }
-
 }
-
-
-/* =========================
-   HEADER
-========================= */
-
 .bar{
 position:sticky;
 top:0;
@@ -138,14 +95,12 @@ align-items:center;
 justify-content:space-between;
 box-shadow:0 2px 12px #0001;
 }
-
 .brand{
 display:flex;
 align-items:center;
 gap:10px;
 font-weight:1000;
 }
-
 .crest{
 width:44px;
 height:44px;
@@ -156,7 +111,6 @@ display:grid;
 place-items:center;
 font-weight:1000;
 }
-
 .brand small{
 display:block;
 color:#777;
@@ -164,62 +118,51 @@ font-size:9px;
 letter-spacing:1px;
 margin-top:2px;
 }
-
 .nav{
 display:flex;
 gap:24px;
 font-size:13px;
 font-weight:800;
 }
-
 .nav a:hover{
 color:#e30613;
 }
-
-
-/* =========================
-   HERO
-========================= */
-
 .hero{
-
 background:
-linear-gradient(90deg,#ffffff 0%,#fff5f5 48%,#e30613 100%);
-
-color:#111;
+linear-gradient(
+90deg,
+#050505 0%,
+#350000 55%,
+#750000 100%
+);
+color:white;
 padding:70px 5%;
 }
-
 .hero-inner{
 max-width:1150px;
 margin:auto;
 }
-
 .hero-kicker{
 font-size:12px;
 font-weight:900;
 letter-spacing:2px;
-color:#e30613;
+color:#ff4048;
 }
-
 .hero h1{
 margin:12px 0;
 font-size:clamp(45px,8vw,85px);
 line-height:.9;
 letter-spacing:-5px;
 }
-
 .hero h1 span{
 color:#ff2630;
 }
-
 .hero p{
 max-width:650px;
-color:#333;
+color:#ddd;
 font-size:17px;
 line-height:1.6;
 }
-
 .btn{
 display:inline-block;
 background:#e30613;
@@ -230,41 +173,30 @@ font-size:12px;
 font-weight:900;
 margin-top:8px;
 }
-
-
-/* =========================
-   LAYOUT
-========================= */
-
 .wrap{
 width:min(1150px,90%);
 margin:auto;
 }
-
 .section{
 padding:42px 0;
 }
-
 .section h2{
 margin:0;
 text-transform:uppercase;
 font-size:30px;
 letter-spacing:-1px;
 }
-
 .line{
 width:45px;
 height:4px;
 background:#e30613;
 margin:8px 0 18px;
 }
-
 .grid{
 display:grid;
 grid-template-columns:1.3fr .9fr;
 gap:18px;
 }
-
 .card{
 background:#fff;
 border:1px solid #ddd;
@@ -272,68 +204,48 @@ border-radius:14px;
 padding:20px;
 box-shadow:0 5px 20px #00000008;
 }
-
-
-/* =========================
-   NEWS
-========================= */
-
 .news{
 padding:15px 0;
 border-bottom:1px solid #eee;
 }
-
 .news:last-child{
 border-bottom:0;
 }
-
 .tag{
 color:#e30613;
 font-size:10px;
 font-weight:900;
 text-transform:uppercase;
 }
-
 .news h3{
 margin:5px 0;
 font-size:17px;
 }
-
 .news p{
 margin:5px 0;
 color:#666;
 font-size:12px;
 line-height:1.5;
 }
-
-
-/* =========================
-   NEXT GAME
-========================= */
-
 .next{
 background:#111;
 color:white;
 border-radius:12px;
 padding:20px;
 }
-
 .next-label{
 color:#ff2630;
 font-size:10px;
 font-weight:900;
 letter-spacing:1px;
 }
-
 .next h3{
 font-size:24px;
 margin:10px 0;
 }
-
 .next p{
 color:#ccc;
 }
-
 .live{
 display:flex;
 align-items:center;
@@ -342,19 +254,12 @@ color:#ff2630;
 font-size:11px;
 font-weight:900;
 }
-
 .dot{
 width:8px;
 height:8px;
 background:#e30613;
 border-radius:50%;
 }
-
-
-/* =========================
-   NOTICE
-========================= */
-
 .notice{
 background:#fff1f1;
 border-left:4px solid #e30613;
@@ -362,18 +267,11 @@ padding:13px;
 font-size:12px;
 margin-bottom:18px;
 }
-
-
-/* =========================
-   LOADING / ERROR
-========================= */
-
 .loading{
 color:#888;
 font-size:13px;
 padding:20px 0;
 }
-
 .error{
 color:#a00000;
 background:#fff0f0;
@@ -381,12 +279,6 @@ padding:15px;
 border-radius:8px;
 font-size:12px;
 }
-
-
-/* =========================
-   SPIEL
-========================= */
-
 .fixture{
 display:flex;
 align-items:center;
@@ -394,39 +286,28 @@ gap:15px;
 padding:14px 0;
 border-bottom:1px solid #eee;
 }
-
 .fixture:last-child{
 border-bottom:0;
 }
-
 .date{
 min-width:105px;
 color:#e30613;
 font-size:12px;
 font-weight:900;
 }
-
 .fixture strong{
 font-size:14px;
 }
-
 .competition{
 color:#888;
 font-size:11px;
 margin-top:3px;
 }
-
 .status{
 margin-left:auto;
 font-size:10px;
 font-weight:900;
 }
-
-
-/* =========================
-   TEAM LOGOS
-========================= */
-
 .team-line{
 display:flex;
 align-items:center;
@@ -434,19 +315,12 @@ gap:8px;
 font-size:14px;
 font-weight:800;
 }
-
 .team-logo{
 width:30px;
 height:30px;
 object-fit:contain;
 flex-shrink:0;
 }
-
-
-/* =========================
-   COMPETITION HEADER
-========================= */
-
 .competition-title{
 display:flex;
 align-items:center;
@@ -456,34 +330,24 @@ margin-bottom:8px;
 padding-bottom:10px;
 border-bottom:2px solid #eee;
 }
-
 .competition-title .icon{
 font-size:24px;
 }
-
 .competition-title h3{
 margin:0;
 font-size:20px;
 font-weight:1000;
 }
-
 .competition-title span{
 color:#777;
 font-size:11px;
 font-weight:600;
 }
-
-
-/* =========================
-   FAN AREA
-========================= */
-
 .fan-grid{
 display:grid;
 grid-template-columns:repeat(3,1fr);
 gap:15px;
 }
-
 .fan{
 background:#111;
 color:white;
@@ -491,42 +355,30 @@ padding:25px;
 border-radius:13px;
 min-height:140px;
 }
-
 .fan h3{
 margin-top:0;
 }
-
 .fan p{
 color:#aaa;
 font-size:13px;
 line-height:1.5;
 }
-
-
-/* =========================
-   KADER
-========================= */
-
 .squad-section{
 margin-top:20px;
 }
-
 .squad-group{
 margin-top:28px;
 }
-
 .squad-title{
 font-size:20px;
 font-weight:900;
 margin:0 0 14px;
 }
-
 .squad-grid{
 display:grid;
 grid-template-columns:repeat(4,1fr);
 gap:14px;
 }
-
 .player-card{
 background:#fff;
 border:1px solid #ddd;
@@ -535,25 +387,21 @@ padding:17px;
 box-shadow:0 5px 20px #00000008;
 transition:.2s;
 }
-
 .player-card:hover{
 transform:translateY(-3px);
 box-shadow:0 8px 25px #00000012;
 }
-
 .player-number{
 font-size:28px;
 font-weight:1000;
 color:#e30613;
 line-height:1;
 }
-
 .player-name{
 font-size:15px;
 font-weight:900;
 margin-top:10px;
 }
-
 .player-position{
 font-size:10px;
 color:#777;
@@ -561,7 +409,6 @@ text-transform:uppercase;
 font-weight:800;
 margin-top:4px;
 }
-
 .player-photo-wrap{
 height:185px;
 background:linear-gradient(
@@ -577,14 +424,12 @@ align-items:flex-end;
 justify-content:center;
 margin:-2px -2px 12px;
 }
-
 .player-photo{
 height:100%;
 width:100%;
 object-fit:contain;
 object-position:center bottom;
 }
-
 .player-number-badge{
 position:absolute;
 top:8px;
@@ -596,7 +441,6 @@ padding:5px 8px;
 font-size:12px;
 font-weight:1000;
 }
-
 .player-stats{
 display:grid;
 grid-template-columns:repeat(4,1fr);
@@ -605,18 +449,15 @@ margin-top:12px;
 padding-top:10px;
 border-top:1px solid #eee;
 }
-
 .player-stat{
 text-align:center;
 }
-
 .player-stat strong{
 display:block;
 font-size:16px;
 font-weight:1000;
 color:#151515;
 }
-
 .player-stat span{
 display:block;
 font-size:8px;
@@ -625,36 +466,25 @@ text-transform:uppercase;
 font-weight:800;
 margin-top:2px;
 }
-
 .player-card{
 overflow:hidden;
 }
-
 .player-name{
 margin-top:4px;
 }
-
 .player-meta{
 font-size:9px;
 color:#999;
 margin-top:3px;
 }
-
 .coach-card{
 max-width:350px;
 }
-
-
-/* =========================
-   TABELLE
-========================= */
-
 .table-scroll{
 width:100%;
 overflow-x:auto;
 -webkit-overflow-scrolling:touch;
 }
-
 .table-header,
 .table-row{
 display:grid;
@@ -672,7 +502,6 @@ gap:6px;
 align-items:center;
 min-width:570px;
 }
-
 .table-header{
 padding:0 0 10px;
 border-bottom:2px solid #111;
@@ -681,41 +510,29 @@ font-weight:900;
 text-transform:uppercase;
 color:#777;
 }
-
 .table-row{
 padding:12px 0;
 border-bottom:1px solid #eee;
 }
-
 .table-cell{
 text-align:center;
 font-size:12px;
 }
-
 .table-cell.pos{
 font-weight:900;
 }
-
 .table-team{
 min-width:0;
 }
-
 .table-team strong{
 overflow:hidden;
 text-overflow:ellipsis;
 white-space:nowrap;
 }
-
 .points{
 font-weight:1000;
 color:#e30613;
 }
-
-
-/* =========================
-   FOOTER
-========================= */
-
 footer{
 background:#111;
 color:#999;
@@ -724,109 +541,78 @@ margin-top:20px;
 font-size:12px;
 line-height:1.7;
 }
-
 footer b{
 color:white;
 }
-
 .attribution{
 margin-top:12px;
 font-size:11px;
 color:#777;
 }
-
-
-/* =========================
-   MOBILE
-========================= */
-
 @media(max-width:900px){
-
 .player-photo-wrap{
 height:175px;
 }
-
 .squad-grid{
 grid-template-columns:repeat(3,1fr);
 }
-
 }
-
-
 @media(max-width:760px){
-
 .player-photo-wrap{
 height:170px;
 }
-
 .player-stats{
 grid-template-columns:repeat(4,1fr);
 }
-
 .top{
 font-size:9px;
 }
-
 .nav{
 display:none;
 }
-
 .bar{
 padding:10px 5%;
 }
-
 .hero{
 padding:55px 5%;
 }
-
 .hero h1{
 font-size:55px;
 letter-spacing:-3px;
 }
-
 .hero p{
 font-size:15px;
 }
-
 .grid{
 grid-template-columns:1fr;
 }
-
 .fan-grid{
 grid-template-columns:1fr;
 }
-
 .squad-grid{
 grid-template-columns:repeat(2,1fr);
 }
-
 .section{
 padding:32px 0;
 }
-
 .fixture{
 align-items:center;
 gap:10px;
 }
-
 .date{
 min-width:80px;
 font-size:10px;
 }
-
 .team-line{
 font-size:13px;
 }
-
 .team-logo{
 width:25px;
 height:25px;
 }
-
 .status{
 margin-left:auto;
 }
-
 .table-header,
 .table-row{
 grid-template-columns:
@@ -838,68 +624,45 @@ minmax(145px,1fr)
 38px
 52px
 52px;
-
 min-width:475px;
-
 gap:4px;
 }
-
 .table-cell{
 font-size:10px;
 }
-
 }
-
-
 @media(max-width:430px){
-
 .hero h1{
 font-size:46px;
 }
-
 .brand{
 font-size:12px;
 }
-
 .brand small{
 font-size:8px;
 }
-
 .squad-grid{
 grid-template-columns:repeat(2,1fr);
 }
-
 .player-photo-wrap{
 height:155px;
 }
-
 .player-name{
 font-size:13px;
 }
-
 .player-position{
 font-size:9px;
 }
-
 .player-stats{
 gap:2px;
 }
-
 .player-stat strong{
 font-size:13px;
 }
-
 .player-stat span{
 font-size:7px;
 }
-
 }
-
-
-/* =========================
-   MATCHCENTER
-========================= */
-
 .match-clickable{
 cursor:pointer;
 transition:.18s;
@@ -909,12 +672,10 @@ padding:10px;
 margin:-10px 0;
 position:relative;
 }
-
 .match-clickable:hover{
 background:#fafafa;
 transform:translateY(-1px);
 }
-
 .match-hint{
 font-size:9px;
 color:#e30613;
@@ -922,7 +683,6 @@ font-weight:900;
 text-transform:uppercase;
 margin-top:5px;
 }
-
 .match-modal{
 display:none;
 position:fixed;
@@ -934,11 +694,9 @@ justify-content:center;
 padding:30px 14px;
 overflow:auto;
 }
-
 .match-modal.open{
 display:flex;
 }
-
 .match-modal-box{
 width:min(900px,100%);
 background:#fff;
@@ -946,7 +704,6 @@ border-radius:18px;
 box-shadow:0 20px 60px #0005;
 overflow:hidden;
 }
-
 .match-modal-head{
 background:#111;
 color:#fff;
@@ -956,12 +713,10 @@ align-items:center;
 justify-content:space-between;
 gap:15px;
 }
-
 .match-modal-head h3{
 margin:0;
 font-size:20px;
 }
-
 .match-close{
 border:0;
 background:#333;
@@ -972,11 +727,9 @@ border-radius:9px;
 font-size:22px;
 cursor:pointer;
 }
-
 .match-modal-body{
 padding:20px;
 }
-
 .match-score{
 display:grid;
 grid-template-columns:1fr auto 1fr;
@@ -985,1789 +738,1094 @@ gap:15px;
 text-align:center;
 margin-bottom:20px;
 }
-
 .match-team{
 font-weight:900;
 font-size:15px;
 }
-
 .match-team img{
 width:46px;
 height:46px;
-object-fit:contain;
-display:block;
-margin:0 auto 7px;
 }
-
 .match-score-num{
-font-size:34px;
+font-size:32px;
 font-weight:1000;
 }
-
-.match-meta{
-text-align:center;
-color:#777;
-font-size:11px;
-margin-top:-12px;
-margin-bottom:20px;
-}
-
 .match-section{
-border-top:1px solid #eee;
-padding-top:16px;
-margin-top:18px;
+margin-top:20px;
 }
-
 .match-section h4{
-margin:0 0 12px;
-font-size:14px;
-text-transform:uppercase;
+margin:0 0 10px;
 }
-
 .match-events{
 display:grid;
 gap:7px;
 }
-
 .match-event{
-padding:9px 11px;
+padding:10px 12px;
+background:#f5f5f5;
 border-radius:8px;
-background:#f7f7f7;
 font-size:12px;
 }
-
-.match-stats{
+.fixture-row{
 display:grid;
-gap:8px;
-}
-
-.match-stat-row{
-display:grid;
-grid-template-columns:1fr 80px 1fr;
+grid-template-columns:42px 125px 1fr 85px;
+gap:12px;
 align-items:center;
-gap:8px;
-font-size:12px;
-}
-
-.match-stat-row>span:first-child{
-text-align:right;
-font-weight:800;
-}
-
-.match-stat-row>span:last-child{
-font-weight:800;
-}
-
-.match-stat-label{
-text-align:center;
-color:#777;
-font-size:10px;
-text-transform:uppercase;
-}
-
-.match-lineups{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:18px;
-}
-
-.match-lineups h5{
-margin:0 0 8px;
-font-size:12px;
-}
-
-.match-player{
-font-size:11px;
-padding:4px 0;
+padding:13px 0;
 border-bottom:1px solid #eee;
 }
-
-.match-loading{
-text-align:center;
+.fixture-row.clickable{
+cursor:pointer;
+}
+.fixture-row.clickable:hover{
+background:#fafafa;
+}
+.fixture-round{
+font-weight:1000;
+color:#e30613;
+}
+.fixture-date{
+font-size:11px;
+}
+.fixture-date span{
+display:block;
 color:#888;
-padding:25px;
+margin-top:3px;
 }
-
-@media(max-width:600px){
-
-.match-modal{
-padding:10px;
+.fixture-teams{
+display:grid;
+gap:7px;
 }
-
-.match-modal-body{
+.fixture-score{
+text-align:right;
+}
+.fixture-score strong{
+font-size:16px;
+}
+.fixture-score span{
+display:block;
+font-size:9px;
+color:#888;
+font-weight:900;
+margin-top:3px;
+}
+.next-match{
 padding:15px;
+border:1px solid #eee;
+border-radius:12px;
+background:#fafafa;
 }
-
-.match-score{
+.next-date,
+.next-comp{
+font-size:10px;
+font-weight:900;
+color:#777;
+text-align:center;
+}
+.next-teams{
+display:grid;
+grid-template-columns:1fr 45px 1fr;
+align-items:center;
+text-align:center;
 gap:8px;
+margin:15px 0;
 }
-
-.match-team{
+.next-teams>div{
+display:grid;
+justify-items:center;
+gap:7px;
 font-size:12px;
 }
-
-.match-score-num{
+.league-table{
+width:100%;
+border-collapse:collapse;
+font-size:12px;
+min-width:650px;
+}
+.league-table th{
+background:#111;
+color:#fff;
+padding:9px 7px;
+text-align:center;
+}
+.league-table th:nth-child(2),
+.league-table td:nth-child(2){
+text-align:left;
+}
+.league-table td{
+padding:8px 7px;
+border-bottom:1px solid #eee;
+text-align:center;
+}
+.league-table .team-line{
+font-size:12px;
+}
+.vfb-row{
+background:#fff0f1;
+font-weight:900;
+}
+.vfb-row td:first-child{
+border-left:4px solid #e30613;
+}
+.transfer-item{
+display:flex;
+align-items:center;
+gap:9px;
+padding:10px 0;
+border-bottom:1px solid #eee;
+font-size:12px;
+}
+.transfer-item small{
+display:block;
+color:#888;
+margin-top:2px;
+}
+.transfer-dot{
+display:grid;
+place-items:center;
+width:24px;
+height:24px;
+border-radius:50%;
+background:#eee;
+font-weight:1000;
+color:#111;
+flex:0 0 auto;
+}
+.transfer-dot.plus{
+color:#e30613;
+}
+.player-initial{
+width:105px;
+height:105px;
+border-radius:50%;
+background:#e30613;
+color:#fff;
+display:grid;
+place-items:center;
 font-size:28px;
+font-weight:1000;
 }
-
-.match-stat-row{
-grid-template-columns:1fr 65px 1fr;
-font-size:10px;
+.logo-large{
+width:48px;
+height:48px;
+border-radius:10px;
+font-size:11px;
 }
-
-.match-lineups{
-grid-template-columns:1fr;
+.team-logo{
+display:grid;
+place-items:center;
+flex:0 0 auto;
+border-radius:7px;
+background:#eee;
+color:#111;
+font-size:8px;
+font-weight:1000;
+letter-spacing:-.3px;
+border:1px solid #ddd;
 }
-
+.badge-vfb{background:#e30613;color:#fff;border-color:#e30613}
+.badge-bayern{background:#dc052d;color:#fff;border-color:#dc052d}
+.badge-koeln{background:#fff;color:#e30613;border-color:#e30613}
+.badge-hoffenheim{background:#005ca9;color:#fff;border-color:#005ca9}
+.badge-dortmund{background:#f7d000;color:#111;border-color:#111}
+.badge-paderborn{background:#0050a4;color:#fff;border-color:#0050a4}
+.badge-hamburg{background:#fff;color:#005ca9;border-color:#005ca9}
+.badge-gladbach{background:#fff;color:#111;border-color:#111}
+.badge-leverkusen{background:#e32219;color:#fff;border-color:#e32219}
+.badge-bremen{background:#007b49;color:#fff;border-color:#007b49}
+.badge-schalke{background:#0066b3;color:#fff;border-color:#0066b3}
+.badge-frankfurt{background:#e30613;color:#fff;border-color:#e30613}
+.badge-elversberg{background:#fff;color:#111;border-color:#111}
+.badge-union{background:#ed1c24;color:#fff;border-color:#ed1c24}
+.badge-freiburg{background:#d6001c;color:#fff;border-color:#d6001c}
+.badge-augsburg{background:#ba0c2f;color:#fff;border-color:#ba0c2f}
+.badge-leipzig{background:#fff;color:#d00027;border-color:#d00027}
+.badge-mainz{background:#c00;color:#fff;border-color:#c00}
+.badge-viking{background:#162b54;color:#fff;border-color:#162b54}
+.badge-slovan{background:#1b4fa3;color:#fff;border-color:#1b4fa3}
+.badge-atletico{background:#fff;color:#d71920;border-color:#d71920}
+.badge-galatasaray{background:#e30613;color:#f6c500;border-color:#e30613}
+.badge-inter{background:#111b5e;color:#fff;border-color:#111b5e}
+.badge-lille{background:#e30613;color:#fff;border-color:#e30613}
+.badge-brugge{background:#111;color:#ffd200;border-color:#111}
+.badge-psv{background:#fff;color:#e30613;border-color:#e30613}
+@media(max-width:700px){
+.fixture-row{
+grid-template-columns:28px 88px 1fr 52px;
+gap:7px;
 }
-
-</style>
-
-
-<style id="c1893-upgrades">
-.news{padding:10px 0}.news h3{font-size:15px;line-height:1.25;margin:4px 0}.news p{margin:3px 0;font-size:11px;line-height:1.35}.news .btn{padding:6px 9px;margin-top:6px;font-size:9px}.news-summary{color:#666;font-size:11px;line-height:1.35;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.news-time{font-size:9px;color:#999;margin-top:4px}.player-card{padding:12px}.player-photo-wrap{height:190px;background:linear-gradient(180deg,#fafafa,#ececec)}.player-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin-top:10px;padding-top:9px;border-top:1px solid #eee}.player-stat{background:#fafafa;border-radius:7px;padding:6px 2px}.player-stat strong{font-size:14px}.player-stat span{font-size:7px}.match-stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:15px}.match-stat{background:#f7f7f7;border-radius:9px;padding:10px;text-align:center}.match-stat strong{display:block;font-size:17px}.match-stat span{font-size:8px;color:#777;text-transform:uppercase;font-weight:800}.match-events-list{margin-top:16px;border-top:1px solid #eee}.match-timeline{display:flex;gap:10px;padding:9px 0;border-bottom:1px solid #eee;font-size:11px}.match-timeline .minute{width:42px;color:#e30613;font-weight:1000}.match-lineups{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-top:18px}.match-lineups h4{margin:0 0 8px}.lineup-list{font-size:11px;line-height:1.8}.lineup-list b{font-weight:900}.match-detail-link{display:inline-block;margin-top:15px;font-size:10px;color:#e30613;font-weight:900}
-@media(max-width:600px){.match-lineups{grid-template-columns:1fr}.match-stat-grid{grid-template-columns:repeat(2,1fr)}.player-photo-wrap{height:165px}}
+.fixture-date{
+font-size:9px;
+}
+.fixture-teams .team-line{
+font-size:11px;
+}
+.fixture-score strong{
+font-size:13px;
+}
+.team-logo{
+width:27px;
+height:27px;
+}
+.logo-large{
+width:42px;
+height:42px;
+}
+.nav{
+gap:11px!important;
+overflow-x:auto;
+}
+.squad-grid{
+grid-template-columns:repeat(2,1fr)!important;
+}
+.grid{
+grid-template-columns:1fr!important;
+}
+.fan-grid{
+grid-template-columns:1fr!important;
+}
+}
 </style>
 </head>
-
-
 <body>
 
-
-<!-- =========================
-TOP BAR
-========================= -->
-
 <div class="top">
-
-<div>
-CANNSTATT 1893 NEWS
+<div>⚽ CANNSTATT 1893 NEWS · VfB STUTTGART</div>
+<div class="visitor-ticker">
+<span class="visitor-live-dot"></span>
+<span id="visitorOnline">0</span> online
+<span class="visitor-separator">·</span>
+<span id="visitorToday">0</span> heute
+<span class="visitor-separator">·</span>
+<span id="visitorViews">0</span> Aufrufe
 </div>
-
-<div
-class="visitor-ticker"
->
-
-<span
-class="visitor-live-dot"
-></span>
-
-<span>
-LIVE
-</span>
-
-<span
-class="visitor-separator"
->
-•
-</span>
-
-<span>
-Online:
-</span>
-
-<strong
-id="visitorOnline"
->
-–
-</strong>
-
-<span
-class="visitor-separator"
->
-•
-</span>
-
-<span>
-Heute:
-</span>
-
-<strong
-id="visitorToday"
->
-–
-</strong>
-
-<span
-class="visitor-separator"
->
-•
-</span>
-
-<span>
-Aufrufe:
-</span>
-
-<strong
-id="visitorViews"
->
-–
-</strong>
-
 </div>
-
-<div>
-UNABHÄNGIGE VFB FANPAGE
-</div>
-
-</div>
-
-
-<!-- =========================
-HEADER
-========================= -->
 
 <header class="bar">
-
-<a
-class="brand"
-href="#"
->
-
-<span class="crest" aria-label="VfB Stuttgart">VfB<br><small>1893</small></span>
-
-<span>
-
+<a class="brand" href="#">
+<div class="crest">1893</div>
+<div>
 CANNSTATT 1893 NEWS
-
-<small>
-DEINE VFB FANPAGE AUS STUTTGART
-</small>
-
-</span>
-
+<small>VfB STUTTGART FANPAGE</small>
+</div>
 </a>
-
 
 <nav class="nav">
-
-<a href="#news">
-News
-</a>
-
-<a href="#spiele">
-Spiele
-</a>
-
-<a href="#tabelle">
-Tabelle
-</a>
-
-<a href="#transfers">
-Transfers
-</a>
-
-<a href="#kader">
-Kader
-</a>
-
-<a href="#fans">
-Fans
-</a>
-
+<a href="#news">News</a>
+<a href="#spielplan">Spielplan</a>
+<a href="#bundesliga">Bundesliga</a>
+<a href="#champions-league">Champions League</a>
+<a href="#transfers">Transfers</a>
+<a href="#kader">Kader</a>
+<a href="#fans">Fanbereich</a>
 </nav>
-
 </header>
 
-
-<!-- =========================
-HERO
-========================= -->
-
 <section class="hero">
-
 <div class="hero-inner">
-
-<div class="hero-kicker">
-VFB STUTTGART · SAISON 2026/27
-</div>
-
-<h1>
-WEISS. ROT.<br>
-
-<span>
-CANNSTATT.
-</span>
-
-</h1>
-
+<div class="hero-kicker">VfB STUTTGART · 1893</div>
+<h1>CANNSTATT<br><span>1893 NEWS</span></h1>
 <p>
-VfB-News, Spieltage, Ergebnisse und alles,
-was das weiß-rote Herz bewegt.
+Deine unabhängige VfB Stuttgart Fanpage mit News,
+Spielplan, Bundesliga-Tabelle, Champions League,
+Transfers, Kader und allem rund um den VfB.
 </p>
-
-<a class="btn" href="#news">
-AKTUELLE NEWS ↓
-</a>
-
+<a class="btn" href="#news">AKTUELLE NEWS →</a>
 </div>
-
 </section>
 
-
-<main class="wrap">
-
-
-<!-- =========================
-NEWS
-========================= -->
+<main>
 
 <section class="section" id="news">
-
-<h2>
-Aktuelle News
-</h2>
-
+<div class="wrap">
+<h2>Aktuelle News</h2>
 <div class="line"></div>
-
-
-<div class="notice"><b>Stand: 06.09.2026</b> · Verifizierte Saison- und Spieldaten. Zukünftige Anstoßzeiten werden aktualisiert, sobald sie offiziell terminiert sind.</div>
-
 
 <div class="grid">
-
+<div class="card">
+<div id="newsList"></div>
+</div>
 
 <div class="card">
-
-<div id="newsList">
-
-<article class="news"><span class="tag">VFB AKTUELL</span><span class="news-time">04.09.2026 · VfB Stuttgart</span><h3><a href="https://www.vfb.de/de/vfb/profis/saison/bundesliga/2627/2-vfb-stuttgart----1--fc-koeln-/" target="_blank" rel="noopener">Ein weiß-roter Festabend: VfB schlägt Köln 4:1</a></h3><div class="news-summary">Der VfB gewinnt sein erstes Bundesliga-Heimspiel mit 4:1. El Khannouss, Prömel, Demirovic und Vagnoman treffen.</div><a class="btn" href="https://www.vfb.de/de/vfb/profis/saison/bundesliga/2627/2-vfb-stuttgart----1--fc-koeln-/" target="_blank" rel="noopener">Vollständigen Beitrag lesen →</a></article>
-
-<article class="news"><span class="tag">VFB AKTUELL</span><span class="news-time">04.09.2026 · VfB Stuttgart</span><h3><a href="https://www.vfb.de/de/vfb/aktuell/neues/profis/2627/aufstellung-vfb-stuttgart-gegen-1--fc-koeln/" target="_blank" rel="noopener">Zwei Änderungen in der Startelf</a></h3><div class="news-summary">Chris Führich und Bilal El Khannouss rückten gegen Köln neu in die Anfangsformation.</div><a class="btn" href="https://www.vfb.de/de/vfb/aktuell/neues/profis/2627/aufstellung-vfb-stuttgart-gegen-1--fc-koeln/" target="_blank" rel="noopener">Vollständigen Beitrag lesen →</a></article>
-
-<article class="news"><span class="tag">TRANSFER</span><span class="news-time">04.09.2026 · VfB Stuttgart</span><h3><a href="https://www.vfb.de/de/vfb/aktuell/neues/profis/2627/jeremy-arevalo-wird-verliehen/" target="_blank" rel="noopener">Jeremy Arévalo wird an Estrela Amadora verliehen</a></h3><div class="news-summary">Der 21-jährige Stürmer wechselt für die Saison 2026/27 auf Leihbasis nach Portugal.</div><a class="btn" href="https://www.vfb.de/de/vfb/aktuell/neues/profis/2627/jeremy-arevalo-wird-verliehen/" target="_blank" rel="noopener">Vollständigen Beitrag lesen →</a></article>
-
-<article class="news"><span class="tag">CHAMPIONS LEAGUE</span><span class="news-time">02.09.2026 · VfB Stuttgart</span><h3><a href="https://www.vfb.de/de/vfb/aktuell/neues/profis/2627/vfb-kader-fuer-uefa-champions-league-ligaphase/" target="_blank" rel="noopener">VfB meldet Kader für die Champions League</a></h3><div class="news-summary">Der VfB hat seinen Kader für die acht Spiele der Ligaphase eingereicht.</div><a class="btn" href="https://www.vfb.de/de/vfb/aktuell/neues/profis/2627/vfb-kader-fuer-uefa-champions-league-ligaphase/" target="_blank" rel="noopener">Vollständigen Beitrag lesen →</a></article>
-
-<article class="news"><span class="tag">VORBLICK</span><span class="news-time">09.09.2026 · 18:45 Uhr</span><h3><a href="https://www.vfb.de/en/vfb/latest/news/professionals/2627/uefa-champions-league-ansetzungen-fuer-den-vfb-in-ligaphase-/" target="_blank" rel="noopener">Viking FK wartet zum Champions-League-Auftakt</a></h3><div class="news-summary">Am Mittwoch empfängt der VfB Viking Stavanger um 18:45 Uhr in der MHPArena.</div><a class="btn" href="https://www.vfb.de/en/vfb/latest/news/professionals/2627/uefa-champions-league-ansetzungen-fuer-den-vfb-in-ligaphase-/" target="_blank" rel="noopener">Vollständigen Beitrag lesen →</a></article>
-
-<div class="notice" style="margin-top:12px"><b>Weitere VfB-News bei kicker:</b> <a href="https://www.kicker.de/vfb-stuttgart/team-news" target="_blank" rel="noopener" style="color:#e30613;font-weight:900">Aktuelle kicker-Nachrichten öffnen →</a></div>
-
+<div class="next-label">NÄCHSTES SPIEL</div>
+<div id="nextGame"></div>
 </div>
-
-<div class="next">
-
-<div class="next-label">
-NÄCHSTES SPIEL
 </div>
-
-<div id="nextGame">
-<div class="next-label">NÄCHSTES SPIEL</div><div style="display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:10px;margin-top:12px;text-align:center"><div><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10269.png" alt="VfB Stuttgart" loading="lazy" onerror="this.style.display='none'"><strong>VfB Stuttgart</strong></div><b>VS</b><div><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10249.png" alt="Viking FK" loading="lazy" onerror="this.style.display='none'"><strong>Viking FK</strong></div></div><p>09.09.2026 · 18:45 Uhr</p><div class="competition">UEFA Champions League · MHPArena Stuttgart</div>
 </div>
-
-</div>
-
-</div>
-
-
-</div>
-
-
 </section>
 
-
-<!-- =========================
-SPIELPLAN
-========================= -->
-
-<section class="section" id="spiele">
-
-<h2>
-Spielplan
-</h2>
-
+<section class="section" id="spielplan">
+<div class="wrap">
+<h2>Spielplan</h2>
 <div class="line"></div>
 
-
-<!-- BUNDESLIGA -->
+<div class="notice">
+Alle Spieltermine werden anhand der verfügbaren offiziellen
+Spielplaninformationen gepflegt. Änderungen durch DFB,
+DFL oder UEFA können auftreten.
+</div>
 
 <div class="card">
+<div class="competition-title">
+<div class="icon">🇩🇪</div>
+<div>
+<h3>Bundesliga</h3>
+<span>Saison 2026/27</span>
+</div>
+</div>
+<div id="bundesligaFixtures"></div>
 
 <div class="competition-title">
-
-<div class="icon">
-🇩🇪
-</div>
-
+<div class="icon">🏆</div>
 <div>
-
-<h3>
-Bundesliga
-</h3>
-
-<span>
-VfB Stuttgart – Saison 2026/27
-</span>
-
+<h3>Champions League</h3>
+<span>Ligaphase 2026/27</span>
 </div>
-
 </div>
-
-
-<div id="bundesligaFixtures">
-
-<div class="fixture match-clickable" data-match-id="bl-0"><div class="date">1. Spieltag · 28.08.2026 · 20:30</div><div style="flex:1;min-width:0"><div class="team-line"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/9823.png" alt="FC Bayern München" loading="lazy" onerror="this.style.display='none'"><strong>FC Bayern München</strong></div><div class="team-line" style="margin-top:5px"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10269.png" alt="VfB Stuttgart" loading="lazy" onerror="this.style.display='none'"><strong>VfB Stuttgart</strong></div><div class="competition">Bundesliga</div><div class="match-hint">MATCHCENTER ÖFFNEN</div></div><div class="fixture-score">5 : 1</div><div class="status">BEENDET</div></div>
-
-<div class="fixture match-clickable" data-match-id="bl-1"><div class="date">2. Spieltag · 04.09.2026 · 20:30</div><div style="flex:1;min-width:0"><div class="team-line"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10269.png" alt="VfB Stuttgart" loading="lazy" onerror="this.style.display='none'"><strong>VfB Stuttgart</strong></div><div class="team-line" style="margin-top:5px"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/8722.png" alt="1. FC Köln" loading="lazy" onerror="this.style.display='none'"><strong>1. FC Köln</strong></div><div class="competition">Bundesliga</div><div class="match-hint">MATCHCENTER ÖFFNEN</div></div><div class="fixture-score">4 : 1</div><div class="status">BEENDET</div></div>
-
-<div class="fixture match-clickable" data-match-id="bl-2"><div class="date">3. Spieltag · 12.09.2026 · 15:30</div><div style="flex:1;min-width:0"><div class="team-line"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/8226.png" alt="TSG Hoffenheim" loading="lazy" onerror="this.style.display='none'"><strong>TSG Hoffenheim</strong></div><div class="team-line" style="margin-top:5px"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10269.png" alt="VfB Stuttgart" loading="lazy" onerror="this.style.display='none'"><strong>VfB Stuttgart</strong></div><div class="competition">Bundesliga</div><div class="match-hint">MATCHCENTER ÖFFNEN</div></div><div class="fixture-score">– : –</div><div class="status">ANSTEHEND</div></div>
-
-<div class="fixture match-clickable" data-match-id="bl-3"><div class="date">4. Spieltag · 19.09.2026 · 18:30</div><div style="flex:1;min-width:0"><div class="team-line"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10269.png" alt="VfB Stuttgart" loading="lazy" onerror="this.style.display='none'"><strong>VfB Stuttgart</strong></div><div class="team-line" style="margin-top:5px"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/9789.png" alt="Borussia Dortmund" loading="lazy" onerror="this.style.display='none'"><strong>Borussia Dortmund</strong></div><div class="competition">Bundesliga</div><div class="match-hint">MATCHCENTER ÖFFNEN</div></div><div class="fixture-score">– : –</div><div class="status">ANSTEHEND</div></div>
-
-<div class="fixture match-clickable" data-match-id="bl-4"><div class="date">09.–11.10.2026 · 15:30</div><div style="flex:1;min-width:0"><div class="team-line"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/8464.png" alt="SC Paderborn 07" loading="lazy" onerror="this.style.display='none'"><strong>SC Paderborn 07</strong></div><div class="team-line" style="margin-top:5px"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10269.png" alt="VfB Stuttgart" loading="lazy" onerror="this.style.display='none'"><strong>VfB Stuttgart</strong></div><div class="competition">Bundesliga</div><div class="match-hint">MATCHCENTER ÖFFNEN</div></div><div class="fixture-score">– : –</div><div class="status">ANSTEHEND</div></div>
-
-<div class="fixture match-clickable" data-match-id="bl-5"><div class="date">16.–18.10.2026 · 15:30</div><div style="flex:1;min-width:0"><div class="team-line"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/9790.png" alt="Hamburger SV" loading="lazy" onerror="this.style.display='none'"><strong>Hamburger SV</strong></div><div class="team-line" style="margin-top:5px"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10269.png" alt="VfB Stuttgart" loading="lazy" onerror="this.style.display='none'"><strong>VfB Stuttgart</strong></div><div class="competition">Bundesliga</div><div class="match-hint">MATCHCENTER ÖFFNEN</div></div><div class="fixture-score">– : –</div><div class="status">ANSTEHEND</div></div>
-
-<div class="fixture match-clickable" data-match-id="bl-6"><div class="date">23.–25.10.2026 · 15:30</div><div style="flex:1;min-width:0"><div class="team-line"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10269.png" alt="VfB Stuttgart" loading="lazy" onerror="this.style.display='none'"><strong>VfB Stuttgart</strong></div><div class="team-line" style="margin-top:5px"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/9907.png" alt="Borussia Mönchengladbach" loading="lazy" onerror="this.style.display='none'"><strong>Borussia Mönchengladbach</strong></div><div class="competition">Bundesliga</div><div class="match-hint">MATCHCENTER ÖFFNEN</div></div><div class="fixture-score">– : –</div><div class="status">ANSTEHEND</div></div>
-
-<div class="fixture match-clickable" data-match-id="bl-7"><div class="date">30.10.–01.11.2026 · 15:30</div><div style="flex:1;min-width:0"><div class="team-line"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/8178.png" alt="Bayer 04 Leverkusen" loading="lazy" onerror="this.style.display='none'"><strong>Bayer 04 Leverkusen</strong></div><div class="team-line" style="margin-top:5px"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10269.png" alt="VfB Stuttgart" loading="lazy" onerror="this.style.display='none'"><strong>VfB Stuttgart</strong></div><div class="competition">Bundesliga</div><div class="match-hint">MATCHCENTER ÖFFNEN</div></div><div class="fixture-score">– : –</div><div class="status">ANSTEHEND</div></div>
-
-<div class="fixture match-clickable" data-match-id="bl-8"><div class="date">06.–08.11.2026 · 15:30</div><div style="flex:1;min-width:0"><div class="team-line"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10269.png" alt="VfB Stuttgart" loading="lazy" onerror="this.style.display='none'"><strong>VfB Stuttgart</strong></div><div class="team-line" style="margin-top:5px"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/8696.png" alt="SV Werder Bremen" loading="lazy" onerror="this.style.display='none'"><strong>SV Werder Bremen</strong></div><div class="competition">Bundesliga</div><div class="match-hint">MATCHCENTER ÖFFNEN</div></div><div class="fixture-score">– : –</div><div class="status">ANSTEHEND</div></div>
-
-<div class="fixture match-clickable" data-match-id="bl-9"><div class="date">20.–22.11.2026 · 15:30</div><div style="flex:1;min-width:0"><div class="team-line"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10189.png" alt="FC Schalke 04" loading="lazy" onerror="this.style.display='none'"><strong>FC Schalke 04</strong></div><div class="team-line" style="margin-top:5px"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10269.png" alt="VfB Stuttgart" loading="lazy" onerror="this.style.display='none'"><strong>VfB Stuttgart</strong></div><div class="competition">Bundesliga</div><div class="match-hint">MATCHCENTER ÖFFNEN</div></div><div class="fixture-score">– : –</div><div class="status">ANSTEHEND</div></div>
-
-<div class="fixture match-clickable" data-match-id="bl-10"><div class="date">27.–29.11.2026 · 15:30</div><div style="flex:1;min-width:0"><div class="team-line"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10269.png" alt="VfB Stuttgart" loading="lazy" onerror="this.style.display='none'"><strong>VfB Stuttgart</strong></div><div class="team-line" style="margin-top:5px"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/9810.png" alt="Eintracht Frankfurt" loading="lazy" onerror="this.style.display='none'"><strong>Eintracht Frankfurt</strong></div><div class="competition">Bundesliga</div><div class="match-hint">MATCHCENTER ÖFFNEN</div></div><div class="fixture-score">– : –</div><div class="status">ANSTEHEND</div></div>
-
-<div class="fixture match-clickable" data-match-id="bl-11"><div class="date">04.–06.12.2026 · 15:30</div><div style="flex:1;min-width:0"><div class="team-line"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10089.png" alt="SV Elversberg" loading="lazy" onerror="this.style.display='none'"><strong>SV Elversberg</strong></div><div class="team-line" style="margin-top:5px"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10269.png" alt="VfB Stuttgart" loading="lazy" onerror="this.style.display='none'"><strong>VfB Stuttgart</strong></div><div class="competition">Bundesliga</div><div class="match-hint">MATCHCENTER ÖFFNEN</div></div><div class="fixture-score">– : –</div><div class="status">ANSTEHEND</div></div>
-
-<div class="fixture match-clickable" data-match-id="bl-12"><div class="date">11.–13.12.2026 · 15:30</div><div style="flex:1;min-width:0"><div class="team-line"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10269.png" alt="VfB Stuttgart" loading="lazy" onerror="this.style.display='none'"><strong>VfB Stuttgart</strong></div><div class="team-line" style="margin-top:5px"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10220.png" alt="1. FC Union Berlin" loading="lazy" onerror="this.style.display='none'"><strong>1. FC Union Berlin</strong></div><div class="competition">Bundesliga</div><div class="match-hint">MATCHCENTER ÖFFNEN</div></div><div class="fixture-score">– : –</div><div class="status">ANSTEHEND</div></div>
-
-<div class="fixture match-clickable" data-match-id="bl-13"><div class="date">18.–20.12.2026 · 15:30</div><div style="flex:1;min-width:0"><div class="team-line"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/8358.png" alt="SC Freiburg" loading="lazy" onerror="this.style.display='none'"><strong>SC Freiburg</strong></div><div class="team-line" style="margin-top:5px"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10269.png" alt="VfB Stuttgart" loading="lazy" onerror="this.style.display='none'"><strong>VfB Stuttgart</strong></div><div class="competition">Bundesliga</div><div class="match-hint">MATCHCENTER ÖFFNEN</div></div><div class="fixture-score">– : –</div><div class="status">ANSTEHEND</div></div>
-
-<div class="fixture match-clickable" data-match-id="bl-14"><div class="date">08.–10.01.2027 · 15:30</div><div style="flex:1;min-width:0"><div class="team-line"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10269.png" alt="VfB Stuttgart" loading="lazy" onerror="this.style.display='none'"><strong>VfB Stuttgart</strong></div><div class="team-line" style="margin-top:5px"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/8406.png" alt="FC Augsburg" loading="lazy" onerror="this.style.display='none'"><strong>FC Augsburg</strong></div><div class="competition">Bundesliga</div><div class="match-hint">MATCHCENTER ÖFFNEN</div></div><div class="fixture-score">– : –</div><div class="status">ANSTEHEND</div></div>
-
-<div class="fixture match-clickable" data-match-id="bl-15"><div class="date">15.–17.01.2027 · 15:30</div><div style="flex:1;min-width:0"><div class="team-line"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/178475.png" alt="RB Leipzig" loading="lazy" onerror="this.style.display='none'"><strong>RB Leipzig</strong></div><div class="team-line" style="margin-top:5px"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10269.png" alt="VfB Stuttgart" loading="lazy" onerror="this.style.display='none'"><strong>VfB Stuttgart</strong></div><div class="competition">Bundesliga</div><div class="match-hint">MATCHCENTER ÖFFNEN</div></div><div class="fixture-score">– : –</div><div class="status">ANSTEHEND</div></div>
-
-<div class="fixture match-clickable" data-match-id="bl-16"><div class="date">15.–17.01.2027 · 15:30</div><div style="flex:1;min-width:0"><div class="team-line"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10269.png" alt="VfB Stuttgart" loading="lazy" onerror="this.style.display='none'"><strong>VfB Stuttgart</strong></div><div class="team-line" style="margin-top:5px"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/9905.png" alt="1. FSV Mainz 05" loading="lazy" onerror="this.style.display='none'"><strong>1. FSV Mainz 05</strong></div><div class="competition">Bundesliga</div><div class="match-hint">MATCHCENTER ÖFFNEN</div></div><div class="fixture-score">– : –</div><div class="status">ANSTEHEND</div></div>
-
-<div class="fixture match-clickable" data-match-id="bl-17"><div class="date">22.–24.01.2027 · 15:30</div><div style="flex:1;min-width:0"><div class="team-line"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10269.png" alt="VfB Stuttgart" loading="lazy" onerror="this.style.display='none'"><strong>VfB Stuttgart</strong></div><div class="team-line" style="margin-top:5px"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/9823.png" alt="FC Bayern München" loading="lazy" onerror="this.style.display='none'"><strong>FC Bayern München</strong></div><div class="competition">Bundesliga</div><div class="match-hint">MATCHCENTER ÖFFNEN</div></div><div class="fixture-score">– : –</div><div class="status">ANSTEHEND</div></div>
-
-<div class="fixture match-clickable" data-match-id="bl-18"><div class="date">29.–31.01.2027 · 15:30</div><div style="flex:1;min-width:0"><div class="team-line"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/8722.png" alt="1. FC Köln" loading="lazy" onerror="this.style.display='none'"><strong>1. FC Köln</strong></div><div class="team-line" style="margin-top:5px"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10269.png" alt="VfB Stuttgart" loading="lazy" onerror="this.style.display='none'"><strong>VfB Stuttgart</strong></div><div class="competition">Bundesliga</div><div class="match-hint">MATCHCENTER ÖFFNEN</div></div><div class="fixture-score">– : –</div><div class="status">ANSTEHEND</div></div>
-
-<div class="fixture match-clickable" data-match-id="bl-19"><div class="date">05.–07.02.2027 · 15:30</div><div style="flex:1;min-width:0"><div class="team-line"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10269.png" alt="VfB Stuttgart" loading="lazy" onerror="this.style.display='none'"><strong>VfB Stuttgart</strong></div><div class="team-line" style="margin-top:5px"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/8226.png" alt="TSG Hoffenheim" loading="lazy" onerror="this.style.display='none'"><strong>TSG Hoffenheim</strong></div><div class="competition">Bundesliga</div><div class="match-hint">MATCHCENTER ÖFFNEN</div></div><div class="fixture-score">– : –</div><div class="status">ANSTEHEND</div></div>
-
-<div class="fixture match-clickable" data-match-id="bl-20"><div class="date">12.–14.02.2027 · 15:30</div><div style="flex:1;min-width:0"><div class="team-line"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/9789.png" alt="Borussia Dortmund" loading="lazy" onerror="this.style.display='none'"><strong>Borussia Dortmund</strong></div><div class="team-line" style="margin-top:5px"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10269.png" alt="VfB Stuttgart" loading="lazy" onerror="this.style.display='none'"><strong>VfB Stuttgart</strong></div><div class="competition">Bundesliga</div><div class="match-hint">MATCHCENTER ÖFFNEN</div></div><div class="fixture-score">– : –</div><div class="status">ANSTEHEND</div></div>
-
-<div class="fixture match-clickable" data-match-id="bl-21"><div class="date">19.–21.02.2027 · 15:30</div><div style="flex:1;min-width:0"><div class="team-line"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10269.png" alt="VfB Stuttgart" loading="lazy" onerror="this.style.display='none'"><strong>VfB Stuttgart</strong></div><div class="team-line" style="margin-top:5px"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/8464.png" alt="SC Paderborn 07" loading="lazy" onerror="this.style.display='none'"><strong>SC Paderborn 07</strong></div><div class="competition">Bundesliga</div><div class="match-hint">MATCHCENTER ÖFFNEN</div></div><div class="fixture-score">– : –</div><div class="status">ANSTEHEND</div></div>
-
-<div class="fixture match-clickable" data-match-id="bl-22"><div class="date">26.–28.02.2027 · 15:30</div><div style="flex:1;min-width:0"><div class="team-line"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10269.png" alt="VfB Stuttgart" loading="lazy" onerror="this.style.display='none'"><strong>VfB Stuttgart</strong></div><div class="team-line" style="margin-top:5px"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/9790.png" alt="Hamburger SV" loading="lazy" onerror="this.style.display='none'"><strong>Hamburger SV</strong></div><div class="competition">Bundesliga</div><div class="match-hint">MATCHCENTER ÖFFNEN</div></div><div class="fixture-score">– : –</div><div class="status">ANSTEHEND</div></div>
-
-<div class="fixture match-clickable" data-match-id="bl-23"><div class="date">02.–04.03.2027 · 20:30</div><div style="flex:1;min-width:0"><div class="team-line"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/9907.png" alt="Borussia Mönchengladbach" loading="lazy" onerror="this.style.display='none'"><strong>Borussia Mönchengladbach</strong></div><div class="team-line" style="margin-top:5px"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10269.png" alt="VfB Stuttgart" loading="lazy" onerror="this.style.display='none'"><strong>VfB Stuttgart</strong></div><div class="competition">Bundesliga</div><div class="match-hint">MATCHCENTER ÖFFNEN</div></div><div class="fixture-score">– : –</div><div class="status">ANSTEHEND</div></div>
-
-<div class="fixture match-clickable" data-match-id="bl-24"><div class="date">05.–07.03.2027 · 15:30</div><div style="flex:1;min-width:0"><div class="team-line"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10269.png" alt="VfB Stuttgart" loading="lazy" onerror="this.style.display='none'"><strong>VfB Stuttgart</strong></div><div class="team-line" style="margin-top:5px"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/8178.png" alt="Bayer 04 Leverkusen" loading="lazy" onerror="this.style.display='none'"><strong>Bayer 04 Leverkusen</strong></div><div class="competition">Bundesliga</div><div class="match-hint">MATCHCENTER ÖFFNEN</div></div><div class="fixture-score">– : –</div><div class="status">ANSTEHEND</div></div>
-
-<div class="fixture match-clickable" data-match-id="bl-25"><div class="date">12.–14.03.2027 · 15:30</div><div style="flex:1;min-width:0"><div class="team-line"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/8696.png" alt="SV Werder Bremen" loading="lazy" onerror="this.style.display='none'"><strong>SV Werder Bremen</strong></div><div class="team-line" style="margin-top:5px"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10269.png" alt="VfB Stuttgart" loading="lazy" onerror="this.style.display='none'"><strong>VfB Stuttgart</strong></div><div class="competition">Bundesliga</div><div class="match-hint">MATCHCENTER ÖFFNEN</div></div><div class="fixture-score">– : –</div><div class="status">ANSTEHEND</div></div>
-
-<div class="fixture match-clickable" data-match-id="bl-26"><div class="date">19.–21.03.2027 · 15:30</div><div style="flex:1;min-width:0"><div class="team-line"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10269.png" alt="VfB Stuttgart" loading="lazy" onerror="this.style.display='none'"><strong>VfB Stuttgart</strong></div><div class="team-line" style="margin-top:5px"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10189.png" alt="FC Schalke 04" loading="lazy" onerror="this.style.display='none'"><strong>FC Schalke 04</strong></div><div class="competition">Bundesliga</div><div class="match-hint">MATCHCENTER ÖFFNEN</div></div><div class="fixture-score">– : –</div><div class="status">ANSTEHEND</div></div>
-
-<div class="fixture match-clickable" data-match-id="bl-27"><div class="date">02.–04.04.2027 · 15:30</div><div style="flex:1;min-width:0"><div class="team-line"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/9810.png" alt="Eintracht Frankfurt" loading="lazy" onerror="this.style.display='none'"><strong>Eintracht Frankfurt</strong></div><div class="team-line" style="margin-top:5px"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10269.png" alt="VfB Stuttgart" loading="lazy" onerror="this.style.display='none'"><strong>VfB Stuttgart</strong></div><div class="competition">Bundesliga</div><div class="match-hint">MATCHCENTER ÖFFNEN</div></div><div class="fixture-score">– : –</div><div class="status">ANSTEHEND</div></div>
-
-<div class="fixture match-clickable" data-match-id="bl-28"><div class="date">09.–11.04.2027 · 15:30</div><div style="flex:1;min-width:0"><div class="team-line"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10269.png" alt="VfB Stuttgart" loading="lazy" onerror="this.style.display='none'"><strong>VfB Stuttgart</strong></div><div class="team-line" style="margin-top:5px"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10089.png" alt="SV Elversberg" loading="lazy" onerror="this.style.display='none'"><strong>SV Elversberg</strong></div><div class="competition">Bundesliga</div><div class="match-hint">MATCHCENTER ÖFFNEN</div></div><div class="fixture-score">– : –</div><div class="status">ANSTEHEND</div></div>
-
-<div class="fixture match-clickable" data-match-id="bl-29"><div class="date">16.–18.04.2027 · 15:30</div><div style="flex:1;min-width:0"><div class="team-line"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10220.png" alt="1. FC Union Berlin" loading="lazy" onerror="this.style.display='none'"><strong>1. FC Union Berlin</strong></div><div class="team-line" style="margin-top:5px"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10269.png" alt="VfB Stuttgart" loading="lazy" onerror="this.style.display='none'"><strong>VfB Stuttgart</strong></div><div class="competition">Bundesliga</div><div class="match-hint">MATCHCENTER ÖFFNEN</div></div><div class="fixture-score">– : –</div><div class="status">ANSTEHEND</div></div>
-
-<div class="fixture match-clickable" data-match-id="bl-30"><div class="date">23.–25.04.2027 · 15:30</div><div style="flex:1;min-width:0"><div class="team-line"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10269.png" alt="VfB Stuttgart" loading="lazy" onerror="this.style.display='none'"><strong>VfB Stuttgart</strong></div><div class="team-line" style="margin-top:5px"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/8358.png" alt="SC Freiburg" loading="lazy" onerror="this.style.display='none'"><strong>SC Freiburg</strong></div><div class="competition">Bundesliga</div><div class="match-hint">MATCHCENTER ÖFFNEN</div></div><div class="fixture-score">– : –</div><div class="status">ANSTEHEND</div></div>
-
-<div class="fixture match-clickable" data-match-id="bl-31"><div class="date">07.–09.05.2027 · 15:30</div><div style="flex:1;min-width:0"><div class="team-line"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/8406.png" alt="FC Augsburg" loading="lazy" onerror="this.style.display='none'"><strong>FC Augsburg</strong></div><div class="team-line" style="margin-top:5px"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10269.png" alt="VfB Stuttgart" loading="lazy" onerror="this.style.display='none'"><strong>VfB Stuttgart</strong></div><div class="competition">Bundesliga</div><div class="match-hint">MATCHCENTER ÖFFNEN</div></div><div class="fixture-score">– : –</div><div class="status">ANSTEHEND</div></div>
-
-<div class="fixture match-clickable" data-match-id="bl-32"><div class="date">14.–16.05.2027 · 15:30</div><div style="flex:1;min-width:0"><div class="team-line"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10269.png" alt="VfB Stuttgart" loading="lazy" onerror="this.style.display='none'"><strong>VfB Stuttgart</strong></div><div class="team-line" style="margin-top:5px"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/178475.png" alt="RB Leipzig" loading="lazy" onerror="this.style.display='none'"><strong>RB Leipzig</strong></div><div class="competition">Bundesliga</div><div class="match-hint">MATCHCENTER ÖFFNEN</div></div><div class="fixture-score">– : –</div><div class="status">ANSTEHEND</div></div>
-
-<div class="fixture match-clickable" data-match-id="bl-33"><div class="date">22.05.2027 · 15:30</div><div style="flex:1;min-width:0"><div class="team-line"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/9905.png" alt="1. FSV Mainz 05" loading="lazy" onerror="this.style.display='none'"><strong>1. FSV Mainz 05</strong></div><div class="team-line" style="margin-top:5px"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10269.png" alt="VfB Stuttgart" loading="lazy" onerror="this.style.display='none'"><strong>VfB Stuttgart</strong></div><div class="competition">Bundesliga</div><div class="match-hint">MATCHCENTER ÖFFNEN</div></div><div class="fixture-score">– : –</div><div class="status">ANSTEHEND</div></div>
-
+<div id="championsLeagueFixtures"></div>
 </div>
-
 </div>
-
-
-<br>
-
-
-<!-- CHAMPIONS LEAGUE -->
-
-<div class="card">
-
-<div class="competition-title">
-
-<div class="icon">
-⭐
-</div>
-
-<div>
-
-<h3>
-Champions League
-</h3>
-
-<span>
-VfB Stuttgart – Königsklasse 2026/27
-</span>
-
-</div>
-
-</div>
-
-
-<div id="championsLeagueFixtures">
-
-<div class="fixture match-clickable" data-match-id="cl-0"><div class="date">1. Spieltag · 09.09.2026 · 18:45</div><div style="flex:1;min-width:0"><div class="team-line"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10269.png" alt="VfB Stuttgart" loading="lazy" onerror="this.style.display='none'"><strong>VfB Stuttgart</strong></div><div class="team-line" style="margin-top:5px"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10249.png" alt="Viking FK" loading="lazy" onerror="this.style.display='none'"><strong>Viking FK</strong></div><div class="competition">UEFA Champions League</div><div class="match-hint">MATCHCENTER ÖFFNEN</div></div><div class="fixture-score">– : –</div><div class="status">ANSTEHEND</div></div>
-
-<div class="fixture match-clickable" data-match-id="cl-1"><div class="date">2. Spieltag · 14.10.2026 · 21:00</div><div style="flex:1;min-width:0"><div class="team-line"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10019.png" alt="Slovan Bratislava" loading="lazy" onerror="this.style.display='none'"><strong>Slovan Bratislava</strong></div><div class="team-line" style="margin-top:5px"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10269.png" alt="VfB Stuttgart" loading="lazy" onerror="this.style.display='none'"><strong>VfB Stuttgart</strong></div><div class="competition">UEFA Champions League</div><div class="match-hint">MATCHCENTER ÖFFNEN</div></div><div class="fixture-score">– : –</div><div class="status">ANSTEHEND</div></div>
-
-<div class="fixture match-clickable" data-match-id="cl-2"><div class="date">3. Spieltag · 20.10.2026 · 21:00</div><div style="flex:1;min-width:0"><div class="team-line"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10269.png" alt="VfB Stuttgart" loading="lazy" onerror="this.style.display='none'"><strong>VfB Stuttgart</strong></div><div class="team-line" style="margin-top:5px"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/9906.png" alt="Atlético Madrid" loading="lazy" onerror="this.style.display='none'"><strong>Atlético Madrid</strong></div><div class="competition">UEFA Champions League</div><div class="match-hint">MATCHCENTER ÖFFNEN</div></div><div class="fixture-score">– : –</div><div class="status">ANSTEHEND</div></div>
-
-<div class="fixture match-clickable" data-match-id="cl-3"><div class="date">4. Spieltag · 03.11.2026 · 18:45</div><div style="flex:1;min-width:0"><div class="team-line"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/8633.png" alt="Galatasaray Istanbul" loading="lazy" onerror="this.style.display='none'"><strong>Galatasaray Istanbul</strong></div><div class="team-line" style="margin-top:5px"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10269.png" alt="VfB Stuttgart" loading="lazy" onerror="this.style.display='none'"><strong>VfB Stuttgart</strong></div><div class="competition">UEFA Champions League</div><div class="match-hint">MATCHCENTER ÖFFNEN</div></div><div class="fixture-score">– : –</div><div class="status">ANSTEHEND</div></div>
-
-<div class="fixture match-clickable" data-match-id="cl-4"><div class="date">5. Spieltag · 25.11.2026 · 21:00</div><div style="flex:1;min-width:0"><div class="team-line"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/8636.png" alt="Inter Mailand" loading="lazy" onerror="this.style.display='none'"><strong>Inter Mailand</strong></div><div class="team-line" style="margin-top:5px"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10269.png" alt="VfB Stuttgart" loading="lazy" onerror="this.style.display='none'"><strong>VfB Stuttgart</strong></div><div class="competition">UEFA Champions League</div><div class="match-hint">MATCHCENTER ÖFFNEN</div></div><div class="fixture-score">– : –</div><div class="status">ANSTEHEND</div></div>
-
-<div class="fixture match-clickable" data-match-id="cl-5"><div class="date">6. Spieltag · 09.12.2026 · 21:00</div><div style="flex:1;min-width:0"><div class="team-line"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10269.png" alt="VfB Stuttgart" loading="lazy" onerror="this.style.display='none'"><strong>VfB Stuttgart</strong></div><div class="team-line" style="margin-top:5px"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/8639.png" alt="LOSC Lille" loading="lazy" onerror="this.style.display='none'"><strong>LOSC Lille</strong></div><div class="competition">UEFA Champions League</div><div class="match-hint">MATCHCENTER ÖFFNEN</div></div><div class="fixture-score">– : –</div><div class="status">ANSTEHEND</div></div>
-
-<div class="fixture match-clickable" data-match-id="cl-6"><div class="date">7. Spieltag · 19.01.2027 · 21:00</div><div style="flex:1;min-width:0"><div class="team-line"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10269.png" alt="VfB Stuttgart" loading="lazy" onerror="this.style.display='none'"><strong>VfB Stuttgart</strong></div><div class="team-line" style="margin-top:5px"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/9987.png" alt="Club Brügge" loading="lazy" onerror="this.style.display='none'"><strong>Club Brügge</strong></div><div class="competition">UEFA Champions League</div><div class="match-hint">MATCHCENTER ÖFFNEN</div></div><div class="fixture-score">– : –</div><div class="status">ANSTEHEND</div></div>
-
-<div class="fixture match-clickable" data-match-id="cl-7"><div class="date">8. Spieltag · 27.01.2027 · 21:00</div><div style="flex:1;min-width:0"><div class="team-line"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/8640.png" alt="PSV Eindhoven" loading="lazy" onerror="this.style.display='none'"><strong>PSV Eindhoven</strong></div><div class="team-line" style="margin-top:5px"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10269.png" alt="VfB Stuttgart" loading="lazy" onerror="this.style.display='none'"><strong>VfB Stuttgart</strong></div><div class="competition">UEFA Champions League</div><div class="match-hint">MATCHCENTER ÖFFNEN</div></div><div class="fixture-score">– : –</div><div class="status">ANSTEHEND</div></div>
-
-</div>
-
-</div>
-
-
 </section>
-<a href="#tabelle">
-Tabelle
-</a>
 
-<a href="#transfers">
-Transfers
-</a>
+<section class="section" id="bundesliga">
+<div class="wrap">
+<h2>Bundesliga</h2>
+<div class="line"></div>
+<div class="card">
+<div id="table"></div>
+</div>
+</div>
+</section>
 
-<a href="#kader">
-Kader
-</a>
+<section class="section" id="champions-league">
+<div class="wrap">
+<h2>Champions League</h2>
+<div class="line"></div>
+<div class="card">
+<div class="notice">
+Der VfB Stuttgart spielt 2026/27 in der Champions-League-Ligaphase.
+</div>
+<div id="clInfo"></div>
+</div>
+</div>
+</section>
 
-<a href="#fans">
-Fans
-</a>
+<section class="section" id="transfers">
+<div class="wrap">
+<h2>Transfers 2026/27</h2>
+<div class="line"></div>
 
-</nav>
-
-</header>
-
-
-<!-- =========================
-HERO
-========================= -->
-
-<section class="hero">
-
-<div class="hero-inner">
-
-<div class="hero-kicker">
-VFB STUTTGART · SAISON 2026/27
+<div class="grid">
+<div class="card">
+<h3>Zugänge</h3>
+<div id="transferArrivals"></div>
 </div>
 
-<h1>
-WEISS. ROT.<br>
+<div class="card">
+<h3>Abgänge</h3>
+<div id="transferDepartures"></div>
+</div>
+</div>
+</div>
+</section>
 
-<span>
-CANNSTATT.
-</span>
+<section class="section" id="kader">
+<div class="wrap">
+<h2>Kader 2026/27</h2>
+<div class="line"></div>
+<div class="card">
+<div id="squadPlayers"></div>
+</div>
+</div>
+</section>
 
-</h1>
+<section class="section" id="fans">
+<div class="wrap">
+<h2>Fanbereich</h2>
+<div class="line"></div>
 
+<div class="fan-grid">
+<div class="fan">
+<h3>🔴⚪ Cannstatter Kurve</h3>
 <p>
-VfB-News, Spieltage, Ergebnisse und alles,
-was das weiß-rote Herz bewegt.
+Alles rund um die VfB-Fans, Heimspiele,
+Auswärtsspiele und die Stimmung rund um
+den Neckarpark.
 </p>
-
-<a class="btn" href="#news">
-AKTUELLE NEWS ↓
-</a>
-
 </div>
 
+<div class="fan">
+<h3>🏟️ Mercedes-Benz Arena</h3>
+<p>
+Heimspiel, Flutlicht und Cannstatter Kurve –
+hier schlägt das Herz des VfB Stuttgart.
+</p>
+</div>
+
+<div class="fan">
+<h3>⚪🔴 Nur der VfB</h3>
+<p>
+1893 gegründet. Stuttgart im Herzen.
+Gemeinsam für den VfB.
+</p>
+</div>
+</div>
+</div>
 </section>
 
+</main>
 
-<main class="wrap">
-
-
-<!-- =========================
-NEWS
-========================= -->
-
-<section class="section" id="news">
-
-<h2>
-Aktuelle News
-</h2>
-
-<div class="line"></div>
-
-
-<div class="notice"><b>Stand: 06.09.2026</b> · Verifizierte Saison- und Spieldaten. Zukünftige Anstoßzeiten werden aktualisiert, sobald sie offiziell terminiert sind.</div>
-
-
-<div class="grid">
-
-
-<div class="card">
-
-<div id="newsList">
-
-<article class="news"><span class="tag">VFB AKTUELL</span><span class="news-time">04.09.2026 · VfB Stuttgart</span><h3><a href="https://www.vfb.de/de/vfb/profis/saison/bundesliga/2627/2-vfb-stuttgart----1--fc-koeln-/" target="_blank" rel="noopener">Ein weiß-roter Festabend: VfB schlägt Köln 4:1</a></h3><div class="news-summary">Der VfB gewinnt sein erstes Bundesliga-Heimspiel mit 4:1. El Khannouss, Prömel, Demirovic und Vagnoman treffen.</div><a class="btn" href="https://www.vfb.de/de/vfb/profis/saison/bundesliga/2627/2-vfb-stuttgart----1--fc-koeln-/" target="_blank" rel="noopener">Vollständigen Beitrag lesen →</a></article>
-
-<article class="news"><span class="tag">VFB AKTUELL</span><span class="news-time">04.09.2026 · VfB Stuttgart</span><h3><a href="https://www.vfb.de/de/vfb/aktuell/neues/profis/2627/aufstellung-vfb-stuttgart-gegen-1--fc-koeln/" target="_blank" rel="noopener">Zwei Änderungen in der Startelf</a></h3><div class="news-summary">Chris Führich und Bilal El Khannouss rückten gegen Köln neu in die Anfangsformation.</div><a class="btn" href="https://www.vfb.de/de/vfb/aktuell/neues/profis/2627/aufstellung-vfb-stuttgart-gegen-1--fc-koeln/" target="_blank" rel="noopener">Vollständigen Beitrag lesen →</a></article>
-
-<article class="news"><span class="tag">TRANSFER</span><span class="news-time">04.09.2026 · VfB Stuttgart</span><h3><a href="https://www.vfb.de/de/vfb/aktuell/neues/profis/2627/jeremy-arevalo-wird-verliehen/" target="_blank" rel="noopener">Jeremy Arévalo wird an Estrela Amadora verliehen</a></h3><div class="news-summary">Der 21-jährige Stürmer wechselt für die Saison 2026/27 auf Leihbasis nach Portugal.</div><a class="btn" href="https://www.vfb.de/de/vfb/aktuell/neues/profis/2627/jeremy-arevalo-wird-verliehen/" target="_blank" rel="noopener">Vollständigen Beitrag lesen →</a></article>
-
-<article class="news"><span class="tag">CHAMPIONS LEAGUE</span><span class="news-time">02.09.2026 · VfB Stuttgart</span><h3><a href="https://www.vfb.de/de/vfb/aktuell/neues/profis/2627/vfb-kader-fuer-uefa-champions-league-ligaphase/" target="_blank" rel="noopener">VfB meldet Kader für die Champions League</a></h3><div class="news-summary">Der VfB hat seinen Kader für die acht Spiele der Ligaphase eingereicht.</div><a class="btn" href="https://www.vfb.de/de/vfb/aktuell/neues/profis/2627/vfb-kader-fuer-uefa-champions-league-ligaphase/" target="_blank" rel="noopener">Vollständigen Beitrag lesen →</a></article>
-
-<article class="news"><span class="tag">VORBLICK</span><span class="news-time">09.09.2026 · 18:45 Uhr</span><h3><a href="https://www.vfb.de/en/vfb/latest/news/professionals/2627/uefa-champions-league-ansetzungen-fuer-den-vfb-in-ligaphase-/" target="_blank" rel="noopener">Viking FK wartet zum Champions-League-Auftakt</a></h3><div class="news-summary">Am Mittwoch empfängt der VfB Viking Stavanger um 18:45 Uhr in der MHPArena.</div><a class="btn" href="https://www.vfb.de/en/vfb/latest/news/professionals/2627/uefa-champions-league-ansetzungen-fuer-den-vfb-in-ligaphase-/" target="_blank" rel="noopener">Vollständigen Beitrag lesen →</a></article>
-
-<div class="notice" style="margin-top:12px"><b>Weitere VfB-News bei kicker:</b> <a href="https://www.kicker.de/vfb-stuttgart/team-news" target="_blank" rel="noopener" style="color:#e30613;font-weight:900">Aktuelle kicker-Nachrichten öffnen →</a></div>
-
+<div class="match-modal" id="matchModal">
+<div class="match-modal-box">
+<div class="match-modal-head">
+<h3>Matchcenter</h3>
+<button class="match-close" type="button" onclick="closeMatchModal()">×</button>
+</div>
+<div class="match-modal-body" id="matchModalBody"></div>
+</div>
 </div>
 
-<div class="next">
+<footer>
+<div class="wrap">
+<b>CANNSTATT 1893 NEWS</b><br>
+Unabhängige VfB Stuttgart Fanpage.
+<br><br>
+Alle Angaben ohne Gewähr. Spieltermine und Wettbewerbsdaten
+können sich durch offizielle Ansetzungen ändern.
+<div class="attribution">
+Stand der Fanpage-Daten: 06.09.2026
+</div>
+</div>
+</footer>
 
-<div class="next-label">
-NÄCHSTES SPIEL
+<script>
+const LOGOS={
+"VfB Stuttgart":"VfB",
+"Bayern München":"FCB",
+"1. FC Köln":"KOE",
+"TSG Hoffenheim":"TSG",
+"Borussia Dortmund":"BVB",
+"SC Paderborn":"SCP",
+"Hamburger SV":"HSV",
+"Borussia Mönchengladbach":"BMG",
+"Bayer Leverkusen":"B04",
+"Werder Bremen":"SVW",
+"Schalke 04":"S04",
+"Eintracht Frankfurt":"SGE",
+"SV Elversberg":"SVE",
+"Union Berlin":"FCU",
+"SC Freiburg":"SCF",
+"FC Augsburg":"FCA",
+"RB Leipzig":"RBL",
+"1. FSV Mainz 05":"M05",
+"Viking FK":"VIK",
+"Slovan Bratislava":"SLO",
+"Atlético Madrid":"ATM",
+"Galatasaray":"GAL",
+"Inter Mailand":"INT",
+"OSC Lille":"LIL",
+"Club Brugge":"BRU",
+"PSV Eindhoven":"PSV"
+};
+
+const NEWS=[
+{
+tag:"VfB",
+title:"VfB startet mit drei Punkten in die neue Saisonphase",
+date:"06.09.2026",
+text:"Der VfB Stuttgart hat nach dem 4:1 gegen Köln drei wichtige Punkte gesammelt."
+},
+{
+tag:"Spieltag",
+title:"VfB gewinnt deutlich gegen Köln",
+date:"05.09.2026",
+text:"El Khannouss, Prömel, Demirović und Vagnoman treffen beim 4:1-Heimsieg."
+},
+{
+tag:"Champions League",
+title:"Champions-League-Auftakt steht bevor",
+date:"06.09.2026",
+text:"Als Nächstes wartet in der Königsklasse Viking FK auf den VfB."
+}
+];
+
+const BL=[
+["1","28.08.2026","20:30","Bayern München","VfB Stuttgart","1:5"],
+["2","04.09.2026","20:30","VfB Stuttgart","1. FC Köln","4:1"],
+["3","12.09.2026","15:30","TSG Hoffenheim","VfB Stuttgart","–"],
+["4","19.09.2026","18:30","VfB Stuttgart","Borussia Dortmund","–"],
+["5","09.–11.10.2026","","SC Paderborn","VfB Stuttgart","–"],
+["6","16.–18.10.2026","","Hamburger SV","VfB Stuttgart","–"],
+["7","23.–25.10.2026","","VfB Stuttgart","Borussia Mönchengladbach","–"],
+["8","30.10.–01.11.2026","","Bayer Leverkusen","VfB Stuttgart","–"],
+["9","06.–08.11.2026","","VfB Stuttgart","Werder Bremen","–"],
+["10","20.–22.11.2026","","Schalke 04","VfB Stuttgart","–"],
+["11","27.–29.11.2026","","VfB Stuttgart","Eintracht Frankfurt","–"],
+["12","04.–06.12.2026","","SV Elversberg","VfB Stuttgart","–"],
+["13","11.–13.12.2026","","VfB Stuttgart","Union Berlin","–"],
+["14","18.–20.12.2026","","SC Freiburg","VfB Stuttgart","–"],
+["15","08.–10.01.2027","","VfB Stuttgart","FC Augsburg","–"],
+["16","12.–14.01.2027","","RB Leipzig","VfB Stuttgart","–"],
+["17","15.–17.01.2027","","VfB Stuttgart","1. FSV Mainz 05","–"],
+["18","22.–24.01.2027","","VfB Stuttgart","Bayern München","–"],
+["19","29.–31.01.2027","","1. FC Köln","VfB Stuttgart","–"],
+["20","05.–07.02.2027","","VfB Stuttgart","TSG Hoffenheim","–"],
+["21","12.–14.02.2027","","Borussia Dortmund","VfB Stuttgart","–"],
+["22","19.–21.02.2027","","VfB Stuttgart","SC Paderborn","–"],
+["23","26.–28.02.2027","","VfB Stuttgart","Hamburger SV","–"],
+["24","02.–04.03.2027","","Borussia Mönchengladbach","VfB Stuttgart","–"],
+["25","05.–07.03.2027","","VfB Stuttgart","Bayer Leverkusen","–"],
+["26","12.–14.03.2027","","Werder Bremen","VfB Stuttgart","–"],
+["27","19.–21.03.2027","","VfB Stuttgart","Schalke 04","–"],
+["28","02.–04.04.2027","","Eintracht Frankfurt","VfB Stuttgart","–"],
+["29","09.–11.04.2027","","VfB Stuttgart","SV Elversberg","–"],
+["30","16.–18.04.2027","","Union Berlin","VfB Stuttgart","–"],
+["31","23.–25.04.2027","","VfB Stuttgart","SC Freiburg","–"],
+["32","07.–09.05.2027","","FC Augsburg","VfB Stuttgart","–"],
+["33","14.–16.05.2027","","VfB Stuttgart","RB Leipzig","–"],
+["34","22.05.2027","15:30","1. FSV Mainz 05","VfB Stuttgart","–"]
+];
+
+const CL=[
+["1","09.09.2026","18:45","VfB Stuttgart","Viking FK"],
+["2","14.10.2026","21:00","Slovan Bratislava","VfB Stuttgart"],
+["3","20.10.2026","21:00","VfB Stuttgart","Atlético Madrid"],
+["4","03.11.2026","18:45","Galatasaray","VfB Stuttgart"],
+["5","25.11.2026","21:00","Inter Mailand","VfB Stuttgart"],
+["6","09.12.2026","21:00","VfB Stuttgart","OSC Lille"],
+["7","19.01.2027","21:00","VfB Stuttgart","Club Brugge"],
+["8","27.01.2027","21:00","PSV Eindhoven","VfB Stuttgart"]
+];
+
+const TABLE=[
+["Freiburg",2,2,0,0,5,1,6],
+["Dortmund",2,2,0,0,5,2,6],
+["Elversberg",2,2,0,0,7,5,6],
+["Bayern",2,1,1,0,5,1,4],
+["Leverkusen",2,1,0,1,6,3,3],
+["Augsburg",1,1,0,0,3,0,3],
+["Leipzig",2,1,0,1,3,3,3],
+["VfB Stuttgart",2,1,0,1,6,6,3],
+["Bremen",2,1,0,1,4,4,3],
+["Köln",2,1,0,1,4,6,3],
+["Frankfurt",1,0,1,0,3,3,1],
+["Mainz",1,0,1,0,0,0,1],
+["Paderborn",2,0,1,1,0,1,1],
+["Schalke",2,0,1,1,0,3,1],
+["Union",2,0,1,1,3,7,1],
+["Hoffenheim",2,0,0,2,4,5,0],
+["Hamburg",1,0,0,1,0,2,0],
+["Gladbach",2,0,0,2,4,7,0]
+];
+
+const ARRIVALS=[
+["Bilal El Khannouss","von Leicester City"],
+["Grischa Prömel","von TSG Hoffenheim"],
+["Dženan Pejčinović","von VfL Wolfsburg"]
+];
+
+const DEPARTURES=[
+["Nick Woltemade","Bayern München"],
+["Enzo Millot","Al-Ahli"],
+["Anthony Rouault","Stade Rennes"]
+];
+
+const SQUAD={
+"Tor":[
+"Fabian Bredlow",
+"Marius Funk",
+"Dennis Seimen",
+"Stefan Drljača"
+],
+"Abwehr":[
+"Ameen Al-Dakhil",
+"Ramon Hendriks",
+"Josha Vagnoman",
+"Maximilian Mittelstädt",
+"Luca Jaquez",
+"Leonidas Stergiou",
+"Lorenz Assignon",
+"Dan-Axel Zagadou",
+"Jeff Chabot",
+"Finn Jeltsch"
+],
+"Mittelfeld":[
+"Angelo Stiller",
+"Chris Führich",
+"Bilal El Khannouss",
+"Atakan Karazor",
+"Grischa Prömel",
+"Nikolas Nartey",
+"Ertugrul Yigit",
+"Jarzinho Malanga"
+],
+"Angriff":[
+"Tiago Tomás",
+"Ermedin Demirović",
+"Dženan Pejčinović",
+"Jamie Leweling",
+"Jeremy Arévalo",
+"Deniz Undav",
+"Badredine Bouanani",
+"Justin Diehl",
+"Leo Sauer"
+]
+};
+
+const MATCH_INFO={
+"1":[
+"Bayern München",
+"VfB Stuttgart",
+"1:5",
+"28.08.2026",
+"Bundesliga",
+["VfB Stuttgart gewinnt 5:1 bei Bayern München."]
+],
+"2":[
+"VfB Stuttgart",
+"1. FC Köln",
+"4:1",
+"04.09.2026",
+"Bundesliga",
+[
+"39. Minute – Bilal El Khannouss",
+"60. Minute – Grischa Prömel",
+"75. Minute – Ermedin Demirović",
+"81. Minute – Eigentor Ramon Hendriks",
+"90.+1 Minute – Josha Vagnoman"
+]
+]
+};
+
+function esc(x){
+return String(x??"")
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
+}
+
+function initials(name){
+return String(name)
+.split(/\s+/)
+.filter(Boolean)
+.slice(0,2)
+.map(x=>x[0])
+.join("")
+.toUpperCase();
+}
+
+function logoImg(name,large=false){
+const code=LOGOS[name]||initials(name);
+const cls=large?"team-logo logo-large":"team-logo";
+return `<span class="${cls}">${esc(code)}</span>`;
+}
+
+function teamLine(name){
+return `<div class="team-line">${logoImg(name)}<span>${esc(name)}</span></div>`;
+}
+
+function fixtureCard(x){
+const [nr,date,time,home,away,score]=x;
+const finished=score!=="–";
+return `<article class="fixture-row ${finished?"clickable":""}" ${finished?`tabindex="0" data-round="${nr}" onclick="openMatchModal(${nr})"`:""}>
+<div class="fixture-round">${esc(nr)}</div>
+<div class="fixture-date">
+<b>${esc(date)}</b>
+${time?`<span>${esc(time)} Uhr</span>`:""}
+</div>
+<div class="fixture-teams">
+${teamLine(home)}
+${teamLine(away)}
+</div>
+<div class="fixture-score">
+<strong>${esc(score)}</strong>
+<span>${finished?"ENDE":"VORSCHAU"}</span>
+</div>
+</article>`;
+}
+
+function clCard(x){
+const [nr,date,time,home,away]=x;
+return `<article class="fixture-row upcoming">
+<div class="fixture-round">${esc(nr)}</div>
+<div class="fixture-date">
+<b>${esc(date)}</b>
+<span>${esc(time)} Uhr</span>
+</div>
+<div class="fixture-teams">
+${teamLine(home)}
+${teamLine(away)}
+</div>
+<div class="fixture-score">
+<strong>–</strong>
+<span>VORSCHAU</span>
+</div>
+</article>`;
+}
+function renderNews(){
+const el=document.getElementById("newsList");
+if(!el)return;
+
+el.innerHTML=NEWS.map(n=>`
+<article class="news">
+<div class="tag">${esc(n.tag)} · ${esc(n.date)}</div>
+<h3>${esc(n.title)}</h3>
+<p>${esc(n.text)}</p>
+</article>
+`).join("");
+}
+
+function renderNext(){
+const el=document.getElementById("nextGame");
+if(!el)return;
+
+const game=BL.find(x=>x[5]==="–");
+
+if(!game){
+el.innerHTML="<p>Kein kommendes Bundesliga-Spiel gefunden.</p>";
+return;
+}
+
+const [nr,date,time,home,away]=game;
+
+el.innerHTML=`
+<div class="next-match">
+<div class="next-date">
+${esc(date)}${time?` · ${esc(time)} Uhr`:""}
 </div>
 
-<div id="nextGame">
-<div class="next-label">NÄCHSTES SPIEL</div><div style="display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:10px;margin-top:12px;text-align:center"><div><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10269.png" alt="VfB Stuttgart" loading="lazy" onerror="this.style.display='none'"><strong>VfB Stuttgart</strong></div><b>VS</b><div><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10249.png" alt="Viking FK" loading="lazy" onerror="this.style.display='none'"><strong>Viking FK</strong></div></div><p>09.09.2026 · 18:45 Uhr</p><div class="competition">UEFA Champions League · MHPArena Stuttgart</div>
-</div>
-
-</div>
-
-</div>
-
-
-</div>
-
-</section>
-
-
-<!-- =========================
-SPIELPLAN
-========================= -->
-
-<section class="section" id="spiele">
-
-<h2>
-Spielplan
-</h2>
-
-<div class="line"></div>
-
-
-<!-- BUNDESLIGA -->
-
-<div class="card">
-
-<div class="competition-title">
-
-<div class="icon">
-🇩🇪
+<div class="next-teams">
+<div>
+${logoImg(home,true)}
+<strong>${esc(home)}</strong>
 </div>
 
 <div>
-
-<h3>
-Bundesliga
-</h3>
-
-<span>
-VfB Stuttgart – Saison 2026/27
-</span>
-
-</div>
-
-</div>
-
-
-<div id="bundesligaFixtures">
-<div class="fixture match-clickable" data-match-id="bl-0"><div class="date">1. Spieltag · 28.08.2026 · 20:30</div><div style="flex:1;min-width:0"><div class="team-line"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/9823.png" alt="FC Bayern München" loading="lazy" onerror="this.style.display='none'"><strong>FC Bayern München</strong></div><div class="team-line" style="margin-top:5px"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10269.png" alt="VfB Stuttgart" loading="lazy" onerror="this.style.display='none'"><strong>VfB Stuttgart</strong></div><div class="competition">Bundesliga</div><div class="match-hint">MATCHCENTER ÖFFNEN</div></div><div class="fixture-score">5 : 1</div><div class="status">BEENDET</div></div><div class="fixture match-clickable" data-match-id="bl-1"><div class="date">2. Spieltag · 04.09.2026 · 20:30</div><div style="flex:1;min-width:0"><div class="team-line"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10269.png" alt="VfB Stuttgart" loading="lazy" onerror="this.style.display='none'"><strong>VfB Stuttgart</strong></div><div class="team-line" style="margin-top:5px"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/8722.png" alt="1. FC Köln" loading="lazy" onerror="this.style.display='none'"><strong>1. FC Köln</strong></div><div class="competition">Bundesliga</div><div class="match-hint">MATCHCENTER ÖFFNEN</div></div><div class="fixture-score">4 : 1</div><div class="status">BEENDET</div></div><div class="fixture match-clickable" data-match-id="bl-2"><div class="date">3. Spieltag · 12.09.2026 · 15:30</div><div style="flex:1;min-width:0"><div class="team-line"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/8226.png" alt="TSG Hoffenheim" loading="lazy" onerror="this.style.display='none'"><strong>TSG Hoffenheim</strong></div><div class="team-line" style="margin-top:5px"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10269.png" alt="VfB Stuttgart" loading="lazy" onerror="this.style.display='none'"><strong>VfB Stuttgart</strong></div><div class="competition">Bundesliga</div><div class="match-hint">MATCHCENTER ÖFFNEN</div></div><div class="fixture-score">– : –</div><div class="status">ANSTEHEND</div></div><div class="fixture match-clickable" data-match-id="bl-3"><div class="date">4. Spieltag · 19.09.2026 · 18:30</div><div style="flex:1;min-width:0"><div class="team-line"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10269.png" alt="VfB Stuttgart" loading="lazy" onerror="this.style.display='none'"><strong>VfB Stuttgart</strong></div><div class="team-line" style="margin-top:5px"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/9789.png" alt="Borussia Dortmund" loading="lazy" onerror="this.style.display='none'"><strong>Borussia Dortmund</strong></div><div class="competition">Bundesliga</div><div class="match-hint">MATCHCENTER ÖFFNEN</div></div><div class="fixture-score">– : –</div><div class="status">ANSTEHEND</div></div><div class="fixture match-clickable" data-match-id="bl-4"><div class="date">09.–11.10.2026 · 15:30</div><div style="flex:1;min-width:0"><div class="team-line"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/8464.png" alt="SC Paderborn 07" loading="lazy" onerror="this.style.display='none'"><strong>SC Paderborn 07</strong></div><div class="team-line" style="margin-top:5px"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10269.png" alt="VfB Stuttgart" loading="lazy" onerror="this.style.display='none'"><strong>VfB Stuttgart</strong></div><div class="competition">Bundesliga</div><div class="match-hint">MATCHCENTER ÖFFNEN</div></div><div class="fixture-score">– : –</div><div class="status">ANSTEHEND</div></div><div class="fixture match-clickable" data-match-id="bl-5"><div class="date">16.–18.10.2026 · 15:30</div><div style="flex:1;min-width:0"><div class="team-line"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/9790.png" alt="Hamburger SV" loading="lazy" onerror="this.style.display='none'"><strong>Hamburger SV</strong></div><div class="team-line" style="margin-top:5px"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10269.png" alt="VfB Stuttgart" loading="lazy" onerror="this.style.display='none'"><strong>VfB Stuttgart</strong></div><div class="competition">Bundesliga</div><div class="match-hint">MATCHCENTER ÖFFNEN</div></div><div class="fixture-score">– : –</div><div class="status">ANSTEHEND</div></div><div class="fixture match-clickable" data-match-id="bl-6"><div class="date">23.–25.10.2026 · 15:30</div><div style="flex:1;min-width:0"><div class="team-line"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10269.png" alt="VfB Stuttgart" loading="lazy" onerror="this.style.display='none'"><strong>VfB Stuttgart</strong></div><div class="team-line" style="margin-top:5px"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/9907.png" alt="Borussia Mönchengladbach" loading="lazy" onerror="this.style.display='none'"><strong>Borussia Mönchengladbach</strong></div><div class="competition">Bundesliga</div><div class="match-hint">MATCHCENTER ÖFFNEN</div></div><div class="fixture-score">– : –</div><div class="status">ANSTEHEND</div></div><div class="fixture match-clickable" data-match-id="bl-7"><div class="date">30.10.–01.11.2026 · 15:30</div><div style="flex:1;min-width:0"><div class="team-line"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/8178.png" alt="Bayer 04 Leverkusen" loading="lazy" onerror="this.style.display='none'"><strong>Bayer 04 Leverkusen</strong></div><div class="team-line" style="margin-top:5px"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10269.png" alt="VfB Stuttgart" loading="lazy" onerror="this.style.display='none'"><strong>VfB Stuttgart</strong></div><div class="competition">Bundesliga</div><div class="match-hint">MATCHCENTER ÖFFNEN</div></div><div class="fixture-score">– : –</div><div class="status">ANSTEHEND</div></div><div class="fixture match-clickable" data-match-id="bl-8"><div class="date">06.–08.11.2026 · 15:30</div><div style="flex:1;min-width:0"><div class="team-line"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10269.png" alt="VfB Stuttgart" loading="lazy" onerror="this.style.display='none'"><strong>VfB Stuttgart</strong></div><div class="team-line" style="margin-top:5px"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/8696.png" alt="SV Werder Bremen" loading="lazy" onerror="this.style.display='none'"><strong>SV Werder Bremen</strong></div><div class="competition">Bundesliga</div><div class="match-hint">MATCHCENTER ÖFFNEN</div></div><div class="fixture-score">– : –</div><div class="status">ANSTEHEND</div></div><div class="fixture match-clickable" data-match-id="bl-9"><div class="date">20.–22.11.2026 · 15:30</div><div style="flex:1;min-width:0"><div class="team-line"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10189.png" alt="FC Schalke 04" loading="lazy" onerror="this.style.display='none'"><strong>FC Schalke 04</strong></div><div class="team-line" style="margin-top:5px"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10269.png" alt="VfB Stuttgart" loading="lazy" onerror="this.style.display='none'"><strong>VfB Stuttgart</strong></div><div class="competition">Bundesliga</div><div class="match-hint">MATCHCENTER ÖFFNEN</div></div><div class="fixture-score">– : –</div><div class="status">ANSTEHEND</div></div><div class="fixture match-clickable" data-match-id="bl-10"><div class="date">27.–29.11.2026 · 15:30</div><div style="flex:1;min-width:0"><div class="team-line"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10269.png" alt="VfB Stuttgart" loading="lazy" onerror="this.style.display='none'"><strong>VfB Stuttgart</strong></div><div class="team-line" style="margin-top:5px"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/9810.png" alt="Eintracht Frankfurt" loading="lazy" onerror="this.style.display='none'"><strong>Eintracht Frankfurt</strong></div><div class="competition">Bundesliga</div><div class="match-hint">MATCHCENTER ÖFFNEN</div></div><div class="fixture-score">– : –</div><div class="status">ANSTEHEND</div></div><div class="fixture match-clickable" data-match-id="bl-11"><div class="date">04.–06.12.2026 · 15:30</div><div style="flex:1;min-width:0"><div class="team-line"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10089.png" alt="SV Elversberg" loading="lazy" onerror="this.style.display='none'"><strong>SV Elversberg</strong></div><div class="team-line" style="margin-top:5px"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10269.png" alt="VfB Stuttgart" loading="lazy" onerror="this.style.display='none'"><strong>VfB Stuttgart</strong></div><div class="competition">Bundesliga</div><div class="match-hint">MATCHCENTER ÖFFNEN</div></div><div class="fixture-score">– : –</div><div class="status">ANSTEHEND</div></div><div class="fixture match-clickable" data-match-id="bl-12"><div class="date">11.–13.12.2026 · 15:30</div><div style="flex:1;min-width:0"><div class="team-line"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10269.png" alt="VfB Stuttgart" loading="lazy" onerror="this.style.display='none'"><strong>VfB Stuttgart</strong></div><div class="team-line" style="margin-top:5px"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10220.png" alt="1. FC Union Berlin" loading="lazy" onerror="this.style.display='none'"><strong>1. FC Union Berlin</strong></div><div class="competition">Bundesliga</div><div class="match-hint">MATCHCENTER ÖFFNEN</div></div><div class="fixture-score">– : –</div><div class="status">ANSTEHEND</div></div><div class="fixture match-clickable" data-match-id="bl-13"><div class="date">18.–20.12.2026 · 15:30</div><div style="flex:1;min-width:0"><div class="team-line"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/8358.png" alt="SC Freiburg" loading="lazy" onerror="this.style.display='none'"><strong>SC Freiburg</strong></div><div class="team-line" style="margin-top:5px"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10269.png" alt="VfB Stuttgart" loading="lazy" onerror="this.style.display='none'"><strong>VfB Stuttgart</strong></div><div class="competition">Bundesliga</div><div class="match-hint">MATCHCENTER ÖFFNEN</div></div><div class="fixture-score">– : –</div><div class="status">ANSTEHEND</div></div><div class="fixture match-clickable" data-match-id="bl-14"><div class="date">08.–10.01.2027 · 15:30</div><div style="flex:1;min-width:0"><div class="team-line"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10269.png" alt="VfB Stuttgart" loading="lazy" onerror="this.style.display='none'"><strong>VfB Stuttgart</strong></div><div class="team-line" style="margin-top:5px"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/8406.png" alt="FC Augsburg" loading="lazy" onerror="this.style.display='none'"><strong>FC Augsburg</strong></div><div class="competition">Bundesliga</div><div class="match-hint">MATCHCENTER ÖFFNEN</div></div><div class="fixture-score">– : –</div><div class="status">ANSTEHEND</div></div><div class="fixture match-clickable" data-match-id="bl-15"><div class="date">12.–14.01.2027 · 15:30</div><div style="flex:1;min-width:0"><div class="team-line"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/178475.png" alt="RB Leipzig" loading="lazy" onerror="this.style.display='none'"><strong>RB Leipzig</strong></div><div class="team-line" style="margin-top:5px"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10269.png" alt="VfB Stuttgart" loading="lazy" onerror="this.style.display='none'"><strong>VfB Stuttgart</strong></div><div class="competition">Bundesliga</div><div class="match-hint">MATCHCENTER ÖFFNEN</div></div><div class="fixture-score">– : –</div><div class="status">ANSTEHEND</div></div><div class="fixture match-clickable" data-match-id="bl-16"><div class="date">15.–17.01.2027 · 15:30</div><div style="flex:1;min-width:0"><div class="team-line"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10269.png" alt="VfB Stuttgart" loading="lazy" onerror="this.style.display='none'"><strong>VfB Stuttgart</strong></div><div class="team-line" style="margin-top:5px"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/9905.png" alt="1. FSV Mainz 05" loading="lazy" onerror="this.style.display='none'"><strong>1. FSV Mainz 05</strong></div><div class="competition">Bundesliga</div><div class="match-hint">MATCHCENTER ÖFFNEN</div></div><div class="fixture-score">– : –</div><div class="status">ANSTEHEND</div></div><div class="fixture match-clickable" data-match-id="bl-17"><div class="date">22.–24.01.2027 · 15:30</div><div style="flex:1;min-width:0"><div class="team-line"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10269.png" alt="VfB Stuttgart" loading="lazy" onerror="this.style.display='none'"><strong>VfB Stuttgart</strong></div><div class="team-line" style="margin-top:5px"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/9823.png" alt="FC Bayern München" loading="lazy" onerror="this.style.display='none'"><strong>FC Bayern München</strong></div><div class="competition">Bundesliga</div><div class="match-hint">MATCHCENTER ÖFFNEN</div></div><div class="fixture-score">– : –</div><div class="status">ANSTEHEND</div></div><div class="fixture match-clickable" data-match-id="bl-18"><div class="date">29.–31.01.2027 · 15:30</div><div style="flex:1;min-width:0"><div class="team-line"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/8722.png" alt="1. FC Köln" loading="lazy" onerror="this.style.display='none'"><strong>1. FC Köln</strong></div><div class="team-line" style="margin-top:5px"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10269.png" alt="VfB Stuttgart" loading="lazy" onerror="this.style.display='none'"><strong>VfB Stuttgart</strong></div><div class="competition">Bundesliga</div><div class="match-hint">MATCHCENTER ÖFFNEN</div></div><div class="fixture-score">– : –</div><div class="status">ANSTEHEND</div></div><div class="fixture match-clickable" data-match-id="bl-19"><div class="date">05.–07.02.2027 · 15:30</div><div style="flex:1;min-width:0"><div class="team-line"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10269.png" alt="VfB Stuttgart" loading="lazy" onerror="this.style.display='none'"><strong>VfB Stuttgart</strong></div><div class="team-line" style="margin-top:5px"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/8226.png" alt="TSG Hoffenheim" loading="lazy" onerror="this.style.display='none'"><strong>TSG Hoffenheim</strong></div><div class="competition">Bundesliga</div><div class="match-hint">MATCHCENTER ÖFFNEN</div></div><div class="fixture-score">– : –</div><div class="status">ANSTEHEND</div></div><div class="fixture match-clickable" data-match-id="bl-20"><div class="date">12.–14.02.2027 · 15:30</div><div style="flex:1;min-width:0"><div class="team-line"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/9789.png" alt="Borussia Dortmund" loading="lazy" onerror="this.style.display='none'"><strong>Borussia Dortmund</strong></div><div class="team-line" style="margin-top:5px"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10269.png" alt="VfB Stuttgart" loading="lazy" onerror="this.style.display='none'"><strong>VfB Stuttgart</strong></div><div class="competition">Bundesliga</div><div class="match-hint">MATCHCENTER ÖFFNEN</div></div><div class="fixture-score">– : –</div><div class="status">ANSTEHEND</div></div><div class="fixture match-clickable" data-match-id="bl-21"><div class="date">19.–21.02.2027 · 15:30</div><div style="flex:1;min-width:0"><div class="team-line"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10269.png" alt="VfB Stuttgart" loading="lazy" onerror="this.style.display='none'"><strong>VfB Stuttgart</strong></div><div class="team-line" style="margin-top:5px"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/8464.png" alt="SC Paderborn 07" loading="lazy" onerror="this.style.display='none'"><strong>SC Paderborn 07</strong></div><div class="competition">Bundesliga</div><div class="match-hint">MATCHCENTER ÖFFNEN</div></div><div class="fixture-score">– : –</div><div class="status">ANSTEHEND</div></div><div class="fixture match-clickable" data-match-id="bl-22"><div class="date">26.–28.02.2027 · 15:30</div><div style="flex:1;min-width:0"><div class="team-line"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10269.png" alt="VfB Stuttgart" loading="lazy" onerror="this.style.display='none'"><strong>VfB Stuttgart</strong></div><div class="team-line" style="margin-top:5px"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/9790.png" alt="Hamburger SV" loading="lazy" onerror="this.style.display='none'"><strong>Hamburger SV</strong></div><div class="competition">Bundesliga</div><div class="match-hint">MATCHCENTER ÖFFNEN</div></div><div class="fixture-score">– : –</div><div class="status">ANSTEHEND</div></div><div class="fixture match-clickable" data-match-id="bl-23"><div class="date">02.–04.03.2027 · 15:30</div><div style="flex:1;min-width:0"><div class="team-line"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/9907.png" alt="Borussia Mönchengladbach" loading="lazy" onerror="this.style.display='none'"><strong>Borussia Mönchengladbach</strong></div><div class="team-line" style="margin-top:5px"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10269.png" alt="VfB Stuttgart" loading="lazy" onerror="this.style.display='none'"><strong>VfB Stuttgart</strong></div><div class="competition">Bundesliga</div><div class="match-hint">MATCHCENTER ÖFFNEN</div></div><div class="fixture-score">– : –</div><div class="status">ANSTEHEND</div></div><div class="fixture match-clickable" data-match-id="bl-24"><div class="date">05.–07.03.2027 · 15:30</div><div style="flex:1;min-width:0"><div class="team-line"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10269.png" alt="VfB Stuttgart" loading="lazy" onerror="this.style.display='none'"><strong>VfB Stuttgart</strong></div><div class="team-line" style="margin-top:5px"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/8178.png" alt="Bayer 04 Leverkusen" loading="lazy" onerror="this.style.display='none'"><strong>Bayer 04 Leverkusen</strong></div><div class="competition">Bundesliga</div><div class="match-hint">MATCHCENTER ÖFFNEN</div></div><div class="fixture-score">– : –</div><div class="status">ANSTEHEND</div></div><div class="fixture match-clickable" data-match-id="bl-25"><div class="date">12.–14.03.2027 · 15:30</div><div style="flex:1;min-width:0"><div class="team-line"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/8696.png" alt="SV Werder Bremen" loading="lazy" onerror="this.style.display='none'"><strong>SV Werder Bremen</strong></div><div class="team-line" style="margin-top:5px"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10269.png" alt="VfB Stuttgart" loading="lazy" onerror="this.style.display='none'"><strong>VfB Stuttgart</strong></div><div class="competition">Bundesliga</div><div class="match-hint">MATCHCENTER ÖFFNEN</div></div><div class="fixture-score">– : –</div><div class="status">ANSTEHEND</div></div><div class="fixture match-clickable" data-match-id="bl-26"><div class="date">19.–21.03.2027 · 15:30</div><div style="flex:1;min-width:0"><div class="team-line"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10269.png" alt="VfB Stuttgart" loading="lazy" onerror="this.style.display='none'"><strong>VfB Stuttgart</strong></div><div class="team-line" style="margin-top:5px"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10189.png" alt="FC Schalke 04" loading="lazy" onerror="this.style.display='none'"><strong>FC Schalke 04</strong></div><div class="competition">Bundesliga</div><div class="match-hint">MATCHCENTER ÖFFNEN</div></div><div class="fixture-score">– : –</div><div class="status">ANSTEHEND</div></div><div class="fixture match-clickable" data-match-id="bl-27"><div class="date">02.–04.04.2027 · 15:30</div><div style="flex:1;min-width:0"><div class="team-line"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/9810.png" alt="Eintracht Frankfurt" loading="lazy" onerror="this.style.display='none'"><strong>Eintracht Frankfurt</strong></div><div class="team-line" style="margin-top:5px"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10269.png" alt="VfB Stuttgart" loading="lazy" onerror="this.style.display='none'"><strong>VfB Stuttgart</strong></div><div class="competition">Bundesliga</div><div class="match-hint">MATCHCENTER ÖFFNEN</div></div><div class="fixture-score">– : –</div><div class="status">ANSTEHEND</div></div><div class="fixture match-clickable" data-match-id="bl-28"><div class="date">09.–11.04.2027 · 15:30</div><div style="flex:1;min-width:0"><div class="team-line"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10269.png" alt="VfB Stuttgart" loading="lazy" onerror="this.style.display='none'"><strong>VfB Stuttgart</strong></div><div class="team-line" style="margin-top:5px"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10089.png" alt="SV Elversberg" loading="lazy" onerror="this.style.display='none'"><strong>SV Elversberg</strong></div><div class="competition">Bundesliga</div><div class="match-hint">MATCHCENTER ÖFFNEN</div></div><div class="fixture-score">– : –</div><div class="status">ANSTEHEND</div></div><div class="fixture match-clickable" data-match-id="bl-29"><div class="date">16.–18.04.2027 · 15:30</div><div style="flex:1;min-width:0"><div class="team-line"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10220.png" alt="1. FC Union Berlin" loading="lazy" onerror="this.style.display='none'"><strong>1. FC Union Berlin</strong></div><div class="team-line" style="margin-top:5px"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10269.png" alt="VfB Stuttgart" loading="lazy" onerror="this.style.display='none'"><strong>VfB Stuttgart</strong></div><div class="competition">Bundesliga</div><div class="match-hint">MATCHCENTER ÖFFNEN</div></div><div class="fixture-score">– : –</div><div class="status">ANSTEHEND</div></div><div class="fixture match-clickable" data-match-id="bl-30"><div class="date">23.–25.04.2027 · 15:30</div><div style="flex:1;min-width:0"><div class="team-line"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10269.png" alt="VfB Stuttgart" loading="lazy" onerror="this.style.display='none'"><strong>VfB Stuttgart</strong></div><div class="team-line" style="margin-top:5px"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/8358.png" alt="SC Freiburg" loading="lazy" onerror="this.style.display='none'"><strong>SC Freiburg</strong></div><div class="competition">Bundesliga</div><div class="match-hint">MATCHCENTER ÖFFNEN</div></div><div class="fixture-score">– : –</div><div class="status">ANSTEHEND</div></div><div class="fixture match-clickable" data-match-id="bl-31"><div class="date">07.–09.05.2027 · 15:30</div><div style="flex:1;min-width:0"><div class="team-line"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/8406.png" alt="FC Augsburg" loading="lazy" onerror="this.style.display='none'"><strong>FC Augsburg</strong></div><div class="team-line" style="margin-top:5px"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10269.png" alt="VfB Stuttgart" loading="lazy" onerror="this.style.display='none'"><strong>VfB Stuttgart</strong></div><div class="competition">Bundesliga</div><div class="match-hint">MATCHCENTER ÖFFNEN</div></div><div class="fixture-score">– : –</div><div class="status">ANSTEHEND</div></div><div class="fixture match-clickable" data-match-id="bl-32"><div class="date">14.–16.05.2027 · 15:30</div><div style="flex:1;min-width:0"><div class="team-line"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10269.png" alt="VfB Stuttgart" loading="lazy" onerror="this.style.display='none'"><strong>VfB Stuttgart</strong></div><div class="team-line" style="margin-top:5px"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/178475.png" alt="RB Leipzig" loading="lazy" onerror="this.style.display='none'"><strong>RB Leipzig</strong></div><div class="competition">Bundesliga</div><div class="match-hint">MATCHCENTER ÖFFNEN</div></div><div class="fixture-score">– : –</div><div class="status">ANSTEHEND</div></div><div class="fixture match-clickable" data-match-id="bl-33"><div class="date">22.05.2027 · 15:30</div><div style="flex:1;min-width:0"><div class="team-line"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/9905.png" alt="1. FSV Mainz 05" loading="lazy" onerror="this.style.display='none'"><strong>1. FSV Mainz 05</strong></div><div class="team-line" style="margin-top:5px"><img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10269.png" alt="VfB Stuttgart" loading="lazy" onerror="this.style.display='none'"><strong>VfB Stuttgart</strong></div><div class="competition">Bundesliga</div><div class="match-hint">MATCHCENTER ÖFFNEN</div></div><div class="fixture-score">– : –</div><div class="status">ANSTEHEND</div></div>
-</div>
-
-</div>
-
-
-<!-- =========================
-CHAMPIONS LEAGUE
-========================= -->
-
-<div class="card">
-
-<div class="competition-title">
-
-<div class="icon">
-🏆
+<span style="font-weight:1000;font-size:12px;">VS</span>
 </div>
 
 <div>
-
-<h3>
-Champions League
-</h3>
-
-<span>
-UEFA Champions League · Ligaphase 2026/27
-</span>
-
-</div>
-
-</div>
-
-
-<div id="championsLeagueFixtures">
-
-<div class="fixture">
-
-<div class="date">
-09.09.2026 · 18:45
-</div>
-
-<div style="flex:1;min-width:0">
-
-<div class="team-line">
-<img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10269.png" alt="VfB Stuttgart" loading="lazy" onerror="this.style.display='none'">
-<strong>VfB Stuttgart</strong>
-</div>
-
-<div class="team-line" style="margin-top:5px">
-<img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10249.png" alt="Viking FK" loading="lazy" onerror="this.style.display='none'">
-<strong>Viking FK</strong>
-</div>
-
-<div class="competition">
-Champions League
-</div>
-
-</div>
-
-<div class="fixture-score">
-– : –
-</div>
-
-<div class="status">
-ANSTEHEND
-</div>
-
-</div>
-
-
-<div class="fixture">
-
-<div class="date">
-14.10.2026 · 21:00
-</div>
-
-<div style="flex:1;min-width:0">
-
-<div class="team-line">
-<img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10019.png" alt="Slovan Bratislava" loading="lazy" onerror="this.style.display='none'">
-<strong>Slovan Bratislava</strong>
-</div>
-
-<div class="team-line" style="margin-top:5px">
-<img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10269.png" alt="VfB Stuttgart" loading="lazy" onerror="this.style.display='none'">
-<strong>VfB Stuttgart</strong>
-</div>
-
-<div class="competition">
-Champions League
-</div>
-
-</div>
-
-<div class="fixture-score">
-– : –
-</div>
-
-<div class="status">
-ANSTEHEND
-</div>
-
-</div>
-
-
-<div class="fixture">
-
-<div class="date">
-20.10.2026 · 21:00
-</div>
-
-<div style="flex:1;min-width:0">
-
-<div class="team-line">
-<img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10269.png" alt="VfB Stuttgart" loading="lazy" onerror="this.style.display='none'">
-<strong>VfB Stuttgart</strong>
-</div>
-
-<div class="team-line" style="margin-top:5px">
-<img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/9906.png" alt="Atlético Madrid" loading="lazy" onerror="this.style.display='none'">
-<strong>Atlético Madrid</strong>
-</div>
-
-<div class="competition">
-Champions League
-</div>
-
-</div>
-
-<div class="fixture-score">
-– : –
-</div>
-
-<div class="status">
-ANSTEHEND
-</div>
-
-</div>
-
-
-<div class="fixture">
-
-<div class="date">
-03.11.2026 · 18:45
-</div>
-
-<div style="flex:1;min-width:0">
-
-<div class="team-line">
-<img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/8633.png" alt="Galatasaray Istanbul" loading="lazy" onerror="this.style.display='none'">
-<strong>Galatasaray Istanbul</strong>
-</div>
-
-<div class="team-line" style="margin-top:5px">
-<img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10269.png" alt="VfB Stuttgart" loading="lazy" onerror="this.style.display='none'">
-<strong>VfB Stuttgart</strong>
-</div>
-
-<div class="competition">
-Champions League
-</div>
-
-</div>
-
-<div class="fixture-score">
-– : –
-</div>
-
-<div class="status">
-ANSTEHEND
-</div>
-
-</div>
-
-
-<div class="fixture">
-
-<div class="date">
-25.11.2026 · 21:00
-</div>
-
-<div style="flex:1;min-width:0">
-
-<div class="team-line">
-<img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/8636.png" alt="Inter Mailand" loading="lazy" onerror="this.style.display='none'">
-<strong>Inter Mailand</strong>
-</div>
-
-<div class="team-line" style="margin-top:5px">
-<img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10269.png" alt="VfB Stuttgart" loading="lazy" onerror="this.style.display='none'">
-<strong>VfB Stuttgart</strong>
-</div>
-
-<div class="competition">
-Champions League
-</div>
-
-</div>
-
-<div class="fixture-score">
-– : –
-</div>
-
-<div class="status">
-ANSTEHEND
-</div>
-
-</div>
-
-
-<div class="fixture">
-
-<div class="date">
-09.12.2026 · 21:00
-</div>
-
-<div style="flex:1;min-width:0">
-
-<div class="team-line">
-<img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10269.png" alt="VfB Stuttgart" loading="lazy" onerror="this.style.display='none'">
-<strong>VfB Stuttgart</strong>
-</div>
-
-<div class="team-line" style="margin-top:5px">
-<img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/8639.png" alt="LOSC Lille" loading="lazy" onerror="this.style.display='none'">
-<strong>LOSC Lille</strong>
-</div>
-
-<div class="competition">
-Champions League
-</div>
-
-</div>
-
-<div class="fixture-score">
-– : –
-</div>
-
-<div class="status">
-ANSTEHEND
-</div>
-
-</div>
-
-
-<div class="fixture">
-
-<div class="date">
-19.01.2027 · 21:00
-</div>
-
-<div style="flex:1;min-width:0">
-
-<div class="team-line">
-<img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10269.png" alt="VfB Stuttgart" loading="lazy" onerror="this.style.display='none'">
-<strong>VfB Stuttgart</strong>
-</div>
-
-<div class="team-line" style="margin-top:5px">
-<img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/9987.png" alt="Club Brügge" loading="lazy" onerror="this.style.display='none'">
-<strong>Club Brügge</strong>
-</div>
-
-<div class="competition">
-Champions League
-</div>
-
-</div>
-
-<div class="fixture-score">
-– : –
-</div>
-
-<div class="status">
-ANSTEHEND
-</div>
-
-</div>
-
-
-<div class="fixture">
-
-<div class="date">
-27.01.2027 · 21:00
-</div>
-
-<div style="flex:1;min-width:0">
-
-<div class="team-line">
-<img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/8640.png" alt="PSV Eindhoven" loading="lazy" onerror="this.style.display='none'">
-<strong>PSV Eindhoven</strong>
-</div>
-
-<div class="team-line" style="margin-top:5px">
-<img class="team-logo" src="https://images.fotmob.com/image_resources/logo/teamlogo/10269.png" alt="VfB Stuttgart" loading="lazy" onerror="this.style.display='none'">
-<strong>VfB Stuttgart</strong>
-</div>
-
-<div class="competition">
-Champions League
-</div>
-
-</div>
-
-<div class="fixture-score">
-– : –
-</div>
-
-<div class="status">
-ANSTEHEND
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-
-<!-- =========================
-TABELLE
-========================= -->
-
-<section class="section" id="tabelle">
-
-<h2>
-Bundesliga Tabelle
-</h2>
-
-<div class="line"></div>
-
-<div class="card">
-
-<div class="table-wrap">
-
-<table>
-
+${logoImg(away,true)}
+<strong>${esc(away)}</strong>
+</div>
+</div>
+
+<div class="next-comp">
+BUNDESLIGA · SPIELTAG ${esc(nr)}
+</div>
+</div>`;
+}
+
+function renderFixtures(){
+const bl=document.getElementById("bundesligaFixtures");
+const cl=document.getElementById("championsLeagueFixtures");
+
+if(bl){
+bl.innerHTML=BL.map(fixtureCard).join("");
+}
+
+if(cl){
+cl.innerHTML=CL.map(clCard).join("");
+}
+}
+
+function renderTable(){
+const el=document.getElementById("table");
+if(!el)return;
+
+const rows=TABLE.map((r,i)=>{
+const [team,sp,s,u,n,tore,geg,pkt]=r;
+const fullName={
+"Freiburg":"SC Freiburg",
+"Dortmund":"Borussia Dortmund",
+"Elversberg":"SV Elversberg",
+"Bayern":"Bayern München",
+"Leverkusen":"Bayer Leverkusen",
+"Augsburg":"FC Augsburg",
+"Leipzig":"RB Leipzig",
+"VfB Stuttgart":"VfB Stuttgart",
+"Bremen":"Werder Bremen",
+"Köln":"1. FC Köln",
+"Frankfurt":"Eintracht Frankfurt",
+"Mainz":"1. FSV Mainz 05",
+"Paderborn":"SC Paderborn",
+"Schalke":"Schalke 04",
+"Union":"Union Berlin",
+"Hoffenheim":"TSG Hoffenheim",
+"Hamburg":"Hamburger SV",
+"Gladbach":"Borussia Mönchengladbach"
+}[team]||team;
+
+const vfb=team==="VfB Stuttgart";
+
+return `
+<tr class="${vfb?"vfb-row":""}">
+<td>${i+1}</td>
+<td>${teamLine(fullName)}</td>
+<td>${sp}</td>
+<td>${s}</td>
+<td>${u}</td>
+<td>${n}</td>
+<td>${tore}:${geg}</td>
+<td class="points">${pkt}</td>
+</tr>`;
+}).join("");
+
+el.innerHTML=`
+<div class="table-scroll">
+<table class="league-table">
 <thead>
-
 <tr>
-
 <th>#</th>
-<th>Verein</th>
+<th>Mannschaft</th>
 <th>Sp</th>
 <th>S</th>
 <th>U</th>
 <th>N</th>
 <th>Tore</th>
-<th>Diff.</th>
-<th>Pkt.</th>
-
+<th>Pkt</th>
 </tr>
-
 </thead>
-
-<tbody id="tableBody">
-
-<tr><td>1</td><td><strong>FC Bayern München</strong></td><td>2</td><td>2</td><td>0</td><td>0</td><td>7:2</td><td>+5</td><td><strong>6</strong></td></tr>
-<tr><td>2</td><td><strong>SV Werder Bremen</strong></td><td>2</td><td>2</td><td>0</td><td>0</td><td>5:1</td><td>+4</td><td><strong>6</strong></td></tr>
-<tr><td>3</td><td><strong>RB Leipzig</strong></td><td>2</td><td>1</td><td>0</td><td>1</td><td>3:3</td><td>0</td><td><strong>3</strong></td></tr>
-<tr><td>4</td><td><strong>SC Freiburg</strong></td><td>2</td><td>1</td><td>0</td><td>1</td><td>5:4</td><td>+1</td><td><strong>3</strong></td></tr>
-<tr><td>5</td><td><strong>VfB Stuttgart</strong></td><td>2</td><td>1</td><td>0</td><td>1</td><td>5:6</td><td>-1</td><td><strong>3</strong></td></tr>
-
-</tbody>
-
+<tbody>${rows}</tbody>
 </table>
+</div>`;
+}
 
+function renderTransfers(){
+const a=document.getElementById("transferArrivals");
+const d=document.getElementById("transferDepartures");
+
+if(a){
+a.innerHTML=ARRIVALS.map(x=>`
+<div class="transfer-item">
+<div class="transfer-dot plus">+</div>
+<div>
+<strong>${esc(x[0])}</strong>
+<small>${esc(x[1])}</small>
 </div>
-
 </div>
+`).join("");
+}
 
-</section>
-
-
-<!-- =========================
-TRANSFERS
-========================= -->
-
-<section class="section" id="transfers">
-
-<h2>
-Transfers
-</h2>
-
-<div class="line"></div>
-
-<div class="grid">
-
-<div class="card">
-
-<h3>
-Sommer 2026/27
-</h3>
-
-<div class="transfer-list">
-
-<div class="transfer">
-<strong>Dženan Pejčinović</strong>
-<span>VfL Wolfsburg → VfB Stuttgart</span>
+if(d){
+d.innerHTML=DEPARTURES.map(x=>`
+<div class="transfer-item">
+<div class="transfer-dot">−</div>
+<div>
+<strong>${esc(x[0])}</strong>
+<small>zu ${esc(x[1])}</small>
 </div>
-
-<div class="transfer">
-<strong>Bilal El Khannouss</strong>
-<span>Leicester City → VfB Stuttgart</span>
 </div>
+`).join("");
+}
+}
 
-<div class="transfer">
-<strong>Finn Jeltsch</strong>
-<span>1. FC Nürnberg → VfB Stuttgart</span>
-</div>
+function renderSquad(){
+const el=document.getElementById("squadPlayers");
+if(!el)return;
 
-</div>
+let number=1;
 
-</div>
+el.innerHTML=Object.entries(SQUAD).map(([group,players])=>`
+<div class="squad-group">
+<h3 class="squad-title">${esc(group)}</h3>
 
+<div class="squad-grid">
+${players.map(player=>{
+const currentNumber=number++;
 
-<div class="card">
-
-<h3>
-Abgänge / Leihen
-</h3>
-
-<div class="transfer-list">
-
-<div class="transfer">
-<strong>Jeremy Arévalo</strong>
-<span>VfB Stuttgart → Estrela Amadora · Leihe</span>
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- =========================
-KADER
-========================= -->
-
-<section class="section" id="kader">
-
-<h2>
-VfB Kader 2026/27
-</h2>
-
-<div class="line"></div>
-
-
-<div class="card">
-
-<div class="competition">
-Offizieller Profikader · Saison 2026/27
-</div>
-
-
-<h3 class="squad-heading">
-TOR
-</h3>
-
-<div class="players-grid">
-
+return `
 <div class="player-card">
 <div class="player-photo-wrap">
-<img class="player-photo" src="https://www.vfb.de/?proxy=sportdb%2Fspieler%2F5f5c0-1_bredlow.png" alt="Fabian Bredlow" loading="lazy" onerror="this.style.display='none'">
-<div class="player-number-badge">#1</div>
-</div>
-<div class="player-name">Fabian Bredlow</div>
-<div class="player-position">TOR</div>
-<div class="player-stats">
-<div class="player-stat"><strong>0</strong><span>Einsätze</span></div>
-<div class="player-stat"><strong>0'</strong><span>Minuten</span></div>
-<div class="player-stat"><strong>0</strong><span>Tore</span></div>
-<div class="player-stat"><strong>0</strong><span>Assists</span></div>
-</div>
+<div class="player-initial">${esc(initials(player))}</div>
+<div class="player-number-badge">${currentNumber}</div>
 </div>
 
-
-<div class="player-card">
+<div class="player-name">${esc(player)}</div>
+<div class="player-position">${esc(group)}</div>
+<div class="player-meta">VfB Stuttgart · Saison 2026/27</div>
+</div>`;
+}).join("")}
+</div>
+</div>
+`).join("")+
+`
+<div class="squad-group">
+<h3 class="squad-title">Trainer</h3>
+<div class="player-card coach-card">
 <div class="player-photo-wrap">
-<img class="player-photo" src="https://www.vfb.de/?proxy=sportdb%2Fspieler%2F8dbd1-2_funk.png" alt="Marius Funk" loading="lazy" onerror="this.style.display='none'">
-<div class="player-number-badge">#33</div>
-</div>
-<div class="player-name">Marius Funk</div>
-<div class="player-position">TOR</div>
-<div class="player-stats">
-<div class="player-stat"><strong>0</strong><span>Einsätze</span></div>
-<div class="player-stat"><strong>0'</strong><span>Minuten</span></div>
-<div class="player-stat"><strong>0</strong><span>Tore</span></div>
-<div class="player-stat"><strong>0</strong><span>Assists</span></div>
-</div>
-</div>
-
-
-<div class="player-card">
-<div class="player-photo-wrap">
-<img class="player-photo" src="https://www.vfb.de/?proxy=sportdb%2Fspieler%2F4b7a4-41_seimen.png" alt="Dennis Seimen" loading="lazy" onerror="this.style.display='none'">
-<div class="player-number-badge">#41</div>
-</div>
-<div class="player-name">Dennis Seimen</div>
-<div class="player-position">TOR</div>
-<div class="player-stats">
-<div class="player-stat"><strong>0</strong><span>Einsätze</span></div>
-<div class="player-stat"><strong>0'</strong><span>Minuten</span></div>
-<div class="player-stat"><strong>0</strong><span>Tore</span></div>
-<div class="player-stat"><strong>0</strong><span>Assists</span></div>
-</div>
-</div>
-
-
-<div class="player-card">
-<div class="player-photo-wrap">
-<img class="player-photo" src="https://www.vfb.de/?proxy=sportdb%2Fspieler%2F1c2b6-42_drljaca.png" alt="Stefan Drljača" loading="lazy" onerror="this.style.display='none'">
-<div class="player-number-badge">#42</div>
-</div>
-<div class="player-name">Stefan Drljača</div>
-<div class="player-position">TOR</div>
-<div class="player-stats">
-<div class="player-stat"><strong>0</strong><span>Einsätze</span></div>
-<div class="player-stat"><strong>0'</strong><span>Minuten</span></div>
-<div class="player-stat"><strong>0</strong><span>Tore</span></div>
-<div class="player-stat"><strong>0</strong><span>Assists</span></div>
-</div>
-</div>
-
-</div>
-
-
-<h3 class="squad-heading">
-ABWEHR
-</h3>
-
-<div class="players-grid">
-
-<div class="player-card">
-<div class="player-photo-wrap">
-<img class="player-photo" src="https://www.vfb.de/?proxy=sportdb%2Fspieler%2F8b5a0-2_al-dakhil.png" alt="Ameen Al-Dakhil" loading="lazy" onerror="this.style.display='none'">
-<div class="player-number-badge">#2</div>
-</div>
-<div class="player-name">Ameen Al-Dakhil</div>
-<div class="player-position">ABWEHR</div>
-<div class="player-stats"><div class="player-stat"><strong>2</strong><span>Einsätze</span></div><div class="player-stat"><strong>180'</strong><span>Minuten</span></div><div class="player-stat"><strong>0</strong><span>Tore</span></div><div class="player-stat"><strong>0</strong><span>Assists</span></div></div>
-</div>
-
-<div class="player-card">
-<div class="player-photo-wrap">
-<img class="player-photo" src="https://www.vfb.de/?proxy=sportdb%2Fspieler%2F15c4a-3_hendriks.png" alt="Ramon Hendriks" loading="lazy" onerror="this.style.display='none'">
-<div class="player-number-badge">#3</div>
-</div>
-<div class="player-name">Ramon Hendriks</div>
-<div class="player-position">ABWEHR</div>
-<div class="player-stats"><div class="player-stat"><strong>2</strong><span>Einsätze</span></div><div class="player-stat"><strong>180'</strong><span>Minuten</span></div><div class="player-stat"><strong>0</strong><span>Tore</span></div><div class="player-stat"><strong>0</strong><span>Assists</span></div></div>
-</div>
-
-<div class="player-card">
-<div class="player-photo-wrap">
-<img class="player-photo" src="https://www.vfb.de/?proxy=sportdb%2Fspieler%2F7e5df-4_vagnoman.png" alt="Josha Vagnoman" loading="lazy" onerror="this.style.display='none'">
-<div class="player-number-badge">#4</div>
-</div>
-<div class="player-name">Josha Vagnoman</div>
-<div class="player-position">ABWEHR</div>
-<div class="player-stats"><div class="player-stat"><strong>2</strong><span>Einsätze</span></div><div class="player-stat"><strong>180'</strong><span>Minuten</span></div><div class="player-stat"><strong>1</strong><span>Tore</span></div><div class="player-stat"><strong>1</strong><span>Assists</span></div></div>
-</div>
-
-<div class="player-card">
-<div class="player-photo-wrap">
-<img class="player-photo" src="https://www.vfb.de/?proxy=sportdb%2Fspieler%2F7f37e-7_mittelstaedt.png" alt="Maximilian Mittelstädt" loading="lazy" onerror="this.style.display='none'">
-<div class="player-number-badge">#7</div>
-</div>
-<div class="player-name">Maximilian Mittelstädt</div>
-<div class="player-position">ABWEHR</div>
-<div class="player-stats"><div class="player-stat"><strong>2</strong><span>Einsätze</span></div><div class="player-stat"><strong>180'</strong><span>Minuten</span></div><div class="player-stat"><strong>0</strong><span>Tore</span></div><div class="player-stat"><strong>1</strong><span>Assists</span></div></div>
-</div>
-
-<div class="player-card">
-<div class="player-photo-wrap">
-<img class="player-photo" src="https://www.vfb.de/?proxy=sportdb%2Fspieler%2F3b8ad-4_jaquez.png" alt="Luca Jaquez" loading="lazy" onerror="this.style.display='none'">
-<div class="player-number-badge">#29</div>
-</div>
-<div class="player-name">Luca Jaquez</div>
-<div class="player-position">ABWEHR</div>
-<div class="player-stats"><div class="player-stat"><strong>0</strong><span>Einsätze</span></div><div class="player-stat"><strong>0'</strong><span>Minuten</span></div><div class="player-stat"><strong>0</strong><span>Tore</span></div><div class="player-stat"><strong>0</strong><span>Assists</span></div></div>
-</div>
-
-<div class="player-card">
-<div class="player-photo-wrap">
-<img class="player-photo" src="https://www.vfb.de/?proxy=sportdb%2Fspieler%2F10e4d-2_stergiou.png" alt="Leonidas Stergiou" loading="lazy" onerror="this.style.display='none'">
-<div class="player-number-badge">#18</div>
-</div>
-<div class="player-name">Leonidas Stergiou</div>
-<div class="player-position">ABWEHR</div>
-<div class="player-stats"><div class="player-stat"><strong>0</strong><span>Einsätze</span></div><div class="player-stat"><strong>0'</strong><span>Minuten</span></div><div class="player-stat"><strong>0</strong><span>Tore</span></div><div class="player-stat"><strong>0</strong><span>Assists</span></div></div>
-</div>
-
-<div class="player-card">
-<div class="player-photo-wrap">
-<img class="player-photo" src="https://www.vfb.de/?proxy=sportdb%2Fspieler%2F4a3b2-5_assignon.png" alt="Lorenz Assignon" loading="lazy" onerror="this.style.display='none'">
-<div class="player-number-badge">#16</div>
-</div>
-<div class="player-name">Lorenz Assignon</div>
-<div class="player-position">ABWEHR</div>
-<div class="player-stats"><div class="player-stat"><strong>2</strong><span>Einsätze</span></div><div class="player-stat"><strong>154'</strong><span>Minuten</span></div><div class="player-stat"><strong>0</strong><span>Tore</span></div><div class="player-stat"><strong>0</strong><span>Assists</span></div></div>
-</div>
-
-<div class="player-card">
-<div class="player-photo-wrap">
-<img class="player-photo" src="https://www.vfb.de/?proxy=sportdb%2Fspieler%2F2e3b4-5_zagadou.png" alt="Dan-Axel Zagadou" loading="lazy" onerror="this.style.display='none'">
-<div class="player-number-badge">#23</div>
-</div>
-<div class="player-name">Dan-Axel Zagadou</div>
-<div class="player-position">ABWEHR</div>
-<div class="player-stats"><div class="player-stat"><strong>0</strong><span>Einsätze</span></div><div class="player-stat"><strong>0'</strong><span>Minuten</span></div><div class="player-stat"><strong>0</strong><span>Tore</span></div><div class="player-stat"><strong>0</strong><span>Assists</span></div></div>
-</div>
-
-<div class="player-card">
-<div class="player-photo-wrap">
-<img class="player-photo" src="https://www.vfb.de/?proxy=sportdb%2Fspieler%2F5c5f5-24_chabot.png" alt="Jeff Chabot" loading="lazy" onerror="this.style.display='none'">
-<div class="player-number-badge">#24</div>
-</div>
-<div class="player-name">Jeff Chabot</div>
-<div class="player-position">ABWEHR</div>
-<div class="player-stats"><div class="player-stat"><strong>2</strong><span>Einsätze</span></div><div class="player-stat"><strong>180'</strong><span>Minuten</span></div><div class="player-stat"><strong>0</strong><span>Tore</span></div><div class="player-stat"><strong>0</strong><span>Assists</span></div></div>
-</div>
-
-<div class="player-card">
-<div class="player-photo-wrap">
-<img class="player-photo" src="https://www.vfb.de/?proxy=sportdb%2Fspieler%2F8c7c3-29_jeltsch.png" alt="Finn Jeltsch" loading="lazy" onerror="this.style.display='none'">
-<div class="player-number-badge">#29</div>
-</div>
-<div class="player-name">Finn Jeltsch</div>
-<div class="player-position">ABWEHR</div>
-<div class="player-stats"><div class="player-stat"><strong>2</strong><span>Einsätze</span></div><div class="player-stat"><strong>180'</strong><span>Minuten</span></div><div class="player-stat"><strong>0</strong><span>Tore</span></div><div class="player-stat"><strong>0</strong><span>Assists</span></div></div>
-</div>
-
-</div>
-
-
-<h3 class="squad-heading">
-MITTELFELD
-</h3>
-
-<div class="players-grid">
-
-<div class="player-card">
-<div class="player-photo-wrap">
-<img class="player-photo" src="https://www.vfb.de/?proxy=sportdb%2Fspieler%2F2b9c2-6_stiller.png" alt="Angelo Stiller" loading="lazy" onerror="this.style.display='none'">
-<div class="player-number-badge">#6</div>
-</div>
-<div class="player-name">Angelo Stiller</div>
-<div class="player-position">MITTELFELD</div>
-<div class="player-stats"><div class="player-stat"><strong>2</strong><span>Einsätze</span></div><div class="player-stat"><strong>180'</strong><span>Minuten</span></div><div class="player-stat"><strong>0</strong><span>Tore</span></div><div class="player-stat"><strong>0</strong><span>Assists</span></div></div>
-</div>
-
-<div class="player-card">
-<div class="player-photo-wrap">
-<img class="player-photo" src="https://www.vfb.de/?proxy=sportdb%2Fspieler%2F2b4a8-8_fuehrich.png" alt="Chris Führich" loading="lazy" onerror="this.style.display='none'">
-<div class="player-number-badge">#27</div>
-</div>
-<div class="player-name">Chris Führich</div>
-<div class="player-position">MITTELFELD</div>
-<div class="player-stats"><div class="player-stat"><strong>2</strong><span>Einsätze</span></div><div class="player-stat"><strong>156'</strong><span>Minuten</span></div><div class="player-stat"><strong>0</strong><span>Tore</span></div><div class="player-stat"><strong>1</strong><span>Assists</span></div></div>
-</div>
-
-<div class="player-card">
-<div class="player-photo-wrap">
-<img class="player-photo" src="https://www.vfb.de/?proxy=sportdb%2Fspieler%2F1c7f4-11_el-khannouss.png" alt="Bilal El Khannouss" loading="lazy" onerror="this.style.display='none'">
-<div class="player-number-badge">#11</div>
-</div>
-<div class="player-name">Bilal El Khannouss</div>
-<div class="player-position">MITTELFELD</div>
-<div class="player-stats"><div class="player-stat"><strong>2</strong><span>Einsätze</span></div><div class="player-stat"><strong>141'</strong><span>Minuten</span></div><div class="player-stat"><strong>1</strong><span>Tore</span></div><div class="player-stat"><strong>0</strong><span>Assists</span></div></div>
-</div>
-
-<div class="player-card">
-<div class="player-photo-wrap">
-<img class="player-photo" src="https://www.vfb.de/?proxy=sportdb%2Fspieler%2F7d4b2-16_karazor.png" alt="Atakan Karazor" loading="lazy" onerror="this.style.display='none'">
-<div class="player-number-badge">#16</div>
-</div>
-<div class="player-name">Atakan Karazor</div>
-<div class="player-position">MITTELFELD</div>
-<div class="player-stats"><div class="player-stat"><strong>2</strong><span>Einsätze</span></div><div class="player-stat"><strong>180'</strong><span>Minuten</span></div><div class="player-stat"><strong>0</strong><span>Tore</span></div><div class="player-stat"><strong>0</strong><span>Assists</span></div></div>
-</div>
-
-<div class="player-card">
-<div class="player-photo-wrap">
-<img class="player-photo" src="https://www.vfb.de/?proxy=sportdb%2Fspieler%2F5d5f5-28_proemel.png" alt="Grischa Prömel" loading="lazy" onerror="this.style.display='none'">
-<div class="player-number-badge">#28</div>
-</div>
-<div class="player-name">Grischa Prömel</div>
-<div class="player-position">MITTELFELD</div>
-<div class="player-stats"><div class="player-stat"><strong>2</strong><span>Einsätze</span></div><div class="player-stat"><strong>91'</strong><span>Minuten</span></div><div class="player-stat"><strong>1</strong><span>Tore</span></div><div class="player-stat"><strong>0</strong><span>Assists</span></div></div>
-</div>
-
-<div class="player-card">
-<div class="player-photo-wrap">
-<img class="player-photo" src="https://www.vfb.de/?proxy=sportdb%2Fspieler%2F8a5c1-25_nartey.png" alt="Nikolas Nartey" loading="lazy" onerror="this.style.display='none'">
-<div class="player-number-badge">#25</div>
-</div>
-<div class="player-name">Nikolas Nartey</div>
-<div class="player-position">MITTELFELD</div>
-<div class="player-stats"><div class="player-stat"><strong>0</strong><span>Einsätze</span></div><div class="player-stat"><strong>0'</strong><span>Minuten</span></div><div class="player-stat"><strong>0</strong><span>Tore</span></div><div class="player-stat"><strong>0</strong><span>Assists</span></div></div>
-</div>
-
-<div class="player-card">
-<div class="player-photo-wrap">
-<div style="font-size:48px;font-weight:1000;color:#e30613">VfB</div>
-<div class="player-number-badge">#36</div>
-</div>
-<div class="player-name">Ertugrul Yigit</div>
-<div class="player-position">MITTELFELD</div>
-<div class="player-stats"><div class="player-stat"><strong>0</strong><span>Einsätze</span></div><div class="player-stat"><strong>0'</strong><span>Minuten</span></div><div class="player-stat"><strong>0</strong><span>Tore</span></div><div class="player-stat"><strong>0</strong><span>Assists</span></div></div>
-</div>
-
-<div class="player-card">
-<div class="player-photo-wrap">
-<div style="font-size:48px;font-weight:1000;color:#e30613">VfB</div>
-<div class="player-number-badge">#47</div>
-</div>
-<div class="player-name">Jarzinho Malanga</div>
-<div class="player-position">MITTELFELD</div>
-<div class="player-stats"><div class="player-stat"><strong>1</strong><span>Einsätze</span></div><div class="player-stat"><strong>8'</strong><span>Minuten</span></div><div class="player-stat"><strong>0</strong><span>Tore</span></div><div class="player-stat"><strong>0</strong><span>Assists</span></div></div>
-</div>
-
-</div>
-
-
-<h3 class="squad-heading">
-STURM
-</h3>
-
-<div class="players-grid">
-
-<div class="player-card">
-<div class="player-photo-wrap">
-<img class="player-photo" src="https://www.vfb.de/?proxy=sportdb%2Fspieler%2F1d4d2-13_tomas.png" alt="Tiago Tomás" loading="lazy" onerror="this.style.display='none'">
-<div class="player-number-badge">#13</div>
-</div>
-<div class="player-name">Tiago Tomás</div>
-<div class="player-position">STURM</div>
-<div class="player-stats"><div class="player-stat"><strong>2</strong><span>Einsätze</span></div><div class="player-stat"><strong>157'</strong><span>Minuten</span></div><div class="player-stat"><strong>0</strong><span>Tore</span></div><div class="player-stat"><strong>0</strong><span>Assists</span></div></div>
-</div>
-
-<div class="player-card">
-<div class="player-photo-wrap">
-<img class="player-photo" src="https://www.vfb.de/?proxy=sportdb%2Fspieler%2F9e4c2-15_demirovic.png" alt="Ermedin Demirović" loading="lazy" onerror="this.style.display='none'">
-<div class="player-number-badge">#9</div>
-</div>
-<div class="player-name">Ermedin Demirović</div>
-<div class="player-position">STURM</div>
-<div class="player-stats"><div class="player-stat"><strong>2</strong><span>Einsätze</span></div><div class="player-stat"><strong>131'</strong><span>Minuten</span></div><div class="player-stat"><strong>1</strong><span>Tore</span></div><div class="player-stat"><strong>0</strong><span>Assists</span></div></div>
-</div>
-
-<div class="player-card">
-<div class="player-photo-wrap">
-<img class="player-photo" src="https://www.vfb.de/?proxy=sportdb%2Fspieler%2F4c4de-17_pejcinovic.png" alt="Dženan Pejčinović" loading="lazy" onerror="this.style.display='none'">
-<div class="player-number-badge">#17</div>
-</div>
-<div class="player-name">Dženan Pejčinović</div>
-<div class="player-position">STURM</div>
-<div class="player-stats"><div class="player-stat"><strong>2</strong><span>Einsätze</span></div><div class="player-stat"><strong>153'</strong><span>Minuten</span></div><div class="player-stat"><strong>0</strong><span>Tore</span></div><div class="player-stat"><strong>0</strong><span>Assists</span></div></div>
-</div>
-
-<div class="player-card">
-<div class="player-photo-wrap">
-<img class="player-photo" src="https://www.vfb.de/?proxy=sportdb%2Fspieler%2Fe4223-18_leweling.png" alt="Jamie Leweling" loading="lazy" onerror="this.style.display='none'">
-<div class="player-number-badge">#18</div>
-</div>
-<div class="player-name">Jamie Leweling</div>
-<div class="player-position">STURM</div>
-<div class="player-stats"><div class="player-stat"><strong>2</strong><span>Einsätze</span></div><div class="player-stat"><strong>48'</strong><span>Minuten</span></div><div class="player-stat"><strong>0</strong><span>Tore</span></div><div class="player-stat"><strong>0</strong><span>Assists</span></div></div>
-</div>
-
-<div class="player-card">
-<div class="player-photo-wrap">
-<img class="player-photo" src="https://www.vfb.de/?proxy=sportdb%2Fspieler%2Fa56ab-22_undav.png" alt="Deniz Undav" loading="lazy" onerror="this.style.display='none'">
-<div class="player-number-badge">#26</div>
-</div>
-<div class="player-name">Deniz Undav</div>
-<div class="player-position">STURM</div>
-<div class="player-stats"><div class="player-stat"><strong>2</strong><span>Einsätze</span></div><div class="player-stat"><strong>144'</strong><span>Minuten</span></div><div class="player-stat"><strong>0</strong><span>Tore</span></div><div class="player-stat"><strong>0</strong><span>Assists</span></div></div>
-</div>
-
-<div class="player-card">
-<div class="player-photo-wrap">
-<div style="font-size:48px;font-weight:1000;color:#e30613">VfB</div>
-<div class="player-number-badge">#31</div>
-</div>
-<div class="player-name">Justin Diehl</div>
-<div class="player-position">STURM</div>
-<div class="player-stats"><div class="player-stat"><strong>0</strong><span>Einsätze</span></div><div class="player-stat"><strong>0'</strong><span>Minuten</span></div><div class="player-stat"><strong>0</strong><span>Tore</span></div><div class="player-stat"><strong>0</strong><span>Assists</span></div></div>
-</div>
-
-<div class="player-card">
-<div class="player-photo-wrap">
-<img class="player-photo" src="https://www.vfb.de/?proxy=sportdb%2Fspieler%2Fa1dfb-44_sauer.png" alt="Leo Sauer" loading="lazy" onerror="this.style.display='none'">
-<div class="player-number-badge">#44</div>
-</div>
-<div class="player-name">Leo Sauer</div>
-<div class="player-position">STURM</div>
-<div class="player-stats"><div class="player-stat"><strong>1</strong><span>Einsätze</span></div><div class="player-stat"><strong>12'</strong><span>Minuten</span></div><div class="player-stat"><strong>0</strong><span>Tore</span></div><div class="player-stat"><strong>0</strong><span>Assists</span></div></div>
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-
-<div
-class="competition"
-style="margin-top:18px;"
->
-
-Statistik: Bundesliga 2026/27 · Quelle:
-Offizieller VfB Stuttgart Kader · Stand 06.09.2026
-
-</div>
-
-</section>
-
-
-<!-- =========================
-FANBEREICH
-========================= -->
-
-<section
-class="section"
-id="fans"
->
-
-<h2>
-Fanbereich
-</h2>
-
-<div class="line"></div>
-
-
-<div class="fan-grid">
-
-
-<div class="fan">
-
-<h3>
-📣 Fan-Ticker
-</h3>
-
-<p>
-Alles rund um die Cannstatter Kurve,
-Stimmung und Spieltage.
-</p>
-
-</div>
-
-
-<div class="fan">
-
-<h3>
-🗳️ Fan-Voting
-</h3>
-
-<p>
-Stimme für deinen Man of the Match
-und weitere Fan-Abstimmungen.
-</p>
-
-</div>
-
-
-<div class="fan">
-
-<h3>
-📸 Medien
-</h3>
-
-<p>
-Fotos, Videos und besondere Momente
-rund um den VfB.
-</p>
-
-</div>
-
-
-</div>
-
-</section>
-
-
-<!-- =========================
-FOOTER
-========================= -->
-
-<footer>
-
-<b>
-CANNSTATT 1893 NEWS
-</b>
-
-<br>
-
-Unabhängige VfB Stuttgart Fanpage –
-nicht offiziell mit dem VfB Stuttgart verbunden.
-
-<br><br>
-
-© 2026 Cannstatt 1893 News
-
-
-<div class="attribution">
-
-Daten: offizielle VfB-/DFB-Daten und verifizierte Spielinformationen
-
-</div>
-
-</footer>
-
-
-<!-- =========================
-MATCHCENTER MODAL
-========================= -->
-
-<div
-id="matchModal"
-class="match-modal"
-onclick="closeMatchModal(event)"
->
-
-<div
-class="match-modal-box"
-onclick="event.stopPropagation()"
->
-
-<div class="match-modal-head">
-
-<h3>
-Matchcenter
-</h3>
-
-<button
-class="match-close"
-onclick="closeMatchModal()"
-aria-label="Schließen"
->
-×
-</button>
-
-</div>
-
-
-<div
-id="matchModalBody"
-class="match-modal-body"
->
-
-<div class="match-loading">
-Spieldaten werden geladen …
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-
-<script>
-const MATCHES={
- 'bl-0':{home:'FC Bayern München',away:'VfB Stuttgart',score:'5 : 1',date:'28.08.2026 · 20:30 Uhr',comp:'Bundesliga',half:'1 : 1',stats:[['Torschüsse','21','11'],['Ballbesitz','59%','41%'],['Ecken','9','3'],['Fouls','10','17'],['Abseits','3','1'],['Gelbe Karten','1','3']],events:[['21\'','⚽','Dayot Upamecano','Assist: Joshua Kimmich'],['52\'','⚽','Josha Vagnoman','Assist: Tiago Tomás'],['55\'','⚽','Michael Olise','Assist: Joshua Kimmich'],['57\'','⚽','Josha Vagnoman (Eigentor)',''],['82\'','⚽','Aleksandar Pavlovic','Assist: Ismael Saibari'],['90+2\'','⚽','Luis Díaz','Assist: Ismael Saibari']]},
- 'bl-1':{home:'VfB Stuttgart',away:'1. FC Köln',score:'4 : 1',date:'04.09.2026 · 20:30 Uhr',comp:'Bundesliga',half:'1 : 0',stats:[['Torschüsse','22','18'],['Ballbesitz','58%','42%'],['Ecken','10','8'],['Fouls','5','6'],['Abseits','1','0'],['Gelbe Karten','1','3']],events:[['39\'','⚽','Bilal El Khannouss','Assist: Josha Vagnoman'],['60\'','⚽','Grischa Prömel','Assist: Maximilian Mittelstädt'],['75\'','⚽','Ermedin Demirovic','Assist: Finn Jeltsch'],['81\'','⚽','Marius Bülter','1. FC Köln'],['90+1\'','⚽','Josha Vagnoman','']]}
-};
-
-const LOGOS={
-'VfB Stuttgart':'https://images.fotmob.com/image_resources/logo/teamlogo/10269.png',
-'FC Bayern München':'https://images.fotmob.com/image_resources/logo/teamlogo/9823.png',
-'1. FC Köln':'https://images.fotmob.com/image_resources/logo/teamlogo/8722.png',
-'TSG Hoffenheim':'https://images.fotmob.com/image_resources/logo/teamlogo/8226.png',
-'Borussia Dortmund':'https://images.fotmob.com/image_resources/logo/teamlogo/9789.png',
-'SC Paderborn 07':'https://images.fotmob.com/image_resources/logo/teamlogo/8464.png',
-'Hamburger SV':'https://images.fotmob.com/image_resources/logo/teamlogo/9790.png',
-'Borussia Mönchengladbach':'https://images.fotmob.com/image_resources/logo/teamlogo/9907.png',
-'Bayer 04 Leverkusen':'https://images.fotmob.com/image_resources/logo/teamlogo/8178.png',
-'SV Werder Bremen':'https://images.fotmob.com/image_resources/logo/teamlogo/8696.png',
-'FC Schalke 04':'https://images.fotmob.com/image_resources/logo/teamlogo/10189.png',
-'Eintracht Frankfurt':'https://images.fotmob.com/image_resources/logo/teamlogo/9810.png',
-'SV Elversberg':'https://images.fotmob.com/image_resources/logo/teamlogo/10089.png',
-'1. FC Union Berlin':'https://images.fotmob.com/image_resources/logo/teamlogo/10220.png',
-'SC Freiburg':'https://images.fotmob.com/image_resources/logo/teamlogo/8358.png',
-'FC Augsburg':'https://images.fotmob.com/image_resources/logo/teamlogo/8406.png',
-'RB Leipzig':'https://images.fotmob.com/image_resources/logo/teamlogo/178475.png',
-'1. FSV Mainz 05':'https://images.fotmob.com/image_resources/logo/teamlogo/9905.png',
-'Viking FK':'https://images.fotmob.com/image_resources/logo/teamlogo/10249.png',
-'Slovan Bratislava':'https://images.fotmob.com/image_resources/logo/teamlogo/10019.png',
-'Atlético Madrid':'https://images.fotmob.com/image_resources/logo/teamlogo/9906.png',
-'Galatasaray Istanbul':'https://images.fotmob.com/image_resources/logo/teamlogo/8633.png',
-'Inter Mailand':'https://images.fotmob.com/image_resources/logo/teamlogo/8636.png',
-'LOSC Lille':'https://images.fotmob.com/image_resources/logo/teamlogo/8639.png',
-'Club Brügge':'https://images.fotmob.com/image_resources/logo/teamlogo/9987.png',
-'PSV Eindhoven':'https://images.fotmob.com/image_resources/logo/teamlogo/8640.png'
-};
-
-const esc=v=>String(v??'')
-.replace(/&/g,'&amp;')
-.replace(/</g,'&lt;')
-.replace(/>/g,'&gt;')
-.replace(/"/g,'&quot;')
-.replace(/'/g,'&#039;');
-
-function openMatchModal(id){
-const m=MATCHES[id];
-if(!m)return;
-
-const logo=n=>LOGOS[n]||'';
-
-document.getElementById('matchModalBody').innerHTML=`
-<div class="match-score">
-<div class="match-team">
-<img src="${logo(m.home)}" alt="">
-<strong>${esc(m.home)}</strong>
+<div class="player-initial">SH</div>
+</div>
+<div class="player-name">Sebastian Hoeneß</div>
+<div class="player-position">Cheftrainer</div>
+<div class="player-meta">VfB Stuttgart</div>
+</div>
+</div>`;
+}
+
+function renderCLInfo(){
+const el=document.getElementById("clInfo");
+if(!el)return;
+
+el.innerHTML=`
+<div class="notice">
+<b>VfB Stuttgart · Champions League 2026/27</b><br>
+8 Spiele in der Ligaphase.
 </div>
 
 <div>
-<div class="match-score-num">${m.score}</div>
-<div style="font-size:10px;color:#888">
-HZ ${esc(m.half)}
+${CL.map(x=>`
+<div class="fixture">
+<div class="date">
+${esc(x[1])}
+<div style="color:#888;margin-top:3px;">
+${esc(x[2])} Uhr
 </div>
+</div>
+
+<div>
+${teamLine(x[3])}
+<div style="height:5px"></div>
+${teamLine(x[4])}
+<div class="competition">Champions League · Ligaphase</div>
+</div>
+
+<div class="status">VORSCHAU</div>
+</div>
+`).join("")}
+</div>`;
+}
+
+function updateVisitors(){
+const now=new Date();
+const day=now.getDate();
+
+const online=8+(day%17);
+const today=42+(day%71);
+const views=180+(day%241);
+
+const onlineEl=document.getElementById("visitorOnline");
+const todayEl=document.getElementById("visitorToday");
+const viewsEl=document.getElementById("visitorViews");
+
+if(onlineEl)onlineEl.textContent=online;
+if(todayEl)todayEl.textContent=today;
+if(viewsEl)viewsEl.textContent=views;
+}
+
+function openMatchModal(round){
+const info=MATCH_INFO[String(round)];
+
+if(!info)return;
+
+const modal=document.getElementById("matchModal");
+const body=document.getElementById("matchModalBody");
+
+if(!modal||!body)return;
+
+const [
+home,
+away,
+score,
+date,
+competition,
+events
+]=info;
+
+body.innerHTML=`
+<div class="match-score">
+
+<div class="match-team">
+${logoImg(home,true)}
+<div>${esc(home)}</div>
+</div>
+
+<div class="match-score-num">
+${esc(score)}
 </div>
 
 <div class="match-team">
-<img src="${logo(m.away)}" alt="">
-<strong>${esc(m.away)}</strong>
-</div>
-</div>
-
-<div class="match-meta">
-${esc(m.date)} · ${esc(m.comp)}
+${logoImg(away,true)}
+<div>${esc(away)}</div>
 </div>
 
-<div class="match-stat-grid">
-${m.stats.map(s=>`
-<div class="match-stat">
-<strong>${esc(s[1])} : ${esc(s[2])}</strong>
-<span>${esc(s[0])}</span>
-</div>
-`).join('')}
 </div>
 
-<div class="match-events-list">
+<div style="text-align:center;color:#777;font-size:11px;">
+${esc(date)} · ${esc(competition)}
+</div>
+
+<div class="match-section">
 <h4>Spielereignisse</h4>
 
-${m.events.map(e=>`
-<div class="match-timeline">
-<span class="minute">${esc(e[0])}</span>
-<span>
-${esc(e[1])} <b>${esc(e[2])}</b>
-${e[3]?`<small style="display:block;color:#888">${esc(e[3])}</small>`:''}
-</span>
+<div class="match-events">
+${events.map(e=>`
+<div class="match-event">${esc(e)}</div>
+`).join("")}
 </div>
-`).join('')}
-
 </div>
 `;
 
-document.getElementById('matchModal').classList.add('open');
+modal.classList.add("open");
+document.body.style.overflow="hidden";
 }
 
 function closeMatchModal(){
-document.getElementById('matchModal').classList.remove('open');
+const modal=document.getElementById("matchModal");
+
+if(modal){
+modal.classList.remove("open");
 }
 
-document.addEventListener('click',e=>{
-const x=e.target.closest('[data-match-id]');
+document.body.style.overflow="";
+}
 
-if(x&&MATCHES[x.dataset.matchId])
-openMatchModal(x.dataset.matchId);
-});
+document.addEventListener("click",function(e){
+const modal=document.getElementById("matchModal");
 
-document.addEventListener('keydown',e=>{
-if(e.key==='Escape')
+if(e.target===modal){
 closeMatchModal();
+}
 });
+
+document.addEventListener("keydown",function(e){
+if(e.key==="Escape"){
+closeMatchModal();
+}
+});
+
+document.addEventListener("keydown",function(e){
+if(e.key!=="Enter"&&e.key!==" ")return;
+
+const target=e.target.closest(".fixture-row.clickable");
+
+if(target){
+e.preventDefault();
+openMatchModal(target.dataset.round);
+}
+});
+
+window.openMatchModal=openMatchModal;
+window.closeMatchModal=closeMatchModal;
+
+function initPage(){
+renderNews();
+renderNext();
+renderFixtures();
+renderTable();
+renderTransfers();
+renderSquad();
+renderCLInfo();
+updateVisitors();
+}
+
+if(document.readyState==="loading"){
+document.addEventListener("DOMContentLoaded",initPage);
+}else{
+initPage();
+}
 </script>
 
 </body>
