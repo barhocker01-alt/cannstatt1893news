@@ -2000,7 +2000,13 @@ function renderTransfers(){
 function renderSquad(){
  const el=document.getElementById("squadPlayers");if(!el)return;
  const groups={"Tor":[],"Abwehr":[],"Mittelfeld":[],"Sturm":[]};
- const data=Array.isArray(dashboard?.squad)?dashboard.squad:[];
+ const squad=dashboard?.squad||{};
+ const data=[
+   ...(Array.isArray(squad.goalkeepers)?squad.goalkeepers:[]),
+   ...(Array.isArray(squad.defenders)?squad.defenders:[]),
+   ...(Array.isArray(squad.midfielders)?squad.midfielders:[]),
+   ...(Array.isArray(squad.attackers)?squad.attackers:[])
+ ];
  if(!data.length){el.innerHTML='<div class="competition">Kaderdaten momentan nicht verfügbar.</div>';return;}
  data.forEach(p=>{
    const pos=String(p.position||"");
