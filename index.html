@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="de">
 
@@ -1876,12 +1875,44 @@ function esc(v){return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&l
 function initials(name){return (BADGES[name]?.[0]||String(name||"").split(/\s+/).map(x=>x[0]).join("").slice(0,3)).toUpperCase();}
 
 /* API liefert die offiziellen/aktuellen Crest-URLs mit. */
+const CLUB_LOGOS={
+ "VfB Stuttgart":"https://www.vfb.de/?proxy=img%2Flogo.svg",
+ "FC Bayern München":"https://commons.wikimedia.org/wiki/Special:FilePath/FC_Bayern_M%C3%BCnchen_logo_(2017).svg",
+ "1. FC Köln":"https://commons.wikimedia.org/wiki/Special:FilePath/1._FC_K%C3%B6ln_Logo_2014.svg",
+ "TSG Hoffenheim":"https://commons.wikimedia.org/wiki/Special:FilePath/TSG_1899_Hoffenheim.svg",
+ "Borussia Dortmund":"https://commons.wikimedia.org/wiki/Special:FilePath/Borussia_Dortmund_logo.svg",
+ "SC Paderborn 07":"https://commons.wikimedia.org/wiki/Special:FilePath/SC_Paderborn_07_Logo.svg",
+ "Hamburger SV":"https://commons.wikimedia.org/wiki/Special:FilePath/Hamburger_SV_logo.svg",
+ "Borussia Mönchengladbach":"https://commons.wikimedia.org/wiki/Special:FilePath/Borussia_M%C3%B6nchengladbach_logo.svg",
+ "Bayer 04 Leverkusen":"https://commons.wikimedia.org/wiki/Special:FilePath/Bayer_04_Leverkusen_logo.svg",
+ "SV Werder Bremen":"https://commons.wikimedia.org/wiki/Special:FilePath/SV-Werder-Bremen-Logo.svg",
+ "FC Schalke 04":"https://commons.wikimedia.org/wiki/Special:FilePath/FC_Schalke_04_Logo.svg",
+ "Eintracht Frankfurt":"https://commons.wikimedia.org/wiki/Special:FilePath/Eintracht_Frankfurt_Logo.svg",
+ "SV Elversberg":"https://commons.wikimedia.org/wiki/Special:FilePath/SV_Elversberg_Logo.svg",
+ "1. FC Union Berlin":"https://commons.wikimedia.org/wiki/Special:FilePath/1._FC_Union_Berlin_logo.svg",
+ "SC Freiburg":"https://commons.wikimedia.org/wiki/Special:FilePath/SC_Freiburg_logo.svg",
+ "FC Augsburg":"https://commons.wikimedia.org/wiki/Special:FilePath/FC_Augsburg_logo.svg",
+ "RB Leipzig":"https://commons.wikimedia.org/wiki/Special:FilePath/RB_Leipzig_2014_logo.svg",
+ "1. FSV Mainz 05":"https://commons.wikimedia.org/wiki/Special:FilePath/1._FSV_Mainz_05_Logo.svg",
+ "Viking FK":"https://commons.wikimedia.org/wiki/Special:FilePath/Viking_FK_logo.svg",
+ "Viking Stavanger":"https://commons.wikimedia.org/wiki/Special:FilePath/Viking_FK_logo.svg",
+ "ŠK Slovan Bratislava":"https://commons.wikimedia.org/wiki/Special:FilePath/Slovan_Bratislava_logo.svg",
+ "Atlético Madrid":"https://commons.wikimedia.org/wiki/Special:FilePath/Atletico_Madrid_2017_logo.svg",
+ "Galatasaray":"https://commons.wikimedia.org/wiki/Special:FilePath/Galatasaray_Sports_Club_Logo.svg",
+ "Inter Mailand":"https://commons.wikimedia.org/wiki/Special:FilePath/Inter_Milan_2021_logo.svg",
+ "LOSC Lille":"https://commons.wikimedia.org/wiki/Special:FilePath/LOSC_Lille_logo.svg",
+ "Club Brugge":"https://commons.wikimedia.org/wiki/Special:FilePath/Club_Brugge_KV_logo.svg",
+ "PSV Eindhoven":"https://commons.wikimedia.org/wiki/Special:FilePath/PSV_Eindhoven.svg"
+};
 function logoImg(name,size="normal",crest=""){
  const cls=BADGES[name]?.[1]||"generic";
- if(crest){
-   return `<img class="team-logo ${size==='large'?'logo-large':''}" src="${esc(crest)}" alt="${esc(name)}" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'team-logo badge-${esc(cls)} ${size==='large'?'logo-large':''}',textContent:'${esc(initials(name))}'}))">`;
+ const src=String(crest||CLUB_LOGOS[name]||"").trim();
+ const logoClass=`team-logo ${size==='large'?'logo-large':''}`;
+ if(src){
+   return `<img class="${logoClass}" src="${esc(src)}" alt="${esc(name)}" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'">`+
+          `<span class="${logoClass} badge-${esc(cls)}" style="display:none" aria-label="${esc(name)}">${esc(initials(name))}</span>`;
  }
- return `<span class="team-logo badge-${esc(cls)} ${size==='large'?'logo-large':''}" aria-label="${esc(name)}">${esc(initials(name))}</span>`;
+ return `<span class="${logoClass} badge-${esc(cls)}" aria-label="${esc(name)}">${esc(initials(name))}</span>`;
 }
 function teamLine(name,crest=""){return `<div class="team-line">${logoImg(name,"normal",crest)}<span>${esc(name)}</span></div>`;}
 
@@ -1953,7 +1984,7 @@ function renderNews(){
    const date=n.date||n.pubDate||"";
    const url=n.url||n.link||"https://www.vfb.de/";
    const source=String(n.source||"VFB").toUpperCase()==="KICKER"?"KICKER":"VFB NEWS";
-   return `<article class="news"><div class="news-meta"><span class="tag">${source}</span><span>${esc(date)}</span></div><h3>${esc(n.title)}</h3><p class="news-summary">${esc(shortSummary(n.description))}</p><a class="btn" href="${esc(url)}" target="_blank" rel="noopener noreferrer">MELDUNG LESEN →</a></article>`;
+   return `<article class="news"><div class="news-meta"><span class="tag">${source}</span><span>${esc(date)}</span></div><h3>${esc(n.title)}</h3><p class="news-summary">${esc(shortSummary(n.summary||n.description||n.content||""))}</p><a class="btn" href="${esc(url)}" target="_blank" rel="noopener noreferrer">MELDUNG LESEN →</a></article>`;
  }).join("");
 }
 function renderNext(){
@@ -2112,8 +2143,8 @@ async function fetchDashboard(){
    if(attr)attr.textContent=data.attribution||"Data provided by football-data.org";
  }catch(err){
    console.error("Dashboard-Fehler:",err);
-   BL=FALLBACK_BL.map(x=>normalizeFixture({matchday:x[0],date:x[1],home:x[3],away:x[4],homeGoals:x[5]?.split(":")[0],awayGoals:x[5]?.split(":")[1],status:x[6]}));
-   CL=FALLBACK_CL.map(x=>normalizeFixture({matchday:x[0],date:x[1],home:x[3],away:x[4],status:"SCHEDULED"}));
+   BL=FALLBACK_BL.map(x=>normalizeFixture({matchday:x[0],rawDate:`${x[1]}T${x[2]||"12:00"}:00+02:00`,date:x[1],time:x[2],home:x[3],away:x[4],homeLogo:CLUB_LOGOS[x[3]]||"",awayLogo:CLUB_LOGOS[x[4]]||"",homeGoals:x[5]?.split(":")[0],awayGoals:x[5]?.split(":")[1],status:x[6]}));
+   CL=FALLBACK_CL.map(x=>normalizeFixture({matchday:x[0],rawDate:`${x[1]}T${x[2]}:00+02:00`,date:x[1],time:x[2],home:x[3],away:x[4],homeLogo:CLUB_LOGOS[x[3]]||"",awayLogo:CLUB_LOGOS[x[4]]||"",status:"SCHEDULED",competition:"UEFA Champions League"}));
    renderFixtures();
    const status=document.getElementById("updated");
    if(status)status.textContent="Live-Daten momentan nicht erreichbar";
