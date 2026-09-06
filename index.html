@@ -1,22 +1,54 @@
 <!doctype html>
 <html lang="de">
+
 <head>
+
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#e30613">
-<meta name="description" content="Cannstatt 1893 News – unabhängige VfB Stuttgart Fanpage">
-<title>Cannstatt 1893 News – VfB Stuttgart</title>
+
+<meta name="viewport"
+content="width=device-width,initial-scale=1">
+
+<meta name="theme-color"
+content="#e30613">
+
+<meta
+name="description"
+content="Cannstatt 1893 News – unabhängige VfB Stuttgart Fanpage">
+
+<title>
+Cannstatt 1893 News – VfB Stuttgart
+</title>
 
 <style>
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
+
+/* =========================
+   GRUNDLAGEN
+========================= */
+
+*{
+box-sizing:border-box;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
 body{
 margin:0;
 background:#f4f4f4;
 color:#151515;
-font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif
+font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
 }
-a{text-decoration:none;color:inherit}
+
+a{
+text-decoration:none;
+color:inherit;
+}
+
+
+/* =========================
+   TOP BAR
+========================= */
 
 .top{
 background:#080808;
@@ -25,15 +57,20 @@ padding:8px 5%;
 font-size:11px;
 display:flex;
 justify-content:space-between;
-gap:10px
+gap:10px;
 }
+
+
+/* =========================
+   BESUCHER-TICKER
+========================= */
 
 .visitor-ticker{
 display:flex;
 align-items:center;
 gap:5px;
 font-weight:800;
-white-space:nowrap
+white-space:nowrap;
 }
 
 .visitor-live-dot{
@@ -43,18 +80,51 @@ border-radius:50%;
 background:#e30613;
 box-shadow:0 0 0 3px #e3061333;
 display:inline-block;
-animation:visitorPulse 1.8s infinite
+animation:visitorPulse 1.8s infinite;
 }
 
 .visitor-separator{
 opacity:.45;
-margin:0 3px
+margin:0 3px;
 }
 
 @keyframes visitorPulse{
-0%,100%{opacity:1;transform:scale(1)}
-50%{opacity:.45;transform:scale(.8)}
+
+0%,100%{
+opacity:1;
+transform:scale(1);
 }
+
+50%{
+opacity:.45;
+transform:scale(.8);
+}
+
+}
+
+@media(max-width:800px){
+
+.top{
+font-size:9px;
+padding:7px 4%;
+flex-wrap:wrap;
+justify-content:center;
+text-align:center;
+}
+
+.visitor-ticker{
+order:3;
+width:100%;
+justify-content:center;
+font-size:9px;
+}
+
+}
+
+
+/* =========================
+   HEADER
+========================= */
 
 .bar{
 position:sticky;
@@ -66,14 +136,14 @@ padding:12px 5%;
 display:flex;
 align-items:center;
 justify-content:space-between;
-box-shadow:0 2px 12px #0001
+box-shadow:0 2px 12px #0001;
 }
 
 .brand{
 display:flex;
 align-items:center;
 gap:10px;
-font-weight:1000
+font-weight:1000;
 }
 
 .crest{
@@ -84,7 +154,7 @@ background:#e30613;
 color:#fff;
 display:grid;
 place-items:center;
-font-weight:1000
+font-weight:1000;
 }
 
 .brand small{
@@ -92,19 +162,27 @@ display:block;
 color:#777;
 font-size:9px;
 letter-spacing:1px;
-margin-top:2px
+margin-top:2px;
 }
 
 .nav{
 display:flex;
 gap:24px;
 font-size:13px;
-font-weight:800
+font-weight:800;
 }
 
-.nav a:hover{color:#e30613}
+.nav a:hover{
+color:#e30613;
+}
+
+
+/* =========================
+   HERO
+========================= */
 
 .hero{
+
 background:
 linear-gradient(
 90deg,
@@ -112,36 +190,39 @@ linear-gradient(
 #350000 55%,
 #750000 100%
 );
+
 color:white;
-padding:70px 5%
+padding:70px 5%;
 }
 
 .hero-inner{
 max-width:1150px;
-margin:auto
+margin:auto;
 }
 
 .hero-kicker{
 font-size:12px;
 font-weight:900;
 letter-spacing:2px;
-color:#ff4048
+color:#ff4048;
 }
 
 .hero h1{
 margin:12px 0;
 font-size:clamp(45px,8vw,85px);
 line-height:.9;
-letter-spacing:-5px
+letter-spacing:-5px;
 }
 
-.hero h1 span{color:#ff2630}
+.hero h1 span{
+color:#ff2630;
+}
 
 .hero p{
 max-width:650px;
 color:#ddd;
 font-size:17px;
-line-height:1.6
+line-height:1.6;
 }
 
 .btn{
@@ -152,34 +233,41 @@ padding:12px 17px;
 border-radius:8px;
 font-size:12px;
 font-weight:900;
-margin-top:8px
+margin-top:8px;
 }
+
+
+/* =========================
+   LAYOUT
+========================= */
 
 .wrap{
 width:min(1150px,90%);
-margin:auto
+margin:auto;
 }
 
-.section{padding:42px 0}
+.section{
+padding:42px 0;
+}
 
 .section h2{
 margin:0;
 text-transform:uppercase;
 font-size:30px;
-letter-spacing:-1px
+letter-spacing:-1px;
 }
 
 .line{
 width:45px;
 height:4px;
 background:#e30613;
-margin:8px 0 18px
+margin:8px 0 18px;
 }
 
 .grid{
 display:grid;
 grid-template-columns:1.3fr .9fr;
-gap:18px
+gap:18px;
 }
 
 .card{
@@ -187,55 +275,69 @@ background:#fff;
 border:1px solid #ddd;
 border-radius:14px;
 padding:20px;
-box-shadow:0 5px 20px #00000008
+box-shadow:0 5px 20px #00000008;
 }
+
+
+/* =========================
+   NEWS
+========================= */
 
 .news{
 padding:15px 0;
-border-bottom:1px solid #eee
+border-bottom:1px solid #eee;
 }
 
-.news:last-child{border-bottom:0}
+.news:last-child{
+border-bottom:0;
+}
 
 .tag{
 color:#e30613;
 font-size:10px;
 font-weight:900;
-text-transform:uppercase
+text-transform:uppercase;
 }
 
 .news h3{
 margin:5px 0;
-font-size:17px
+font-size:17px;
 }
 
 .news p{
 margin:5px 0;
 color:#666;
 font-size:12px;
-line-height:1.5
+line-height:1.5;
 }
+
+
+/* =========================
+   NEXT GAME
+========================= */
 
 .next{
 background:#111;
 color:white;
 border-radius:12px;
-padding:20px
+padding:20px;
 }
 
 .next-label{
 color:#ff2630;
 font-size:10px;
 font-weight:900;
-letter-spacing:1px
+letter-spacing:1px;
 }
 
 .next h3{
 font-size:24px;
-margin:10px 0
+margin:10px 0;
 }
 
-.next p{color:#ccc}
+.next p{
+color:#ccc;
+}
 
 .live{
 display:flex;
@@ -243,28 +345,38 @@ align-items:center;
 gap:7px;
 color:#ff2630;
 font-size:11px;
-font-weight:900
+font-weight:900;
 }
 
 .dot{
 width:8px;
 height:8px;
 background:#e30613;
-border-radius:50%
+border-radius:50%;
 }
+
+
+/* =========================
+   NOTICE
+========================= */
 
 .notice{
 background:#fff1f1;
 border-left:4px solid #e30613;
 padding:13px;
 font-size:12px;
-margin-bottom:18px
+margin-bottom:18px;
 }
+
+
+/* =========================
+   LOADING / ERROR
+========================= */
 
 .loading{
 color:#888;
 font-size:13px;
-padding:20px 0
+padding:20px 0;
 }
 
 .error{
@@ -272,54 +384,73 @@ color:#a00000;
 background:#fff0f0;
 padding:15px;
 border-radius:8px;
-font-size:12px
+font-size:12px;
 }
+
+
+/* =========================
+   SPIEL
+========================= */
 
 .fixture{
 display:flex;
 align-items:center;
 gap:15px;
 padding:14px 0;
-border-bottom:1px solid #eee
+border-bottom:1px solid #eee;
 }
 
-.fixture:last-child{border-bottom:0}
+.fixture:last-child{
+border-bottom:0;
+}
 
 .date{
 min-width:105px;
 color:#e30613;
 font-size:12px;
-font-weight:900
+font-weight:900;
 }
 
-.fixture strong{font-size:14px}
+.fixture strong{
+font-size:14px;
+}
 
 .competition{
 color:#888;
 font-size:11px;
-margin-top:3px
+margin-top:3px;
 }
 
 .status{
 margin-left:auto;
 font-size:10px;
-font-weight:900
+font-weight:900;
 }
+
+
+/* =========================
+   TEAM LOGOS
+========================= */
 
 .team-line{
 display:flex;
 align-items:center;
 gap:8px;
 font-size:14px;
-font-weight:800
+font-weight:800;
 }
 
 .team-logo{
 width:30px;
 height:30px;
 object-fit:contain;
-flex-shrink:0
+flex-shrink:0;
 }
+
+
+/* =========================
+   COMPETITION HEADER
+========================= */
 
 .competition-title{
 display:flex;
@@ -328,27 +459,34 @@ gap:10px;
 margin-top:10px;
 margin-bottom:8px;
 padding-bottom:10px;
-border-bottom:2px solid #eee
+border-bottom:2px solid #eee;
 }
 
-.competition-title .icon{font-size:24px}
+.competition-title .icon{
+font-size:24px;
+}
 
 .competition-title h3{
 margin:0;
 font-size:20px;
-font-weight:1000
+font-weight:1000;
 }
 
 .competition-title span{
 color:#777;
 font-size:11px;
-font-weight:600
+font-weight:600;
 }
+
+
+/* =========================
+   FAN AREA
+========================= */
 
 .fan-grid{
 display:grid;
 grid-template-columns:repeat(3,1fr);
-gap:15px
+gap:15px;
 }
 
 .fan{
@@ -356,31 +494,42 @@ background:#111;
 color:white;
 padding:25px;
 border-radius:13px;
-min-height:140px
+min-height:140px;
 }
 
-.fan h3{margin-top:0}
+.fan h3{
+margin-top:0;
+}
 
 .fan p{
 color:#aaa;
 font-size:13px;
-line-height:1.5
+line-height:1.5;
 }
 
-.squad-section{margin-top:20px}
 
-.squad-group{margin-top:28px}
+/* =========================
+   KADER
+========================= */
+
+.squad-section{
+margin-top:20px;
+}
+
+.squad-group{
+margin-top:28px;
+}
 
 .squad-title{
 font-size:20px;
 font-weight:900;
-margin:0 0 14px
+margin:0 0 14px;
 }
 
 .squad-grid{
 display:grid;
 grid-template-columns:repeat(4,1fr);
-gap:14px
+gap:14px;
 }
 
 .player-card{
@@ -390,25 +539,24 @@ border-radius:14px;
 padding:17px;
 box-shadow:0 5px 20px #00000008;
 transition:.2s;
-overflow:hidden
 }
 
 .player-card:hover{
 transform:translateY(-3px);
-box-shadow:0 8px 25px #00000012
+box-shadow:0 8px 25px #00000012;
 }
 
 .player-number{
 font-size:28px;
 font-weight:1000;
 color:#e30613;
-line-height:1
+line-height:1;
 }
 
 .player-name{
 font-size:15px;
 font-weight:900;
-margin-top:4px
+margin-top:10px;
 }
 
 .player-position{
@@ -416,7 +564,7 @@ font-size:10px;
 color:#777;
 text-transform:uppercase;
 font-weight:800;
-margin-top:4px
+margin-top:4px;
 }
 
 .player-photo-wrap{
@@ -432,14 +580,14 @@ overflow:hidden;
 display:flex;
 align-items:flex-end;
 justify-content:center;
-margin:-2px -2px 12px
+margin:-2px -2px 12px;
 }
 
 .player-photo{
 height:100%;
 width:100%;
 object-fit:contain;
-object-position:center bottom
+object-position:center bottom;
 }
 
 .player-number-badge{
@@ -451,7 +599,7 @@ color:#fff;
 border-radius:8px;
 padding:5px 8px;
 font-size:12px;
-font-weight:1000
+font-weight:1000;
 }
 
 .player-stats{
@@ -460,16 +608,18 @@ grid-template-columns:repeat(4,1fr);
 gap:6px;
 margin-top:12px;
 padding-top:10px;
-border-top:1px solid #eee
+border-top:1px solid #eee;
 }
 
-.player-stat{text-align:center}
+.player-stat{
+text-align:center;
+}
 
 .player-stat strong{
 display:block;
 font-size:16px;
 font-weight:1000;
-color:#151515
+color:#151515;
 }
 
 .player-stat span{
@@ -478,21 +628,36 @@ font-size:8px;
 color:#888;
 text-transform:uppercase;
 font-weight:800;
-margin-top:2px
+margin-top:2px;
+}
+
+.player-card{
+overflow:hidden;
+}
+
+.player-name{
+margin-top:4px;
 }
 
 .player-meta{
 font-size:9px;
 color:#999;
-margin-top:3px
+margin-top:3px;
 }
 
-.coach-card{max-width:350px}
+.coach-card{
+max-width:350px;
+}
+
+
+/* =========================
+   TABELLE
+========================= */
 
 .table-scroll{
 width:100%;
 overflow-x:auto;
--webkit-overflow-scrolling:touch
+-webkit-overflow-scrolling:touch;
 }
 
 .table-header,
@@ -510,7 +675,7 @@ minmax(170px,1fr)
 52px;
 gap:6px;
 align-items:center;
-min-width:570px
+min-width:570px;
 }
 
 .table-header{
@@ -519,33 +684,42 @@ border-bottom:2px solid #111;
 font-size:9px;
 font-weight:900;
 text-transform:uppercase;
-color:#777
+color:#777;
 }
 
 .table-row{
 padding:12px 0;
-border-bottom:1px solid #eee
+border-bottom:1px solid #eee;
 }
 
 .table-cell{
 text-align:center;
-font-size:12px
+font-size:12px;
 }
 
-.table-cell.pos{font-weight:900}
+.table-cell.pos{
+font-weight:900;
+}
 
-.table-team{min-width:0}
+.table-team{
+min-width:0;
+}
 
 .table-team strong{
 overflow:hidden;
 text-overflow:ellipsis;
-white-space:nowrap
+white-space:nowrap;
 }
 
 .points{
 font-weight:1000;
-color:#e30613
+color:#e30613;
 }
+
+
+/* =========================
+   FOOTER
+========================= */
 
 footer{
 background:#111;
@@ -553,54 +727,111 @@ color:#999;
 padding:40px 5%;
 margin-top:20px;
 font-size:12px;
-line-height:1.7
+line-height:1.7;
 }
 
-footer b{color:white}
+footer b{
+color:white;
+}
 
 .attribution{
 margin-top:12px;
 font-size:11px;
-color:#777
+color:#777;
 }
+
+
+/* =========================
+   MOBILE
+========================= */
 
 @media(max-width:900px){
-.player-photo-wrap{height:175px}
-.squad-grid{grid-template-columns:repeat(3,1fr)}
+
+.player-photo-wrap{
+height:175px;
 }
 
+.squad-grid{
+grid-template-columns:repeat(3,1fr);
+}
+
+}
+
+
 @media(max-width:760px){
-.player-photo-wrap{height:170px}
-.player-stats{grid-template-columns:repeat(4,1fr)}
-.top{font-size:9px}
-.nav{display:none}
-.bar{padding:10px 5%}
-.hero{padding:55px 5%}
+
+.player-photo-wrap{
+height:170px;
+}
+
+.player-stats{
+grid-template-columns:repeat(4,1fr);
+}
+
+.top{
+font-size:9px;
+}
+
+.nav{
+display:none;
+}
+
+.bar{
+padding:10px 5%;
+}
+
+.hero{
+padding:55px 5%;
+}
+
 .hero h1{
 font-size:55px;
-letter-spacing:-3px
+letter-spacing:-3px;
 }
-.hero p{font-size:15px}
-.grid{grid-template-columns:1fr}
-.fan-grid{grid-template-columns:1fr}
-.squad-grid{grid-template-columns:repeat(2,1fr)}
-.section{padding:32px 0}
+
+.hero p{
+font-size:15px;
+}
+
+.grid{
+grid-template-columns:1fr;
+}
+
+.fan-grid{
+grid-template-columns:1fr;
+}
+
+.squad-grid{
+grid-template-columns:repeat(2,1fr);
+}
+
+.section{
+padding:32px 0;
+}
+
 .fixture{
 align-items:center;
-gap:10px
+gap:10px;
 }
+
 .date{
 min-width:80px;
-font-size:10px
+font-size:10px;
 }
-.team-line{font-size:13px}
+
+.team-line{
+font-size:13px;
+}
+
 .team-logo{
 width:25px;
-height:25px
+height:25px;
 }
+
 .status{
-margin-left:auto
+margin-left:auto;
 }
+
 .table-header,
 .table-row{
 grid-template-columns:
@@ -612,30 +843,67 @@ minmax(145px,1fr)
 38px
 52px
 52px;
+
 min-width:475px;
-gap:4px
+
+gap:4px;
 }
-.table-cell{font-size:10px}
+
+.table-cell{
+font-size:10px;
 }
+
+}
+
 
 @media(max-width:430px){
+
 .hero h1{
-font-size:46px
-}
-.brand{font-size:12px}
-.brand small{font-size:8px}
-.squad-grid{
-grid-template-columns:repeat(2,1fr)
-}
-.player-photo-wrap{height:155px}
-.player-name{font-size:13px}
-.player-position{font-size:9px}
-.player-stats{gap:2px}
-.player-stat strong{font-size:13px}
-.player-stat span{font-size:7px}
+font-size:46px;
 }
 
-/* MATCHCENTER */
+.brand{
+font-size:12px;
+}
+
+.brand small{
+font-size:8px;
+}
+
+.squad-grid{
+grid-template-columns:repeat(2,1fr);
+}
+
+.player-photo-wrap{
+height:155px;
+}
+
+.player-name{
+font-size:13px;
+}
+
+.player-position{
+font-size:9px;
+}
+
+.player-stats{
+gap:2px;
+}
+
+.player-stat strong{
+font-size:13px;
+}
+
+.player-stat span{
+font-size:7px;
+}
+
+}
+
+
+/* =========================
+   MATCHCENTER
+========================= */
 
 .match-clickable{
 cursor:pointer;
@@ -644,12 +912,12 @@ background:#fff;
 border-radius:10px;
 padding:10px;
 margin:-10px 0;
-position:relative
+position:relative;
 }
 
 .match-clickable:hover{
 background:#fafafa;
-transform:translateY(-1px)
+transform:translateY(-1px);
 }
 
 .match-hint{
@@ -657,7 +925,7 @@ font-size:9px;
 color:#e30613;
 font-weight:900;
 text-transform:uppercase;
-margin-top:5px
+margin-top:5px;
 }
 
 .match-modal{
@@ -669,17 +937,19 @@ z-index:100;
 align-items:flex-start;
 justify-content:center;
 padding:30px 14px;
-overflow:auto
+overflow:auto;
 }
 
-.match-modal.open{display:flex}
+.match-modal.open{
+display:flex;
+}
 
 .match-modal-box{
 width:min(900px,100%);
 background:#fff;
 border-radius:18px;
 box-shadow:0 20px 60px #0005;
-overflow:hidden
+overflow:hidden;
 }
 
 .match-modal-head{
@@ -689,12 +959,12 @@ padding:18px 20px;
 display:flex;
 align-items:center;
 justify-content:space-between;
-gap:15px
+gap:15px;
 }
 
 .match-modal-head h3{
 margin:0;
-font-size:20px
+font-size:20px;
 }
 
 .match-close{
@@ -705,10 +975,12 @@ width:36px;
 height:36px;
 border-radius:9px;
 font-size:22px;
-cursor:pointer
+cursor:pointer;
 }
 
-.match-modal-body{padding:20px}
+.match-modal-body{
+padding:20px;
+}
 
 .match-score{
 display:grid;
@@ -716,12 +988,12 @@ grid-template-columns:1fr auto 1fr;
 align-items:center;
 gap:15px;
 text-align:center;
-margin-bottom:20px
+margin-bottom:20px;
 }
 
 .match-team{
 font-weight:900;
-font-size:15px
+font-size:15px;
 }
 
 .match-team img{
@@ -729,12 +1001,12 @@ width:46px;
 height:46px;
 object-fit:contain;
 display:block;
-margin:0 auto 7px
+margin:0 auto 7px;
 }
 
 .match-score-num{
 font-size:34px;
-font-weight:1000
+font-weight:1000;
 }
 
 .match-meta{
@@ -742,36 +1014,36 @@ text-align:center;
 color:#777;
 font-size:11px;
 margin-top:-12px;
-margin-bottom:20px
+margin-bottom:20px;
 }
 
 .match-section{
 border-top:1px solid #eee;
 padding-top:16px;
-margin-top:18px
+margin-top:18px;
 }
 
 .match-section h4{
 margin:0 0 12px;
 font-size:14px;
-text-transform:uppercase
+text-transform:uppercase;
 }
 
 .match-events{
 display:grid;
-gap:7px
+gap:7px;
 }
 
 .match-event{
 padding:9px 11px;
 border-radius:8px;
 background:#f7f7f7;
-font-size:12px
+font-size:12px;
 }
 
 .match-stats{
 display:grid;
-gap:8px
+gap:8px;
 }
 
 .match-stat-row{
@@ -779,64 +1051,92 @@ display:grid;
 grid-template-columns:1fr 80px 1fr;
 align-items:center;
 gap:8px;
-font-size:12px
+font-size:12px;
 }
 
 .match-stat-row>span:first-child{
 text-align:right;
-font-weight:800
+font-weight:800;
 }
 
 .match-stat-row>span:last-child{
-font-weight:800
+font-weight:800;
 }
 
 .match-stat-label{
 text-align:center;
 color:#777;
 font-size:10px;
-text-transform:uppercase
+text-transform:uppercase;
 }
 
 .match-lineups{
 display:grid;
 grid-template-columns:1fr 1fr;
-gap:18px
+gap:18px;
 }
 
 .match-lineups h5{
 margin:0 0 8px;
-font-size:12px
+font-size:12px;
 }
 
 .match-player{
 font-size:11px;
 padding:4px 0;
-border-bottom:1px solid #eee
+border-bottom:1px solid #eee;
 }
 
 .match-loading{
 text-align:center;
 color:#888;
-padding:25px
+padding:25px;
 }
 
 @media(max-width:600px){
-.match-modal{padding:10px}
-.match-modal-body{padding:15px}
-.match-score{gap:8px}
-.match-team{font-size:12px}
-.match-score-num{font-size:28px}
+
+.match-modal{
+padding:10px;
+}
+
+.match-modal-body{
+padding:15px;
+}
+
+.match-score{
+gap:8px;
+}
+
+.match-team{
+font-size:12px;
+}
+
+.match-score-num{
+font-size:28px;
+}
+
 .match-stat-row{
 grid-template-columns:1fr 65px 1fr;
-font-size:10px
+font-size:10px;
 }
-.match-lineups{grid-template-columns:1fr}
+
+.match-lineups{
+grid-template-columns:1fr;
 }
+
+}
+
 </style>
+
 </head>
 
+
 <body>
+
+
+<!-- =========================
+TOP BAR
+========================= -->
 
 <div class="top">
 
@@ -844,41 +1144,63 @@ font-size:10px
 CANNSTATT 1893 NEWS
 </div>
 
-<div class="visitor-ticker">
+<div
+class="visitor-ticker"
+>
 
-<span class="visitor-live-dot"></span>
+<span
+class="visitor-live-dot"
+></span>
 
 <span>
 LIVE
 </span>
 
-<span class="visitor-separator">•</span>
+<span
+class="visitor-separator"
+>
+•
+</span>
 
 <span>
 Online:
 </span>
 
-<strong id="visitorOnline">
+<strong
+id="visitorOnline"
+>
 –
 </strong>
 
-<span class="visitor-separator">•</span>
+<span
+class="visitor-separator"
+>
+•
+</span>
 
 <span>
 Heute:
 </span>
 
-<strong id="visitorToday">
+<strong
+id="visitorToday"
+>
 –
 </strong>
 
-<span class="visitor-separator">•</span>
+<span
+class="visitor-separator"
+>
+•
+</span>
 
 <span>
 Aufrufe:
 </span>
 
-<strong id="visitorViews">
+<strong
+id="visitorViews"
+>
 –
 </strong>
 
@@ -890,15 +1212,24 @@ UNABHÄNGIGE VFB FANPAGE
 
 </div>
 
+
+<!-- =========================
+HEADER
+========================= -->
+
 <header class="bar">
 
-<a class="brand" href="#">
+<a
+class="brand"
+href="#"
+>
 
 <span class="crest">
 VfB
 </span>
 
 <span>
+
 CANNSTATT 1893 NEWS
 
 <small>
@@ -908,6 +1239,7 @@ DEINE VFB FANPAGE AUS STUTTGART
 </span>
 
 </a>
+
 
 <nav class="nav">
 
@@ -939,6 +1271,11 @@ Fans
 
 </header>
 
+
+<!-- =========================
+HERO
+========================= -->
+
 <section class="hero">
 
 <div class="hero-inner">
@@ -949,9 +1286,11 @@ VFB STUTTGART · SAISON 2026/27
 
 <h1>
 WEISS. ROT.<br>
+
 <span>
 CANNSTATT.
 </span>
+
 </h1>
 
 <p>
@@ -967,7 +1306,13 @@ AKTUELLE NEWS ↓
 
 </section>
 
+
 <main class="wrap">
+
+
+<!-- =========================
+NEWS
+========================= -->
 
 <section class="section" id="news">
 
@@ -976,6 +1321,7 @@ Aktuelle News
 </h2>
 
 <div class="line"></div>
+
 
 <div class="notice">
 
@@ -987,7 +1333,9 @@ Die Daten werden automatisch über unseren Server aktualisiert.
 
 </div>
 
+
 <div class="grid">
+
 
 <div class="card">
 
@@ -1000,6 +1348,7 @@ Die Daten werden automatisch über unseren Server aktualisiert.
 </div>
 
 </div>
+
 
 <div class="next">
 
@@ -1017,9 +1366,15 @@ Spiel wird geladen …
 
 </div>
 
+
 </div>
 
 </section>
+
+
+<!-- =========================
+SPIELPLAN
+========================= -->
 
 <section class="section" id="spiele">
 
@@ -1028,6 +1383,9 @@ Spielplan
 </h2>
 
 <div class="line"></div>
+
+
+<!-- BUNDESLIGA -->
 
 <div class="card">
 
@@ -1051,6 +1409,7 @@ VfB Stuttgart – Saison 2026/27
 
 </div>
 
+
 <div id="bundesligaFixtures">
 
 <div class="loading">
@@ -1061,7 +1420,11 @@ Bundesliga-Spiele werden geladen …
 
 </div>
 
+
 <br>
+
+
+<!-- CHAMPIONS LEAGUE -->
 
 <div class="card">
 
@@ -1085,6 +1448,7 @@ VfB Stuttgart – Königsklasse 2026/27
 
 </div>
 
+
 <div id="championsLeagueFixtures">
 
 <div class="loading">
@@ -1097,6 +1461,11 @@ Champions-League-Spiele werden geladen …
 
 </section>
 
+
+<!-- =========================
+TABELLE
+========================= -->
+
 <section class="section" id="tabelle">
 
 <h2>
@@ -1104,6 +1473,7 @@ Bundesliga
 </h2>
 
 <div class="line"></div>
+
 
 <div class="card">
 
@@ -1119,6 +1489,11 @@ Tabelle wird geladen …
 
 </section>
 
+
+<!-- =========================
+TRANSFERS
+========================= -->
+
 <section class="section" id="transfers">
 
 <h2>
@@ -1126,6 +1501,7 @@ Transfers 2026/27
 </h2>
 
 <div class="line"></div>
+
 
 <div class="notice">
 
@@ -1139,7 +1515,11 @@ Aktuelle Transfers des VfB Stuttgart.
 
 </div>
 
+
 <div class="grid">
+
+
+<!-- ZUGÄNGE -->
 
 <div class="card">
 
@@ -1163,6 +1543,7 @@ Neue Spieler beim VfB Stuttgart
 
 </div>
 
+
 <div id="transferArrivals">
 
 <div class="loading">
@@ -1172,6 +1553,9 @@ Transfers werden geladen …
 </div>
 
 </div>
+
+
+<!-- ABGÄNGE -->
 
 <div class="card">
 
@@ -1195,6 +1579,7 @@ Spieler verlassen den VfB
 
 </div>
 
+
 <div id="transferDepartures">
 
 <div class="loading">
@@ -1205,17 +1590,27 @@ Transfers werden geladen …
 
 </div>
 
+
 </div>
 
 </section>
 
-<section class="section squad-section" id="kader">
+
+<!-- =========================
+KADER
+========================= -->
+
+<section
+class="section squad-section"
+id="kader"
+>
 
 <h2>
 Kader 2026/27
 </h2>
 
 <div class="line"></div>
+
 
 <div class="notice">
 
@@ -1229,6 +1624,7 @@ Spieler mit Bild und aktuellen Saisonstatistiken.
 
 </div>
 
+
 <div class="notice">
 
 <b>
@@ -1241,6 +1637,7 @@ Einsätze, Tore, Assists und Spielminuten werden automatisch geladen.
 
 </div>
 
+
 <div id="squadPlayers">
 
 <div class="loading">
@@ -1249,7 +1646,11 @@ Kader wird geladen …
 
 </div>
 
-<div class="competition" style="margin-top:18px;">
+
+<div
+class="competition"
+style="margin-top:18px;"
+>
 
 Statistik: Bundesliga 2026/27 · Quelle:
 offizieller VfB Stuttgart Kaderbereich
@@ -1258,7 +1659,15 @@ offizieller VfB Stuttgart Kaderbereich
 
 </section>
 
-<section class="section" id="fans">
+
+<!-- =========================
+FANBEREICH
+========================= -->
+
+<section
+class="section"
+id="fans"
+>
 
 <h2>
 Fanbereich
@@ -1266,7 +1675,9 @@ Fanbereich
 
 <div class="line"></div>
 
+
 <div class="fan-grid">
+
 
 <div class="fan">
 
@@ -1281,6 +1692,7 @@ Stimmung und Spieltage.
 
 </div>
 
+
 <div class="fan">
 
 <h3>
@@ -1293,6 +1705,7 @@ und weitere Fan-Abstimmungen.
 </p>
 
 </div>
+
 
 <div class="fan">
 
@@ -1307,9 +1720,15 @@ rund um den VfB.
 
 </div>
 
+
 </div>
 
 </section>
+
+
+<!-- =========================
+FOOTER
+========================= -->
 
 <footer>
 
@@ -1326,6 +1745,7 @@ nicht offiziell mit dem VfB Stuttgart verbunden.
 
 © 2026 Cannstatt 1893 News
 
+
 <div class="attribution">
 
 Spielplan & Kader: DFB Datencenter · Transfers: offizielle VfB-Saisonübersicht · News: VfB Stuttgart
@@ -1334,9 +1754,21 @@ Spielplan & Kader: DFB Datencenter · Transfers: offizielle VfB-Saisonübersicht
 
 </footer>
 
-<div id="matchModal" class="match-modal" onclick="closeMatchModal(event)">
 
-<div class="match-modal-box" onclick="event.stopPropagation()">
+<!-- =========================
+MATCHCENTER MODAL
+========================= -->
+
+<div
+id="matchModal"
+class="match-modal"
+onclick="closeMatchModal(event)"
+>
+
+<div
+class="match-modal-box"
+onclick="event.stopPropagation()"
+>
 
 <div class="match-modal-head">
 
@@ -1354,6 +1786,7 @@ aria-label="Schließen"
 
 </div>
 
+
 <div
 id="matchModalBody"
 class="match-modal-body"
@@ -1369,1363 +1802,315 @@ Spieldaten werden geladen …
 
 </div>
 
+
 <script>
 /* =========================================================
-   CANNSTATT 1893 NEWS – STABILES FRONTEND
-   Datenbasis: DFB Datencenter / Kicker.
-   Keine FotMob-Abhängigkeit, keine externe API nötig.
+   CANNSTATT 1893 NEWS – DYNAMISCHES FRONTEND
+   Die Live-Daten kommen aus /api/dashboard und die
+   Spiel-Details aus /api/match/:id des Node-Servers.
 ========================================================= */
 
 const BADGES={
-"VfB Stuttgart":["VfB","vfb"],
-"FC Bayern München":["FCB","bayern"],
-"1. FC Köln":["KOE","koeln"],
-"TSG Hoffenheim":["TSG","hoffenheim"],
-"Borussia Dortmund":["BVB","dortmund"],
-"SC Paderborn 07":["SCP","paderborn"],
-"Hamburger SV":["HSV","hamburg"],
-"Borussia Mönchengladbach":["BMG","gladbach"],
-"Bayer 04 Leverkusen":["B04","leverkusen"],
-"SV Werder Bremen":["SVW","bremen"],
-"FC Schalke 04":["S04","schalke"],
-"Eintracht Frankfurt":["SGE","frankfurt"],
-"SV Elversberg":["SVE","elversberg"],
-"1. FC Union Berlin":["FCU","union"],
-"SC Freiburg":["SCF","freiburg"],
-"FC Augsburg":["FCA","augsburg"],
-"RB Leipzig":["RBL","leipzig"],
-"1. FSV Mainz 05":["M05","mainz"],
-"Viking FK":["VIK","viking"],
-"ŠK Slovan Bratislava":["SLO","slovan"],
-"Atlético Madrid":["ATM","atletico"],
-"Galatasaray":["GAL","galatasaray"],
-"Inter Mailand":["INT","inter"],
-"LOSC Lille":["LIL","lille"],
-"Club Brugge":["BRU","brugge"],
-"PSV Eindhoven":["PSV","psv"]
+ "VfB Stuttgart":["VfB","vfb"],"FC Bayern München":["FCB","bayern"],"1. FC Köln":["KOE","koeln"],
+ "TSG Hoffenheim":["TSG","hoffenheim"],"Borussia Dortmund":["BVB","dortmund"],"SC Paderborn 07":["SCP","paderborn"],
+ "Hamburger SV":["HSV","hamburg"],"Borussia Mönchengladbach":["BMG","gladbach"],"Bayer 04 Leverkusen":["B04","leverkusen"],
+ "SV Werder Bremen":["SVW","bremen"],"FC Schalke 04":["S04","schalke"],"Eintracht Frankfurt":["SGE","frankfurt"],
+ "SV Elversberg":["SVE","elversberg"],"1. FC Union Berlin":["FCU","union"],"SC Freiburg":["SCF","freiburg"],
+ "FC Augsburg":["FCA","augsburg"],"RB Leipzig":["RBL","leipzig"],"1. FSV Mainz 05":["M05","mainz"],
+ "Viking FK":["VIK","viking"],"ŠK Slovan Bratislava":["SLO","slovan"],"Atlético Madrid":["ATM","atletico"],
+ "Galatasaray":["GAL","galatasaray"],"Inter Mailand":["INT","inter"],"LOSC Lille":["LIL","lille"],
+ "Club Brugge":["BRU","brugge"],"PSV Eindhoven":["PSV","psv"]
 };
 
-/* DFB/Kicker-geprüfter Spielplan 2026/27. */
-
-const BL=[
-[1,"28.08.2026","20:30","FC Bayern München","VfB Stuttgart","5:1","FINISHED"],
-[2,"04.09.2026","20:30","VfB Stuttgart","1. FC Köln","4:1","FINISHED"],
-[3,"12.09.2026","15:30","TSG Hoffenheim","VfB Stuttgart","–","UPCOMING"],
-[4,"19.09.2026","18:30","VfB Stuttgart","Borussia Dortmund","–","UPCOMING"],
-[5,"09.–11.10.2026","","SC Paderborn 07","VfB Stuttgart","–","TBA"],
-[6,"16.–18.10.2026","","Hamburger SV","VfB Stuttgart","–","TBA"],
-[7,"23.–25.10.2026","","VfB Stuttgart","Borussia Mönchengladbach","–","TBA"],
-[8,"30.10.–01.11.2026","","Bayer 04 Leverkusen","VfB Stuttgart","–","TBA"],
-[9,"06.–08.11.2026","","VfB Stuttgart","SV Werder Bremen","–","TBA"],
-[10,"20.–22.11.2026","","FC Schalke 04","VfB Stuttgart","–","TBA"],
-[11,"27.–29.11.2026","","VfB Stuttgart","Eintracht Frankfurt","–","TBA"],
-[12,"04.–06.12.2026","","SV Elversberg","VfB Stuttgart","–","TBA"],
-[13,"11.–13.12.2026","","VfB Stuttgart","1. FC Union Berlin","–","TBA"],
-[14,"18.–20.12.2026","","SC Freiburg","VfB Stuttgart","–","TBA"],
-[15,"08.–10.01.2027","","VfB Stuttgart","FC Augsburg","–","TBA"],
-[16,"12.–14.01.2027","","RB Leipzig","VfB Stuttgart","–","TBA"],
-[17,"15.–17.01.2027","","VfB Stuttgart","1. FSV Mainz 05","–","TBA"],
-[18,"22.–24.01.2027","","VfB Stuttgart","FC Bayern München","–","TBA"],
-[19,"29.–31.01.2027","","1. FC Köln","VfB Stuttgart","–","TBA"],
-[20,"05.–07.02.2027","","VfB Stuttgart","TSG Hoffenheim","–","TBA"],
-[21,"12.–14.02.2027","","Borussia Dortmund","VfB Stuttgart","–","TBA"],
-[22,"19.–21.02.2027","","VfB Stuttgart","SC Paderborn 07","–","TBA"],
-[23,"26.–28.02.2027","","VfB Stuttgart","Hamburger SV","–","TBA"],
-[24,"02.–04.03.2027","","Borussia Mönchengladbach","VfB Stuttgart","–","TBA"],
-[25,"05.–07.03.2027","","VfB Stuttgart","Bayer 04 Leverkusen","–","TBA"],
-[26,"12.–14.03.2027","","SV Werder Bremen","VfB Stuttgart","–","TBA"],
-[27,"19.–21.03.2027","","VfB Stuttgart","FC Schalke 04","–","TBA"],
-[28,"02.–04.04.2027","","Eintracht Frankfurt","VfB Stuttgart","–","TBA"],
-[29,"09.–11.04.2027","","VfB Stuttgart","SV Elversberg","–","TBA"],
-[30,"16.–18.04.2027","","1. FC Union Berlin","VfB Stuttgart","–","TBA"],
-[31,"23.–25.04.2027","","VfB Stuttgart","SC Freiburg","–","TBA"],
-[32,"07.–09.05.2027","","FC Augsburg","VfB Stuttgart","–","TBA"],
-[33,"14.–16.05.2027","","VfB Stuttgart","RB Leipzig","–","TBA"],
-[34,"22.05.2027","15:30","1. FSV Mainz 05","VfB Stuttgart","–","TBA"]
+const FALLBACK_BL=[
+ [1,"28.08.2026","20:30","FC Bayern München","VfB Stuttgart","5:1","FINISHED"],
+ [2,"04.09.2026","20:30","VfB Stuttgart","1. FC Köln","4:1","FINISHED"]
 ];
-
-const CL=[
-[1,"09.09.2026","18:45","VfB Stuttgart","Viking FK"],
-[2,"14.10.2026","21:00","ŠK Slovan Bratislava","VfB Stuttgart"],
-[3,"20.10.2026","21:00","VfB Stuttgart","Atlético Madrid"],
-[4,"03.11.2026","18:45","Galatasaray","VfB Stuttgart"],
-[5,"25.11.2026","21:00","Inter Mailand","VfB Stuttgart"],
-[6,"09.12.2026","21:00","VfB Stuttgart","LOSC Lille"],
-[7,"19.01.2027","21:00","VfB Stuttgart","Club Brugge"],
-[8,"27.01.2027","21:00","PSV Eindhoven","VfB Stuttgart"]
-];
-
-/* Tabellenstand nach den bereits abgeschlossenen Spielen am 05.09.2026.
-   Die beiden Sonntagsspiele am 06.09.2026 sind noch nicht eingerechnet. */
-
-const TABLE=[
-["SC Freiburg",2,2,0,0,5,1,6],
-["Borussia Dortmund",2,2,0,0,5,2,6],
-["SV Elversberg",2,2,0,0,7,5,6],
-["FC Bayern München",2,1,1,0,5,1,4],
-["Bayer 04 Leverkusen",2,1,0,1,6,3,3],
-["FC Augsburg",1,1,0,0,3,0,3],
-["RB Leipzig",2,1,0,1,4,3,3],
-["VfB Stuttgart",2,1,0,1,5,6,3],
-["SV Werder Bremen",2,1,0,1,4,5,3],
-["1. FC Köln",2,1,0,1,4,6,3],
-["Eintracht Frankfurt",1,0,1,0,3,3,1],
-["1. FSV Mainz 05",1,0,1,0,0,0,1],
-["SC Paderborn 07",2,0,1,1,0,1,1],
-["FC Schalke 04",2,0,1,1,0,3,1],
-["1. FC Union Berlin",2,0,1,1,3,7,1],
-["TSG Hoffenheim",2,0,0,2,4,6,0],
-["Hamburger SV",1,0,0,1,0,2,0],
-["Borussia Mönchengladbach",2,0,0,2,3,7,0]
-];
-
-const NEWS=[
-{
-tag:"BUNDESLIGA",
-title:"VfB Stuttgart schlägt Köln mit 4:1",
-date:"04.09.2026",
-text:"Der VfB gewinnt den zweiten Bundesliga-Spieltag deutlich mit 4:1 gegen den 1. FC Köln."
-},
-{
-tag:"BUNDESLIGA",
-title:"Heimauftakt mit drei Punkten",
-date:"04.09.2026",
-text:"Nach dem 1:5 in München holt der VfB vor heimischem Publikum die ersten drei Punkte der Saison."
-},
-{
-tag:"CHAMPIONS LEAGUE",
-title:"Viking FK kommt zum Königsklassen-Auftakt",
-date:"09.09.2026",
-text:"Am Mittwoch, 9. September, startet der VfB gegen Viking FK in die Ligaphase der Champions League."
-}
+const FALLBACK_CL=[
+ [1,"09.09.2026","18:45","VfB Stuttgart","Viking FK"],
+ [2,"14.10.2026","21:00","ŠK Slovan Bratislava","VfB Stuttgart"],
+ [3,"20.10.2026","21:00","VfB Stuttgart","Atlético Madrid"],
+ [4,"03.11.2026","18:45","Galatasaray","VfB Stuttgart"],
+ [5,"25.11.2026","21:00","Inter Mailand","VfB Stuttgart"],
+ [6,"09.12.2026","21:00","VfB Stuttgart","LOSC Lille"],
+ [7,"19.01.2027","21:00","VfB Stuttgart","Club Brugge"],
+ [8,"27.01.2027","21:00","PSV Eindhoven","VfB Stuttgart"]
 ];
 
 const SQUAD={
-"Tor":[
-"Fabian Bredlow",
-"Marius Funk",
-"Dennis Seimen",
-"Stefan Drljaca"
-],
-
-"Abwehr":[
-"Ameen Al-Dakhil",
-"Ramon Hendriks",
-"Josha Vagnoman",
-"Maximilian Mittelstädt",
-"Luca Jaquez",
-"Leonidas Stergiou",
-"Lorenz Assignon",
-"Dan-Axel Zagadou",
-"Jeff Chabot",
-"Finn Jeltsch"
-],
-
-"Mittelfeld":[
-"Angelo Stiller",
-"Chris Führich",
-"Bilal El Khannouss",
-"Atakan Karazor",
-"Grischa Prömel",
-"Nikolas Nartey",
-"Ertugrul Yigit",
-"Jarzinho Malanga"
-],
-
-"Sturm":[
-"Tiago Tomás",
-"Ermedin Demirovic",
-"Dzenan Pejcinovic",
-"Jamie Leweling",
-"Jeremy Arevalo",
-"Deniz Undav",
-"Justin Diehl",
-"Leo Sauer"
-]
+ "Tor":["Fabian Bredlow","Marius Funk","Dennis Seimen","Stefan Drljaca"],
+ "Abwehr":["Ameen Al-Dakhil","Ramon Hendriks","Josha Vagnoman","Maximilian Mittelstädt","Luca Jaquez","Leonidas Stergiou","Lorenz Assignon","Dan-Axel Zagadou","Jeff Chabot","Finn Jeltsch"],
+ "Mittelfeld":["Angelo Stiller","Chris Führich","Bilal El Khannouss","Atakan Karazor","Grischa Prömel","Nikolas Nartey","Ertugrul Yigit","Jarzinho Malanga"],
+ "Sturm":["Tiago Tomás","Ermedin Demirovic","Dzenan Pejcinovic","Jamie Leweling","Jeremy Arevalo","Deniz Undav","Justin Diehl","Leo Sauer"]
 };
-
-const ARRIVALS=[
-["Grischa Prömel","TSG Hoffenheim"],
-["Marius Funk","Energie Cottbus"],
-["Laurin Ulrich","1. FC Magdeburg · Ende der Leihe"],
-["Jovan Milosevic","SV Werder Bremen · Ende der Leihe"],
-["Leonidas Stergiou","1. FC Heidenheim · Ende der Leihe"],
-["Dennis Seimen","SC Paderborn 07 · Ende der Leihe"],
-["Dzenan Pejcinovic","VfL Wolfsburg"]
+const FALLBACK_ARRIVALS=[
+ ["Grischa Prömel","TSG Hoffenheim"],
+ ["Marius Funk","Energie Cottbus"],
+ ["Laurin Ulrich","1. FC Magdeburg · Ende der Leihe"],
+ ["Jovan Milosevic","SV Werder Bremen · Ende der Leihe"],
+ ["Leonidas Stergiou","1. FC Heidenheim · Ende der Leihe"],
+ ["Dennis Seimen","SC Paderborn 07 · Ende der Leihe"],
+ ["Dzenan Pejcinovic","VfL Wolfsburg"]
+];
+const FALLBACK_DEPARTURES=[
+ ["Noah Darvich","SV Elversberg · Leihe"],
+ ["Yannik Keitel","FC Augsburg · Leihe"],
+ ["Florian Hellstern","SpVgg Greuther Fürth · Leihe"],
+ ["Alexander Nübel","FC Bayern München · Ende der Leihe"],
+ ["Pascal Stenzel","Ziel unbekannt"],
+ ["Laurin Ulrich","SC Paderborn · Leihe"],
+ ["Jovan Milosevic","SC Braga"],
+ ["Lazar Jovanovic","Udinese Calcio"],
+ ["Chema","Brighton & Hove Albion"],
+ ["Mirza Catovic","FC Barcelona II · Leihe"]
 ];
 
-const DEPARTURES=[
-["Noah Darvich","SV Elversberg · Leihe"],
-["Yannik Keitel","FC Augsburg · Leihe"],
-["Florian Hellstern","SpVgg Greuther Fürth · Leihe"],
-["Alexander Nübel","FC Bayern München · Ende der Leihe"],
-["Pascal Stenzel","Ziel unbekannt"],
-["Laurin Ulrich","SC Paderborn · Leihe"],
-["Jovan Milosevic","SC Braga"],
-["Lazar Jovanovic","Udinese Calcio"],
-["Chema","Brighton & Hove Albion"],
-["Mirza Catovic","FC Barcelona II · Leihe"]
-];
+let dashboard=null;
+let BL=[];
+let CL=[];
+let TABLE=[];
+let NEWS=[];
 
-const MATCH_INFO={
-"1":[
-"FC Bayern München",
-"VfB Stuttgart",
-"5:1",
-"28.08.2026",
-"Bundesliga",
-[]
-],
+function esc(v){return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[m]));}
+function initials(name){return (BADGES[name]?.[0]||String(name||"").split(/\s+/).map(x=>x[0]).join("").slice(0,3)).toUpperCase();}
 
-"2":[
-"VfB Stuttgart",
-"1. FC Köln",
-"4:1",
-"04.09.2026",
-"Bundesliga",
-[
-"39' 1:0 Bilal El Khannouss",
-"60' 2:0 Grischa Prömel",
-"75' 3:0 Ermedin Demirovic",
-"81' 3:1 Ramon Hendriks (ET)",
-"90+1' 4:1 Josha Vagnoman"
-]
-]
-};
-
-function esc(v){
-return String(v??"").replace(
-/[&<>"']/g,
-m=>({
-"&":"&amp;",
-"<":"&lt;",
-">":"&gt;",
-"\"":"&quot;",
-"'":"&#039;"
-}[m])
-);
+/* API liefert die offiziellen/aktuellen Crest-URLs mit. */
+function logoImg(name,size="normal",crest=""){
+ const cls=BADGES[name]?.[1]||"generic";
+ if(crest){
+   return `<img class="team-logo ${size==='large'?'logo-large':''}" src="${esc(crest)}" alt="${esc(name)}" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'team-logo badge-${esc(cls)} ${size==='large'?'logo-large':''}',textContent:'${esc(initials(name))}'}))">`;
+ }
+ return `<span class="team-logo badge-${esc(cls)} ${size==='large'?'logo-large':''}" aria-label="${esc(name)}">${esc(initials(name))}</span>`;
 }
+function teamLine(name,crest=""){return `<div class="team-line">${logoImg(name,"normal",crest)}<span>${esc(name)}</span></div>`;}
 
-function initials(name){
-return (
-BADGES[name]?.[0] ||
-name.split(/\s+/)
-.map(x=>x[0])
-.join("")
-.slice(0,3)
-).toUpperCase();
+function dateParts(iso){
+ if(!iso) return {date:"",time:""};
+ const d=new Date(iso);
+ if(Number.isNaN(d.getTime())) return {date:String(iso),time:""};
+ return {
+   date:new Intl.DateTimeFormat("de-DE",{day:"2-digit",month:"2-digit",year:"numeric"}).format(d),
+   time:new Intl.DateTimeFormat("de-DE",{hour:"2-digit",minute:"2-digit",hour12:false}).format(d)
+ };
 }
-
-function logoImg(name,size="normal"){
-
-const [abbr,cls]=
-BADGES[name] ||
-[initials(name),"generic"];
-
-return `
-<span
-class="team-logo badge-${esc(cls)} ${size==="large"?"logo-large":""}"
-aria-label="${esc(name)}"
->
-${esc(abbr)}
-</span>
-`;
+function matchStatus(m){
+ const status=String(m?.status||"").toUpperCase();
+ if(["FINISHED","AWARDED"].includes(status)) return "FINISHED";
+ if(["IN_PLAY","PAUSED"].includes(status)) return "LIVE";
+ if(["SCHEDULED","TIMED"].includes(status)) return "UPCOMING";
+ return "TBA";
 }
-
-function teamLine(name){
-return `
-<div class="team-line">
-${logoImg(name)}
-<span>${esc(name)}</span>
-</div>
-`;
+function normalizeFixture(m){
+ const dp=dateParts(m?.rawDate||m?.date);
+ return {
+   id:m?.id??null,
+   nr:m?.matchday??"",
+   date:dp.date||m?.date||"",
+   time:dp.time,
+   home:m?.home||"",
+   away:m?.away||"",
+   homeLogo:m?.homeLogo||"",
+   awayLogo:m?.awayLogo||"",
+   score:(m?.homeGoals!=null&&m?.awayGoals!=null)?`${m.homeGoals}:${m.awayGoals}`:"–",
+   status:matchStatus(m),
+   competition:m?.competition||m?.league||"",
+   rawDate:m?.rawDate||""
+ };
 }
-
-function fixtureCard(x){
-
-const [
-nr,
-date,
-time,
-home,
-away,
-score,
-status
-]=x;
-
-const label=
-status==="FINISHED"
-?"BEENDET"
-:
-status==="UPCOMING"
-?"VORSCHAU"
-:
-"TERMIN OFFEN";
-
-return `
-<article
-class="fixture-row ${status.toLowerCase()} ${status==="FINISHED"?"clickable":""}"
-data-round="${nr}"
-onclick="openMatchModal(${Number(nr)})"
-role="${status==="FINISHED"?"button":"article"}"
-tabindex="${status==="FINISHED"?0:-1}"
->
-
-<div class="fixture-round">
-${nr}
-</div>
-
-<div class="fixture-date">
-<b>${esc(date)}</b>
-${time?`<span>${esc(time)} Uhr</span>`:""}
-</div>
-
-<div class="fixture-teams">
-${teamLine(home)}
-${teamLine(away)}
-</div>
-
-<div class="fixture-score">
-<strong>${esc(score)}</strong>
-<span>${label}</span>
-</div>
-
-</article>
-`;
+function fixtureCard(m){
+ const status=m.status;
+ const label=status==="FINISHED"?"BEENDET":status==="LIVE"?"LIVE":status==="UPCOMING"?"VORSCHAU":"TERMIN OFFEN";
+ const clickable=status==="FINISHED" && m.id;
+ return `<article class="fixture-row ${status.toLowerCase()} ${clickable?'clickable':''}" ${clickable?`data-match-id="${esc(m.id)}" onclick="openMatchModal('${esc(m.id)}')" role="button" tabindex="0"`:""} >
+   <div class="fixture-round">${esc(m.nr||"")}</div>
+   <div class="fixture-date"><b>${esc(m.date)}</b>${m.time?`<span>${esc(m.time)} Uhr</span>`:""}</div>
+   <div class="fixture-teams">${teamLine(m.home,m.homeLogo)}${teamLine(m.away,m.awayLogo)}</div>
+   <div class="fixture-score"><strong>${esc(m.score)}</strong><span>${label}</span></div>
+ </article>`;
 }
-
-function clCard(x){
-
-const [
-nr,
-date,
-time,
-home,
-away
-]=x;
-
-return `
-<article class="fixture-row upcoming">
-
-<div class="fixture-round">
-${nr}
-</div>
-
-<div class="fixture-date">
-<b>${esc(date)}</b>
-<span>${esc(time)} Uhr</span>
-</div>
-
-<div class="fixture-teams">
-${teamLine(home)}
-${teamLine(away)}
-</div>
-
-<div class="fixture-score">
-<strong>–</strong>
-<span>VORSCHAU</span>
-</div>
-
-</article>
-`;
+function clCard(m){
+ const status=m.status;
+ const label=status==="FINISHED"?"BEENDET":status==="LIVE"?"LIVE":"VORSCHAU";
+ const clickable=status==="FINISHED" && m.id;
+ return `<article class="fixture-row ${status.toLowerCase()} ${clickable?'clickable':''}" ${clickable?`data-match-id="${esc(m.id)}" onclick="openMatchModal('${esc(m.id)}')" role="button" tabindex="0"`:""}>
+   <div class="fixture-round">${esc(m.nr||"")}</div>
+   <div class="fixture-date"><b>${esc(m.date)}</b>${m.time?`<span>${esc(m.time)} Uhr</span>`:""}</div>
+   <div class="fixture-teams">${teamLine(m.home,m.homeLogo)}${teamLine(m.away,m.awayLogo)}</div>
+   <div class="fixture-score"><strong>${esc(m.score)}</strong><span>${label}</span></div>
+ </article>`;
 }
 
 function renderNews(){
-
-const el=document.getElementById("newsList");
-
-if(!el)return;
-
-el.innerHTML=NEWS.map(n=>`
-
-<article class="news">
-
-<span class="tag">
-${esc(n.tag)}
-</span>
-
-<h3>
-${esc(n.title)}
-</h3>
-
-<p>
-${esc(n.date)}
-</p>
-
-<p class="news-summary">
-${esc(n.text)}
-</p>
-
-<a
-class="btn"
-href="https://www.vfb.de/"
-target="_blank"
-rel="noopener noreferrer"
->
-VFB.DE →
-</a>
-
-</article>
-
-`).join("");
+ const el=document.getElementById("newsList");if(!el)return;
+ if(!NEWS.length){el.innerHTML='<div class="competition">Aktuell sind keine VfB-News verfügbar.</div>';return;}
+ el.innerHTML=NEWS.map(n=>{
+   const date=n.date||n.pubDate||"";
+   const text=n.description||"";
+   const url=n.url||n.link||"https://www.vfb.de/";
+   return `<article class="news"><span class="tag">VFB NEWS</span><h3>${esc(n.title)}</h3><p>${esc(date)}</p>${text?`<p class="news-summary">${esc(text)}</p>`:""}<a class="btn" href="${esc(url)}" target="_blank" rel="noopener noreferrer">VFB.DE →</a></article>`;
+ }).join("");
 }
 
 function renderNext(){
-
-const el=document.getElementById("nextGame");
-
-if(!el)return;
-
-const g=CL[0];
-
-el.innerHTML=`
-
-<div class="next-match">
-
-<div class="next-date">
-MITTWOCH · ${g[1]} · ${g[2]} UHR
-</div>
-
-<div class="next-teams">
-
-<div>
-${logoImg(g[3],"large")}
-<b>${esc(g[3])}</b>
-</div>
-
-<strong>
-VS
-</strong>
-
-<div>
-${logoImg(g[4],"large")}
-<b>${esc(g[4])}</b>
-</div>
-
-</div>
-
-<div class="next-comp">
-CHAMPIONS LEAGUE · LIGAPHASE
-</div>
-
-</div>
-`;
+ const el=document.getElementById("nextGame");if(!el)return;
+ const g=dashboard?.nextGame;
+ if(!g){el.innerHTML='<div class="next-match"><div class="next-comp">AKTUELL KEIN NÄCHSTES SPIEL GEFUNDEN</div></div>';return;}
+ const m=normalizeFixture(g);
+ const comp=m.competition||"VfB Stuttgart";
+ el.innerHTML=`<div class="next-match">
+   <div class="next-date">${esc(m.date)}${m.time?` · ${esc(m.time)} UHR`:""}</div>
+   <div class="next-teams"><div>${logoImg(m.home,"large",m.homeLogo)}<b>${esc(m.home)}</b></div><strong>VS</strong><div>${logoImg(m.away,"large",m.awayLogo)}<b>${esc(m.away)}</b></div></div>
+   <div class="next-comp">${esc(comp)} · NÄCHSTES SPIEL</div>
+ </div>`;
 }
 
 function renderFixtures(){
-
-const bl=document.getElementById(
-"bundesligaFixtures"
-);
-
-if(bl){
-bl.innerHTML=BL.map(
-fixtureCard
-).join("");
-}
-
-const cl=document.getElementById(
-"championsLeagueFixtures"
-);
-
-if(cl){
-cl.innerHTML=CL.map(
-clCard
-).join("");
-}
+ const bl=document.getElementById("bundesligaFixtures");
+ const cl=document.getElementById("championsLeagueFixtures");
+ if(bl) bl.innerHTML=BL.length?BL.map(fixtureCard).join(""):'<div class="competition">Keine Bundesliga-Spiele verfügbar.</div>';
+ if(cl) cl.innerHTML=CL.length?CL.map(clCard).join(""):'<div class="competition">Keine Champions-League-Spiele verfügbar.</div>';
+ const cli=document.getElementById("clInfo");
+ if(cli) cli.innerHTML=CL.map(clCard).join("");
 }
 
 function renderTable(){
-
-const el=document.getElementById("table");
-
-if(!el)return;
-
-el.innerHTML=`
-
-<div class="table-scroll">
-
-<table class="league-table">
-
-<thead>
-
-<tr>
-<th>#</th>
-<th>Mannschaft</th>
-<th>Sp.</th>
-<th>S</th>
-<th>U</th>
-<th>N</th>
-<th>Tore</th>
-<th>Diff.</th>
-<th>Pkt.</th>
-</tr>
-
-</thead>
-
-<tbody>
-
-${TABLE.map((r,i)=>{
-
-const [
-n,
-p,
-w,
-d,
-l,
-gf,
-ga,
-pts
-]=r;
-
-const diff=gf-ga;
-
-return `
-
-<tr class="${n==="VfB Stuttgart"?"vfb-row":""}">
-
-<td>
-${i+1}
-</td>
-
-<td>
-${teamLine(n)}
-</td>
-
-<td>
-${p}
-</td>
-
-<td>
-${w}
-</td>
-
-<td>
-${d}
-</td>
-
-<td>
-${l}
-</td>
-
-<td>
-${gf}:${ga}
-</td>
-
-<td>
-${diff>0?"+":""}${diff}
-</td>
-
-<td>
-<b>${pts}</b>
-</td>
-
-</tr>
-`;
-
-}).join("")}
-
-</tbody>
-
-</table>
-
-</div>
-
-<div
-class="competition"
-style="margin-top:12px"
->
-Stand: 05.09.2026 · Die Sonntagsspiele Hamburg–Mainz und Frankfurt–Augsburg sind noch offen.
-</div>
-`;
+ const el=document.getElementById("table");if(!el)return;
+ if(!TABLE.length){el.innerHTML='<div class="competition">Die Bundesliga-Tabelle ist aktuell nicht verfügbar.</div>';return;}
+ el.innerHTML=`<div class="table-scroll"><table class="league-table"><thead><tr><th>#</th><th>Mannschaft</th><th>Sp.</th><th>S</th><th>U</th><th>N</th><th>Tore</th><th>Diff.</th><th>Pkt.</th></tr></thead><tbody>${TABLE.map((r,i)=>{
+   const n=r.team||"";
+   return `<tr class="${n==='VfB Stuttgart'?'vfb-row':''}"><td>${esc(r.position??i+1)}</td><td>${teamLine(n,r.logo||"")}</td><td>${esc(r.played??0)}</td><td>${esc(r.wins??0)}</td><td>${esc(r.draws??0)}</td><td>${esc(r.losses??0)}</td><td>${esc(r.goalsFor??0)}:${esc(r.goalsAgainst??0)}</td><td>${Number(r.goalDiff)>0?'+':''}${esc(r.goalDiff??0)}</td><td><b>${esc(r.points??0)}</b></td></tr>`;
+ }).join("")}</tbody></table></div><div class="competition" style="margin-top:12px">Live-Stand aus dem Backend · zuletzt aktualisiert ${esc(formatUpdated(dashboard?.updatedAt))}</div>`;
 }
 
-function renderCLInfo(){
-
-const el=document.getElementById(
-"championsLeagueFixtures"
-);
-
-if(!el)return;
-
-el.innerHTML=CL.map(
-clCard
-).join("");
+function formatUpdated(iso){
+ if(!iso)return "";
+ const d=new Date(iso);if(Number.isNaN(d.getTime()))return "";
+ return new Intl.DateTimeFormat("de-DE",{dateStyle:"short",timeStyle:"short"}).format(d);
 }
 
 function renderTransfers(){
-
-const a=document.getElementById(
-"transferArrivals"
-);
-
-const d=document.getElementById(
-"transferDepartures"
-);
-
-if(a){
-
-a.innerHTML=ARRIVALS.map(
-([n,from])=>`
-
-<div class="transfer-item">
-
-<span class="transfer-dot plus">
-+
-</span>
-
-<div>
-
-<b>
-${esc(n)}
-</b>
-
-<small>
-${esc(from)}
-</small>
-
-</div>
-
-</div>
-
-`
-).join("");
-
+ const a=document.getElementById("transferArrivals"),d=document.getElementById("transferDepartures");
+ if(a)a.innerHTML=FALLBACK_ARRIVALS.map(([n,from])=>`<div class="transfer-item"><span class="transfer-dot plus">+</span><div><b>${esc(n)}</b><small>${esc(from)}</small></div></div>`).join("");
+ if(d)d.innerHTML=FALLBACK_DEPARTURES.map(([n,to])=>`<div class="transfer-item"><span class="transfer-dot">−</span><div><b>${esc(n)}</b><small>${esc(to)}</small></div></div>`).join("");
 }
-
-if(d){
-
-d.innerHTML=DEPARTURES.map(
-([n,to])=>`
-
-<div class="transfer-item">
-
-<span class="transfer-dot">
-−
-</span>
-
-<div>
-
-<b>
-${esc(n)}
-</b>
-
-<small>
-${esc(to)}
-</small>
-
-</div>
-
-</div>
-
-`
-).join("");
-
-}
-}
-
 function renderSquad(){
-
-const el=document.getElementById(
-"squadPlayers"
-);
-
-if(!el)return;
-
-let html="";
-
-Object.entries(SQUAD).forEach(
-([group,names])=>{
-
-html+=`
-
-<div class="squad-group">
-
-<h3 class="squad-title">
-${esc(group)}
-</h3>
-
-<div class="squad-grid">
-`;
-
-names.forEach(name=>{
-
-html+=`
-
-<div class="player-card">
-
-<div class="player-photo-wrap">
-
-<div class="player-initial">
-${esc(initials(name))}
-</div>
-
-</div>
-
-<div class="player-name">
-${esc(name)}
-</div>
-
-<div class="player-position">
-VfB Stuttgart · ${esc(group)}
-</div>
-
-</div>
-`;
-
-});
-
-html+=`
-
-</div>
-
-</div>
-`;
-});
-
-el.innerHTML=html;
+ const el=document.getElementById("squadPlayers");if(!el)return;let html="";
+ Object.entries(SQUAD).forEach(([group,names])=>{
+   html+=`<div class="squad-group"><h3 class="squad-title">${esc(group)}</h3><div class="squad-grid">`;
+   names.forEach(name=>html+=`<div class="player-card"><div class="player-photo-wrap"><div class="player-initial">${esc(initials(name))}</div></div><div class="player-name">${esc(name)}</div><div class="player-position">VfB Stuttgart · ${esc(group)}</div></div>`);
+   html+=`</div></div>`;
+ });
+ el.innerHTML=html;
 }
-
 function updateVisitors(){
-
-const day=
-Math.floor(Date.now()/86400000);
-
-const vals={
-visitorOnline:8+(day%17),
-visitorToday:42+(day%71),
-visitorViews:180+(day%241)
-};
-
-Object.entries(vals).forEach(
-([id,v])=>{
-
-const e=document.getElementById(id);
-
-if(e)e.textContent=v;
-
-}
-);
+ const day=Math.floor(Date.now()/86400000);
+ const vals={visitorOnline:8+(day%17),visitorToday:42+(day%71),visitorViews:180+(day%241)};
+ Object.entries(vals).forEach(([id,v])=>{const e=document.getElementById(id);if(e)e.textContent=v;});
 }
 
-function openMatchModal(round){
-
-const m=document.getElementById(
-"matchModal"
-);
-
-const b=document.getElementById(
-"matchModalBody"
-);
-
-if(!m||!b)return;
-
-const data=
-MATCH_INFO[String(round)];
-
-if(!data){
-
-b.innerHTML=`
-
-<div class="match-section">
-
-<h4>
-Spieldaten
-</h4>
-
-<p>
-Für dieses Spiel liegen in der Fanpage aktuell noch keine abgeschlossenen Ereignisdaten vor.
-</p>
-
-</div>
-`;
-
-m.classList.add("open");
-
-return;
+function scoreText(details){
+ const ft=details?.score?.fullTime||{};
+ if(ft.home!=null&&ft.away!=null)return `${ft.home}:${ft.away}`;
+ const tg=details?.score?.total;
+ if(tg?.home!=null&&tg?.away!=null)return `${tg.home}:${tg.away}`;
+ return "–";
+}
+function renderMatchEvents(details){
+ const events=[];
+ (details?.goals||[]).forEach(g=>events.push({
+   minute:g.minuteLabel||"",
+   text:`⚽ ${g.scorer||"Tor"}${g.assist?` (Assist: ${g.assist})`:""} · ${g.team||""}`
+ }));
+ (details?.bookings||[]).forEach(c=>events.push({
+   minute:c.minuteLabel||"",
+   text:`🟨 ${c.player||"Spieler"} · ${c.team||""} ${c.card?`(${c.card})`:""}`
+ }));
+ (details?.substitutions||[]).forEach(s=>events.push({
+   minute:s.minuteLabel||"",
+   text:`🔄 ${s.team||""}: ${s.playerIn||"?"} für ${s.playerOut||"?"}`
+ }));
+ return events.length?events.map(e=>`<div class="match-event"><b>${esc(e.minute)}</b> ${esc(e.text)}</div>`).join(""):'<div class="match-event">Keine Ereignisse verfügbar.</div>';
+}
+function renderLineupBlock(label,data){
+ if(!data)return "";
+ const players=[...(data.lineup||[]),...(data.bench||[])];
+ if(!players.length)return "";
+ return `<div class="match-section"><h4>${esc(label)}${data.formation?` · ${esc(data.formation)}`:""}</h4>${data.coach?`<p class="match-muted">Trainer: ${esc(data.coach)}</p>`:""}<div class="lineup-list">${players.map(p=>`<span>${p.shirtNumber!=null?`#${esc(p.shirtNumber)} `:""}${esc(p.name)}</span>`).join("")}</div></div>`;
+}
+async function openMatchModal(matchId){
+ const m=document.getElementById("matchModal"),b=document.getElementById("matchModalBody");if(!m||!b)return;
+ m.classList.add("open");document.body.style.overflow="hidden";
+ b.innerHTML='<div class="match-section"><h4>Spielbericht wird geladen…</h4><p class="match-muted">Aktuelle Daten werden vom Server abgerufen.</p></div>';
+ try{
+   const res=await fetch(`/api/match/${encodeURIComponent(matchId)}`,{cache:"no-store"});
+   const details=await res.json();
+   if(!res.ok)throw new Error(details.error||"Spieldaten konnten nicht geladen werden.");
+   const home=details.homeTeam||{},away=details.awayTeam||{};
+   const referee=(details.referees||[]).map(r=>r.name).filter(Boolean).join(", ");
+   b.innerHTML=`<div class="match-score">
+      <div class="match-team">${logoImg(home.name,"large",home.crest)}<strong>${esc(home.name)}</strong></div>
+      <div><div class="match-score-num">${esc(scoreText(details))}</div><div style="font-size:10px;color:#888">${esc(details.date||"")} · ${esc(details.competition||"")}</div></div>
+      <div class="match-team">${logoImg(away.name,"large",away.crest)}<strong>${esc(away.name)}</strong></div>
+    </div>
+    <div class="match-section"><h4>Spielereignisse</h4><div class="match-events">${renderMatchEvents(details)}</div></div>
+    ${details.venue?`<div class="match-section"><h4>Spielort</h4><p class="match-muted">${esc(details.venue)}${details.attendance?` · ${esc(details.attendance)} Zuschauer`:""}</p></div>`:""}
+    ${referee?`<div class="match-section"><h4>Schiedsrichter</h4><p class="match-muted">${esc(referee)}</p></div>`:""}
+    ${renderLineupBlock(home.name,details.lineups?.home)}
+    ${renderLineupBlock(away.name,details.lineups?.away)}`;
+ }catch(err){
+   b.innerHTML=`<div class="match-section"><h4>Spieldaten</h4><p>${esc(err.message||"Spieldaten konnten nicht geladen werden.")}</p></div>`;
+ }
+}
+function closeMatchModal(){const m=document.getElementById("matchModal");if(m)m.classList.remove("open");document.body.style.overflow="";}
+async function fetchDashboard(){
+ const status=document.getElementById("updated");
+ try{
+   const res=await fetch("/api/dashboard",{cache:"no-store"});
+   const data=await res.json();
+   if(!res.ok)throw new Error(data.error||"Dashboard konnte nicht geladen werden.");
+   dashboard=data;
+   NEWS=Array.isArray(data.news)?data.news:[];
+   BL=(Array.isArray(data.fixtures)?data.fixtures:[]).map(normalizeFixture);
+   CL=(Array.isArray(data.championsLeague)?data.championsLeague:[]).map(normalizeFixture);
+   TABLE=Array.isArray(data.table)?data.table:[];
+   renderNews();renderNext();renderFixtures();renderTable();
+   if(status)status.textContent=`Live-Daten · ${formatUpdated(data.updatedAt)}`;
+   const attr=document.querySelector("[data-attribution]");
+   if(attr)attr.textContent=data.attribution||"Data provided by football-data.org";
+ }catch(err){
+   console.error("Dashboard-Fehler:",err);
+   BL=FALLBACK_BL.map(x=>normalizeFixture({matchday:x[0],date:x[1],home:x[3],away:x[4],homeGoals:x[5]?.split(":")[0],awayGoals:x[5]?.split(":")[1],status:x[6]}));
+   CL=FALLBACK_CL.map(x=>normalizeFixture({matchday:x[0],date:x[1],home:x[3],away:x[4],status:"SCHEDULED"}));
+   renderFixtures();
+   const status=document.getElementById("updated");
+   if(status)status.textContent="Live-Daten momentan nicht erreichbar";
+ }
 }
 
-const [
-home,
-away,
-score,
-date,
-comp,
-events
-]=data;
-
-b.innerHTML=`
-
-<div class="match-score">
-
-<div class="match-team">
-
-${logoImg(home,"large")}
-
-<strong>
-${esc(home)}
-</strong>
-
-</div>
-
-<div>
-
-<div class="match-score-num">
-${esc(score)}
-</div>
-
-<div
-style="font-size:10px;color:#888"
->
-${esc(date)} · ${esc(comp)}
-</div>
-
-</div>
-
-<div class="match-team">
-
-${logoImg(away,"large")}
-
-<strong>
-${esc(away)}
-</strong>
-
-</div>
-
-</div>
-
-<div class="match-section">
-
-<h4>
-Spielereignisse
-</h4>
-
-<div class="match-events">
-
-${
-events.length
-?
-events.map(
-e=>`
-<div class="match-event">
-${esc(e)}
-</div>
-`
-).join("")
-:
-`
-<div class="match-event">
-Detailereignisse werden für dieses Spiel noch nicht angezeigt.
-</div>
-`
-}
-
-</div>
-
-</div>
-`;
-
-m.classList.add("open");
-
-document.body.style.overflow="hidden";
-}
-
-function closeMatchModal(){
-
-const m=document.getElementById(
-"matchModal"
-);
-
-if(m){
-m.classList.remove("open");
-}
-
-document.body.style.overflow="";
-}
-
+/* Zusätzliche Darstellung für API-Crest-Bilder. */
 const style=document.createElement("style");
-
 style.textContent=`
-
-.fixture-row{
-display:grid;
-grid-template-columns:42px 125px 1fr 85px;
-gap:12px;
-align-items:center;
-padding:13px 0;
-border-bottom:1px solid #eee
-}
-
-.fixture-row.clickable{
-cursor:pointer
-}
-
-.fixture-row.clickable:hover{
-background:#fafafa
-}
-
-.fixture-round{
-font-weight:1000;
-color:#e30613
-}
-
-.fixture-date{
-font-size:11px
-}
-
-.fixture-date span{
-display:block;
-color:#888;
-margin-top:3px
-}
-
-.fixture-teams{
-display:grid;
-gap:7px
-}
-
-.fixture-score{
-text-align:right
-}
-
-.fixture-score strong{
-font-size:16px
-}
-
-.fixture-score span{
-display:block;
-font-size:9px;
-color:#888;
-font-weight:900;
-margin-top:3px
-}
-
-.next-match{
-padding:15px;
-border:1px solid #eee;
-border-radius:12px;
-background:#fafafa
-}
-
-.next-date,
-.next-comp{
-font-size:10px;
-font-weight:900;
-color:#777;
-text-align:center
-}
-
-.next-teams{
-display:grid;
-grid-template-columns:1fr 45px 1fr;
-align-items:center;
-text-align:center;
-gap:8px;
-margin:15px 0
-}
-
-.next-teams>div{
-display:grid;
-justify-items:center;
-gap:7px;
-font-size:12px
-}
-
-.table-scroll{
-overflow-x:auto
-}
-
-.league-table{
-width:100%;
-border-collapse:collapse;
-font-size:12px;
-min-width:650px
-}
-
-.league-table th{
-background:#111;
-color:#fff;
-padding:9px 7px;
-text-align:center
-}
-
-.league-table th:nth-child(2),
-.league-table td:nth-child(2){
-text-align:left
-}
-
-.league-table td{
-padding:8px 7px;
-border-bottom:1px solid #eee;
-text-align:center
-}
-
-.league-table .team-line{
-font-size:12px
-}
-
-.vfb-row{
-background:#fff0f1;
-font-weight:900
-}
-
-.vfb-row td:first-child{
-border-left:4px solid #e30613
-}
-
-.transfer-item{
-display:flex;
-align-items:center;
-gap:9px;
-padding:10px 0;
-border-bottom:1px solid #eee;
-font-size:12px
-}
-
-.transfer-item small{
-display:block;
-color:#888;
-margin-top:2px
-}
-
-.transfer-dot{
-display:grid;
-place-items:center;
-width:24px;
-height:24px;
-border-radius:50%;
-background:#eee;
-font-weight:1000;
-color:#111;
-flex:0 0 auto
-}
-
-.transfer-dot.plus{
-color:#e30613
-}
-
-.player-initial{
-width:105px;
-height:105px;
-border-radius:50%;
-background:#e30613;
-color:#fff;
-display:grid;
-place-items:center;
-font-size:28px;
-font-weight:1000
-}
-
-.player-photo-wrap{
-align-items:center!important
-}
-
-.match-modal.open{
-display:flex!important
-}
-
-.match-team{
-display:grid;
-justify-items:center;
-gap:6px;
-text-align:center
-}
-
-.team-logo{
-width:30px;
-height:30px;
-display:grid;
-place-items:center;
-flex:0 0 auto;
-border-radius:7px;
-background:#eee;
-color:#111;
-font-size:8px;
-font-weight:1000;
-letter-spacing:-.3px;
-border:1px solid #ddd
-}
-
-.logo-large{
-width:48px;
-height:48px;
-border-radius:10px;
-font-size:11px
-}
-
-.badge-vfb{
-background:#e30613;
-color:#fff;
-border-color:#e30613
-}
-
-.badge-bayern{
-background:#dc052d;
-color:#fff;
-border-color:#dc052d
-}
-
-.badge-koeln{
-background:#fff;
-color:#e30613;
-border-color:#e30613
-}
-
-.badge-hoffenheim{
-background:#005ca9;
-color:#fff;
-border-color:#005ca9
-}
-
-.badge-dortmund{
-background:#f7d000;
-color:#111;
-border-color:#111
-}
-
-.badge-paderborn{
-background:#0050a4;
-color:#fff;
-border-color:#0050a4
-}
-
-.badge-hamburg{
-background:#fff;
-color:#005ca9;
-border-color:#005ca9
-}
-
-.badge-gladbach{
-background:#fff;
-color:#111;
-border-color:#111
-}
-
-.badge-leverkusen{
-background:#e32219;
-color:#fff;
-border-color:#e32219
-}
-
-.badge-bremen{
-background:#007b49;
-color:#fff;
-border-color:#007b49
-}
-
-.badge-schalke{
-background:#0066b3;
-color:#fff;
-border-color:#0066b3
-}
-
-.badge-frankfurt{
-background:#e30613;
-color:#fff;
-border-color:#e30613
-}
-
-.badge-elversberg{
-background:#fff;
-color:#111;
-border-color:#111
-}
-
-.badge-union{
-background:#ed1c24;
-color:#fff;
-border-color:#ed1c24
-}
-
-.badge-freiburg{
-background:#d6001c;
-color:#fff;
-border-color:#d6001c
-}
-
-.badge-augsburg{
-background:#ba0c2f;
-color:#fff;
-border-color:#ba0c2f
-}
-
-.badge-leipzig{
-background:#fff;
-color:#d00027;
-border-color:#d00027
-}
-
-.badge-mainz{
-background:#c00;
-color:#fff;
-border-color:#c00
-}
-
-.badge-viking{
-background:#162b54;
-color:#fff;
-border-color:#162b54
-}
-
-.badge-slovan{
-background:#1b4fa3;
-color:#fff;
-border-color:#1b4fa3
-}
-
-.badge-atletico{
-background:#fff;
-color:#d71920;
-border-color:#d71920
-}
-
-.badge-galatasaray{
-background:#e30613;
-color:#f6c500;
-border-color:#e30613
-}
-
-.badge-inter{
-background:#111b5e;
-color:#fff;
-border-color:#111b5e
-}
-
-.badge-lille{
-background:#e30613;
-color:#fff;
-border-color:#e30613
-}
-
-.badge-brugge{
-background:#111;
-color:#ffd200;
-border-color:#111
-}
-
-.badge-psv{
-background:#fff;
-color:#e30613;
-border-color:#e30613
-}
-
-@media(max-width:700px){
-
-.fixture-row{
-grid-template-columns:28px 88px 1fr 52px;
-gap:7px
-}
-
-.fixture-date{
-font-size:9px
-}
-
-.fixture-teams .team-line{
-font-size:11px
-}
-
-.fixture-score strong{
-font-size:13px
-}
-
-.team-logo{
-width:27px;
-height:27px
-}
-
-.logo-large{
-width:42px;
-height:42px
-}
-
-.nav{
-gap:11px!important;
-overflow-x:auto
-}
-
-.squad-grid{
-grid-template-columns:repeat(2,1fr)!important
-}
-
-.grid{
-grid-template-columns:1fr!important
-}
-
-.fan-grid{
-grid-template-columns:1fr!important
-}
-
-}
+.fixture-row{display:grid;grid-template-columns:42px 125px 1fr 85px;gap:12px;align-items:center;padding:13px 0;border-bottom:1px solid #eee}.fixture-row.clickable{cursor:pointer}.fixture-row.clickable:hover{background:#fafafa}.fixture-round{font-weight:1000;color:#e30613}.fixture-date{font-size:11px}.fixture-date span{display:block;color:#888;margin-top:3px}.fixture-teams{display:grid;gap:7px}.fixture-score{text-align:right}.fixture-score strong{font-size:16px}.fixture-score span{display:block;font-size:9px;color:#888;font-weight:900;margin-top:3px}.next-match{padding:15px;border:1px solid #eee;border-radius:12px;background:#fafafa}.next-date,.next-comp{font-size:10px;font-weight:900;color:#777;text-align:center}.next-teams{display:grid;grid-template-columns:1fr 45px 1fr;align-items:center;text-align:center;gap:8px;margin:15px 0}.next-teams>div{display:grid;justify-items:center;gap:7px;font-size:12px}.table-scroll{overflow-x:auto}.league-table{width:100%;border-collapse:collapse;font-size:12px;min-width:650px}.league-table th{background:#111;color:#fff;padding:9px 7px;text-align:center}.league-table th:nth-child(2),.league-table td:nth-child(2){text-align:left}.league-table td{padding:8px 7px;border-bottom:1px solid #eee;text-align:center}.league-table .team-line{font-size:12px}.vfb-row{background:#fff0f1;font-weight:900}.vfb-row td:first-child{border-left:4px solid #e30613}.transfer-item{display:flex;align-items:center;gap:9px;padding:10px 0;border-bottom:1px solid #eee;font-size:12px}.transfer-item small{display:block;color:#888;margin-top:2px}.transfer-dot{display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:#eee;font-weight:1000;color:#111;flex:0 0 auto}.transfer-dot.plus{color:#e30613}.player-initial{width:105px;height:105px;border-radius:50%;background:#e30613;color:#fff;display:grid;place-items:center;font-size:28px;font-weight:1000}.player-photo-wrap{align-items:center!important}.match-modal.open{display:flex!important}.match-team{display:grid;justify-items:center;gap:6px;text-align:center}.team-logo{width:30px;height:30px;display:grid;place-items:center;flex:0 0 auto;border-radius:7px;background:#eee;color:#111;font-size:8px;font-weight:1000;letter-spacing:-.3px;border:1px solid #ddd;object-fit:contain}.logo-large{width:48px;height:48px;border-radius:10px;font-size:11px}.badge-vfb{background:#e30613;color:#fff;border-color:#e30613}.badge-bayern{background:#dc052d;color:#fff;border-color:#dc052d}.badge-koeln{background:#fff;color:#e30613;border-color:#e30613}.badge-hoffenheim{background:#005ca9;color:#fff;border-color:#005ca9}.badge-dortmund{background:#f7d000;color:#111;border-color:#111}.badge-paderborn{background:#0050a4;color:#fff;border-color:#0050a4}.badge-hamburg{background:#fff;color:#005ca9;border-color:#005ca9}.badge-gladbach{background:#fff;color:#111;border-color:#111}.badge-leverkusen{background:#e32219;color:#fff;border-color:#e32219}.badge-bremen{background:#007b49;color:#fff;border-color:#007b49}.badge-schalke{background:#0066b3;color:#fff;border-color:#0066b3}.badge-frankfurt{background:#e30613;color:#fff;border-color:#e30613}.badge-elversberg{background:#fff;color:#111;border-color:#111}.badge-union{background:#ed1c24;color:#fff;border-color:#ed1c24}.badge-freiburg{background:#d6001c;color:#fff;border-color:#d6001c}.badge-augsburg{background:#ba0c2f;color:#fff;border-color:#ba0c2f}.badge-leipzig{background:#fff;color:#d00027;border-color:#d00027}.badge-mainz{background:#c00;color:#fff;border-color:#c00}.badge-viking{background:#162b54;color:#fff;border-color:#162b54}.badge-slovan{background:#1b4fa3;color:#fff;border-color:#1b4fa3}.badge-atletico{background:#fff;color:#d71920;border-color:#d71920}.badge-galatasaray{background:#e30613;color:#f6c500;border-color:#e30613}.badge-inter{background:#111b5e;color:#fff;border-color:#111b5e}.badge-lille{background:#e30613;color:#fff;border-color:#e30613}.badge-brugge{background:#111;color:#ffd200;border-color:#111}.badge-psv{background:#fff;color:#e30613;border-color:#e30613}.match-muted{color:#777;font-size:12px}.lineup-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:5px;font-size:11px}.lineup-list span{padding:5px 7px;background:#f7f7f7;border-radius:5px}
+@media(max-width:700px){.fixture-row{grid-template-columns:28px 88px 1fr 52px;gap:7px}.fixture-date{font-size:9px}.fixture-teams .team-line{font-size:11px}.fixture-score strong{font-size:13px}.team-logo{width:27px;height:27px}.logo-large{width:42px;height:42px}.nav{gap:11px!important;overflow-x:auto}.squad-grid{grid-template-columns:repeat(2,1fr)!important}.grid{grid-template-columns:1fr!important}.fan-grid{grid-template-columns:1fr!important}.lineup-list{grid-template-columns:1fr}}
 `;
-
 document.head.appendChild(style);
 
-function initPage(){
-
-renderNews();
-renderNext();
-renderFixtures();
-renderTable();
-renderCLInfo();
 renderTransfers();
 renderSquad();
 updateVisitors();
-
-}
-
-if(document.readyState==="loading"){
-
-document.addEventListener(
-"DOMContentLoaded",
-initPage
-);
-
-}else{
-
-initPage();
-
-}
-
-document.addEventListener(
-"keydown",
-function(e){
-
-if(e.key!=="Enter" && e.key!==" ")
-return;
-
-const target=
-e.target.closest(
-".fixture-row.clickable"
-);
-
-if(target){
-
-e.preventDefault();
-
-openMatchModal(
-target.dataset.round
-);
-
-}
-
-}
-);
-
-document.addEventListener(
-"keydown",
-function(e){
-
-if(e.key==="Escape"){
-closeMatchModal();
-}
-
-}
-);
-
-window.openMatchModal=openMatchModal;
+fetchDashboard();
+setInterval(updateVisitors,30000);
+document.addEventListener("keydown",e=>{
+ if(e.key==="Escape")closeMatchModal();
+ if((e.key==="Enter"||e.key===" ")&&document.activeElement?.classList.contains("clickable")){
+   e.preventDefault();
+   const id=document.activeElement.dataset.matchId;
+   if(id)openMatchModal(id);
+ }
+});
+document.getElementById("matchModal")?.addEventListener("click",e=>{if(e.target.id==="matchModal")closeMatchModal();});
 window.closeMatchModal=closeMatchModal;
-
+window.openMatchModal=openMatchModal;
 </script>
-
 </body>
-</html>  
+</html>
