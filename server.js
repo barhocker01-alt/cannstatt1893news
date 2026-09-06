@@ -141,13 +141,11 @@ function apiRequest(endpoint) {
           try {
             json = JSON.parse(body);
           } catch (error) {
-
             reject(
               new Error(
                 "football-data.org lieferte kein gültiges JSON"
               )
             );
-
             return;
           }
 
@@ -216,7 +214,6 @@ function formatDate(dateString) {
       minute: "2-digit"
     }
   );
-
 }
 
 
@@ -528,7 +525,7 @@ function normalizeVfbUrl(url = "") {
 
 
 /* =========================================================
-   RSS NEWS
+   VFB NEWS
 ========================================================= */
 
 async function fetchVfbNews() {
@@ -548,12 +545,22 @@ async function fetchVfbNews() {
       "VfB RSS Feed geladen."
     );
 
+    console.log(
+      "RSS Zeichen:",
+      xml.length
+    );
+
     const items = [];
 
     const rssItems =
       xml.match(
         /<item\b[\s\S]*?<\/item>/gi
       ) || [];
+
+    console.log(
+      "RSS Items gefunden:",
+      rssItems.length
+    );
 
     for (
       const item of rssItems
@@ -712,7 +719,10 @@ async function fetchVfbNews() {
       }
     );
 
-    return items.slice(0, 10);
+    return items.slice(
+      0,
+      10
+    );
 
   } catch (error) {
 
@@ -1282,472 +1292,6 @@ async function getVfbSquadStats(
 
 
 /* =========================================================
-   MATCHCENTER
-========================================================= */
-
-const MATCH_DETAIL_CACHE_TIME =
-  2 * 60 * 1000;
-
-const matchDetailCache =
-  new Map();
-
-
-function normalizeMatchEventMinute(
-  event
-) {
-
-  const minute =
-    event?.minute ??
-    event?.time?.elapsed ??
-    null;
-
-  const injury =
-    event?.injuryTime ??
-    event?.time?.extra ??
-    null;
-
-  if (
-    minute === null ||
-    minute === undefined
-  ) {
-    return "";
-  }
-
-  return injury
-    ? `${minute}+${injury}.`
-    : `${minute}.`;
-
-}
-
-
-function mapMatchDetails(
-  match
-) {
-
-  const home =
-    match?.homeTeam || {};
-
-  const away =
-    match?.awayTeam || {};
-
-  const goals =
-    (match?.goals || [])
-      .map(
-        goal => ({
-
-          minute:
-            goal.minute ??
-            null,
-
-          injuryTime:
-            goal.injuryTime ??
-            null,
-
-          minuteLabel:
-            normalizeMatchEventMinute(
-              goal
-            ),
-
-          type:
-            goal.type ||
-            "REGULAR",
-
-          teamId:
-            goal.team?.id ??
-            null,
-
-          team:
-            goal.team?.name ||
-            "",
-
-          scorerId:
-            goal.scorer?.id ??
-            null,
-
-          scorer:
-            goal.scorer?.name ||
-            "",
-
-          assistId:
-            goal.assist?.id ??
-            null,
-
-          assist:
-            goal.assist?.name ||
-            "",
-
-          scoreHome:
-            goal.score?.home ??
-            null,
-
-          scoreAway:
-            goal.score?.away ??
-            null
-
-        })
-      );
-
-  const bookings =
-    (match?.bookings || [])
-      .map(
-        card => ({
-
-          minute:
-            card.minute ??
-            null,
-
-          injuryTime:
-            card.injuryTime ??
-            null,
-
-          minuteLabel:
-            normalizeMatchEventMinute(
-              card
-            ),
-
-          teamId:
-            card.team?.id ??
-            null,
-
-          team:
-            card.team?.name ||
-            "",
-
-          playerId:
-            card.player?.id ??
-            null,
-
-          player:
-            card.player?.name ||
-            "",
-
-          card:
-            card.card ||
-            ""
-
-        })
-      );
-
-  const substitutions =
-    (match?.substitutions || [])
-      .map(
-        sub => ({
-
-          minute:
-            sub.minute ??
-            null,
-
-          injuryTime:
-            sub.injuryTime ??
-            null,
-
-          minuteLabel:
-            normalizeMatchEventMinute(
-              sub
-            ),
-
-          teamId:
-            sub.team?.id ??
-            null,
-
-          team:
-            sub.team?.name ||
-            "",
-
-          playerInId:
-            sub.playerIn?.id ??
-            null,
-
-          playerIn:
-            sub.playerIn?.name ||
-            "",
-
-          playerOutId:
-            sub.playerOut?.id ??
-            null,
-
-          playerOut:
-            sub.playerOut?.name ||
-            ""
-
-        })
-      );
-
-  function mapLineup(team) {
-
-    return {
-
-      formation:
-        team?.formation ||
-        null,
-
-      coach:
-        team?.coach?.name ||
-        null,
-
-      lineup:
-        (team?.lineup || [])
-          .map(
-            player => ({
-
-              id:
-                player.id ??
-                null,
-
-              name:
-                player.name ||
-                "",
-
-              position:
-                player.position ||
-                "",
-
-              shirtNumber:
-                player.shirtNumber ??
-                null
-
-            })
-          ),
-
-      bench:
-        (team?.bench || [])
-          .map(
-            player => ({
-
-              id:
-                player.id ??
-                null,
-
-              name:
-                player.name ||
-                "",
-
-              position:
-                player.position ||
-                "",
-
-              shirtNumber:
-                player.shirtNumber ??
-                null
-
-            })
-          ),
-
-      statistics:
-        team?.statistics ||
-        {}
-
-    };
-
-  }
-
-  const stats = {
-
-    home:
-      home.statistics ||
-      {},
-
-    away:
-      away.statistics ||
-      {}
-
-  };
-
-  return {
-
-    id:
-      match?.id ??
-      null,
-
-    utcDate:
-      match?.utcDate ||
-      null,
-
-    date:
-      formatDate(
-        match?.utcDate
-      ),
-
-    status:
-      match?.status ||
-      "",
-
-    minute:
-      match?.minute ??
-      null,
-
-    injuryTime:
-      match?.injuryTime ??
-      null,
-
-    venue:
-      match?.venue ||
-      "",
-
-    attendance:
-      match?.attendance ??
-      null,
-
-    matchday:
-      match?.matchday ??
-      null,
-
-    stage:
-      match?.stage ||
-      null,
-
-    competition:
-      match?.competition?.name ||
-      "",
-
-    competitionCode:
-      match?.competition?.code ||
-      "",
-
-    homeTeam: {
-
-      id:
-        home.id ??
-        null,
-
-      name:
-        home.name ||
-        "",
-
-      shortName:
-        home.shortName ||
-        home.name ||
-        "",
-
-      crest:
-        home.crest ||
-        "",
-
-      formation:
-        home.formation ||
-        null
-
-    },
-
-    awayTeam: {
-
-      id:
-        away.id ??
-        null,
-
-      name:
-        away.name ||
-        "",
-
-      shortName:
-        away.shortName ||
-        away.name ||
-        "",
-
-      crest:
-        away.crest ||
-        "",
-
-      formation:
-        away.formation ||
-        null
-
-    },
-
-    score:
-      match?.score ||
-      {},
-
-    goals,
-
-    bookings,
-
-    substitutions,
-
-    lineups: {
-
-      home:
-        mapLineup(home),
-
-      away:
-        mapLineup(away)
-
-    },
-
-    statistics:
-      stats,
-
-    referees:
-      match?.referees ||
-      []
-
-  };
-
-}
-
-
-async function getMatchDetails(
-  matchId
-) {
-
-  const id =
-    String(
-      matchId || ""
-    ).trim();
-
-  if (
-    !/^\d+$/.test(id)
-  ) {
-
-    throw new Error(
-      "Ungültige Spiel-ID"
-    );
-
-  }
-
-  const cached =
-    matchDetailCache.get(
-      id
-    );
-
-  if (
-    cached &&
-    Date.now() -
-      cached.time <
-      MATCH_DETAIL_CACHE_TIME
-  ) {
-
-    return cached.data;
-
-  }
-
-  const data =
-    await apiRequest(
-      `/matches/${id}`
-    );
-
-  const details =
-    mapMatchDetails(
-      data
-    );
-
-  matchDetailCache.set(
-    id,
-    {
-      time:
-        Date.now(),
-
-      data:
-        details
-    }
-  );
-
-  return details;
-
-}
-
-
-/* =========================================================
    DASHBOARD
 ========================================================= */
 
@@ -1874,6 +1418,8 @@ async function buildDashboard() {
   return dashboard;
 
 }
+
+
 /* =========================================================
    DASHBOARD CACHE
 ========================================================= */
@@ -2476,16 +2022,13 @@ function sendJSON(
   res.writeHead(
     200,
     {
-
       "Content-Type":
         "application/json; charset=utf-8",
 
       "Cache-Control":
         "no-store"
-
     }
   );
-
 
   res.end(
     JSON.stringify(data)
@@ -2509,12 +2052,10 @@ function serveFile(
       filename
     );
 
-
   console.log(
     "Datei angefordert:",
     filePath
   );
-
 
   if (
     !fs.existsSync(
@@ -2527,17 +2068,13 @@ function serveFile(
       filePath
     );
 
-
     res.writeHead(
       404,
       {
-
         "Content-Type":
           "text/plain; charset=utf-8"
-
       }
     );
-
 
     res.end(
       "Nicht gefunden"
@@ -2547,12 +2084,10 @@ function serveFile(
 
   }
 
-
   const ext =
     path.extname(
       filePath
     );
-
 
   const types = {
 
@@ -2585,18 +2120,14 @@ function serveFile(
 
   };
 
-
   res.writeHead(
     200,
     {
-
       "Content-Type":
         types[ext] ||
         "application/octet-stream"
-
     }
   );
-
 
   fs.createReadStream(
     filePath
@@ -2624,7 +2155,6 @@ const server =
             `http://${req.headers.host}`
           ).pathname;
 
-
         console.log(
           "REQUEST:",
           pathname
@@ -2640,7 +2170,6 @@ const server =
             /^\/api\/match\/(\d+)$/
           );
 
-
         if (matchPath) {
 
           const data =
@@ -2648,11 +2177,9 @@ const server =
               matchPath[1]
             );
 
-
           sendJSON(
             res,
             {
-
               success:
                 true,
 
@@ -2661,10 +2188,8 @@ const server =
 
               attribution:
                 "Data provided by football-data.org"
-
             }
           );
-
 
           return;
 
@@ -2683,12 +2208,10 @@ const server =
           const data =
             await getDashboard();
 
-
           sendJSON(
             res,
             data
           );
-
 
           return;
 
@@ -2737,7 +2260,6 @@ const server =
             }
           );
 
-
           return;
 
         }
@@ -2757,7 +2279,6 @@ const server =
             res,
             "index.html"
           );
-
 
           return;
 
@@ -2781,7 +2302,6 @@ const server =
                 ""
               );
 
-
           if (
             safePath &&
             !safePath.includes(
@@ -2795,7 +2315,6 @@ const server =
                 safePath
               );
 
-
             if (
               fs.existsSync(
                 fullPath
@@ -2807,7 +2326,6 @@ const server =
                   fullPath
                 );
 
-
               if (
                 stats.isFile()
               ) {
@@ -2817,7 +2335,6 @@ const server =
                   safePath
                 );
 
-
                 return;
 
               }
@@ -2826,16 +2343,14 @@ const server =
 
           }
 
-
-          /* =====================================
-             FALLBACK AUF INDEX.HTML
-          ===================================== */
+          /*
+           * FALLBACK AUF INDEX.HTML
+           */
 
           serveFile(
             res,
             "index.html"
           );
-
 
           return;
 
@@ -2849,13 +2364,10 @@ const server =
         res.writeHead(
           404,
           {
-
             "Content-Type":
               "text/plain; charset=utf-8"
-
           }
         );
-
 
         res.end(
           "Nicht gefunden"
@@ -2869,24 +2381,18 @@ const server =
           error
         );
 
-
         res.writeHead(
           500,
           {
-
             "Content-Type":
               "application/json; charset=utf-8"
-
           }
         );
 
-
         res.end(
           JSON.stringify({
-
             error:
               error.message
-
           })
         );
 
@@ -2909,35 +2415,29 @@ server.listen(
       "======================================"
     );
 
-
     console.log(
       `Canstatt 1893 News läuft auf Port ${PORT}`
     );
-
 
     console.log(
       "Football-Data Token vorhanden:",
       !!TOKEN
     );
 
-
     console.log(
       "VfB RSS Feed:",
       VFB_RSS_URL
     );
-
 
     console.log(
       "Kicker RSS Feed:",
       KICKER_RSS_URL
     );
 
-
     console.log(
       "Server-Verzeichnis:",
       __dirname
     );
-
 
     console.log(
       "index.html vorhanden:",
@@ -2948,7 +2448,6 @@ server.listen(
         )
       )
     );
-
 
     console.log(
       "======================================"
