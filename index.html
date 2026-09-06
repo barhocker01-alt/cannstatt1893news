@@ -1940,17 +1940,21 @@ function clCard(m){
  </article>`;
 }
 
+function shortSummary(text, max=150){
+ const clean=String(text||"").replace(/\s+/g," ").trim();
+ if(!clean)return "Kurzmeldung direkt aus der Quelle.";
+ return clean.length>max ? clean.slice(0,max).replace(/\s+\S*$/,"…") : clean;
+}
 function renderNews(){
  const el=document.getElementById("newsList");if(!el)return;
  if(!NEWS.length){el.innerHTML='<div class="competition">Aktuell sind keine VfB-News verfügbar.</div>';return;}
  el.innerHTML=NEWS.map(n=>{
    const date=n.date||n.pubDate||"";
-   const text=n.description||"";
    const url=n.url||n.link||"https://www.vfb.de/";
-   return `<article class="news"><span class="tag">VFB NEWS</span><h3>${esc(n.title)}</h3><p>${esc(date)}</p>${text?`<p class="news-summary">${esc(text)}</p>`:""}<a class="btn" href="${esc(url)}" target="_blank" rel="noopener noreferrer">VFB.DE →</a></article>`;
+   const source=String(n.source||"VFB").toUpperCase()==="KICKER"?"KICKER":"VFB NEWS";
+   return `<article class="news"><div class="news-meta"><span class="tag">${source}</span><span>${esc(date)}</span></div><h3>${esc(n.title)}</h3><p class="news-summary">${esc(shortSummary(n.description))}</p><a class="btn" href="${esc(url)}" target="_blank" rel="noopener noreferrer">MELDUNG LESEN →</a></article>`;
  }).join("");
 }
-
 function renderNext(){
  const el=document.getElementById("nextGame");if(!el)return;
  const g=dashboard?.nextGame;
@@ -1994,10 +1998,24 @@ function renderTransfers(){
  if(d)d.innerHTML=FALLBACK_DEPARTURES.map(([n,to])=>`<div class="transfer-item"><span class="transfer-dot">−</span><div><b>${esc(n)}</b><small>${esc(to)}</small></div></div>`).join("");
 }
 function renderSquad(){
- const el=document.getElementById("squadPlayers");if(!el)return;let html="";
- Object.entries(SQUAD).forEach(([group,names])=>{
+ const el=document.getElementById("squadPlayers");if(!el)return;
+ const groups={"Tor":[],"Abwehr":[],"Mittelfeld":[],"Sturm":[]};
+ const data=Array.isArray(dashboard?.squad)?dashboard.squad:[];
+ if(!data.length){el.innerHTML='<div class="competition">Kaderdaten momentan nicht verfügbar.</div>';return;}
+ data.forEach(p=>{
+   const pos=String(p.position||"");
+   const group=pos.toLowerCase().includes("goal")||pos.toLowerCase().includes("keeper")||pos==="Tor"?"Tor":pos.toLowerCase().includes("def")||pos==="Abwehr"?"Abwehr":pos.toLowerCase().includes("mid")||pos==="Mittelfeld"?"Mittelfeld":"Sturm";
+   groups[group].push(p);
+ });
+ let html="";
+ Object.entries(groups).forEach(([group,players])=>{
+   if(!players.length)return;
    html+=`<div class="squad-group"><h3 class="squad-title">${esc(group)}</h3><div class="squad-grid">`;
-   names.forEach(name=>html+=`<div class="player-card"><div class="player-photo-wrap"><div class="player-initial">${esc(initials(name))}</div></div><div class="player-name">${esc(name)}</div><div class="player-position">VfB Stuttgart · ${esc(group)}</div></div>`);
+   players.forEach(p=>{
+     const photo=p.photo||"";
+     const image=photo?`<img class="player-photo" src="${esc(photo)}" alt="${esc(p.name)}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'">`:"";
+     html+=`<div class="player-card"><div class="player-photo-wrap">${image}<div class="player-initial" style="${photo?'display:none':''}">${esc(initials(p.name))}</div></div><div class="player-name">${esc(p.name)}</div><div class="player-position">${p.number!=null?'#'+esc(p.number)+' · ':''}VfB Stuttgart</div><div class="player-stats"><span><b>${esc(p.appearances??0)}</b><small>Einsätze</small></span><span><b>${esc(p.goals??0)}</b><small>Tore</small></span><span><b>${esc(p.assists??0)}</b><small>Assists</small></span></div></div>`;
+   });
    html+=`</div></div>`;
  });
  el.innerHTML=html;
@@ -2040,23 +2058,29 @@ function renderLineupBlock(label,data){
 async function openMatchModal(matchId){
  const m=document.getElementById("matchModal"),b=document.getElementById("matchModalBody");if(!m||!b)return;
  m.classList.add("open");document.body.style.overflow="hidden";
- b.innerHTML='<div class="match-section"><h4>Spielbericht wird geladen…</h4><p class="match-muted">Aktuelle Daten werden vom Server abgerufen.</p></div>';
+ b.innerHTML='<div class="match-section"><h4>Match Center wird geladen…</h4><p class="match-muted">Statistiken und Spielereignisse werden abgerufen.</p></div>';
  try{
    const res=await fetch(`/api/match/${encodeURIComponent(matchId)}`,{cache:"no-store"});
-   const details=await res.json();
-   if(!res.ok)throw new Error(details.error||"Spieldaten konnten nicht geladen werden.");
+   const payload=await res.json();
+   if(!res.ok||!payload.match)throw new Error(payload.error||"Spieldaten konnten nicht geladen werden.");
+   const details=payload.match;
    const home=details.homeTeam||{},away=details.awayTeam||{};
    const referee=(details.referees||[]).map(r=>r.name).filter(Boolean).join(", ");
+   const hs=details.statistics?.home||{},as=details.statistics?.away||{};
+   const statMap=[
+    ["Ballbesitz","possession"],["Schüsse aufs Tor","shotsOnGoal"],["Schüsse daneben","shotsOffGoal"],["Ecken","cornerKicks"],["Fouls","fouls"],["Abseits","offsides"],["Gelbe Karten","yellowCards"]
+   ];
+   const statRows=statMap.filter(([_,k])=>hs[k]!=null||as[k]!=null).map(([label,k])=>`<div class="stat-row"><span>${esc(hs[k]??"–")}</span><b>${esc(label)}</b><span>${esc(as[k]??"–")}</span></div>`).join("");
    b.innerHTML=`<div class="match-score">
       <div class="match-team">${logoImg(home.name,"large",home.crest)}<strong>${esc(home.name)}</strong></div>
       <div><div class="match-score-num">${esc(scoreText(details))}</div><div style="font-size:10px;color:#888">${esc(details.date||"")} · ${esc(details.competition||"")}</div></div>
       <div class="match-team">${logoImg(away.name,"large",away.crest)}<strong>${esc(away.name)}</strong></div>
     </div>
+    ${statRows?`<div class="match-section"><h4>Spielstatistiken</h4><div class="stats-table"><div class="stat-row stat-head"><span>${esc(home.shortName||home.name||"Heim")}</span><b>STATISTIK</b><span>${esc(away.shortName||away.name||"Gast")}</span></div>${statRows}</div></div>`:`<div class="match-section"><h4>Spielstatistiken</h4><p class="match-muted">Für dieses Spiel wurden vom Datenanbieter keine Detailstatistiken geliefert.</p></div>`}
     <div class="match-section"><h4>Spielereignisse</h4><div class="match-events">${renderMatchEvents(details)}</div></div>
     ${details.venue?`<div class="match-section"><h4>Spielort</h4><p class="match-muted">${esc(details.venue)}${details.attendance?` · ${esc(details.attendance)} Zuschauer`:""}</p></div>`:""}
     ${referee?`<div class="match-section"><h4>Schiedsrichter</h4><p class="match-muted">${esc(referee)}</p></div>`:""}
-    ${renderLineupBlock(home.name,details.lineups?.home)}
-    ${renderLineupBlock(away.name,details.lineups?.away)}`;
+    ${renderLineupBlock(home.name,details.lineups?.home)}${renderLineupBlock(away.name,details.lineups?.away)}`;
  }catch(err){
    b.innerHTML=`<div class="match-section"><h4>Spieldaten</h4><p>${esc(err.message||"Spieldaten konnten nicht geladen werden.")}</p></div>`;
  }
@@ -2073,7 +2097,7 @@ async function fetchDashboard(){
    BL=(Array.isArray(data.fixtures)?data.fixtures:[]).map(normalizeFixture);
    CL=(Array.isArray(data.championsLeague)?data.championsLeague:[]).map(normalizeFixture);
    TABLE=Array.isArray(data.table)?data.table:[];
-   renderNews();renderNext();renderFixtures();renderTable();
+   renderNews();renderNext();renderFixtures();renderTable();renderSquad();
    if(status)status.textContent=`Live-Daten · ${formatUpdated(data.updatedAt)}`;
    const attr=document.querySelector("[data-attribution]");
    if(attr)attr.textContent=data.attribution||"Data provided by football-data.org";
@@ -2091,7 +2115,7 @@ async function fetchDashboard(){
 const style=document.createElement("style");
 style.textContent=`
 .fixture-row{display:grid;grid-template-columns:42px 125px 1fr 85px;gap:12px;align-items:center;padding:13px 0;border-bottom:1px solid #eee}.fixture-row.clickable{cursor:pointer}.fixture-row.clickable:hover{background:#fafafa}.fixture-round{font-weight:1000;color:#e30613}.fixture-date{font-size:11px}.fixture-date span{display:block;color:#888;margin-top:3px}.fixture-teams{display:grid;gap:7px}.fixture-score{text-align:right}.fixture-score strong{font-size:16px}.fixture-score span{display:block;font-size:9px;color:#888;font-weight:900;margin-top:3px}.next-match{padding:15px;border:1px solid #eee;border-radius:12px;background:#fafafa}.next-date,.next-comp{font-size:10px;font-weight:900;color:#777;text-align:center}.next-teams{display:grid;grid-template-columns:1fr 45px 1fr;align-items:center;text-align:center;gap:8px;margin:15px 0}.next-teams>div{display:grid;justify-items:center;gap:7px;font-size:12px}.table-scroll{overflow-x:auto}.league-table{width:100%;border-collapse:collapse;font-size:12px;min-width:650px}.league-table th{background:#111;color:#fff;padding:9px 7px;text-align:center}.league-table th:nth-child(2),.league-table td:nth-child(2){text-align:left}.league-table td{padding:8px 7px;border-bottom:1px solid #eee;text-align:center}.league-table .team-line{font-size:12px}.vfb-row{background:#fff0f1;font-weight:900}.vfb-row td:first-child{border-left:4px solid #e30613}.transfer-item{display:flex;align-items:center;gap:9px;padding:10px 0;border-bottom:1px solid #eee;font-size:12px}.transfer-item small{display:block;color:#888;margin-top:2px}.transfer-dot{display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:#eee;font-weight:1000;color:#111;flex:0 0 auto}.transfer-dot.plus{color:#e30613}.player-initial{width:105px;height:105px;border-radius:50%;background:#e30613;color:#fff;display:grid;place-items:center;font-size:28px;font-weight:1000}.player-photo-wrap{align-items:center!important}.match-modal.open{display:flex!important}.match-team{display:grid;justify-items:center;gap:6px;text-align:center}.team-logo{width:30px;height:30px;display:grid;place-items:center;flex:0 0 auto;border-radius:7px;background:#eee;color:#111;font-size:8px;font-weight:1000;letter-spacing:-.3px;border:1px solid #ddd;object-fit:contain}.logo-large{width:48px;height:48px;border-radius:10px;font-size:11px}.badge-vfb{background:#e30613;color:#fff;border-color:#e30613}.badge-bayern{background:#dc052d;color:#fff;border-color:#dc052d}.badge-koeln{background:#fff;color:#e30613;border-color:#e30613}.badge-hoffenheim{background:#005ca9;color:#fff;border-color:#005ca9}.badge-dortmund{background:#f7d000;color:#111;border-color:#111}.badge-paderborn{background:#0050a4;color:#fff;border-color:#0050a4}.badge-hamburg{background:#fff;color:#005ca9;border-color:#005ca9}.badge-gladbach{background:#fff;color:#111;border-color:#111}.badge-leverkusen{background:#e32219;color:#fff;border-color:#e32219}.badge-bremen{background:#007b49;color:#fff;border-color:#007b49}.badge-schalke{background:#0066b3;color:#fff;border-color:#0066b3}.badge-frankfurt{background:#e30613;color:#fff;border-color:#e30613}.badge-elversberg{background:#fff;color:#111;border-color:#111}.badge-union{background:#ed1c24;color:#fff;border-color:#ed1c24}.badge-freiburg{background:#d6001c;color:#fff;border-color:#d6001c}.badge-augsburg{background:#ba0c2f;color:#fff;border-color:#ba0c2f}.badge-leipzig{background:#fff;color:#d00027;border-color:#d00027}.badge-mainz{background:#c00;color:#fff;border-color:#c00}.badge-viking{background:#162b54;color:#fff;border-color:#162b54}.badge-slovan{background:#1b4fa3;color:#fff;border-color:#1b4fa3}.badge-atletico{background:#fff;color:#d71920;border-color:#d71920}.badge-galatasaray{background:#e30613;color:#f6c500;border-color:#e30613}.badge-inter{background:#111b5e;color:#fff;border-color:#111b5e}.badge-lille{background:#e30613;color:#fff;border-color:#e30613}.badge-brugge{background:#111;color:#ffd200;border-color:#111}.badge-psv{background:#fff;color:#e30613;border-color:#e30613}.match-muted{color:#777;font-size:12px}.lineup-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:5px;font-size:11px}.lineup-list span{padding:5px 7px;background:#f7f7f7;border-radius:5px}
-@media(max-width:700px){.fixture-row{grid-template-columns:28px 88px 1fr 52px;gap:7px}.fixture-date{font-size:9px}.fixture-teams .team-line{font-size:11px}.fixture-score strong{font-size:13px}.team-logo{width:27px;height:27px}.logo-large{width:42px;height:42px}.nav{gap:11px!important;overflow-x:auto}.squad-grid{grid-template-columns:repeat(2,1fr)!important}.grid{grid-template-columns:1fr!important}.fan-grid{grid-template-columns:1fr!important}.lineup-list{grid-template-columns:1fr}}
+.news-meta{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:8px;font-size:10px;color:#888}.news-summary{font-size:12px;line-height:1.5;color:#555;min-height:38px}.news .btn{display:inline-block;margin-top:8px}.player-photo{width:105px;height:105px;border-radius:50%;object-fit:cover;display:block}.player-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin-top:10px}.player-stats span{background:#f6f6f6;border-radius:7px;padding:6px 2px;text-align:center}.player-stats b{display:block;font-size:14px}.player-stats small{display:block;color:#777;font-size:8px;text-transform:uppercase;font-weight:800}.stats-table{display:grid;gap:2px}.stat-row{display:grid;grid-template-columns:70px 1fr 70px;align-items:center;text-align:center;padding:7px 5px;background:#f7f7f7;font-size:11px}.stat-row b{font-size:10px;text-transform:uppercase}.stat-head{background:#111;color:#fff;font-weight:900}.match-section{margin-top:14px;padding-top:12px;border-top:1px solid #eee}.match-section h4{margin:0 0 8px}.match-events{display:grid;gap:5px}.match-event{font-size:11px;padding:6px 8px;background:#f7f7f7;border-radius:5px}@media(max-width:700px){.fixture-row{grid-template-columns:28px 88px 1fr 52px;gap:7px}.fixture-date{font-size:9px}.fixture-teams .team-line{font-size:11px}.fixture-score strong{font-size:13px}.team-logo{width:27px;height:27px}.logo-large{width:42px;height:42px}.nav{gap:11px!important;overflow-x:auto}.squad-grid{grid-template-columns:repeat(2,1fr)!important}.grid{grid-template-columns:1fr!important}.fan-grid{grid-template-columns:1fr!important}.lineup-list{grid-template-columns:1fr}}
 `;
 document.head.appendChild(style);
 
@@ -2100,6 +2124,7 @@ renderSquad();
 updateVisitors();
 fetchDashboard();
 setInterval(updateVisitors,30000);
+setInterval(fetchDashboard,600000);
 document.addEventListener("keydown",e=>{
  if(e.key==="Escape")closeMatchModal();
  if((e.key==="Enter"||e.key===" ")&&document.activeElement?.classList.contains("clickable")){
