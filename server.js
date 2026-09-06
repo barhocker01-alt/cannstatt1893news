@@ -15,6 +15,12 @@ const VFB_RSS_URL =
   "https://www.vfb.de/templates/generated/1/raw/de.xml";
 
 /*
+ * KICKER RSS
+ */
+const KICKER_RSS_URL =
+  "https://www.kicker.de/news/fussball/bundesliga/startseite.rss";
+
+/*
  * CACHE
  */
 const CACHE_TIME = 6 * 60 * 60 * 1000;
@@ -135,11 +141,13 @@ function apiRequest(endpoint) {
           try {
             json = JSON.parse(body);
           } catch (error) {
+
             reject(
               new Error(
                 "football-data.org lieferte kein gültiges JSON"
               )
             );
+
             return;
           }
 
@@ -208,6 +216,7 @@ function formatDate(dateString) {
       minute: "2-digit"
     }
   );
+
 }
 
 
@@ -539,25 +548,12 @@ async function fetchVfbNews() {
       "VfB RSS Feed geladen."
     );
 
-    console.log(
-      "RSS Zeichen:",
-      xml.length
-    );
-
     const items = [];
 
-    /*
-     * Normale RSS <item>-Blöcke
-     */
     const rssItems =
       xml.match(
         /<item\b[\s\S]*?<\/item>/gi
       ) || [];
-
-    console.log(
-      "RSS Items gefunden:",
-      rssItems.length
-    );
 
     for (
       const item of rssItems
@@ -591,9 +587,6 @@ async function fetchVfbNews() {
           "pubDate"
         );
 
-      /*
-       * Manche Feeds benutzen dc:date
-       */
       if (!pubDate) {
 
         pubDate =
@@ -604,9 +597,6 @@ async function fetchVfbNews() {
 
       }
 
-      /*
-       * Manche Feeds benutzen date
-       */
       if (!pubDate) {
 
         pubDate =
@@ -617,19 +607,11 @@ async function fetchVfbNews() {
 
       }
 
-      /*
-       * Link sauber machen
-       */
       link =
         normalizeVfbUrl(
           link
         );
 
-      /*
-       * Falls kein normaler <link>
-       * vorhanden ist, versuchen wir
-       * guid
-       */
       if (!link) {
 
         link =
@@ -642,9 +624,6 @@ async function fetchVfbNews() {
 
       }
 
-      /*
-       * Nur echte VfB-News
-       */
       if (
         !title ||
         title.length < 5 ||
@@ -653,10 +632,6 @@ async function fetchVfbNews() {
         continue;
       }
 
-      /*
-       * Navigations-/Service-Seiten
-       * nicht als News anzeigen
-       */
       const blocked = [
         "News-Archiv",
         "VfB Magazine",
@@ -681,9 +656,6 @@ async function fetchVfbNews() {
         continue;
       }
 
-      /*
-       * Duplikate verhindern
-       */
       if (
         items.some(
           existing =>
@@ -713,16 +685,15 @@ async function fetchVfbNews() {
         date:
           pubDate
             ? formatDate(pubDate)
-            : ""
+            : "",
+
+        source:
+          "VFB NEWS"
 
       });
 
     }
 
-    /*
-     * Nach Datum sortieren,
-     * neueste zuerst.
-     */
     items.sort(
       (a, b) => {
 
@@ -741,24 +712,7 @@ async function fetchVfbNews() {
       }
     );
 
-    const result =
-      items.slice(0, 10);
-
-    console.log(
-      "VfB-News gefunden:",
-      result.length
-    );
-
-    if (result.length > 0) {
-
-      console.log(
-        "Erste VfB-News:",
-        result[0].title
-      );
-
-    }
-
-    return result;
+    return items.slice(0, 10);
 
   } catch (error) {
 
@@ -775,14 +729,212 @@ async function fetchVfbNews() {
 
 
 /* =========================================================
-   NEWS
+   KICKER NEWS
+========================================================= */
+
+async function fetchKickerNews() {
+
+  try {
+
+    const xml =
+      await httpsRequest(
+        KICKER_RSS_URL
+      );
+
+    const rssItems =
+      xml.match(
+        /<item\b[\s\S]*?<\/item>/gi
+      ) || [];
+
+    const keywords = [
+      "vfb",
+      "stuttgart",
+      "hoeneß",
+      "hoeness",
+      "undav",
+      "führich",
+      "fuehrich",
+      "karazor",
+      "demirovic",
+      "pejcinovic",
+      "leweling",
+      "el khannouss",
+      "prömel",
+      "promel",
+      "jeltsch",
+      "chabot",
+      "sauer"
+    ];
+
+    const out = [];
+
+    for (
+      const item of rssItems
+    ) {
+
+      const title =
+        cleanText(
+          getXmlValue(
+            item,
+            "title"
+          )
+        );
+
+      const description =
+        cleanText(
+          getXmlValue(
+            item,
+            "description"
+          )
+        );
+
+      let link =
+        normalizeVfbUrl(
+          getXmlValue(
+            item,
+            "link"
+          )
+        );
+
+      if (!link) {
+
+        link =
+          normalizeVfbUrl(
+            getXmlValue(
+              item,
+              "guid"
+            )
+          );
+
+      }
+
+      const pubDate =
+        getXmlValue(
+          item,
+          "pubDate"
+        ) ||
+        getXmlValue(
+          item,
+          "dc:date"
+        ) ||
+        getXmlValue(
+          item,
+          "date"
+        );
+
+      const haystack =
+        `${title} ${description}`.toLowerCase();
+
+      if (
+        !title ||
+        !link ||
+        !keywords.some(
+          k => haystack.includes(k)
+        )
+      ) {
+        continue;
+      }
+
+      if (
+        out.some(
+          x => x.url === link
+        )
+      ) {
+        continue;
+      }
+
+      out.push({
+
+        title,
+
+        url:
+          link,
+
+        link:
+          link,
+
+        description,
+
+        pubDate,
+
+        date:
+          pubDate
+            ? formatDate(pubDate)
+            : "",
+
+        source:
+          "KICKER"
+
+      });
+
+    }
+
+    out.sort(
+      (a, b) =>
+        new Date(
+          b.pubDate || 0
+        ) -
+        new Date(
+          a.pubDate || 0
+        )
+    );
+
+    return out.slice(
+      0,
+      8
+    );
+
+  } catch (error) {
+
+    console.error(
+      "KICKER RSS FEHLER:",
+      error.message
+    );
+
+    return [];
+
+  }
+
+}
+
+
+/* =========================================================
+   NEWS ZUSAMMENFÜHREN
 ========================================================= */
 
 async function getNews() {
 
   try {
 
-    return await fetchVfbNews();
+    const [
+      vfbNews,
+      kickerNews
+    ] =
+      await Promise.all([
+        fetchVfbNews(),
+        fetchKickerNews()
+      ]);
+
+    const merged =
+      [
+        ...vfbNews,
+        ...kickerNews
+      ];
+
+    merged.sort(
+      (a, b) =>
+        new Date(
+          b.pubDate || 0
+        ) -
+        new Date(
+          a.pubDate || 0
+        )
+    );
+
+    return merged.slice(
+      0,
+      12
+    );
 
   } catch (error) {
 
@@ -794,6 +946,803 @@ async function getNews() {
     return [];
 
   }
+
+}
+
+
+/* =========================================================
+   VFB KADER + SAISONSTATISTIKEN
+========================================================= */
+
+const VFB_SQUAD_FALLBACK = [
+
+  ["Tor","Fabian Bredlow"],
+  ["Tor","Marius Funk"],
+  ["Tor","Dennis Seimen"],
+  ["Tor","Stefan Drljaca"],
+
+  ["Abwehr","Ameen Al-Dakhil"],
+  ["Abwehr","Ramon Hendriks"],
+  ["Abwehr","Josha Vagnoman"],
+  ["Abwehr","Maximilian Mittelstädt"],
+  ["Abwehr","Luca Jaquez"],
+  ["Abwehr","Leonidas Stergiou"],
+  ["Abwehr","Lorenz Assignon"],
+  ["Abwehr","Dan-Axel Zagadou"],
+  ["Abwehr","Jeff Chabot"],
+  ["Abwehr","Finn Jeltsch"],
+
+  ["Mittelfeld","Angelo Stiller"],
+  ["Mittelfeld","Chris Führich"],
+  ["Mittelfeld","Bilal El Khannouss"],
+  ["Mittelfeld","Atakan Karazor"],
+  ["Mittelfeld","Grischa Prömel"],
+  ["Mittelfeld","Nikolas Nartey"],
+  ["Mittelfeld","Ertugrul Yigit"],
+  ["Mittelfeld","Jarzinho Malanga"],
+
+  ["Sturm","Tiago Tomás"],
+  ["Sturm","Ermedin Demirovic"],
+  ["Sturm","Dzenan Pejcinovic"],
+  ["Sturm","Jamie Leweling"],
+  ["Sturm","Jeremy Arevalo"],
+  ["Sturm","Deniz Undav"],
+  ["Sturm","Justin Diehl"],
+  ["Sturm","Leo Sauer"]
+
+];
+
+
+async function getVfbSquad() {
+
+  try {
+
+    const team =
+      await apiRequest(
+        `/teams/${VFB_TEAM_ID}`
+      );
+
+    const squad =
+      Array.isArray(team.squad)
+        ? team.squad
+        : [];
+
+    const base =
+      squad.length
+        ? squad
+        : VFB_SQUAD_FALLBACK.map(
+            ([position,name]) =>
+              ({
+                name,
+                position
+              })
+          );
+
+    return base.map(
+      p => ({
+
+        id:
+          p.id ?? null,
+
+        name:
+          p.name || "",
+
+        position:
+          p.position || "",
+
+        number:
+          p.shirtNumber ?? null,
+
+        photo:
+          p.photo ||
+          p.image ||
+          "",
+
+        appearances:
+          0,
+
+        minutes:
+          0,
+
+        goals:
+          0,
+
+        assists:
+          0
+
+      })
+    );
+
+  } catch (e) {
+
+    return VFB_SQUAD_FALLBACK.map(
+      ([position,name]) =>
+        ({
+
+          name,
+
+          position,
+
+          number:
+            null,
+
+          photo:
+            "",
+
+          appearances:
+            0,
+
+          minutes:
+            0,
+
+          goals:
+            0,
+
+          assists:
+            0
+
+        })
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   KADERSTATISTIKEN
+========================================================= */
+
+async function getVfbSquadStats(
+  matches,
+  squad
+) {
+
+  const byId =
+    new Map(
+      squad
+        .filter(
+          p => p.id != null
+        )
+        .map(
+          p => [
+            String(p.id),
+            p
+          ]
+        )
+    );
+
+  const byName =
+    new Map(
+      squad.map(
+        p => [
+          String(
+            p.name
+          ).toLowerCase(),
+          p
+        ]
+      )
+    );
+
+  const finished =
+    matches.filter(
+      m =>
+        [
+          "FINISHED",
+          "AWARDED"
+        ].includes(
+          String(
+            m.status || ""
+          ).toUpperCase()
+        ) &&
+        m.id
+    );
+
+  await Promise.all(
+    finished.map(
+      async m => {
+
+        try {
+
+          const d =
+            await getMatchDetails(
+              m.id
+            );
+
+          for (
+            const side of [
+              d.lineups?.home,
+              d.lineups?.away
+            ]
+          ) {
+
+            for (
+              const p of [
+                ...(side?.lineup || []),
+                ...(side?.bench || [])
+              ]
+            ) {
+
+              const player =
+                (
+                  p.id != null &&
+                  byId.get(
+                    String(p.id)
+                  )
+                ) ||
+                byName.get(
+                  String(
+                    p.name || ""
+                  ).toLowerCase()
+                );
+
+              if (
+                player &&
+                (side.lineup || []).some(
+                  x =>
+                    String(
+                      x.id ?? x.name
+                    ) ===
+                    String(
+                      p.id ?? p.name
+                    )
+                )
+              ) {
+
+                player.appearances += 1;
+
+              }
+
+            }
+
+          }
+
+          for (
+            const g of
+            d.goals || []
+          ) {
+
+            let p =
+              g.scorerId != null
+                ? byId.get(
+                    String(
+                      g.scorerId
+                    )
+                  )
+                : byName.get(
+                    String(
+                      g.scorer || ""
+                    ).toLowerCase()
+                  );
+
+            if (p) {
+              p.goals += 1;
+            }
+
+            p =
+              g.assistId != null
+                ? byId.get(
+                    String(
+                      g.assistId
+                    )
+                  )
+                : byName.get(
+                    String(
+                      g.assist || ""
+                    ).toLowerCase()
+                  );
+
+            if (p) {
+              p.assists += 1;
+            }
+
+          }
+
+          for (
+            const sub of
+            d.substitutions || []
+          ) {
+
+            const pIn =
+              sub.playerInId != null
+                ? byId.get(
+                    String(
+                      sub.playerInId
+                    )
+                  )
+                : byName.get(
+                    String(
+                      sub.playerIn || ""
+                    ).toLowerCase()
+                  );
+
+            if (pIn) {
+              pIn.appearances += 1;
+            }
+
+          }
+
+        } catch (e) {
+
+          console.warn(
+            "Kaderstatistik Spiel",
+            m.id,
+            e.message
+          );
+
+        }
+
+      }
+    )
+  );
+
+  return squad;
+
+}
+
+
+/* =========================================================
+   MATCHCENTER
+========================================================= */
+
+const MATCH_DETAIL_CACHE_TIME =
+  2 * 60 * 1000;
+
+const matchDetailCache =
+  new Map();
+
+
+function normalizeMatchEventMinute(
+  event
+) {
+
+  const minute =
+    event?.minute ??
+    event?.time?.elapsed ??
+    null;
+
+  const injury =
+    event?.injuryTime ??
+    event?.time?.extra ??
+    null;
+
+  if (
+    minute === null ||
+    minute === undefined
+  ) {
+    return "";
+  }
+
+  return injury
+    ? `${minute}+${injury}.`
+    : `${minute}.`;
+
+}
+
+
+function mapMatchDetails(
+  match
+) {
+
+  const home =
+    match?.homeTeam || {};
+
+  const away =
+    match?.awayTeam || {};
+
+  const goals =
+    (match?.goals || [])
+      .map(
+        goal => ({
+
+          minute:
+            goal.minute ??
+            null,
+
+          injuryTime:
+            goal.injuryTime ??
+            null,
+
+          minuteLabel:
+            normalizeMatchEventMinute(
+              goal
+            ),
+
+          type:
+            goal.type ||
+            "REGULAR",
+
+          teamId:
+            goal.team?.id ??
+            null,
+
+          team:
+            goal.team?.name ||
+            "",
+
+          scorerId:
+            goal.scorer?.id ??
+            null,
+
+          scorer:
+            goal.scorer?.name ||
+            "",
+
+          assistId:
+            goal.assist?.id ??
+            null,
+
+          assist:
+            goal.assist?.name ||
+            "",
+
+          scoreHome:
+            goal.score?.home ??
+            null,
+
+          scoreAway:
+            goal.score?.away ??
+            null
+
+        })
+      );
+
+  const bookings =
+    (match?.bookings || [])
+      .map(
+        card => ({
+
+          minute:
+            card.minute ??
+            null,
+
+          injuryTime:
+            card.injuryTime ??
+            null,
+
+          minuteLabel:
+            normalizeMatchEventMinute(
+              card
+            ),
+
+          teamId:
+            card.team?.id ??
+            null,
+
+          team:
+            card.team?.name ||
+            "",
+
+          playerId:
+            card.player?.id ??
+            null,
+
+          player:
+            card.player?.name ||
+            "",
+
+          card:
+            card.card ||
+            ""
+
+        })
+      );
+
+  const substitutions =
+    (match?.substitutions || [])
+      .map(
+        sub => ({
+
+          minute:
+            sub.minute ??
+            null,
+
+          injuryTime:
+            sub.injuryTime ??
+            null,
+
+          minuteLabel:
+            normalizeMatchEventMinute(
+              sub
+            ),
+
+          teamId:
+            sub.team?.id ??
+            null,
+
+          team:
+            sub.team?.name ||
+            "",
+
+          playerInId:
+            sub.playerIn?.id ??
+            null,
+
+          playerIn:
+            sub.playerIn?.name ||
+            "",
+
+          playerOutId:
+            sub.playerOut?.id ??
+            null,
+
+          playerOut:
+            sub.playerOut?.name ||
+            ""
+
+        })
+      );
+
+  function mapLineup(team) {
+
+    return {
+
+      formation:
+        team?.formation ||
+        null,
+
+      coach:
+        team?.coach?.name ||
+        null,
+
+      lineup:
+        (team?.lineup || [])
+          .map(
+            player => ({
+
+              id:
+                player.id ??
+                null,
+
+              name:
+                player.name ||
+                "",
+
+              position:
+                player.position ||
+                "",
+
+              shirtNumber:
+                player.shirtNumber ??
+                null
+
+            })
+          ),
+
+      bench:
+        (team?.bench || [])
+          .map(
+            player => ({
+
+              id:
+                player.id ??
+                null,
+
+              name:
+                player.name ||
+                "",
+
+              position:
+                player.position ||
+                "",
+
+              shirtNumber:
+                player.shirtNumber ??
+                null
+
+            })
+          ),
+
+      statistics:
+        team?.statistics ||
+        {}
+
+    };
+
+  }
+
+  const stats = {
+
+    home:
+      home.statistics ||
+      {},
+
+    away:
+      away.statistics ||
+      {}
+
+  };
+
+  return {
+
+    id:
+      match?.id ??
+      null,
+
+    utcDate:
+      match?.utcDate ||
+      null,
+
+    date:
+      formatDate(
+        match?.utcDate
+      ),
+
+    status:
+      match?.status ||
+      "",
+
+    minute:
+      match?.minute ??
+      null,
+
+    injuryTime:
+      match?.injuryTime ??
+      null,
+
+    venue:
+      match?.venue ||
+      "",
+
+    attendance:
+      match?.attendance ??
+      null,
+
+    matchday:
+      match?.matchday ??
+      null,
+
+    stage:
+      match?.stage ||
+      null,
+
+    competition:
+      match?.competition?.name ||
+      "",
+
+    competitionCode:
+      match?.competition?.code ||
+      "",
+
+    homeTeam: {
+
+      id:
+        home.id ??
+        null,
+
+      name:
+        home.name ||
+        "",
+
+      shortName:
+        home.shortName ||
+        home.name ||
+        "",
+
+      crest:
+        home.crest ||
+        "",
+
+      formation:
+        home.formation ||
+        null
+
+    },
+
+    awayTeam: {
+
+      id:
+        away.id ??
+        null,
+
+      name:
+        away.name ||
+        "",
+
+      shortName:
+        away.shortName ||
+        away.name ||
+        "",
+
+      crest:
+        away.crest ||
+        "",
+
+      formation:
+        away.formation ||
+        null
+
+    },
+
+    score:
+      match?.score ||
+      {},
+
+    goals,
+
+    bookings,
+
+    substitutions,
+
+    lineups: {
+
+      home:
+        mapLineup(home),
+
+      away:
+        mapLineup(away)
+
+    },
+
+    statistics:
+      stats,
+
+    referees:
+      match?.referees ||
+      []
+
+  };
+
+}
+
+
+async function getMatchDetails(
+  matchId
+) {
+
+  const id =
+    String(
+      matchId || ""
+    ).trim();
+
+  if (
+    !/^\d+$/.test(id)
+  ) {
+
+    throw new Error(
+      "Ungültige Spiel-ID"
+    );
+
+  }
+
+  const cached =
+    matchDetailCache.get(
+      id
+    );
+
+  if (
+    cached &&
+    Date.now() -
+      cached.time <
+      MATCH_DETAIL_CACHE_TIME
+  ) {
+
+    return cached.data;
+
+  }
+
+  const data =
+    await apiRequest(
+      `/matches/${id}`
+    );
+
+  const details =
+    mapMatchDetails(
+      data
+    );
+
+  matchDetailCache.set(
+    id,
+    {
+      time:
+        Date.now(),
+
+      data:
+        details
+    }
+  );
+
+  return details;
 
 }
 
@@ -819,17 +1768,22 @@ async function buildDashboard() {
   const [
     matches,
     table,
-    news
+    news,
+    squad
   ] =
     await Promise.all([
       getVfbMatches(),
       getBundesligaTable(),
-      getNews()
+      getNews(),
+      getVfbSquad()
     ]);
 
-  /*
-   * Bundesliga
-   */
+  const squadStats =
+    await getVfbSquadStats(
+      matches,
+      squad
+    );
+
   const bundesliga =
     matches.filter(
       match =>
@@ -837,9 +1791,6 @@ async function buildDashboard() {
         "Bundesliga"
     );
 
-  /*
-   * Champions League
-   */
   const championsLeague =
     matches.filter(
       match =>
@@ -849,9 +1800,6 @@ async function buildDashboard() {
           "Champions League"
     );
 
-  /*
-   * Nächstes Spiel
-   */
   const now =
     new Date();
 
@@ -882,32 +1830,24 @@ async function buildDashboard() {
     updatedAt:
       new Date().toISOString(),
 
-    news:
+    news,
 
-      news,
-
-    nextGame:
-
-      nextGame,
+    nextGame,
 
     fixtures:
-
       bundesliga,
 
-    championsLeague:
+    championsLeague,
 
-      championsLeague,
+    table,
 
-    table:
-
-      table,
+    squad:
+      squadStats,
 
     live:
-
       [],
 
     attribution:
-
       "Data provided by football-data.org"
 
   };
@@ -934,8 +1874,6 @@ async function buildDashboard() {
   return dashboard;
 
 }
-
-
 /* =========================================================
    DASHBOARD CACHE
 ========================================================= */
@@ -1001,6 +1939,9 @@ async function getDashboard() {
       table:
         [],
 
+      squad:
+        [],
+
       live:
         [],
 
@@ -1021,144 +1962,505 @@ async function getDashboard() {
    MATCHCENTER / SPIELDETAILS
 ========================================================= */
 
-const MATCH_DETAIL_CACHE_TIME = 2 * 60 * 1000;
-const matchDetailCache = new Map();
+const MATCH_DETAIL_CACHE_TIME =
+  2 * 60 * 1000;
 
-function normalizeMatchEventMinute(event) {
-  const minute = event?.minute ?? event?.time?.elapsed ?? null;
-  const injury = event?.injuryTime ?? event?.time?.extra ?? null;
-  if (minute === null || minute === undefined) return "";
-  return injury ? `${minute}+${injury}.` : `${minute}.`;
+const matchDetailCache =
+  new Map();
+
+
+function normalizeMatchEventMinute(
+  event
+) {
+
+  const minute =
+    event?.minute ??
+    event?.time?.elapsed ??
+    null;
+
+  const injury =
+    event?.injuryTime ??
+    event?.time?.extra ??
+    null;
+
+  if (
+    minute === null ||
+    minute === undefined
+  ) {
+    return "";
+  }
+
+  return injury
+    ? `${minute}+${injury}.`
+    : `${minute}.`;
+
 }
 
-function mapMatchDetails(match) {
-  const home = match?.homeTeam || {};
-  const away = match?.awayTeam || {};
 
-  const goals = (match?.goals || []).map(goal => ({
-    minute: goal.minute ?? null,
-    injuryTime: goal.injuryTime ?? null,
-    minuteLabel: normalizeMatchEventMinute(goal),
-    type: goal.type || "REGULAR",
-    teamId: goal.team?.id ?? null,
-    team: goal.team?.name || "",
-    scorerId: goal.scorer?.id ?? null,
-    scorer: goal.scorer?.name || "",
-    assistId: goal.assist?.id ?? null,
-    assist: goal.assist?.name || "",
-    scoreHome: goal.score?.home ?? null,
-    scoreAway: goal.score?.away ?? null
-  }));
+function mapMatchDetails(
+  match
+) {
 
-  const bookings = (match?.bookings || []).map(card => ({
-    minute: card.minute ?? null,
-    injuryTime: card.injuryTime ?? null,
-    minuteLabel: normalizeMatchEventMinute(card),
-    teamId: card.team?.id ?? null,
-    team: card.team?.name || "",
-    playerId: card.player?.id ?? null,
-    player: card.player?.name || "",
-    card: card.card || ""
-  }));
+  const home =
+    match?.homeTeam || {};
 
-  const substitutions = (match?.substitutions || []).map(sub => ({
-    minute: sub.minute ?? null,
-    injuryTime: sub.injuryTime ?? null,
-    minuteLabel: normalizeMatchEventMinute(sub),
-    teamId: sub.team?.id ?? null,
-    team: sub.team?.name || "",
-    playerInId: sub.playerIn?.id ?? null,
-    playerIn: sub.playerIn?.name || "",
-    playerOutId: sub.playerOut?.id ?? null,
-    playerOut: sub.playerOut?.name || ""
-  }));
+  const away =
+    match?.awayTeam || {};
+
+
+  /* =========================
+     TORE
+  ========================= */
+
+  const goals =
+    (match?.goals || [])
+      .map(
+        goal => ({
+
+          minute:
+            goal.minute ??
+            null,
+
+          injuryTime:
+            goal.injuryTime ??
+            null,
+
+          minuteLabel:
+            normalizeMatchEventMinute(
+              goal
+            ),
+
+          type:
+            goal.type ||
+            "REGULAR",
+
+          teamId:
+            goal.team?.id ??
+            null,
+
+          team:
+            goal.team?.name ||
+            "",
+
+          scorerId:
+            goal.scorer?.id ??
+            null,
+
+          scorer:
+            goal.scorer?.name ||
+            "",
+
+          assistId:
+            goal.assist?.id ??
+            null,
+
+          assist:
+            goal.assist?.name ||
+            "",
+
+          scoreHome:
+            goal.score?.home ??
+            null,
+
+          scoreAway:
+            goal.score?.away ??
+            null
+
+        })
+      );
+
+
+  /* =========================
+     KARTEN
+  ========================= */
+
+  const bookings =
+    (match?.bookings || [])
+      .map(
+        card => ({
+
+          minute:
+            card.minute ??
+            null,
+
+          injuryTime:
+            card.injuryTime ??
+            null,
+
+          minuteLabel:
+            normalizeMatchEventMinute(
+              card
+            ),
+
+          teamId:
+            card.team?.id ??
+            null,
+
+          team:
+            card.team?.name ||
+            "",
+
+          playerId:
+            card.player?.id ??
+            null,
+
+          player:
+            card.player?.name ||
+            "",
+
+          card:
+            card.card ||
+            ""
+
+        })
+      );
+
+
+  /* =========================
+     WECHSEL
+  ========================= */
+
+  const substitutions =
+    (match?.substitutions || [])
+      .map(
+        sub => ({
+
+          minute:
+            sub.minute ??
+            null,
+
+          injuryTime:
+            sub.injuryTime ??
+            null,
+
+          minuteLabel:
+            normalizeMatchEventMinute(
+              sub
+            ),
+
+          teamId:
+            sub.team?.id ??
+            null,
+
+          team:
+            sub.team?.name ||
+            "",
+
+          playerInId:
+            sub.playerIn?.id ??
+            null,
+
+          playerIn:
+            sub.playerIn?.name ||
+            "",
+
+          playerOutId:
+            sub.playerOut?.id ??
+            null,
+
+          playerOut:
+            sub.playerOut?.name ||
+            ""
+
+        })
+      );
+
+
+  /* =========================
+     AUFSTELLUNG
+  ========================= */
 
   function mapLineup(team) {
+
     return {
-      formation: team?.formation || null,
-      coach: team?.coach?.name || null,
-      lineup: (team?.lineup || []).map(player => ({
-        id: player.id ?? null,
-        name: player.name || "",
-        position: player.position || "",
-        shirtNumber: player.shirtNumber ?? null
-      })),
-      bench: (team?.bench || []).map(player => ({
-        id: player.id ?? null,
-        name: player.name || "",
-        position: player.position || "",
-        shirtNumber: player.shirtNumber ?? null
-      })),
-      statistics: team?.statistics || {}
+
+      formation:
+        team?.formation ||
+        null,
+
+      coach:
+        team?.coach?.name ||
+        null,
+
+      lineup:
+        (team?.lineup || [])
+          .map(
+            player => ({
+
+              id:
+                player.id ??
+                null,
+
+              name:
+                player.name ||
+                "",
+
+              position:
+                player.position ||
+                "",
+
+              shirtNumber:
+                player.shirtNumber ??
+                null
+
+            })
+          ),
+
+      bench:
+        (team?.bench || [])
+          .map(
+            player => ({
+
+              id:
+                player.id ??
+                null,
+
+              name:
+                player.name ||
+                "",
+
+              position:
+                player.position ||
+                "",
+
+              shirtNumber:
+                player.shirtNumber ??
+                null
+
+            })
+          ),
+
+      statistics:
+        team?.statistics ||
+        {}
+
     };
+
   }
+
+
+  /* =========================
+     STATISTIKEN
+  ========================= */
 
   const stats = {
-    home: home.statistics || {},
-    away: away.statistics || {}
+
+    home:
+      home.statistics ||
+      {},
+
+    away:
+      away.statistics ||
+      {}
+
   };
+
 
   return {
-    id: match?.id ?? null,
-    utcDate: match?.utcDate || null,
-    date: formatDate(match?.utcDate),
-    status: match?.status || "",
-    minute: match?.minute ?? null,
-    injuryTime: match?.injuryTime ?? null,
-    venue: match?.venue || "",
-    attendance: match?.attendance ?? null,
-    matchday: match?.matchday ?? null,
-    stage: match?.stage || null,
-    competition: match?.competition?.name || "",
-    competitionCode: match?.competition?.code || "",
+
+    id:
+      match?.id ??
+      null,
+
+    utcDate:
+      match?.utcDate ||
+      null,
+
+    date:
+      formatDate(
+        match?.utcDate
+      ),
+
+    status:
+      match?.status ||
+      "",
+
+    minute:
+      match?.minute ??
+      null,
+
+    injuryTime:
+      match?.injuryTime ??
+      null,
+
+    venue:
+      match?.venue ||
+      "",
+
+    attendance:
+      match?.attendance ??
+      null,
+
+    matchday:
+      match?.matchday ??
+      null,
+
+    stage:
+      match?.stage ||
+      null,
+
+    competition:
+      match?.competition?.name ||
+      "",
+
+    competitionCode:
+      match?.competition?.code ||
+      "",
+
+
     homeTeam: {
-      id: home.id ?? null,
-      name: home.name || "",
-      shortName: home.shortName || home.name || "",
-      crest: home.crest || "",
-      formation: home.formation || null
+
+      id:
+        home.id ??
+        null,
+
+      name:
+        home.name ||
+        "",
+
+      shortName:
+        home.shortName ||
+        home.name ||
+        "",
+
+      crest:
+        home.crest ||
+        "",
+
+      formation:
+        home.formation ||
+        null
+
     },
+
+
     awayTeam: {
-      id: away.id ?? null,
-      name: away.name || "",
-      shortName: away.shortName || away.name || "",
-      crest: away.crest || "",
-      formation: away.formation || null
+
+      id:
+        away.id ??
+        null,
+
+      name:
+        away.name ||
+        "",
+
+      shortName:
+        away.shortName ||
+        away.name ||
+        "",
+
+      crest:
+        away.crest ||
+        "",
+
+      formation:
+        away.formation ||
+        null
+
     },
-    score: match?.score || {},
+
+
+    score:
+      match?.score ||
+      {},
+
     goals,
+
     bookings,
+
     substitutions,
+
+
     lineups: {
-      home: mapLineup(home),
-      away: mapLineup(away)
+
+      home:
+        mapLineup(home),
+
+      away:
+        mapLineup(away)
+
     },
-    statistics: stats,
-    referees: match?.referees || []
+
+
+    statistics:
+      stats,
+
+    referees:
+      match?.referees ||
+      []
+
   };
+
 }
 
-async function getMatchDetails(matchId) {
-  const id = String(matchId || "").trim();
 
-  if (!/^\\d+$/.test(id)) {
-    throw new Error("Ungültige Spiel-ID");
+async function getMatchDetails(
+  matchId
+) {
+
+  const id =
+    String(
+      matchId || ""
+    ).trim();
+
+
+  if (
+    !/^\d+$/.test(id)
+  ) {
+
+    throw new Error(
+      "Ungültige Spiel-ID"
+    );
+
   }
 
-  const cached = matchDetailCache.get(id);
-  if (cached && Date.now() - cached.time < MATCH_DETAIL_CACHE_TIME) {
+
+  const cached =
+    matchDetailCache.get(
+      id
+    );
+
+
+  if (
+    cached &&
+    Date.now() -
+      cached.time <
+      MATCH_DETAIL_CACHE_TIME
+  ) {
+
     return cached.data;
+
   }
 
-  const data = await apiRequest(`/matches/${id}`);
-  const details = mapMatchDetails(data);
 
-  matchDetailCache.set(id, {
-    time: Date.now(),
-    data: details
-  });
+  const data =
+    await apiRequest(
+      `/matches/${id}`
+    );
+
+
+  const details =
+    mapMatchDetails(
+      data
+    );
+
+
+  matchDetailCache.set(
+    id,
+    {
+
+      time:
+        Date.now(),
+
+      data:
+        details
+
+    }
+  );
+
 
   return details;
+
 }
 
 
@@ -1174,13 +2476,16 @@ function sendJSON(
   res.writeHead(
     200,
     {
+
       "Content-Type":
         "application/json; charset=utf-8",
 
       "Cache-Control":
         "no-store"
+
     }
   );
+
 
   res.end(
     JSON.stringify(data)
@@ -1204,10 +2509,12 @@ function serveFile(
       filename
     );
 
+
   console.log(
     "Datei angefordert:",
     filePath
   );
+
 
   if (
     !fs.existsSync(
@@ -1220,13 +2527,17 @@ function serveFile(
       filePath
     );
 
+
     res.writeHead(
       404,
       {
+
         "Content-Type":
           "text/plain; charset=utf-8"
+
       }
     );
+
 
     res.end(
       "Nicht gefunden"
@@ -1236,10 +2547,12 @@ function serveFile(
 
   }
 
+
   const ext =
     path.extname(
       filePath
     );
+
 
   const types = {
 
@@ -1272,14 +2585,18 @@ function serveFile(
 
   };
 
+
   res.writeHead(
     200,
     {
+
       "Content-Type":
         types[ext] ||
         "application/octet-stream"
+
     }
   );
+
 
   fs.createReadStream(
     filePath
@@ -1307,6 +2624,7 @@ const server =
             `http://${req.headers.host}`
           ).pathname;
 
+
         console.log(
           "REQUEST:",
           pathname
@@ -1317,20 +2635,36 @@ const server =
            MATCHCENTER API
         ========================================= */
 
-        const matchPath = pathname.match(/^\/api\/match\/(\d+)$/);
+        const matchPath =
+          pathname.match(
+            /^\/api\/match\/(\d+)$/
+          );
+
 
         if (matchPath) {
 
-          const data = await getMatchDetails(matchPath[1]);
+          const data =
+            await getMatchDetails(
+              matchPath[1]
+            );
+
 
           sendJSON(
             res,
             {
-              success: true,
-              match: data,
-              attribution: "Data provided by football-data.org"
+
+              success:
+                true,
+
+              match:
+                data,
+
+              attribution:
+                "Data provided by football-data.org"
+
             }
           );
+
 
           return;
 
@@ -1349,10 +2683,12 @@ const server =
           const data =
             await getDashboard();
 
+
           sendJSON(
             res,
             data
           );
+
 
           return;
 
@@ -1381,6 +2717,9 @@ const server =
               rssConfigured:
                 !!VFB_RSS_URL,
 
+              kickerConfigured:
+                !!KICKER_RSS_URL,
+
               cwd:
                 process.cwd(),
 
@@ -1397,6 +2736,7 @@ const server =
 
             }
           );
+
 
           return;
 
@@ -1417,6 +2757,7 @@ const server =
             res,
             "index.html"
           );
+
 
           return;
 
@@ -1440,6 +2781,7 @@ const server =
                 ""
               );
 
+
           if (
             safePath &&
             !safePath.includes(
@@ -1453,6 +2795,7 @@ const server =
                 safePath
               );
 
+
             if (
               fs.existsSync(
                 fullPath
@@ -1464,6 +2807,7 @@ const server =
                   fullPath
                 );
 
+
               if (
                 stats.isFile()
               ) {
@@ -1473,6 +2817,7 @@ const server =
                   safePath
                 );
 
+
                 return;
 
               }
@@ -1481,13 +2826,16 @@ const server =
 
           }
 
-          /*
-           * Fallback auf index.html
-           */
+
+          /* =====================================
+             FALLBACK AUF INDEX.HTML
+          ===================================== */
+
           serveFile(
             res,
             "index.html"
           );
+
 
           return;
 
@@ -1501,10 +2849,13 @@ const server =
         res.writeHead(
           404,
           {
+
             "Content-Type":
               "text/plain; charset=utf-8"
+
           }
         );
+
 
         res.end(
           "Nicht gefunden"
@@ -1518,13 +2869,17 @@ const server =
           error
         );
 
+
         res.writeHead(
           500,
           {
+
             "Content-Type":
               "application/json; charset=utf-8"
+
           }
         );
+
 
         res.end(
           JSON.stringify({
@@ -1554,24 +2909,35 @@ server.listen(
       "======================================"
     );
 
+
     console.log(
       `Canstatt 1893 News läuft auf Port ${PORT}`
     );
+
 
     console.log(
       "Football-Data Token vorhanden:",
       !!TOKEN
     );
 
+
     console.log(
       "VfB RSS Feed:",
       VFB_RSS_URL
     );
 
+
+    console.log(
+      "Kicker RSS Feed:",
+      KICKER_RSS_URL
+    );
+
+
     console.log(
       "Server-Verzeichnis:",
       __dirname
     );
+
 
     console.log(
       "index.html vorhanden:",
@@ -1583,9 +2949,9 @@ server.listen(
       )
     );
 
+
     console.log(
       "======================================"
-      
     );
 
   }
