@@ -59,8 +59,7 @@ function httpsRequest(url, headers = {}) {
         headers: {
           "User-Agent":
             "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120 Safari/537.36",
-          "Accept-Language":
-            "de-DE,de;q=0.9,en;q=0.8",
+          "Accept-Language": "de-DE,de;q=0.9,en;q=0.8",
           ...headers
         }
       },
@@ -123,10 +122,8 @@ async function apiRequest(endpoint) {
       {
         headers: {
           "X-Auth-Token": TOKEN,
-          "User-Agent":
-            "Cannstatt1893News/1.0",
-          "Accept":
-            "application/json"
+          "User-Agent": "Cannstatt1893News/1.0",
+          "Accept": "application/json"
         }
       },
       response => {
@@ -219,22 +216,10 @@ function stripHtml(text = "") {
 
   return decodeHtml(
     String(text)
-      .replace(
-        /<script[\s\S]*?<\/script>/gi,
-        " "
-      )
-      .replace(
-        /<style[\s\S]*?<\/style>/gi,
-        " "
-      )
-      .replace(
-        /<[^>]+>/g,
-        " "
-      )
-      .replace(
-        /\s+/g,
-        " "
-      )
+      .replace(/<script[\s\S]*?<\/script>/gi, " ")
+      .replace(/<style[\s\S]*?<\/style>/gi, " ")
+      .replace(/<[^>]+>/g, " ")
+      .replace(/\s+/g, " ")
       .trim()
   );
 }
@@ -316,22 +301,10 @@ function slugify(name = "") {
 
   return String(name)
     .normalize("NFD")
-    .replace(
-      /[\u0300-\u036f]/g,
-      ""
-    )
-    .replace(
-      /ß/g,
-      "ss"
-    )
-    .replace(
-      /[^a-zA-Z0-9]+/g,
-      "-"
-    )
-    .replace(
-      /^-+|-+$/g,
-      ""
-    )
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/ß/g, "ss")
+    .replace(/[^a-zA-Z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
     .toLowerCase();
 }
 
@@ -341,136 +314,51 @@ function slugify(name = "") {
 ========================================================= */
 
 function parseRss(xml, sourceName) {
-
   const items = [];
 
   const blocks = [
-    ...(xml.match(
-      /<item\b[\s\S]*?<\/item>/gi
-    ) || []),
-
-    ...(xml.match(
-      /<entry\b[\s\S]*?<\/entry>/gi
-    ) || [])
+    ...(xml.match(/<item\b[\s\S]*?<\/item>/gi) || []),
+    ...(xml.match(/<entry\b[\s\S]*?<\/entry>/gi) || [])
   ];
 
   for (const block of blocks) {
-
-    const title =
-      xmlTag(
-        block,
-        "title"
-      );
-
+    const title = xmlTag(block, "title");
     const description =
-      xmlTag(
-        block,
-        "description"
-      ) ||
-      xmlTag(
-        block,
-        "summary"
-      ) ||
-      xmlTag(
-        block,
-        "content"
-      );
+      xmlTag(block, "description") ||
+      xmlTag(block, "summary") ||
+      xmlTag(block, "content");
 
     let link =
-      xmlTag(
-        block,
-        "link"
-      ) ||
-      xmlTag(
-        block,
-        "guid"
-      );
+      xmlTag(block, "link") ||
+      xmlTag(block, "guid");
 
     if (!link) {
-
       const hrefMatch =
-        block.match(
-          /<link\b[^>]*href=["']([^"']+)["']/i
-        );
-
-      if (hrefMatch) {
-        link =
-          decodeHtml(
-            hrefMatch[1]
-          );
-      }
+        block.match(/<link\b[^>]*href=["']([^"']+)["']/i);
+      if (hrefMatch) link = decodeHtml(hrefMatch[1]);
     }
 
     const pubDate =
-      xmlTag(
-        block,
-        "pubDate"
-      ) ||
-      xmlTag(
-        block,
-        "published"
-      ) ||
-      xmlTag(
-        block,
-        "updated"
-      ) ||
-      xmlTag(
-        block,
-        "dc:date"
-      );
+      xmlTag(block, "pubDate") ||
+      xmlTag(block, "published") ||
+      xmlTag(block, "updated") ||
+      xmlTag(block, "dc:date");
 
     const image =
-      xmlAttr(
-        block,
-        "media:content",
-        "url"
-      ) ||
-      xmlAttr(
-        block,
-        "media:thumbnail",
-        "url"
-      ) ||
-      xmlAttr(
-        block,
-        "enclosure",
-        "url"
-      );
+      xmlAttr(block, "media:content", "url") ||
+      xmlAttr(block, "media:thumbnail", "url") ||
+      xmlAttr(block, "enclosure", "url");
 
-    if (!title) {
-      continue;
-    }
+    if (!title) continue;
 
     items.push({
-
       title,
-
-      summary:
-        stripHtml(
-          description
-        ).slice(
-          0,
-          320
-        ),
-
-      url:
-        link ||
-        "https://www.vfb.de/",
-
-      date:
-        pubDate
-          ? formatDate(pubDate)
-          : "",
-
-      rawDate:
-        pubDate ||
-        "",
-
-      source:
-        sourceName,
-
-      image:
-        image ||
-        ""
+      summary: stripHtml(description).slice(0, 320),
+      url: link || "https://www.vfb.de/",
+      date: pubDate ? formatDate(pubDate) : "",
+      rawDate: pubDate || "",
+      source: sourceName,
+      image: image || ""
     });
   }
 
@@ -479,83 +367,35 @@ function parseRss(xml, sourceName) {
 
 
 async function getVfBNews() {
-
   try {
-
-    const xml =
-      await httpsRequest(
-        VFB_RSS_URL
-      );
-
-    const rssNews =
-      parseRss(
-        xml,
-        "VfB Stuttgart"
-      );
-
-    if (
-      rssNews.length
-    ) {
-      return rssNews;
-    }
-
+    const xml = await httpsRequest(VFB_RSS_URL);
+    const rssNews = parseRss(xml, "VfB Stuttgart");
+    if (rssNews.length) return rssNews;
   } catch (error) {
-
-    console.warn(
-      "VfB RSS nicht verfügbar:",
-      error.message
-    );
+    console.warn("VfB RSS nicht verfügbar:", error.message);
   }
 
-
-  /*
-   * Der VfB RSS-Endpunkt kann
-   * gelegentlich ein anderes Format liefern.
-   * Deshalb zweite Live-Quelle.
-   */
-
   try {
-
-    const html =
-      await httpsRequest(
-        "https://www.vfb.de/de/1893/aktuell/news-archiv/"
-      );
+    const html = await httpsRequest(
+      "https://www.vfb.de/de/1893/aktuell/news-archiv/"
+    );
 
     const results = [];
-
-    const seen =
-      new Set();
+    const seen = new Set();
 
     const re =
       /<a\b[^>]*href=["']([^"']*\/de\/vfb\/aktuell\/neues\/[^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi;
 
     let m;
 
-    while (
-      (m = re.exec(html)) !== null
-    ) {
+    while ((m = re.exec(html)) !== null) {
 
-      let url =
-        decodeHtml(
-          m[1]
-        );
+      let url = decodeHtml(m[1]);
+      const title = stripHtml(m[2]);
 
-      const title =
-        stripHtml(
-          m[2]
-        );
+      if (!title || title.length < 15) continue;
 
-      if (
-        !title ||
-        title.length < 15
-      ) {
-        continue;
-      }
-
-      if (
-        !url.startsWith("http")
-      ) {
-
+      if (!url.startsWith("http")) {
         url =
           new URL(
             url,
@@ -563,48 +403,24 @@ async function getVfBNews() {
           ).toString();
       }
 
-      if (
-        seen.has(url)
-      ) {
-        continue;
-      }
+      if (seen.has(url)) continue;
 
       seen.add(url);
 
       results.push({
-
         title,
-
-        summary:
-          title,
-
+        summary: title,
         url,
-
-        date:
-          "",
-
-        rawDate:
-          "",
-
-        source:
-          "VfB Stuttgart",
-
-        image:
-          ""
+        date: "",
+        rawDate: "",
+        source: "VfB Stuttgart",
+        image: ""
       });
 
-      if (
-        results.length >= 10
-      ) {
-        break;
-      }
+      if (results.length >= 10) break;
     }
 
-    if (
-      results.length
-    ) {
-      return results;
-    }
+    if (results.length) return results;
 
   } catch (error) {
 
@@ -613,13 +429,6 @@ async function getVfBNews() {
       error.message
     );
   }
-
-
-  /*
-   * Letzter Fallback.
-   * Dadurch bleibt die News-Sektion
-   * niemals komplett leer.
-   */
 
   return [
 
@@ -631,7 +440,7 @@ async function getVfBNews() {
         "Der VfB Stuttgart feiert nach dem Heimspiel gegen den 1. FC Köln einen starken Bundesliga-Abend.",
 
       url:
-        "https://www.vfb.de/",
+        "https://www.vfb.de/de/vfb/profis/saison/bundesliga/2627/2-vfb-stuttgart----1--fc-koeln/",
 
       date:
         "04.09.2026",
@@ -654,7 +463,7 @@ async function getVfBNews() {
         "Der Stürmer wechselt auf Leihbasis zum portugiesischen Erstligisten Estrela Amadora.",
 
       url:
-        "https://www.vfb.de/",
+        "https://www.vfb.de/de/vfb/aktuell/neues/profis/2627/jeremy-arevalo-wird-verliehen/",
 
       date:
         "04.09.2026",
@@ -677,7 +486,7 @@ async function getVfBNews() {
         "Der VfB trifft am 25. September 2026 in einem Testspiel auf den 1. FC Heidenheim.",
 
       url:
-        "https://www.vfb.de/",
+        "https://www.vfb.de/de/vfb/aktuell/neues/profis/2627/testspiel-ansetzung-vfb-gegen-heidenheim-in-weinstadt/",
 
       date:
         "04.09.2026",
@@ -706,9 +515,7 @@ async function getKickerNews() {
       );
 
     const results = [];
-
-    const seen =
-      new Set();
+    const seen = new Set();
 
     const anchorRegex =
       /<a\b[^>]*href=["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi;
@@ -722,12 +529,12 @@ async function getKickerNews() {
 
       let url =
         decodeHtml(
-          match[1]
+          match[1] || ""
         );
 
       const title =
         stripHtml(
-          match[2]
+          match[2] || ""
         );
 
       if (
@@ -738,8 +545,16 @@ async function getKickerNews() {
       }
 
       if (
-        !/\/artikel\/|\/video\//i.test(
-          url
+        !url.includes(
+          "kicker.de/"
+        ) ||
+        !(
+          url.includes(
+            "/artikel/"
+          ) ||
+          url.includes(
+            "/video/"
+          )
         )
       ) {
         continue;
@@ -766,10 +581,21 @@ async function getKickerNews() {
 
       results.push({
 
-        title,
+        title:
+          title
+            .replace(
+              /\s+/g,
+              " "
+            )
+            .trim(),
 
         summary:
-          title,
+          title
+            .replace(
+              /\s+/g,
+              " "
+            )
+            .trim(),
 
         url,
 
@@ -798,7 +624,7 @@ async function getKickerNews() {
   } catch (error) {
 
     console.warn(
-      "Kicker nicht verfügbar:",
+      "Kicker News nicht verfügbar:",
       error.message
     );
 
@@ -807,31 +633,43 @@ async function getKickerNews() {
 }
 
 
-function mergeNews(
-  vfbNews,
-  kickerNews
-) {
+async function getNews() {
+
+  const [
+    vfb,
+    kicker
+  ] =
+    await Promise.all([
+      getVfBNews(),
+      getKickerNews()
+    ]);
 
   const all = [
-    ...(vfbNews || []),
-    ...(kickerNews || [])
+    ...vfb,
+    ...kicker
   ];
 
-  const seen =
-    new Set();
+  all.sort(
+    (a, b) =>
+      new Date(
+        b.rawDate || 0
+      ) -
+      new Date(
+        a.rawDate || 0
+      )
+  );
 
-  const result = [];
+  const unique = [];
+  const seen = new Set();
 
   for (
     const item of all
   ) {
 
     const key =
-      item.url ||
-      item.title;
+      `${item.title}|${item.url}`;
 
     if (
-      !key ||
       seen.has(key)
     ) {
       continue;
@@ -839,27 +677,10 @@ function mergeNews(
 
     seen.add(key);
 
-    result.push(item);
+    unique.push(item);
   }
 
-  result.sort(
-    (a, b) => {
-
-      const da =
-        new Date(
-          a.rawDate || 0
-        ).getTime();
-
-      const db =
-        new Date(
-          b.rawDate || 0
-        ).getTime();
-
-      return db - da;
-    }
-  );
-
-  return result.slice(
+  return unique.slice(
     0,
     20
   );
@@ -867,273 +688,58 @@ function mergeNews(
 
 
 /* =========================================================
-   AKTUELLER VFB KADER 2026/27
+   OFFIZIELLE VFB SPIELERBILDER
 ========================================================= */
+
+const OFFICIAL_ROSTER_URL =
+  "https://www.vfb.de/de/1893/profis/kader/saisonen/2026-2027/kader/";
+
+const OFFICIAL_STATS_URL =
+  "https://www.vfb.de/de/1893/profis/kader/saisonen/2026-2027/statistik/";
+
 
 const CURRENT_SQUAD = [
 
-  {
-    name:
-      "Fabian Bredlow",
-    position:
-      "Torwart",
-    number:
-      1
-  },
+  ["Fabian Bredlow", "Tor", 1],
+  ["Marius Funk", "Tor", 33],
+  ["Dennis Seimen", "Tor", 41],
+  ["Stefan Drljaca", "Tor", 46],
 
-  {
-    name:
-      "Marius Funk",
-    position:
-      "Torwart",
-    number:
-      13
-  },
+  ["Ameen Al-Dakhil", "Abwehr", 2],
+  ["Ramon Hendriks", "Abwehr", 3],
+  ["Josha Vagnoman", "Abwehr", 4],
+  ["Maximilian Mittelstädt", "Abwehr", 7],
+  ["Luca Jaquez", "Abwehr", 14],
+  ["Leonidas Stergiou", "Abwehr", 20],
+  ["Lorenz Assignon", "Abwehr", 22],
+  ["Dan-Axel Zagadou", "Abwehr", 23],
+  ["Jeff Chabot", "Abwehr", 24],
+  ["Finn Jeltsch", "Abwehr", 29],
 
-  {
-    name:
-      "Dennis Seimen",
-    position:
-      "Torwart",
-    number:
-      33
-  },
+  ["Angelo Stiller", "Mittelfeld", 6],
+  ["Chris Führich", "Mittelfeld", 10],
+  ["Bilal El Khannouss", "Mittelfeld", 11],
+  ["Atakan Karazor", "Mittelfeld", 16],
+  ["Grischa Prömel", "Mittelfeld", 21],
+  ["Nikolas Nartey", "Mittelfeld", 28],
+  ["Ertugrul Yigit", "Mittelfeld", 39],
+  ["Jarzinho Malanga", "Mittelfeld", 43],
 
-  {
-    name:
-      "Stefan Drljaca",
-    position:
-      "Torwart",
-    number:
-      46
-  },
+  ["Tiago Tomás", "Sturm", 8],
+  ["Ermedin Demirovic", "Sturm", 9],
+  ["Dzenan Pejcinovic", "Sturm", 17],
+  ["Jamie Leweling", "Sturm", 18],
+  ["Deniz Undav", "Sturm", 26],
+  ["Justin Diehl", "Sturm", 31],
+  ["Leo Sauer", "Sturm", 44]
 
-  {
-    name:
-      "Ameen Al-Dakhil",
-    position:
-      "Abwehr",
-    number:
-      2
-  },
-
-  {
-    name:
-      "Ramon Hendriks",
-    position:
-      "Abwehr",
-    number:
-      3
-  },
-
-  {
-    name:
-      "Josha Vagnoman",
-    position:
-      "Abwehr",
-    number:
-      4
-  },
-
-  {
-    name:
-      "Maximilian Mittelstädt",
-    position:
-      "Abwehr",
-    number:
-      7
-  },
-
-  {
-    name:
-      "Luca Jaquez",
-    position:
-      "Abwehr",
-    number:
-      14
-  },
-
-  {
-    name:
-      "Leonidas Stergiou",
-    position:
-      "Abwehr",
-    number:
-      20
-  },
-
-  {
-    name:
-      "Lorenz Assignon",
-    position:
-      "Abwehr",
-    number:
-      22
-  },
-
-  {
-    name:
-      "Dan-Axel Zagadou",
-    position:
-      "Abwehr",
-    number:
-      23
-  },
-
-  {
-    name:
-      "Jeff Chabot",
-    position:
-      "Abwehr",
-    number:
-      24
-  },
-
-  {
-    name:
-      "Finn Jeltsch",
-    position:
-      "Abwehr",
-    number:
-      29
-  },
-
-  {
-    name:
-      "Angelo Stiller",
-    position:
-      "Mittelfeld",
-    number:
-      6
-  },
-
-  {
-    name:
-      "Chris Führich",
-    position:
-      "Mittelfeld",
-    number:
-      10
-  },
-
-  {
-    name:
-      "Bilal El Khannouss",
-    position:
-      "Mittelfeld",
-    number:
-      11
-  },
-
-  {
-    name:
-      "Atakan Karazor",
-    position:
-      "Mittelfeld",
-    number:
-      16
-  },
-
-  {
-    name:
-      "Grischa Prömel",
-    position:
-      "Mittelfeld",
-    number:
-      21
-  },
-
-  {
-    name:
-      "Nikolas Nartey",
-    position:
-      "Mittelfeld",
-    number:
-      28
-  },
-
-  {
-    name:
-      "Ertugrul Yigit",
-    position:
-      "Mittelfeld",
-    number:
-      null
-  },
-
-  {
-    name:
-      "Jarzinho Malanga",
-    position:
-      "Mittelfeld",
-    number:
-      null
-  },
-
-  {
-    name:
-      "Tiago Tomás",
-    position:
-      "Angriff",
-    number:
-      8
-  },
-
-  {
-    name:
-      "Ermedin Demirovic",
-    position:
-      "Angriff",
-    number:
-      9
-  },
-
-  {
-    name:
-      "Dzenan Pejcinovic",
-    position:
-      "Angriff",
-    number:
-      17
-  },
-
-  {
-    name:
-      "Jamie Leweling",
-    position:
-      "Angriff",
-    number:
-      18
-  },
-
-  {
-    name:
-      "Deniz Undav",
-    position:
-      "Angriff",
-    number:
-      26
-  },
-
-  {
-    name:
-      "Justin Diehl",
-    position:
-      "Angriff",
-    number:
-      27
-  },
-
-  {
-    name:
-      "Leo Sauer",
-    position:
-      "Angriff",
-    number:
-      44
-  }
-
-];
+].map(
+  ([name, position, number]) => ({
+    name,
+    position,
+    number
+  })
+);
 
 
 /* =========================================================
@@ -1231,29 +837,28 @@ const FALLBACK_PHOTOS = {
 };
 
 
-/* =========================================================
-   OFFIZIELLE VFB SPIELERBILDER LIVE LADEN
-========================================================= */
-
 async function getOfficialPlayerPhotos() {
+
+  const photos =
+    new Map();
 
   try {
 
     const html =
       await httpsRequest(
-        "https://www.vfb.de/de/1893/profis/kader/saisonen/2026-2027/kader/"
+        OFFICIAL_ROSTER_URL
       );
 
-    const images = [];
+    const matches = [
+      ...html.matchAll(
+        /(?:src|data-src)=["']([^"']*proxy=sportdb%2Fspieler%2F[^"']+)["']/gi
+      )
+    ];
 
-    const regex =
-      /(?:src|data-src)=["']([^"']*proxy=sportdb%2Fspieler%2F[^"']+)["']/gi;
+    const urls = [];
 
-    let match;
-
-    while (
-      (match =
-        regex.exec(html)) !== null
+    for (
+      const match of matches
     ) {
 
       let url =
@@ -1273,45 +878,51 @@ async function getOfficialPlayerPhotos() {
       }
 
       if (
-        !images.includes(url)
+        !urls.includes(url)
       ) {
-        images.push(url);
+        urls.push(url);
       }
     }
 
-    const result = {};
-
     CURRENT_SQUAD.forEach(
-      (player, index) => {
+      (
+        player,
+        index
+      ) => {
 
-        result[player.name] =
-          images[index] ||
-          FALLBACK_PHOTOS[player.name] ||
-          "";
+        if (
+          urls[index]
+        ) {
+
+          photos.set(
+            player.name,
+            urls[index]
+          );
+        }
       }
     );
 
-    return result;
+    console.log(
+      `VfB-Spielerbilder gefunden: ${photos.size}/${CURRENT_SQUAD.length}`
+    );
 
   } catch (error) {
 
     console.warn(
-      "Offizielle VfB Spielerbilder nicht verfügbar:",
+      "VfB-Spielerbilder konnten nicht geladen werden:",
       error.message
     );
-
-    return {
-      ...FALLBACK_PHOTOS
-    };
   }
+
+  return photos;
 }
 
 
 /* =========================================================
-   OFFIZIELLE VFB STATISTIKEN 2026/27
+   OFFIZIELLE STATISTIKEN
 ========================================================= */
 
-const VERIFIED_STATS = {
+const FALLBACK_STATS = {
 
   "Fabian Bredlow":
     {
@@ -1319,6 +930,38 @@ const VERIFIED_STATS = {
       goals: 0,
       assists: 0,
       minutes: 180
+    },
+
+  "Marius Funk":
+    {
+      appearances: 0,
+      goals: 0,
+      assists: 0,
+      minutes: 0
+    },
+
+  "Dennis Seimen":
+    {
+      appearances: 0,
+      goals: 0,
+      assists: 0,
+      minutes: 0
+    },
+
+  "Stefan Drljaca":
+    {
+      appearances: 0,
+      goals: 0,
+      assists: 0,
+      minutes: 0
+    },
+
+  "Ameen Al-Dakhil":
+    {
+      appearances: 0,
+      goals: 0,
+      assists: 0,
+      minutes: 0
     },
 
   "Ramon Hendriks":
@@ -1345,12 +988,36 @@ const VERIFIED_STATS = {
       minutes: 168
     },
 
+  "Luca Jaquez":
+    {
+      appearances: 0,
+      goals: 0,
+      assists: 0,
+      minutes: 0
+    },
+
   "Leonidas Stergiou":
     {
       appearances: 1,
       goals: 0,
       assists: 0,
       minutes: 16
+    },
+
+  "Lorenz Assignon":
+    {
+      appearances: 0,
+      goals: 0,
+      assists: 0,
+      minutes: 0
+    },
+
+  "Dan-Axel Zagadou":
+    {
+      appearances: 0,
+      goals: 0,
+      assists: 0,
+      minutes: 0
     },
 
   "Jeff Chabot":
@@ -1393,12 +1060,44 @@ const VERIFIED_STATS = {
       minutes: 94
     },
 
+  "Atakan Karazor":
+    {
+      appearances: 0,
+      goals: 0,
+      assists: 0,
+      minutes: 0
+    },
+
   "Grischa Prömel":
     {
       appearances: 2,
       goals: 1,
       assists: 0,
       minutes: 180
+    },
+
+  "Nikolas Nartey":
+    {
+      appearances: 0,
+      goals: 0,
+      assists: 0,
+      minutes: 0
+    },
+
+  "Ertugrul Yigit":
+    {
+      appearances: 0,
+      goals: 0,
+      assists: 0,
+      minutes: 0
+    },
+
+  "Jarzinho Malanga":
+    {
+      appearances: 0,
+      goals: 0,
+      assists: 0,
+      minutes: 0
     },
 
   "Tiago Tomás":
@@ -1441,6 +1140,14 @@ const VERIFIED_STATS = {
       minutes: 144
     },
 
+  "Justin Diehl":
+    {
+      appearances: 0,
+      goals: 0,
+      assists: 0,
+      minutes: 0
+    },
+
   "Leo Sauer":
     {
       appearances: 1,
@@ -1448,175 +1155,157 @@ const VERIFIED_STATS = {
       assists: 0,
       minutes: 12
     }
-
 };
 
 
-/* =========================================================
-   STATISTIKEN VOM OFFIZIELLEN VFB PORTAL
-========================================================= */
+function cleanStatValue(value) {
+
+  const v =
+    String(
+      value || ""
+    ).trim();
+
+  if (
+    !v ||
+    v === "-"
+  ) {
+    return 0;
+  }
+
+  const n =
+    Number(
+      v.replace(
+        /[^\d]/g,
+        ""
+      )
+    );
+
+  return Number.isFinite(n)
+    ? n
+    : 0;
+}
+
 
 async function getOfficialSquadStats() {
 
-  const stats = {};
+  const stats =
+    new Map();
 
-  CURRENT_SQUAD.forEach(
-    player => {
+  for (
+    const player of CURRENT_SQUAD
+  ) {
 
-      stats[player.name] =
-        VERIFIED_STATS[player.name] ||
-        {
-          appearances: 0,
-          goals: 0,
-          assists: 0,
-          minutes: 0
-        };
-    }
-  );
+    const fallback =
+      FALLBACK_STATS[
+        player.name
+      ] || {
+
+        appearances:
+          0,
+
+        goals:
+          0,
+
+        assists:
+          0,
+
+        minutes:
+          0
+      };
+
+    stats.set(
+      player.name,
+      {
+        ...fallback
+      }
+    );
+  }
 
   try {
 
     const html =
       await httpsRequest(
-        "https://www.vfb.de/de/1893/profis/kader/saisonen/2026-2027/statistik/?data=&mobile="
+        OFFICIAL_STATS_URL
       );
 
-    /*
-     * Versuche echte Tabellenzeilen zu lesen.
-     * Falls das Markup geändert wurde, bleiben
-     * die verifizierten Werte erhalten.
-     */
-
-    const rowRegex =
-      /<tr\b[^>]*>([\s\S]*?)<\/tr>/gi;
-
-    let row;
-
-    while (
-      (row =
-        rowRegex.exec(html)) !== null
+    for (
+      const player of CURRENT_SQUAD
     ) {
 
-      const rowText =
-        stripHtml(
-          row[1]
+      const escaped =
+        player.name.replace(
+          /[.*+?^${}()|[\]\\]/g,
+          "\\$&"
         );
 
-      const player =
-        CURRENT_SQUAD.find(
-          p =>
-            rowText.includes(
-              p.name
-            )
+      const rowMatch =
+        html.match(
+          new RegExp(
+            `<tr[^>]*>[\\s\\S]*?${escaped}[\\s\\S]*?<\\/tr>`,
+            "i"
+          )
         );
-
-      if (!player) {
-        continue;
-      }
-
-      const numbers =
-        rowText.match(
-          /\b\d+\b/g
-        ) || [];
 
       if (
-        numbers.length < 2
+        !rowMatch
       ) {
         continue;
       }
 
-      /*
-       * Die offizielle Tabelle kann sich ändern.
-       * Nur Werte übernehmen, wenn die Zeile
-       * plausibel genug aussieht.
-       */
-
-      const current =
-        stats[player.name];
-
-      const possibleApps =
-        Number(numbers[0]);
-
-      const possibleGoals =
-        Number(numbers[1]);
+      const cells = [
+        ...rowMatch[0].matchAll(
+          /<td[^>]*>([\s\S]*?)<\/td>/gi
+        )
+      ].map(
+        m =>
+          stripHtml(
+            m[1]
+          )
+      );
 
       if (
-        Number.isFinite(
-          possibleApps
-        ) &&
-        possibleApps >= 0 &&
-        possibleApps <= 50
+        cells.length < 4
       ) {
-
-        current.appearances =
-          possibleApps;
+        continue;
       }
 
-      if (
-        Number.isFinite(
-          possibleGoals
-        ) &&
-        possibleGoals >= 0 &&
-        possibleGoals <= 50
-      ) {
+      const appearances =
+        cleanStatValue(
+          cells[1]
+        );
 
-        current.goals =
-          possibleGoals;
-      }
+      const goals =
+        cleanStatValue(
+          cells[2]
+        );
 
-      /*
-       * Assists und Minuten werden nur
-       * aus klaren Zahlenfeldern übernommen,
-       * ansonsten bleiben die verifizierten Werte.
-       */
+      const assists =
+        cleanStatValue(
+          cells[3]
+        );
 
-      if (
-        numbers.length >= 3
-      ) {
+      const minutes =
+        cleanStatValue(
+          cells[
+            cells.length - 1
+          ]
+        );
 
-        const possibleAssists =
-          Number(numbers[2]);
-
-        if (
-          Number.isFinite(
-            possibleAssists
-          ) &&
-          possibleAssists >= 0 &&
-          possibleAssists <= 50
-        ) {
-
-          current.assists =
-            possibleAssists;
+      stats.set(
+        player.name,
+        {
+          appearances,
+          goals,
+          assists,
+          minutes
         }
-      }
-
-      if (
-        numbers.length >= 4
-      ) {
-
-        const possibleMinutes =
-          Number(
-            numbers[numbers.length - 1]
-          );
-
-        if (
-          Number.isFinite(
-            possibleMinutes
-          ) &&
-          possibleMinutes >= 0 &&
-          possibleMinutes <= 5000
-        ) {
-
-          current.minutes =
-            possibleMinutes;
-        }
-      }
+      );
     }
 
   } catch (error) {
 
     console.warn(
-      "VfB Statistik-Seite nicht verfügbar:",
+      "Offizielle VfB-Statistik nicht erreichbar – verwende letzte verifizierte Werte:",
       error.message
     );
   }
@@ -1632,24 +1321,33 @@ async function getOfficialSquadStats() {
 async function buildSquad() {
 
   const [
-    photos,
-    stats
+    officialStats,
+    officialPhotos
   ] =
     await Promise.all([
-      getOfficialPlayerPhotos(),
-      getOfficialSquadStats()
+      getOfficialSquadStats(),
+      getOfficialPlayerPhotos()
     ]);
 
   return CURRENT_SQUAD.map(
     player => {
 
-      const playerStats =
-        stats[player.name] ||
-        {
-          appearances: 0,
-          goals: 0,
-          assists: 0,
-          minutes: 0
+      const stat =
+        officialStats.get(
+          player.name
+        ) || {
+
+          appearances:
+            0,
+
+          goals:
+            0,
+
+          assists:
+            0,
+
+          minutes:
+            0
         };
 
       return {
@@ -1663,33 +1361,29 @@ async function buildSquad() {
         number:
           player.number,
 
-        shirtNumber:
-          player.number,
-
         appearances:
-          Number(
-            playerStats.appearances || 0
-          ),
+          stat.appearances,
 
         goals:
-          Number(
-            playerStats.goals || 0
-          ),
+          stat.goals,
 
         assists:
-          Number(
-            playerStats.assists || 0
-          ),
+          stat.assists,
 
         minutes:
-          Number(
-            playerStats.minutes || 0
-          ),
+          stat.minutes,
 
         photo:
-          photos[player.name] ||
-          FALLBACK_PHOTOS[player.name] ||
-          ""
+          officialPhotos.get(
+            player.name
+          ) ||
+          FALLBACK_PHOTOS[
+            player.name
+          ] ||
+          "",
+
+        shirtNumber:
+          player.number
       };
     }
   );
@@ -1697,44 +1391,104 @@ async function buildSquad() {
 
 
 /* =========================================================
-   MATCH HELFER
+   SPIELE
 ========================================================= */
 
-function normalizeTeamName(team = {}) {
+const CLUB_LOGOS = {
+
+  "VfB Stuttgart":
+    "https://www.vfb.de/?proxy=img%2Flogo.svg",
+
+  "FC Bayern München":
+    "https://commons.wikimedia.org/wiki/Special:FilePath/FC_Bayern_M%C3%BCnchen_logo_(2017).svg",
+
+  "1. FC Köln":
+    "https://commons.wikimedia.org/wiki/Special:FilePath/1._FC_K%C3%B6ln_Logo_2014.svg",
+
+  "TSG Hoffenheim":
+    "https://commons.wikimedia.org/wiki/Special:FilePath/TSG_1899_Hoffenheim.svg",
+
+  "Borussia Dortmund":
+    "https://commons.wikimedia.org/wiki/Special:FilePath/Borussia_Dortmund_logo.svg",
+
+  "SC Paderborn 07":
+    "https://commons.wikimedia.org/wiki/Special:FilePath/SC_Paderborn_07_Logo.svg",
+
+  "Hamburger SV":
+    "https://commons.wikimedia.org/wiki/Special:FilePath/Hamburger_SV_logo.svg",
+
+  "Borussia Mönchengladbach":
+    "https://commons.wikimedia.org/wiki/Special:FilePath/Borussia_M%C3%B6nchengladbach_logo.svg",
+
+  "Bayer 04 Leverkusen":
+    "https://commons.wikimedia.org/wiki/Special:FilePath/Bayer_04_Leverkusen_logo.svg",
+
+  "SV Werder Bremen":
+    "https://commons.wikimedia.org/wiki/Special:FilePath/SV-Werder-Bremen-Logo.svg",
+
+  "FC Schalke 04":
+    "https://commons.wikimedia.org/wiki/Special:FilePath/FC_Schalke_04_Logo.svg",
+
+  "Eintracht Frankfurt":
+    "https://commons.wikimedia.org/wiki/Special:FilePath/Eintracht_Frankfurt_Logo.svg",
+
+  "SV Elversberg":
+    "https://commons.wikimedia.org/wiki/Special:FilePath/SV_Elversberg_Logo.svg",
+
+  "1. FC Union Berlin":
+    "https://commons.wikimedia.org/wiki/Special:FilePath/1._FC_Union_Berlin_logo.svg",
+
+  "SC Freiburg":
+    "https://commons.wikimedia.org/wiki/Special:FilePath/SC_Freiburg_logo.svg",
+
+  "FC Augsburg":
+    "https://commons.wikimedia.org/wiki/Special:FilePath/FC_Augsburg_logo.svg",
+
+  "RB Leipzig":
+    "https://commons.wikimedia.org/wiki/Special:FilePath/RB_Leipzig_2014_logo.svg",
+
+  "1. FSV Mainz 05":
+    "https://commons.wikimedia.org/wiki/Special:FilePath/1._FSV_Mainz_05_Logo.svg",
+
+  "Viking FK":
+    "https://commons.wikimedia.org/wiki/Special:FilePath/Viking_FK_logo.svg",
+
+  "Viking Stavanger":
+    "https://commons.wikimedia.org/wiki/Special:FilePath/Viking_FK_logo.svg",
+
+  "ŠK Slovan Bratislava":
+    "https://commons.wikimedia.org/wiki/Special:FilePath/Slovan_Bratislava_logo.svg",
+
+  "Atlético Madrid":
+    "https://commons.wikimedia.org/wiki/Special:FilePath/Atletico_Madrid_2017_logo.svg",
+
+  "Galatasaray":
+    "https://commons.wikimedia.org/wiki/Special:FilePath/Galatasaray_Sports_Club_Logo.svg",
+
+  "Inter Mailand":
+    "https://commons.wikimedia.org/wiki/Special:FilePath/Inter_Milan_2021_logo.svg",
+
+  "LOSC Lille":
+    "https://commons.wikimedia.org/wiki/Special:FilePath/LOSC_Lille_logo.svg",
+
+  "Club Brugge":
+    "https://commons.wikimedia.org/wiki/Special:FilePath/Club_Brugge_KV_logo.svg",
+
+  "PSV Eindhoven":
+    "https://commons.wikimedia.org/wiki/Special:FilePath/PSV_Eindhoven.svg"
+};
+
+
+function crestForTeam(
+  name,
+  provided = ""
+) {
 
   return (
-    team.name ||
-    team.shortName ||
-    team.tla ||
-    "Unbekannt"
+    provided ||
+    CLUB_LOGOS[name] ||
+    ""
   );
-}
-
-
-function normalizeScore(score = {}) {
-
-  if (
-    score.fullTime
-  ) {
-
-    return {
-
-      home:
-        score.fullTime.home,
-
-      away:
-        score.fullTime.away
-    };
-  }
-
-  return {
-
-    home:
-      score.home,
-
-    away:
-      score.away
-  };
 }
 
 
@@ -1749,25 +1503,64 @@ function mapMatch(match) {
     {};
 
   const score =
-    normalizeScore(
-      match.score || {}
-    );
-
-  const date =
-    match.utcDate ||
-    match.date ||
-    "";
-
-  const status =
-    match.status ||
-    "";
+    match.score ||
+    {};
 
   return {
 
     id:
       match.id,
 
+    utcDate:
+      match.utcDate,
+
+    rawDate:
+      match.utcDate,
+
+    date:
+      formatDate(
+        match.utcDate
+      ),
+
+    home:
+      home.name ||
+      "",
+
+    away:
+      away.name ||
+      "",
+
+    homeLogo:
+      crestForTeam(
+        home.name || "",
+        home.crest || ""
+      ),
+
+    awayLogo:
+      crestForTeam(
+        away.name || "",
+        away.crest || ""
+      ),
+
+    homeGoals:
+      score.fullTime?.home ??
+      score.halfTime?.home ??
+      null,
+
+    awayGoals:
+      score.fullTime?.away ??
+      score.halfTime?.away ??
+      null,
+
+    status:
+      match.status ||
+      "",
+
     competition:
+      match.competition?.name ||
+      "",
+
+    league:
       match.competition?.name ||
       "",
 
@@ -1775,163 +1568,649 @@ function mapMatch(match) {
       match.competition?.code ||
       "",
 
-    date,
-
-    dateFormatted:
-      date
-        ? new Date(date)
-            .toLocaleDateString(
-              "de-DE",
-              {
-                day: "2-digit",
-                month: "2-digit",
-                year: "numeric"
-              }
-            )
-        : "",
-
-    time:
-      date
-        ? new Date(date)
-            .toLocaleTimeString(
-              "de-DE",
-              {
-                hour: "2-digit",
-                minute: "2-digit"
-              }
-            )
-        : "",
-
-    status,
-
-    homeTeam:
-      normalizeTeamName(home),
-
-    awayTeam:
-      normalizeTeamName(away),
-
-    homeCrest:
-      home.crest ||
-      "",
-
-    awayCrest:
-      away.crest ||
-      "",
-
-    score,
+    matchday:
+      match.matchday ??
+      null,
 
     venue:
       match.venue ||
-      "",
-
-    matchday:
-      match.matchday ||
-      null
+      ""
   };
 }
 
 
-/* =========================================================
-   SPIELE VOM FOOTBALL-DATA
-========================================================= */
+function mapFallbackMatch(match) {
 
-async function getTeamMatches() {
+  return {
 
-  const data =
-    await apiRequest(
-      `/teams/${VFB_TEAM_ID}/matches?status=FINISHED,SCHEDULED&limit=50`
-    );
+    id:
+      match.id,
 
-  return (
-    data.matches ||
-    []
-  );
+    utcDate:
+      match.rawDate,
+
+    rawDate:
+      match.rawDate,
+
+    date:
+      formatDate(
+        match.rawDate
+      ),
+
+    home:
+      match.home,
+
+    away:
+      match.away,
+
+    homeLogo:
+      crestForTeam(
+        match.home
+      ),
+
+    awayLogo:
+      crestForTeam(
+        match.away
+      ),
+
+    homeGoals:
+      match.homeGoals ??
+      null,
+
+    awayGoals:
+      match.awayGoals ??
+      null,
+
+    status:
+      match.status,
+
+    competition:
+      match.competition,
+
+    league:
+      match.competition,
+
+    competitionCode:
+      match.competitionCode,
+
+    matchday:
+      match.matchday,
+
+    venue:
+      match.venue ||
+      ""
+  };
 }
 
 
-function sortMatches(
-  matches
-) {
+const FALLBACK_MATCHES = [
 
-  return [...matches].sort(
-    (a, b) =>
-      new Date(
-        a.utcDate ||
-        a.date ||
-        0
-      ) -
-      new Date(
-        b.utcDate ||
-        b.date ||
-        0
-      )
-  );
-}
+  {
+    id:
+      72513166,
+
+    rawDate:
+      "2026-08-28T20:30:00+02:00",
+
+    home:
+      "FC Bayern München",
+
+    away:
+      "VfB Stuttgart",
+
+    homeGoals:
+      5,
+
+    awayGoals:
+      1,
+
+    status:
+      "FINISHED",
+
+    competition:
+      "Bundesliga",
+
+    competitionCode:
+      "BL1",
+
+    matchday:
+      1,
+
+    venue:
+      "Allianz Arena"
+  },
+
+  {
+    id:
+      72513167,
+
+    rawDate:
+      "2026-09-04T20:30:00+02:00",
+
+    home:
+      "VfB Stuttgart",
+
+    away:
+      "1. FC Köln",
+
+    homeGoals:
+      4,
+
+    awayGoals:
+      1,
+
+    status:
+      "FINISHED",
+
+    competition:
+      "Bundesliga",
+
+    competitionCode:
+      "BL1",
+
+    matchday:
+      2,
+
+    venue:
+      "MHPArena"
+  },
+
+  {
+    id:
+      72513188,
+
+    rawDate:
+      "2026-09-12T15:30:00+02:00",
+
+    home:
+      "TSG Hoffenheim",
+
+    away:
+      "VfB Stuttgart",
+
+    homeGoals:
+      null,
+
+    awayGoals:
+      null,
+
+    status:
+      "SCHEDULED",
+
+    competition:
+      "Bundesliga",
+
+    competitionCode:
+      "BL1",
+
+    matchday:
+      3,
+
+    venue:
+      "SNP Arena"
+  },
+
+  {
+    id:
+      72513190,
+
+    rawDate:
+      "2026-09-19T18:30:00+02:00",
+
+    home:
+      "VfB Stuttgart",
+
+    away:
+      "Borussia Dortmund",
+
+    homeGoals:
+      null,
+
+    awayGoals:
+      null,
+
+    status:
+      "SCHEDULED",
+
+    competition:
+      "Bundesliga",
+
+    competitionCode:
+      "BL1",
+
+    matchday:
+      4,
+
+    venue:
+      "MHPArena"
+  },
+
+  {
+    id:
+      72513200,
+
+    rawDate:
+      "2026-10-10T15:30:00+02:00",
+
+    home:
+      "SC Paderborn 07",
+
+    away:
+      "VfB Stuttgart",
+
+    homeGoals:
+      null,
+
+    awayGoals:
+      null,
+
+    status:
+      "SCHEDULED",
+
+    competition:
+      "Bundesliga",
+
+    competitionCode:
+      "BL1",
+
+    matchday:
+      5,
+
+    venue:
+      "Home Deluxe Arena"
+  },
+
+  {
+    id:
+      72513201,
+
+    rawDate:
+      "2026-10-17T15:30:00+02:00",
+
+    home:
+      "Hamburger SV",
+
+    away:
+      "VfB Stuttgart",
+
+    homeGoals:
+      null,
+
+    awayGoals:
+      null,
+
+    status:
+      "SCHEDULED",
+
+    competition:
+      "Bundesliga",
+
+    competitionCode:
+      "BL1",
+
+    matchday:
+      6,
+
+    venue:
+      "Volksparkstadion"
+  },
+
+  {
+    id:
+      72513202,
+
+    rawDate:
+      "2026-10-24T15:30:00+02:00",
+
+    home:
+      "VfB Stuttgart",
+
+    away:
+      "Borussia Mönchengladbach",
+
+    homeGoals:
+      null,
+
+    awayGoals:
+      null,
+
+    status:
+      "SCHEDULED",
+
+    competition:
+      "Bundesliga",
+
+    competitionCode:
+      "BL1",
+
+    matchday:
+      7,
+
+    venue:
+      "MHPArena"
+  },
+
+  {
+    id:
+      74165882,
+
+    rawDate:
+      "2026-09-09T18:45:00+02:00",
+
+    home:
+      "VfB Stuttgart",
+
+    away:
+      "Viking Stavanger",
+
+    homeGoals:
+      null,
+
+    awayGoals:
+      null,
+
+    status:
+      "SCHEDULED",
+
+    competition:
+      "UEFA Champions League",
+
+    competitionCode:
+      "CL",
+
+    matchday:
+      1,
+
+    venue:
+      "MHPArena"
+  },
+
+  {
+    id:
+      74165891,
+
+    rawDate:
+      "2026-10-14T21:00:00+02:00",
+
+    home:
+      "ŠK Slovan Bratislava",
+
+    away:
+      "VfB Stuttgart",
+
+    homeGoals:
+      null,
+
+    awayGoals:
+      null,
+
+    status:
+      "SCHEDULED",
+
+    competition:
+      "UEFA Champions League",
+
+    competitionCode:
+      "CL",
+
+    matchday:
+      2,
+
+    venue:
+      "Tehelné pole"
+  },
+
+  {
+    id:
+      74165910,
+
+    rawDate:
+      "2026-10-20T21:00:00+02:00",
+
+    home:
+      "VfB Stuttgart",
+
+    away:
+      "Atlético Madrid",
+
+    homeGoals:
+      null,
+
+    awayGoals:
+      null,
+
+    status:
+      "SCHEDULED",
+
+    competition:
+      "UEFA Champions League",
+
+    competitionCode:
+      "CL",
+
+    matchday:
+      3,
+
+    venue:
+      "MHPArena"
+  },
+
+  {
+    id:
+      74165920,
+
+    rawDate:
+      "2026-11-03T18:45:00+01:00",
+
+    home:
+      "Galatasaray",
+
+    away:
+      "VfB Stuttgart",
+
+    homeGoals:
+      null,
+
+    awayGoals:
+      null,
+
+    status:
+      "SCHEDULED",
+
+    competition:
+      "UEFA Champions League",
+
+    competitionCode:
+      "CL",
+
+    matchday:
+      4,
+
+    venue:
+      "RAMS Park"
+  },
+
+  {
+    id:
+      74165930,
+
+    rawDate:
+      "2026-11-25T21:00:00+01:00",
+
+    home:
+      "Inter Mailand",
+
+    away:
+      "VfB Stuttgart",
+
+    homeGoals:
+      null,
+
+    awayGoals:
+      null,
+
+    status:
+      "SCHEDULED",
+
+    competition:
+      "UEFA Champions League",
+
+    competitionCode:
+      "CL",
+
+    matchday:
+      5,
+
+    venue:
+      "San Siro"
+  },
+
+  {
+    id:
+      74165940,
+
+    rawDate:
+      "2026-12-09T21:00:00+01:00",
+
+    home:
+      "VfB Stuttgart",
+
+    away:
+      "LOSC Lille",
+
+    homeGoals:
+      null,
+
+    awayGoals:
+      null,
+
+    status:
+      "SCHEDULED",
+
+    competition:
+      "UEFA Champions League",
+
+    competitionCode:
+      "CL",
+
+    matchday:
+      6,
+
+    venue:
+      "MHPArena"
+  },
+
+  {
+    id:
+      74165950,
+
+    rawDate:
+      "2027-01-19T21:00:00+01:00",
+
+    home:
+      "VfB Stuttgart",
+
+    away:
+      "Club Brugge",
+
+    homeGoals:
+      null,
+
+    awayGoals:
+      null,
+
+    status:
+      "SCHEDULED",
+
+    competition:
+      "UEFA Champions League",
+
+    competitionCode:
+      "CL",
+
+    matchday:
+      7,
+
+    venue:
+      "MHPArena"
+  },
+
+  {
+    id:
+      74165960,
+
+    rawDate:
+      "2027-01-27T21:00:00+01:00",
+
+    home:
+      "PSV Eindhoven",
+
+    away:
+      "VfB Stuttgart",
+
+    homeGoals:
+      null,
+
+    awayGoals:
+      null,
+
+    status:
+      "SCHEDULED",
+
+    competition:
+      "UEFA Champions League",
+
+    competitionCode:
+      "CL",
+
+    matchday:
+      8,
+
+    venue:
+      "Philips Stadion"
+  }
+
+].map(
+  mapFallbackMatch
+);
 
 
-function getNextMatch(
-  matches
-) {
+async function getMatches() {
 
-  const now =
-    Date.now();
+  try {
 
-  const upcoming =
-    matches
-      .filter(
-        match =>
-          new Date(
-            match.utcDate ||
-            match.date ||
-            0
-          ).getTime() >= now
-      )
-      .sort(
-        (a, b) =>
-          new Date(
-            a.utcDate ||
-            a.date ||
-            0
-          ) -
-          new Date(
-            b.utcDate ||
-            b.date ||
-            0
-          )
+    const data =
+      await apiRequest(
+        `/teams/${VFB_TEAM_ID}/matches?season=2026&status=FINISHED,SCHEDULED,IN_PLAY,PAUSED,POSTPONED`
       );
 
-  return (
-    upcoming[0] ||
-    null
-  );
-}
+    const liveMatches =
+      (
+        data.matches ||
+        []
+      ).map(
+        mapMatch
+      );
 
+    return liveMatches.length
+      ? liveMatches
+      : FALLBACK_MATCHES;
 
-function getRecentMatches(
-  matches
-) {
+  } catch (error) {
 
-  return matches
-    .filter(
-      match =>
-        match.status ===
-          "FINISHED"
-    )
-    .sort(
-      (a, b) =>
-        new Date(
-          b.utcDate ||
-          b.date ||
-          0
-        ) -
-        new Date(
-          a.utcDate ||
-          a.date ||
-          0
-        )
+    console.warn(
+      "Spiele nicht verfügbar:",
+      error.message
     );
+
+    return FALLBACK_MATCHES;
+  }
 }
 
+
+/* =========================================================
+   NÄCHSTES SPIEL FALLBACK
+========================================================= */
 
 function fallbackNextGame() {
 
@@ -1940,155 +2219,46 @@ function fallbackNextGame() {
     id:
       null,
 
-    competition:
-      "Bundesliga",
+    rawDate:
+      "2026-09-09T18:45:00+02:00",
 
     date:
-      "2026-09-19T18:30:00+02:00",
+      "09.09.2026",
 
-    dateFormatted:
-      "19.09.2026",
+    home:
+      "VfB Stuttgart",
 
-    time:
-      "18:30",
+    away:
+      "Viking Stavanger",
+
+    homeLogo:
+      crestForTeam(
+        "VfB Stuttgart"
+      ),
+
+    awayLogo:
+      crestForTeam(
+        "Viking Stavanger"
+      ),
+
+    competition:
+      "UEFA Champions League",
+
+    league:
+      "Champions League",
 
     status:
       "SCHEDULED",
 
-    homeTeam:
-      "VfB Stuttgart",
+    homeGoals:
+      null,
 
-    awayTeam:
-      "Borussia Dortmund",
-
-    homeCrest:
-      "",
-
-    awayCrest:
-      "",
-
-    score:
-      {
-        home:
-          null,
-        away:
-          null
-      },
+    awayGoals:
+      null,
 
     venue:
-      "MHPArena",
-
-    matchday:
-      null
+      "MHPArena"
   };
-}
-
-
-/* =========================================================
-   NEXT MATCH
-========================================================= */
-
-async function buildNextMatch() {
-
-  try {
-
-    const matches =
-      await getTeamMatches();
-
-    const next =
-      getNextMatch(
-        matches
-      );
-
-    if (
-      next
-    ) {
-      return mapMatch(
-        next
-      );
-    }
-
-  } catch (error) {
-
-    console.warn(
-      "Next Match nicht verfügbar:",
-      error.message
-    );
-  }
-
-  return fallbackNextGame();
-}
-
-
-/* =========================================================
-   FIXTURES / RESULTS
-========================================================= */
-
-async function buildFixtures() {
-
-  try {
-
-    const matches =
-      await getTeamMatches();
-
-    const sorted =
-      sortMatches(
-        matches
-      );
-
-    const upcoming =
-      sorted
-        .filter(
-          match =>
-            match.status !==
-              "FINISHED"
-        )
-        .slice(
-          0,
-          10
-        )
-        .map(
-          mapMatch
-        );
-
-    const results =
-      getRecentMatches(
-        matches
-      )
-        .slice(
-          0,
-          10
-        )
-        .map(
-          mapMatch
-        );
-
-    return {
-
-      fixtures:
-        upcoming,
-
-      results
-
-    };
-
-  } catch (error) {
-
-    console.warn(
-      "Fixtures nicht verfügbar:",
-      error.message
-    );
-
-    return {
-
-      fixtures:
-        [],
-
-      results:
-        []
-
-    };
-  }
 }
 
 
@@ -2096,324 +2266,95 @@ async function buildFixtures() {
    TABELLE
 ========================================================= */
 
-function calculateTableFromMatches(
-  matches
-) {
-
-  const teams =
-    new Map();
-
-  function ensure(
-    team
-  ) {
-
-    const name =
-      normalizeTeamName(
-        team
-      );
-
-    if (
-      !teams.has(name)
-    ) {
-
-      teams.set(
-        name,
-        {
-          team:
-            name,
-
-          playedGames:
-            0,
-
-          won:
-            0,
-
-          draw:
-            0,
-
-          lost:
-            0,
-
-          goalsFor:
-            0,
-
-          goalsAgainst:
-            0,
-
-          goalDifference:
-            0,
-
-          points:
-            0
-        }
-      );
-    }
-
-    return teams.get(
-      name
-    );
-  }
-
-  for (
-    const match of matches
-  ) {
-
-    if (
-      match.status !==
-        "FINISHED"
-    ) {
-      continue;
-    }
-
-    const home =
-      ensure(
-        match.homeTeam ||
-        {}
-      );
-
-    const away =
-      ensure(
-        match.awayTeam ||
-        {}
-      );
-
-    const score =
-      normalizeScore(
-        match.score || {}
-      );
-
-    const hg =
-      Number(
-        score.home
-      );
-
-    const ag =
-      Number(
-        score.away
-      );
-
-    if (
-      !Number.isFinite(hg) ||
-      !Number.isFinite(ag)
-    ) {
-      continue;
-    }
-
-    home.playedGames++;
-    away.playedGames++;
-
-    home.goalsFor += hg;
-    home.goalsAgainst += ag;
-
-    away.goalsFor += ag;
-    away.goalsAgainst += hg;
-
-    if (
-      hg > ag
-    ) {
-
-      home.won++;
-      home.points += 3;
-      away.lost++;
-
-    } else if (
-      hg < ag
-    ) {
-
-      away.won++;
-      away.points += 3;
-      home.lost++;
-
-    } else {
-
-      home.draw++;
-      away.draw++;
-
-      home.points++;
-      away.points++;
-    }
-  }
-
-  for (
-    const team of teams.values()
-  ) {
-
-    team.goalDifference =
-      team.goalsFor -
-      team.goalsAgainst;
-
-    team.goalDiff =
-      team.goalDifference;
-
-    team.played =
-      team.playedGames;
-
-    team.wins =
-      team.won;
-
-    team.draws =
-      team.draw;
-
-    team.losses =
-      team.lost;
-  }
-
-  return Array.from(
-    teams.values()
-  ).sort(
-    (a, b) => {
-
-      if (
-        b.points !==
-        a.points
-      ) {
-
-        return (
-          b.points -
-          a.points
-        );
-      }
-
-      if (
-        b.goalDifference !==
-        a.goalDifference
-      ) {
-
-        return (
-          b.goalDifference -
-          a.goalDifference
-        );
-      }
-
-      return (
-        b.goalsFor -
-        a.goalsFor
-      );
-    }
-  );
-}
-
-
 async function getTable() {
 
   try {
 
     const data =
       await apiRequest(
-        "/competitions/BL1/standings"
+        "/competitions/BL1/standings?season=2026"
       );
 
-    const table =
+    const standings =
       data.standings?.[0]?.table ||
       [];
 
-    return table.map(
+    return standings.map(
       row => {
 
         const team =
           row.team ||
           {};
 
-        const playedGames =
-          Number(
-            row.playedGames ||
-            row.played ||
-            0
-          );
-
-        const won =
-          Number(
-            row.won ||
-            row.wins ||
-            0
-          );
-
-        const draw =
-          Number(
-            row.draw ||
-            row.draws ||
-            0
-          );
-
-        const lost =
-          Number(
-            row.lost ||
-            row.losses ||
-            0
-          );
-
-        const goalsFor =
-          Number(
-            row.goalsFor ||
-            0
-          );
-
-        const goalsAgainst =
-          Number(
-            row.goalsAgainst ||
-            0
-          );
-
-        const goalDifference =
-          Number(
-            row.goalDifference ??
-            (
-              goalsFor -
-              goalsAgainst
-            )
-          );
-
         return {
 
           position:
-            Number(
-              row.position ||
-              0
-            ),
+            row.position,
 
           team:
-            normalizeTeamName(
-              team
-            ),
+            team.name ||
+            "",
+
+          shortName:
+            team.shortName ||
+            team.name ||
+            "",
 
           crest:
             team.crest ||
             "",
 
-          playedGames,
+          playedGames:
+            row.playedGames ||
+            0,
 
           played:
-            playedGames,
+            row.playedGames ||
+            0,
 
-          won,
+          won:
+            row.won ||
+            0,
 
           wins:
-            won,
+            row.won ||
+            0,
 
-          draw,
+          draw:
+            row.draw ||
+            0,
 
           draws:
-            draw,
+            row.draw ||
+            0,
 
-          lost,
+          lost:
+            row.lost ||
+            0,
 
           losses:
-            lost,
+            row.lost ||
+            0,
 
-          goalsFor,
+          goalsFor:
+            row.goalsFor ||
+            0,
 
-          goalsAgainst,
+          goalsAgainst:
+            row.goalsAgainst ||
+            0,
 
-          goalDifference,
+          goalDifference:
+            row.goalDifference ||
+            0,
 
           goalDiff:
-            goalDifference,
+            row.goalDifference ||
+            0,
 
           points:
-            Number(
-              row.points ||
-              0
-            )
+            row.points ||
+            0
         };
       }
     );
@@ -2425,127 +2366,247 @@ async function getTable() {
       error.message
     );
 
-    try {
-
-      const matches =
-        await getTeamMatches();
-
-      return calculateTableFromMatches(
-        matches
-      );
-
-    } catch (
-      fallbackError
-    ) {
-
-      console.warn(
-        "Tabelle Fallback ebenfalls fehlgeschlagen:",
-        fallbackError.message
-      );
-
-      return [];
-    }
+    return [];
   }
 }
 
 
 /* =========================================================
-   CHAMPIONS LEAGUE
+   DASHBOARD
 ========================================================= */
 
-async function getChampionsLeague() {
+async function buildDashboard() {
 
-  try {
+  console.log(
+    "Dashboard wird aufgebaut..."
+  );
 
-    const data =
-      await apiRequest(
-        `/teams/${VFB_TEAM_ID}/matches?competitions=CL&limit=20`
-      );
+  const [
+    news,
+    matches,
+    table,
+    squad
+  ] =
+    await Promise.all([
+      getNews(),
+      getMatches(),
+      getTable(),
+      buildSquad()
+    ]);
 
-    return (
-      data.matches ||
-      []
-    )
+  const now =
+    Date.now();
+
+  const upcoming =
+    matches
+      .filter(
+        match =>
+          match.rawDate &&
+          new Date(
+            match.rawDate
+          ).getTime() >= now
+      )
       .sort(
         (a, b) =>
           new Date(
-            a.utcDate
+            a.rawDate
           ) -
           new Date(
-            b.utcDate
+            b.rawDate
           )
+      );
+
+  const finished =
+    matches
+      .filter(
+        match =>
+          match.status ===
+          "FINISHED"
       )
-      .map(
-        mapMatch
+      .sort(
+        (a, b) =>
+          new Date(
+            b.rawDate
+          ) -
+          new Date(
+            a.rawDate
+          )
       );
 
-  } catch (error) {
+  let nextGame =
+    upcoming[0] ||
+    fallbackNextGame();
 
-    console.warn(
-      "Champions League nicht verfügbar:",
-      error.message
+  if (
+    !nextGame ||
+    !nextGame.home
+  ) {
+
+    nextGame =
+      fallbackNextGame();
+  }
+
+  const bundesliga =
+    matches.filter(
+      match =>
+        String(
+          match.competition ||
+          ""
+        )
+          .toLowerCase()
+          .includes(
+            "bundesliga"
+          )
     );
 
-    return [];
-  }
+  const championsLeague =
+    matches.filter(
+      match =>
+        String(
+          match.competition ||
+          ""
+        )
+          .toLowerCase()
+          .includes(
+            "champions"
+          )
+    );
+
+  return {
+
+    updatedAt:
+      new Date().toISOString(),
+
+    news:
+      news,
+
+    nextGame:
+      nextGame,
+
+    fixtures:
+      bundesliga,
+
+    championsLeague:
+      championsLeague,
+
+    results:
+      finished,
+
+    table:
+      table,
+
+    squad:
+      squad,
+
+    live:
+      [],
+
+    attribution:
+      "Data provided by football-data.org"
+  };
 }
 
 
 /* =========================================================
-   LIVE
+   MATCHDETAILS
 ========================================================= */
 
-async function getLiveMatches() {
+function normalizeMinute(event) {
 
-  try {
+  const minute =
+    event?.minute ??
+    event?.time?.elapsed ??
+    null;
 
-    const data =
-      await apiRequest(
-        `/teams/${VFB_TEAM_ID}/matches?status=IN_PLAY,PAUSED`
-      );
+  const extra =
+    event?.injuryTime ??
+    event?.time?.extra ??
+    null;
 
-    return (
-      data.matches ||
-      []
-    ).map(
-      mapMatch
-    );
+  if (
+    minute === null ||
+    minute === undefined
+  ) {
 
-  } catch (error) {
-
-    return [];
+    return "";
   }
+
+  return extra
+    ? `${minute}+${extra}.`
+    : `${minute}.`;
 }
 
 
-/* =========================================================
-   MATCH DETAILS
-========================================================= */
+function mapLineup(team) {
 
-function mapMatchDetails(
-  match
-) {
+  return {
 
-  const basic =
-    mapMatch(
-      match
-    );
+    formation:
+      team?.formation ||
+      null,
 
-  const score =
-    match.score ||
-    {};
+    coach:
+      team?.coach?.name ||
+      null,
 
-  const fullTime =
-    score.fullTime ||
-    {};
+    lineup:
+      (
+        team?.lineup ||
+        []
+      ).map(
+        player => ({
 
-  const halfTime =
-    score.halfTime ||
-    {};
+          id:
+            player.id ??
+            null,
 
-  const duration =
-    score.duration ||
-    "";
+          name:
+            player.name ||
+            "",
+
+          position:
+            player.position ||
+            "",
+
+          shirtNumber:
+            player.shirtNumber ??
+            null
+        })
+      ),
+
+    bench:
+      (
+        team?.bench ||
+        []
+      ).map(
+        player => ({
+
+          id:
+            player.id ??
+            null,
+
+          name:
+            player.name ||
+            "",
+
+          position:
+            player.position ||
+            "",
+
+          shirtNumber:
+            player.shirtNumber ??
+            null
+        })
+      ),
+
+    statistics:
+      team?.statistics ||
+      {}
+  };
+}
+
+
+function mapMatchDetails(match) {
 
   const home =
     match.homeTeam ||
@@ -2555,181 +2616,626 @@ function mapMatchDetails(
     match.awayTeam ||
     {};
 
-  const referees =
-    Array.isArray(
-      match.referees
-    )
-      ? match.referees
-      : [];
+  const goals =
+    (
+      match.goals ||
+      []
+    ).map(
+      goal => ({
 
-  const events =
-    Array.isArray(
-      match.events
-    )
-      ? match.events
-      : [];
+        minute:
+          goal.minute ??
+          null,
 
-  const lineups =
-    Array.isArray(
-      match.lineups
-    )
-      ? match.lineups
-      : [];
+        injuryTime:
+          goal.injuryTime ??
+          null,
 
-  const stats =
-    match.statistics ||
-    [];
+        minuteLabel:
+          normalizeMinute(
+            goal
+          ),
 
-  let statistics = {
+        type:
+          goal.type ||
+          "REGULAR",
 
-    home:
-      {},
+        teamId:
+          goal.team?.id ??
+          null,
 
-    away:
-      {}
-  };
+        team:
+          goal.team?.name ||
+          "",
 
-  if (
-    Array.isArray(stats)
-  ) {
+        scorerId:
+          goal.scorer?.id ??
+          null,
 
-    for (
-      const item of stats
-    ) {
+        scorer:
+          goal.scorer?.name ||
+          "",
 
-      const team =
-        item.team ||
-        {};
+        assistId:
+          goal.assist?.id ??
+          null,
 
-      const teamName =
-        normalizeTeamName(
-          team
-        );
+        assist:
+          goal.assist?.name ||
+          "",
 
-      const target =
-        teamName ===
-        normalizeTeamName(home)
-          ? statistics.home
-          : statistics.away;
+        scoreHome:
+          goal.score?.home ??
+          null,
 
-      if (
-        Array.isArray(
-          item.statistics
-        )
-      ) {
+        scoreAway:
+          goal.score?.away ??
+          null
+      })
+    );
 
-        for (
-          const stat of item.statistics
-        ) {
+  const bookings =
+    (
+      match.bookings ||
+      []
+    ).map(
+      booking => ({
 
-          if (
-            stat.type
-          ) {
+        minute:
+          booking.minute ??
+          null,
 
-            target[
-              stat.type
-            ] =
-              stat.value;
-          }
-        }
-      }
-    }
-  }
+        injuryTime:
+          booking.injuryTime ??
+          null,
+
+        minuteLabel:
+          normalizeMinute(
+            booking
+          ),
+
+        teamId:
+          booking.team?.id ??
+          null,
+
+        team:
+          booking.team?.name ||
+          "",
+
+        playerId:
+          booking.player?.id ??
+          null,
+
+        player:
+          booking.player?.name ||
+          "",
+
+        card:
+          booking.card ||
+          ""
+      })
+    );
+
+  const substitutions =
+    (
+      match.substitutions ||
+      []
+    ).map(
+      substitution => ({
+
+        minute:
+          substitution.minute ??
+          null,
+
+        injuryTime:
+          substitution.injuryTime ??
+          null,
+
+        minuteLabel:
+          normalizeMinute(
+            substitution
+          ),
+
+        teamId:
+          substitution.team?.id ??
+          null,
+
+        team:
+          substitution.team?.name ||
+          "",
+
+        playerInId:
+          substitution.playerIn?.id ??
+          null,
+
+        playerIn:
+          substitution.playerIn?.name ||
+          "",
+
+        playerOutId:
+          substitution.playerOut?.id ??
+          null,
+
+        playerOut:
+          substitution.playerOut?.name ||
+          ""
+      })
+    );
 
   return {
 
-    ...basic,
+    id:
+      match.id ??
+      null,
+
+    utcDate:
+      match.utcDate ||
+      null,
+
+    date:
+      formatDate(
+        match.utcDate
+      ),
+
+    status:
+      match.status ||
+      "",
+
+    minute:
+      match.minute ??
+      null,
+
+    injuryTime:
+      match.injuryTime ??
+      null,
 
     venue:
       match.venue ||
-      basic.venue,
-
-    referee:
-      referees[0]?.name ||
       "",
 
-    referees,
+    attendance:
+      match.attendance ??
+      null,
 
-    duration,
+    matchday:
+      match.matchday ??
+      null,
 
-    halfTime,
+    stage:
+      match.stage ||
+      null,
 
-    fullTime,
+    competition:
+      match.competition?.name ||
+      "",
 
-    events,
+    competitionCode:
+      match.competition?.code ||
+      "",
 
-    lineups,
+    homeTeam: {
 
-    statistics
+      id:
+        home.id ??
+        null,
+
+      name:
+        home.name ||
+        "",
+
+      shortName:
+        home.shortName ||
+        home.name ||
+        "",
+
+      crest:
+        home.crest ||
+        "",
+
+      formation:
+        home.formation ||
+        null
+    },
+
+    awayTeam: {
+
+      id:
+        away.id ??
+        null,
+
+      name:
+        away.name ||
+        "",
+
+      shortName:
+        away.shortName ||
+        away.name ||
+        "",
+
+      crest:
+        away.crest ||
+        "",
+
+      formation:
+        away.formation ||
+        null
+    },
+
+    score:
+      match.score ||
+      {},
+
+    goals:
+      goals,
+
+    bookings:
+      bookings,
+
+    substitutions:
+      substitutions,
+
+    lineups: {
+
+      home:
+        mapLineup(
+          home
+        ),
+
+      away:
+        mapLineup(
+          away
+        )
+    },
+
+    statistics: {
+
+      home:
+        home.statistics ||
+        {},
+
+      away:
+        away.statistics ||
+        {}
+    },
+
+    referees:
+      match.referees ||
+      []
   };
 }
 
 
 /* =========================================================
-   BUNDESLIGA MATCH STATS
+   BUNDESLIGA MATCHSTATISTIK
 ========================================================= */
+
+function extractPair(
+  text,
+  regex
+) {
+
+  const match =
+    text.match(
+      regex
+    );
+
+  if (!match) {
+    return null;
+  }
+
+  return [
+
+    Number(
+      String(
+        match[1]
+      ).replace(
+        ",",
+        "."
+      )
+    ),
+
+    Number(
+      String(
+        match[2]
+      ).replace(
+        ",",
+        "."
+      )
+    )
+
+  ];
+}
+
 
 async function getBundesligaMatchStats(
   details
 ) {
 
-  /*
-   * Die Bundesliga-Seite wird nur als
-   * zusätzliche Datenquelle versucht.
-   * Wenn sie nicht erreichbar ist,
-   * bleiben Football-Data-Daten erhalten.
-   */
-
   try {
 
     if (
       !details ||
-      !details.homeTeam ||
-      !details.awayTeam
+      details.competitionCode !==
+        "BL1"
     ) {
+
       return null;
     }
 
-    const searchUrl =
-      `${BUNDESLIGA_BASE}?match=${encodeURIComponent(details.homeTeam)}-${encodeURIComponent(details.awayTeam)}`;
+    if (
+      !details.matchday ||
+      !details.homeTeam?.name ||
+      !details.awayTeam?.name
+    ) {
+
+      return null;
+    }
+
+    const homeSlug =
+      slugify(
+        details.homeTeam.name
+      );
+
+    const awaySlug =
+      slugify(
+        details.awayTeam.name
+      );
+
+    const url =
+      `${BUNDESLIGA_BASE}/2026-2027/${details.matchday}/${homeSlug}-vs-${awaySlug}/stats`;
 
     const html =
       await httpsRequest(
-        searchUrl
+        url
+      );
+
+    const text =
+      stripHtml(
+        html
       );
 
     if (
-      !html
+      !text
     ) {
+
       return null;
     }
 
-    /*
-     * Keine riskante automatische Zuordnung
-     * von Zahlen aus beliebigem HTML.
-     * Die Football-Data-Werte bleiben führend.
-     */
+    const result = {
 
-    return null;
+      home:
+        {},
+
+      away:
+        {},
+
+      source:
+        "Bundesliga.com / DFL"
+    };
+
+    let pair;
+
+
+    pair =
+      extractPair(
+        text,
+        /Ballbesitz\s*\(%\)\s*(\d+(?:[.,]\d+)?)\s*(\d+(?:[.,]\d+)?)/i
+      );
+
+    if (pair) {
+
+      result.home.possession =
+        pair[0];
+
+      result.away.possession =
+        pair[1];
+    }
+
+
+    pair =
+      extractPair(
+        text,
+        /Ecken\s*(\d+)\s*(\d+)/i
+      );
+
+    if (pair) {
+
+      result.home.cornerKicks =
+        pair[0];
+
+      result.away.cornerKicks =
+        pair[1];
+    }
+
+
+    pair =
+      extractPair(
+        text,
+        /Abseits\s*(\d+)\s*(\d+)/i
+      );
+
+    if (pair) {
+
+      result.home.offsides =
+        pair[0];
+
+      result.away.offsides =
+        pair[1];
+    }
+
+
+    pair =
+      extractPair(
+        text,
+        /begangene Fouls\s*(\d+)\s*(\d+)/i
+      );
+
+    if (pair) {
+
+      result.home.fouls =
+        pair[0];
+
+      result.away.fouls =
+        pair[1];
+    }
+
+
+    pair =
+      extractPair(
+        text,
+        /gewonnene Zweikämpfe\s*(\d+)\s*(\d+)/i
+      );
+
+    if (pair) {
+
+      result.home.wonDuels =
+        pair[0];
+
+      result.away.wonDuels =
+        pair[1];
+    }
+
+
+    const shots =
+      text.match(
+        /(\d+)\s+neben das Tor\s+(\d+)\s+auf das Tor\s+(\d+)\s+neben das Tor\s+(\d+)\s+auf das Tor/i
+      );
+
+    if (shots) {
+
+      result.home.shotsOffGoal =
+        Number(
+          shots[1]
+        );
+
+      result.home.shotsOnGoal =
+        Number(
+          shots[2]
+        );
+
+      result.away.shotsOffGoal =
+        Number(
+          shots[3]
+        );
+
+      result.away.shotsOnGoal =
+        Number(
+          shots[4]
+        );
+
+      result.home.shots =
+        result.home.shotsOffGoal +
+        result.home.shotsOnGoal;
+
+      result.away.shots =
+        result.away.shotsOffGoal +
+        result.away.shotsOnGoal;
+    }
+
+
+    const passes =
+      text.match(
+        /Pässe\s+(\d+)\s+(\d+)\s+(\d+(?:[.,]\d+)?)\s*%\s*Passquote\s+(\d+(?:[.,]\d+)?)\s*%/i
+      );
+
+    if (passes) {
+
+      result.home.passes =
+        Number(
+          passes[1]
+        );
+
+      result.away.passes =
+        Number(
+          passes[2]
+        );
+
+      result.home.passAccuracy =
+        Number(
+          String(
+            passes[3]
+          ).replace(
+            ",",
+            "."
+          )
+        );
+
+      result.away.passAccuracy =
+        Number(
+          String(
+            passes[4]
+          ).replace(
+            ",",
+            "."
+          )
+        );
+    }
+
+
+    const xg =
+      text.match(
+        /xGoals\s+(\d+(?:[.,]\d+)?)\s+(\d+(?:[.,]\d+)?)/i
+      );
+
+    if (xg) {
+
+      result.home.xGoals =
+        Number(
+          String(
+            xg[1]
+          ).replace(
+            ",",
+            "."
+          )
+        );
+
+      result.away.xGoals =
+        Number(
+          String(
+            xg[2]
+          ).replace(
+            ",",
+            "."
+          )
+        );
+    }
+
+
+    return result;
 
   } catch (error) {
+
+    console.warn(
+      "Bundesliga Matchstatistik nicht verfügbar:",
+      error.message
+    );
 
     return null;
   }
 }
 
 
-/* =========================================================
-   MATCH DETAILS API
-========================================================= */
-
 async function getMatchDetails(
-  id
+  matchId
 ) {
+
+  const id =
+    String(
+      matchId || ""
+    ).trim();
+
+  if (
+    !/^\d+$/.test(id)
+  ) {
+
+    throw new Error(
+      "Ungültige Spiel-ID"
+    );
+  }
 
   const cached =
     matchCache.get(
-      String(id)
+      id
     );
 
   if (
@@ -2785,7 +3291,7 @@ async function getMatchDetails(
   }
 
   matchCache.set(
-    String(id),
+    id,
     {
       time:
         Date.now(),
@@ -2796,77 +3302,6 @@ async function getMatchDetails(
   );
 
   return details;
-}
-
-
-/* =========================================================
-   DASHBOARD
-========================================================= */
-
-async function buildDashboard() {
-
-  const [
-    vfbNews,
-    kickerNews,
-    nextGame,
-    fixtureData,
-    table,
-    squad,
-    championsLeague,
-    live
-  ] =
-    await Promise.all([
-
-      getVfBNews(),
-
-      getKickerNews(),
-
-      buildNextMatch(),
-
-      buildFixtures(),
-
-      getTable(),
-
-      buildSquad(),
-
-      getChampionsLeague(),
-
-      getLiveMatches()
-
-    ]);
-
-  const news =
-    mergeNews(
-      vfbNews,
-      kickerNews
-    );
-
-  return {
-
-    updatedAt:
-      new Date().toISOString(),
-
-    news,
-
-    nextGame,
-
-    fixtures:
-      fixtureData.fixtures,
-
-    results:
-      fixtureData.results,
-
-    championsLeague,
-
-    table,
-
-    squad,
-
-    live,
-
-    attribution:
-      "Data provided by football-data.org"
-  };
 }
 
 
@@ -2907,11 +3342,6 @@ async function getDashboard() {
       "Dashboard ERROR:",
       error
     );
-
-    /*
-     * Auch bei API-Fehler ein brauchbares
-     * Dashboard zurückgeben.
-     */
 
     const fallbackSquad =
       CURRENT_SQUAD.map(
@@ -3089,7 +3519,9 @@ function serveFile(
       );
 
   if (
-    clean.includes("..")
+    clean.includes(
+      ".."
+    )
   ) {
 
     res.writeHead(
@@ -3285,7 +3717,7 @@ const server =
 
 
         /* =========================================
-           MATCH DETAILS
+           MATCHDETAILS
         ========================================= */
 
         const matchPath =
@@ -3387,10 +3819,6 @@ const server =
               return;
             }
           }
-
-          /*
-           * SPA-Fallback
-           */
 
           serveFile(
             res,
