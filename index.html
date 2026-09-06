@@ -2,33 +2,22 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
-<meta name="viewport"
-content="width=device-width,initial-scale=1">
-<meta name="theme-color"
-content="#e30613">
-<meta
-name="description"
-content="Cannstatt 1893 News – unabhängige VfB Stuttgart Fanpage">
-<title>
-Cannstatt 1893 News – VfB Stuttgart
-</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#e30613">
+<meta name="description" content="Cannstatt 1893 News – unabhängige VfB Stuttgart Fanpage">
+<title>Cannstatt 1893 News – VfB Stuttgart</title>
+
 <style>
-*{
-box-sizing:border-box;
-}
-html{
-scroll-behavior:smooth;
-}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
 body{
 margin:0;
 background:#f4f4f4;
 color:#151515;
-font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif
 }
-a{
-text-decoration:none;
-color:inherit;
-}
+a{text-decoration:none;color:inherit}
+
 .top{
 background:#080808;
 color:#fff;
@@ -36,15 +25,17 @@ padding:8px 5%;
 font-size:11px;
 display:flex;
 justify-content:space-between;
-gap:10px;
+gap:10px
 }
+
 .visitor-ticker{
 display:flex;
 align-items:center;
 gap:5px;
 font-weight:800;
-white-space:nowrap;
+white-space:nowrap
 }
+
 .visitor-live-dot{
 width:7px;
 height:7px;
@@ -52,37 +43,19 @@ border-radius:50%;
 background:#e30613;
 box-shadow:0 0 0 3px #e3061333;
 display:inline-block;
-animation:visitorPulse 1.8s infinite;
+animation:visitorPulse 1.8s infinite
 }
+
 .visitor-separator{
 opacity:.45;
-margin:0 3px;
+margin:0 3px
 }
+
 @keyframes visitorPulse{
-0%,100%{
-opacity:1;
-transform:scale(1);
+0%,100%{opacity:1;transform:scale(1)}
+50%{opacity:.45;transform:scale(.8)}
 }
-50%{
-opacity:.45;
-transform:scale(.8);
-}
-}
-@media(max-width:800px){
-.top{
-font-size:9px;
-padding:7px 4%;
-flex-wrap:wrap;
-justify-content:center;
-text-align:center;
-}
-.visitor-ticker{
-order:3;
-width:100%;
-justify-content:center;
-font-size:9px;
-}
-}
+
 .bar{
 position:sticky;
 top:0;
@@ -93,14 +66,16 @@ padding:12px 5%;
 display:flex;
 align-items:center;
 justify-content:space-between;
-box-shadow:0 2px 12px #0001;
+box-shadow:0 2px 12px #0001
 }
+
 .brand{
 display:flex;
 align-items:center;
 gap:10px;
-font-weight:1000;
+font-weight:1000
 }
+
 .crest{
 width:44px;
 height:44px;
@@ -109,24 +84,26 @@ background:#e30613;
 color:#fff;
 display:grid;
 place-items:center;
-font-weight:1000;
+font-weight:1000
 }
+
 .brand small{
 display:block;
 color:#777;
 font-size:9px;
 letter-spacing:1px;
-margin-top:2px;
+margin-top:2px
 }
+
 .nav{
 display:flex;
 gap:24px;
 font-size:13px;
-font-weight:800;
+font-weight:800
 }
-.nav a:hover{
-color:#e30613;
-}
+
+.nav a:hover{color:#e30613}
+
 .hero{
 background:
 linear-gradient(
@@ -136,33 +113,37 @@ linear-gradient(
 #750000 100%
 );
 color:white;
-padding:70px 5%;
+padding:70px 5%
 }
+
 .hero-inner{
 max-width:1150px;
-margin:auto;
+margin:auto
 }
+
 .hero-kicker{
 font-size:12px;
 font-weight:900;
 letter-spacing:2px;
-color:#ff4048;
+color:#ff4048
 }
+
 .hero h1{
 margin:12px 0;
 font-size:clamp(45px,8vw,85px);
 line-height:.9;
-letter-spacing:-5px;
+letter-spacing:-5px
 }
-.hero h1 span{
-color:#ff2630;
-}
+
+.hero h1 span{color:#ff2630}
+
 .hero p{
 max-width:650px;
 color:#ddd;
 font-size:17px;
-line-height:1.6;
+line-height:1.6
 }
+
 .btn{
 display:inline-block;
 background:#e30613;
@@ -171,156 +152,175 @@ padding:12px 17px;
 border-radius:8px;
 font-size:12px;
 font-weight:900;
-margin-top:8px;
+margin-top:8px
 }
+
 .wrap{
 width:min(1150px,90%);
-margin:auto;
+margin:auto
 }
-.section{
-padding:42px 0;
-}
+
+.section{padding:42px 0}
+
 .section h2{
 margin:0;
 text-transform:uppercase;
 font-size:30px;
-letter-spacing:-1px;
+letter-spacing:-1px
 }
+
 .line{
 width:45px;
 height:4px;
 background:#e30613;
-margin:8px 0 18px;
+margin:8px 0 18px
 }
+
 .grid{
 display:grid;
 grid-template-columns:1.3fr .9fr;
-gap:18px;
+gap:18px
 }
+
 .card{
 background:#fff;
 border:1px solid #ddd;
 border-radius:14px;
 padding:20px;
-box-shadow:0 5px 20px #00000008;
+box-shadow:0 5px 20px #00000008
 }
+
 .news{
 padding:15px 0;
-border-bottom:1px solid #eee;
+border-bottom:1px solid #eee
 }
-.news:last-child{
-border-bottom:0;
-}
+
+.news:last-child{border-bottom:0}
+
 .tag{
 color:#e30613;
 font-size:10px;
 font-weight:900;
-text-transform:uppercase;
+text-transform:uppercase
 }
+
 .news h3{
 margin:5px 0;
-font-size:17px;
+font-size:17px
 }
+
 .news p{
 margin:5px 0;
 color:#666;
 font-size:12px;
-line-height:1.5;
+line-height:1.5
 }
+
 .next{
 background:#111;
 color:white;
 border-radius:12px;
-padding:20px;
+padding:20px
 }
+
 .next-label{
 color:#ff2630;
 font-size:10px;
 font-weight:900;
-letter-spacing:1px;
+letter-spacing:1px
 }
+
 .next h3{
 font-size:24px;
-margin:10px 0;
+margin:10px 0
 }
-.next p{
-color:#ccc;
-}
+
+.next p{color:#ccc}
+
 .live{
 display:flex;
 align-items:center;
 gap:7px;
 color:#ff2630;
 font-size:11px;
-font-weight:900;
+font-weight:900
 }
+
 .dot{
 width:8px;
 height:8px;
 background:#e30613;
-border-radius:50%;
+border-radius:50%
 }
+
 .notice{
 background:#fff1f1;
 border-left:4px solid #e30613;
 padding:13px;
 font-size:12px;
-margin-bottom:18px;
+margin-bottom:18px
 }
+
 .loading{
 color:#888;
 font-size:13px;
-padding:20px 0;
+padding:20px 0
 }
+
 .error{
 color:#a00000;
 background:#fff0f0;
 padding:15px;
 border-radius:8px;
-font-size:12px;
+font-size:12px
 }
+
 .fixture{
 display:flex;
 align-items:center;
 gap:15px;
 padding:14px 0;
-border-bottom:1px solid #eee;
+border-bottom:1px solid #eee
 }
-.fixture:last-child{
-border-bottom:0;
-}
+
+.fixture:last-child{border-bottom:0}
+
 .date{
 min-width:105px;
 color:#e30613;
 font-size:12px;
-font-weight:900;
+font-weight:900
 }
-.fixture strong{
-font-size:14px;
-}
+
+.fixture strong{font-size:14px}
+
 .competition{
 color:#888;
 font-size:11px;
-margin-top:3px;
+margin-top:3px
 }
+
 .status{
 margin-left:auto;
 font-size:10px;
-font-weight:900;
+font-weight:900
 }
+
 .team-line{
 display:flex;
 align-items:center;
 gap:8px;
 font-size:14px;
-font-weight:800;
+font-weight:800
 }
+
 .team-logo{
 width:30px;
 height:30px;
 object-fit:contain;
-flex-shrink:0;
+flex-shrink:0
 }
+
 .competition-title{
 display:flex;
 align-items:center;
@@ -328,57 +328,61 @@ gap:10px;
 margin-top:10px;
 margin-bottom:8px;
 padding-bottom:10px;
-border-bottom:2px solid #eee;
+border-bottom:2px solid #eee
 }
-.competition-title .icon{
-font-size:24px;
-}
+
+.competition-title .icon{font-size:24px}
+
 .competition-title h3{
 margin:0;
 font-size:20px;
-font-weight:1000;
+font-weight:1000
 }
+
 .competition-title span{
 color:#777;
 font-size:11px;
-font-weight:600;
+font-weight:600
 }
+
 .fan-grid{
 display:grid;
 grid-template-columns:repeat(3,1fr);
-gap:15px;
+gap:15px
 }
+
 .fan{
 background:#111;
 color:white;
 padding:25px;
 border-radius:13px;
-min-height:140px;
+min-height:140px
 }
-.fan h3{
-margin-top:0;
-}
+
+.fan h3{margin-top:0}
+
 .fan p{
 color:#aaa;
 font-size:13px;
-line-height:1.5;
+line-height:1.5
 }
-.squad-section{
-margin-top:20px;
-}
-.squad-group{
-margin-top:28px;
-}
+
+.squad-section{margin-top:20px}
+
+.squad-group{margin-top:28px}
+
 .squad-title{
 font-size:20px;
 font-weight:900;
-margin:0 0 14px;
+margin:0 0 14px
 }
+
 .squad-grid{
 display:grid;
 grid-template-columns:repeat(4,1fr);
-gap:14px;
+gap:14px
 }
+
 .player-card{
 background:#fff;
 border:1px solid #ddd;
@@ -386,29 +390,35 @@ border-radius:14px;
 padding:17px;
 box-shadow:0 5px 20px #00000008;
 transition:.2s;
+overflow:hidden
 }
+
 .player-card:hover{
 transform:translateY(-3px);
-box-shadow:0 8px 25px #00000012;
+box-shadow:0 8px 25px #00000012
 }
+
 .player-number{
 font-size:28px;
 font-weight:1000;
 color:#e30613;
-line-height:1;
+line-height:1
 }
+
 .player-name{
 font-size:15px;
 font-weight:900;
-margin-top:10px;
+margin-top:4px
 }
+
 .player-position{
 font-size:10px;
 color:#777;
 text-transform:uppercase;
 font-weight:800;
-margin-top:4px;
+margin-top:4px
 }
+
 .player-photo-wrap{
 height:185px;
 background:linear-gradient(
@@ -422,14 +432,16 @@ overflow:hidden;
 display:flex;
 align-items:flex-end;
 justify-content:center;
-margin:-2px -2px 12px;
+margin:-2px -2px 12px
 }
+
 .player-photo{
 height:100%;
 width:100%;
 object-fit:contain;
-object-position:center bottom;
+object-position:center bottom
 }
+
 .player-number-badge{
 position:absolute;
 top:8px;
@@ -439,52 +451,50 @@ color:#fff;
 border-radius:8px;
 padding:5px 8px;
 font-size:12px;
-font-weight:1000;
+font-weight:1000
 }
+
 .player-stats{
 display:grid;
 grid-template-columns:repeat(4,1fr);
 gap:6px;
 margin-top:12px;
 padding-top:10px;
-border-top:1px solid #eee;
+border-top:1px solid #eee
 }
-.player-stat{
-text-align:center;
-}
+
+.player-stat{text-align:center}
+
 .player-stat strong{
 display:block;
 font-size:16px;
 font-weight:1000;
-color:#151515;
+color:#151515
 }
+
 .player-stat span{
 display:block;
 font-size:8px;
 color:#888;
 text-transform:uppercase;
 font-weight:800;
-margin-top:2px;
+margin-top:2px
 }
-.player-card{
-overflow:hidden;
-}
-.player-name{
-margin-top:4px;
-}
+
 .player-meta{
 font-size:9px;
 color:#999;
-margin-top:3px;
+margin-top:3px
 }
-.coach-card{
-max-width:350px;
-}
+
+.coach-card{max-width:350px}
+
 .table-scroll{
 width:100%;
 overflow-x:auto;
--webkit-overflow-scrolling:touch;
+-webkit-overflow-scrolling:touch
 }
+
 .table-header,
 .table-row{
 display:grid;
@@ -500,118 +510,96 @@ minmax(170px,1fr)
 52px;
 gap:6px;
 align-items:center;
-min-width:570px;
+min-width:570px
 }
+
 .table-header{
 padding:0 0 10px;
 border-bottom:2px solid #111;
 font-size:9px;
 font-weight:900;
 text-transform:uppercase;
-color:#777;
+color:#777
 }
+
 .table-row{
 padding:12px 0;
-border-bottom:1px solid #eee;
+border-bottom:1px solid #eee
 }
+
 .table-cell{
 text-align:center;
-font-size:12px;
+font-size:12px
 }
-.table-cell.pos{
-font-weight:900;
-}
-.table-team{
-min-width:0;
-}
+
+.table-cell.pos{font-weight:900}
+
+.table-team{min-width:0}
+
 .table-team strong{
 overflow:hidden;
 text-overflow:ellipsis;
-white-space:nowrap;
+white-space:nowrap
 }
+
 .points{
 font-weight:1000;
-color:#e30613;
+color:#e30613
 }
+
 footer{
 background:#111;
 color:#999;
 padding:40px 5%;
 margin-top:20px;
 font-size:12px;
-line-height:1.7;
+line-height:1.7
 }
-footer b{
-color:white;
-}
+
+footer b{color:white}
+
 .attribution{
 margin-top:12px;
 font-size:11px;
-color:#777;
+color:#777
 }
+
 @media(max-width:900px){
-.player-photo-wrap{
-height:175px;
+.player-photo-wrap{height:175px}
+.squad-grid{grid-template-columns:repeat(3,1fr)}
 }
-.squad-grid{
-grid-template-columns:repeat(3,1fr);
-}
-}
+
 @media(max-width:760px){
-.player-photo-wrap{
-height:170px;
-}
-.player-stats{
-grid-template-columns:repeat(4,1fr);
-}
-.top{
-font-size:9px;
-}
-.nav{
-display:none;
-}
-.bar{
-padding:10px 5%;
-}
-.hero{
-padding:55px 5%;
-}
+.player-photo-wrap{height:170px}
+.player-stats{grid-template-columns:repeat(4,1fr)}
+.top{font-size:9px}
+.nav{display:none}
+.bar{padding:10px 5%}
+.hero{padding:55px 5%}
 .hero h1{
 font-size:55px;
-letter-spacing:-3px;
+letter-spacing:-3px
 }
-.hero p{
-font-size:15px;
-}
-.grid{
-grid-template-columns:1fr;
-}
-.fan-grid{
-grid-template-columns:1fr;
-}
-.squad-grid{
-grid-template-columns:repeat(2,1fr);
-}
-.section{
-padding:32px 0;
-}
+.hero p{font-size:15px}
+.grid{grid-template-columns:1fr}
+.fan-grid{grid-template-columns:1fr}
+.squad-grid{grid-template-columns:repeat(2,1fr)}
+.section{padding:32px 0}
 .fixture{
 align-items:center;
-gap:10px;
+gap:10px
 }
 .date{
 min-width:80px;
-font-size:10px;
+font-size:10px
 }
-.team-line{
-font-size:13px;
-}
+.team-line{font-size:13px}
 .team-logo{
 width:25px;
-height:25px;
+height:25px
 }
 .status{
-margin-left:auto;
+margin-left:auto
 }
 .table-header,
 .table-row{
@@ -625,44 +613,30 @@ minmax(145px,1fr)
 52px
 52px;
 min-width:475px;
-gap:4px;
+gap:4px
 }
-.table-cell{
-font-size:10px;
+.table-cell{font-size:10px}
 }
-}
+
 @media(max-width:430px){
 .hero h1{
-font-size:46px;
+font-size:46px
 }
-.brand{
-font-size:12px;
-}
-.brand small{
-font-size:8px;
-}
+.brand{font-size:12px}
+.brand small{font-size:8px}
 .squad-grid{
-grid-template-columns:repeat(2,1fr);
+grid-template-columns:repeat(2,1fr)
 }
-.player-photo-wrap{
-height:155px;
+.player-photo-wrap{height:155px}
+.player-name{font-size:13px}
+.player-position{font-size:9px}
+.player-stats{gap:2px}
+.player-stat strong{font-size:13px}
+.player-stat span{font-size:7px}
 }
-.player-name{
-font-size:13px;
-}
-.player-position{
-font-size:9px;
-}
-.player-stats{
-gap:2px;
-}
-.player-stat strong{
-font-size:13px;
-}
-.player-stat span{
-font-size:7px;
-}
-}
+
+/* MATCHCENTER */
+
 .match-clickable{
 cursor:pointer;
 transition:.18s;
@@ -670,19 +644,22 @@ background:#fff;
 border-radius:10px;
 padding:10px;
 margin:-10px 0;
-position:relative;
+position:relative
 }
+
 .match-clickable:hover{
 background:#fafafa;
-transform:translateY(-1px);
+transform:translateY(-1px)
 }
+
 .match-hint{
 font-size:9px;
 color:#e30613;
 font-weight:900;
 text-transform:uppercase;
-margin-top:5px;
+margin-top:5px
 }
+
 .match-modal{
 display:none;
 position:fixed;
@@ -692,18 +669,19 @@ z-index:100;
 align-items:flex-start;
 justify-content:center;
 padding:30px 14px;
-overflow:auto;
+overflow:auto
 }
-.match-modal.open{
-display:flex;
-}
+
+.match-modal.open{display:flex}
+
 .match-modal-box{
 width:min(900px,100%);
 background:#fff;
 border-radius:18px;
 box-shadow:0 20px 60px #0005;
-overflow:hidden;
+overflow:hidden
 }
+
 .match-modal-head{
 background:#111;
 color:#fff;
@@ -711,12 +689,14 @@ padding:18px 20px;
 display:flex;
 align-items:center;
 justify-content:space-between;
-gap:15px;
+gap:15px
 }
+
 .match-modal-head h3{
 margin:0;
-font-size:20px;
+font-size:20px
 }
+
 .match-close{
 border:0;
 background:#333;
@@ -725,609 +705,799 @@ width:36px;
 height:36px;
 border-radius:9px;
 font-size:22px;
-cursor:pointer;
+cursor:pointer
 }
-.match-modal-body{
-padding:20px;
-}
+
+.match-modal-body{padding:20px}
+
 .match-score{
 display:grid;
 grid-template-columns:1fr auto 1fr;
 align-items:center;
 gap:15px;
 text-align:center;
-margin-bottom:20px;
+margin-bottom:20px
 }
+
 .match-team{
 font-weight:900;
-font-size:15px;
+font-size:15px
 }
+
 .match-team img{
 width:46px;
 height:46px;
+object-fit:contain;
+display:block;
+margin:0 auto 7px
 }
+
 .match-score-num{
-font-size:32px;
-font-weight:1000;
+font-size:34px;
+font-weight:1000
 }
+
+.match-meta{
+text-align:center;
+color:#777;
+font-size:11px;
+margin-top:-12px;
+margin-bottom:20px
+}
+
 .match-section{
-margin-top:20px;
+border-top:1px solid #eee;
+padding-top:16px;
+margin-top:18px
 }
+
 .match-section h4{
-margin:0 0 10px;
+margin:0 0 12px;
+font-size:14px;
+text-transform:uppercase
 }
+
 .match-events{
 display:grid;
-gap:7px;
+gap:7px
 }
+
 .match-event{
-padding:10px 12px;
-background:#f5f5f5;
+padding:9px 11px;
 border-radius:8px;
-font-size:12px;
+background:#f7f7f7;
+font-size:12px
 }
-.fixture-row{
+
+.match-stats{
 display:grid;
-grid-template-columns:42px 125px 1fr 85px;
-gap:12px;
+gap:8px
+}
+
+.match-stat-row{
+display:grid;
+grid-template-columns:1fr 80px 1fr;
 align-items:center;
-padding:13px 0;
-border-bottom:1px solid #eee;
-}
-.fixture-row.clickable{
-cursor:pointer;
-}
-.fixture-row.clickable:hover{
-background:#fafafa;
-}
-.fixture-round{
-font-weight:1000;
-color:#e30613;
-}
-.fixture-date{
-font-size:11px;
-}
-.fixture-date span{
-display:block;
-color:#888;
-margin-top:3px;
-}
-.fixture-teams{
-display:grid;
-gap:7px;
-}
-.fixture-score{
-text-align:right;
-}
-.fixture-score strong{
-font-size:16px;
-}
-.fixture-score span{
-display:block;
-font-size:9px;
-color:#888;
-font-weight:900;
-margin-top:3px;
-}
-.next-match{
-padding:15px;
-border:1px solid #eee;
-border-radius:12px;
-background:#fafafa;
-}
-.next-date,
-.next-comp{
-font-size:10px;
-font-weight:900;
-color:#777;
-text-align:center;
-}
-.next-teams{
-display:grid;
-grid-template-columns:1fr 45px 1fr;
-align-items:center;
-text-align:center;
 gap:8px;
-margin:15px 0;
+font-size:12px
 }
-.next-teams>div{
+
+.match-stat-row>span:first-child{
+text-align:right;
+font-weight:800
+}
+
+.match-stat-row>span:last-child{
+font-weight:800
+}
+
+.match-stat-label{
+text-align:center;
+color:#777;
+font-size:10px;
+text-transform:uppercase
+}
+
+.match-lineups{
 display:grid;
-justify-items:center;
-gap:7px;
-font-size:12px;
+grid-template-columns:1fr 1fr;
+gap:18px
 }
-.league-table{
-width:100%;
-border-collapse:collapse;
-font-size:12px;
-min-width:650px;
+
+.match-lineups h5{
+margin:0 0 8px;
+font-size:12px
 }
-.league-table th{
-background:#111;
-color:#fff;
-padding:9px 7px;
+
+.match-player{
+font-size:11px;
+padding:4px 0;
+border-bottom:1px solid #eee
+}
+
+.match-loading{
 text-align:center;
-}
-.league-table th:nth-child(2),
-.league-table td:nth-child(2){
-text-align:left;
-}
-.league-table td{
-padding:8px 7px;
-border-bottom:1px solid #eee;
-text-align:center;
-}
-.league-table .team-line{
-font-size:12px;
-}
-.vfb-row{
-background:#fff0f1;
-font-weight:900;
-}
-.vfb-row td:first-child{
-border-left:4px solid #e30613;
-}
-.transfer-item{
-display:flex;
-align-items:center;
-gap:9px;
-padding:10px 0;
-border-bottom:1px solid #eee;
-font-size:12px;
-}
-.transfer-item small{
-display:block;
 color:#888;
-margin-top:2px;
+padding:25px
 }
-.transfer-dot{
-display:grid;
-place-items:center;
-width:24px;
-height:24px;
-border-radius:50%;
-background:#eee;
-font-weight:1000;
-color:#111;
-flex:0 0 auto;
+
+@media(max-width:600px){
+.match-modal{padding:10px}
+.match-modal-body{padding:15px}
+.match-score{gap:8px}
+.match-team{font-size:12px}
+.match-score-num{font-size:28px}
+.match-stat-row{
+grid-template-columns:1fr 65px 1fr;
+font-size:10px
 }
-.transfer-dot.plus{
-color:#e30613;
-}
-.player-initial{
-width:105px;
-height:105px;
-border-radius:50%;
-background:#e30613;
-color:#fff;
-display:grid;
-place-items:center;
-font-size:28px;
-font-weight:1000;
-}
-.logo-large{
-width:48px;
-height:48px;
-border-radius:10px;
-font-size:11px;
-}
-.team-logo{
-display:grid;
-place-items:center;
-flex:0 0 auto;
-border-radius:7px;
-background:#eee;
-color:#111;
-font-size:8px;
-font-weight:1000;
-letter-spacing:-.3px;
-border:1px solid #ddd;
-}
-.badge-vfb{background:#e30613;color:#fff;border-color:#e30613}
-.badge-bayern{background:#dc052d;color:#fff;border-color:#dc052d}
-.badge-koeln{background:#fff;color:#e30613;border-color:#e30613}
-.badge-hoffenheim{background:#005ca9;color:#fff;border-color:#005ca9}
-.badge-dortmund{background:#f7d000;color:#111;border-color:#111}
-.badge-paderborn{background:#0050a4;color:#fff;border-color:#0050a4}
-.badge-hamburg{background:#fff;color:#005ca9;border-color:#005ca9}
-.badge-gladbach{background:#fff;color:#111;border-color:#111}
-.badge-leverkusen{background:#e32219;color:#fff;border-color:#e32219}
-.badge-bremen{background:#007b49;color:#fff;border-color:#007b49}
-.badge-schalke{background:#0066b3;color:#fff;border-color:#0066b3}
-.badge-frankfurt{background:#e30613;color:#fff;border-color:#e30613}
-.badge-elversberg{background:#fff;color:#111;border-color:#111}
-.badge-union{background:#ed1c24;color:#fff;border-color:#ed1c24}
-.badge-freiburg{background:#d6001c;color:#fff;border-color:#d6001c}
-.badge-augsburg{background:#ba0c2f;color:#fff;border-color:#ba0c2f}
-.badge-leipzig{background:#fff;color:#d00027;border-color:#d00027}
-.badge-mainz{background:#c00;color:#fff;border-color:#c00}
-.badge-viking{background:#162b54;color:#fff;border-color:#162b54}
-.badge-slovan{background:#1b4fa3;color:#fff;border-color:#1b4fa3}
-.badge-atletico{background:#fff;color:#d71920;border-color:#d71920}
-.badge-galatasaray{background:#e30613;color:#f6c500;border-color:#e30613}
-.badge-inter{background:#111b5e;color:#fff;border-color:#111b5e}
-.badge-lille{background:#e30613;color:#fff;border-color:#e30613}
-.badge-brugge{background:#111;color:#ffd200;border-color:#111}
-.badge-psv{background:#fff;color:#e30613;border-color:#e30613}
-@media(max-width:700px){
-.fixture-row{
-grid-template-columns:28px 88px 1fr 52px;
-gap:7px;
-}
-.fixture-date{
-font-size:9px;
-}
-.fixture-teams .team-line{
-font-size:11px;
-}
-.fixture-score strong{
-font-size:13px;
-}
-.team-logo{
-width:27px;
-height:27px;
-}
-.logo-large{
-width:42px;
-height:42px;
-}
-.nav{
-gap:11px!important;
-overflow-x:auto;
-}
-.squad-grid{
-grid-template-columns:repeat(2,1fr)!important;
-}
-.grid{
-grid-template-columns:1fr!important;
-}
-.fan-grid{
-grid-template-columns:1fr!important;
-}
+.match-lineups{grid-template-columns:1fr}
 }
 </style>
 </head>
+
 <body>
 
 <div class="top">
-<div>⚽ CANNSTATT 1893 NEWS · VfB STUTTGART</div>
-<div class="visitor-ticker">
-<span class="visitor-live-dot"></span>
-<span id="visitorOnline">0</span> online
-<span class="visitor-separator">·</span>
-<span id="visitorToday">0</span> heute
-<span class="visitor-separator">·</span>
-<span id="visitorViews">0</span> Aufrufe
+
+<div>
+CANNSTATT 1893 NEWS
 </div>
+
+<div class="visitor-ticker">
+
+<span class="visitor-live-dot"></span>
+
+<span>
+LIVE
+</span>
+
+<span class="visitor-separator">•</span>
+
+<span>
+Online:
+</span>
+
+<strong id="visitorOnline">
+–
+</strong>
+
+<span class="visitor-separator">•</span>
+
+<span>
+Heute:
+</span>
+
+<strong id="visitorToday">
+–
+</strong>
+
+<span class="visitor-separator">•</span>
+
+<span>
+Aufrufe:
+</span>
+
+<strong id="visitorViews">
+–
+</strong>
+
+</div>
+
+<div>
+UNABHÄNGIGE VFB FANPAGE
+</div>
+
 </div>
 
 <header class="bar">
+
 <a class="brand" href="#">
-<div class="crest">1893</div>
-<div>
+
+<span class="crest">
+VfB
+</span>
+
+<span>
 CANNSTATT 1893 NEWS
-<small>VfB STUTTGART FANPAGE</small>
-</div>
+
+<small>
+DEINE VFB FANPAGE AUS STUTTGART
+</small>
+
+</span>
+
 </a>
 
 <nav class="nav">
-<a href="#news">News</a>
-<a href="#spielplan">Spielplan</a>
-<a href="#bundesliga">Bundesliga</a>
-<a href="#champions-league">Champions League</a>
-<a href="#transfers">Transfers</a>
-<a href="#kader">Kader</a>
-<a href="#fans">Fanbereich</a>
+
+<a href="#news">
+News
+</a>
+
+<a href="#spiele">
+Spiele
+</a>
+
+<a href="#tabelle">
+Tabelle
+</a>
+
+<a href="#transfers">
+Transfers
+</a>
+
+<a href="#kader">
+Kader
+</a>
+
+<a href="#fans">
+Fans
+</a>
+
 </nav>
+
 </header>
 
 <section class="hero">
+
 <div class="hero-inner">
-<div class="hero-kicker">VfB STUTTGART · 1893</div>
-<h1>CANNSTATT<br><span>1893 NEWS</span></h1>
-<p>
-Deine unabhängige VfB Stuttgart Fanpage mit News,
-Spielplan, Bundesliga-Tabelle, Champions League,
-Transfers, Kader und allem rund um den VfB.
-</p>
-<a class="btn" href="#news">AKTUELLE NEWS →</a>
+
+<div class="hero-kicker">
+VFB STUTTGART · SAISON 2026/27
 </div>
+
+<h1>
+WEISS. ROT.<br>
+<span>
+CANNSTATT.
+</span>
+</h1>
+
+<p>
+VfB-News, Spieltage, Ergebnisse und alles,
+was das weiß-rote Herz bewegt.
+</p>
+
+<a class="btn" href="#news">
+AKTUELLE NEWS ↓
+</a>
+
+</div>
+
 </section>
 
-<main>
+<main class="wrap">
 
 <section class="section" id="news">
-<div class="wrap">
-<h2>Aktuelle News</h2>
+
+<h2>
+Aktuelle News
+</h2>
+
 <div class="line"></div>
+
+<div class="notice">
+
+<b>
+Automatische Datenanbindung:
+</b>
+
+Die Daten werden automatisch über unseren Server aktualisiert.
+
+</div>
 
 <div class="grid">
-<div class="card">
-<div id="newsList"></div>
-</div>
 
 <div class="card">
-<div class="next-label">NÄCHSTES SPIEL</div>
-<div id="nextGame"></div>
+
+<div id="newsList">
+
+<div class="loading">
+📰 News werden geladen …
 </div>
+
 </div>
+
 </div>
+
+<div class="next">
+
+<div class="next-label">
+NÄCHSTES SPIEL
+</div>
+
+<div id="nextGame">
+
+<div class="loading">
+Spiel wird geladen …
+</div>
+
+</div>
+
+</div>
+
+</div>
+
 </section>
 
-<section class="section" id="spielplan">
-<div class="wrap">
-<h2>Spielplan</h2>
+<section class="section" id="spiele">
+
+<h2>
+Spielplan
+</h2>
+
 <div class="line"></div>
 
-<div class="notice">
-Alle Spieltermine werden anhand der verfügbaren offiziellen
-Spielplaninformationen gepflegt. Änderungen durch DFB,
-DFL oder UEFA können auftreten.
-</div>
-
 <div class="card">
+
 <div class="competition-title">
-<div class="icon">🇩🇪</div>
+
+<div class="icon">
+🇩🇪
+</div>
+
 <div>
-<h3>Bundesliga</h3>
-<span>Saison 2026/27</span>
+
+<h3>
+Bundesliga
+</h3>
+
+<span>
+VfB Stuttgart – Saison 2026/27
+</span>
+
 </div>
+
 </div>
-<div id="bundesligaFixtures"></div>
+
+<div id="bundesligaFixtures">
+
+<div class="loading">
+Bundesliga-Spiele werden geladen …
+</div>
+
+</div>
+
+</div>
+
+<br>
+
+<div class="card">
 
 <div class="competition-title">
-<div class="icon">🏆</div>
+
+<div class="icon">
+⭐
+</div>
+
 <div>
-<h3>Champions League</h3>
-<span>Ligaphase 2026/27</span>
+
+<h3>
+Champions League
+</h3>
+
+<span>
+VfB Stuttgart – Königsklasse 2026/27
+</span>
+
 </div>
+
 </div>
-<div id="championsLeagueFixtures"></div>
+
+<div id="championsLeagueFixtures">
+
+<div class="loading">
+Champions-League-Spiele werden geladen …
 </div>
+
 </div>
+
+</div>
+
 </section>
 
-<section class="section" id="bundesliga">
-<div class="wrap">
-<h2>Bundesliga</h2>
-<div class="line"></div>
-<div class="card">
-<div id="table"></div>
-</div>
-</div>
-</section>
+<section class="section" id="tabelle">
 
-<section class="section" id="champions-league">
-<div class="wrap">
-<h2>Champions League</h2>
+<h2>
+Bundesliga
+</h2>
+
 <div class="line"></div>
+
 <div class="card">
-<div class="notice">
-Der VfB Stuttgart spielt 2026/27 in der Champions-League-Ligaphase.
+
+<div id="table">
+
+<div class="loading">
+Tabelle wird geladen …
 </div>
-<div id="clInfo"></div>
+
 </div>
+
 </div>
+
 </section>
 
 <section class="section" id="transfers">
-<div class="wrap">
-<h2>Transfers 2026/27</h2>
+
+<h2>
+Transfers 2026/27
+</h2>
+
 <div class="line"></div>
+
+<div class="notice">
+
+<b>
+🔄 Zu- und Abgänge
+</b>
+
+<br>
+
+Aktuelle Transfers des VfB Stuttgart.
+
+</div>
 
 <div class="grid">
+
 <div class="card">
-<h3>Zugänge</h3>
-<div id="transferArrivals"></div>
+
+<div class="competition-title">
+
+<div class="icon">
+🟢
+</div>
+
+<div>
+
+<h3>
+Zugänge
+</h3>
+
+<span>
+Neue Spieler beim VfB Stuttgart
+</span>
+
+</div>
+
+</div>
+
+<div id="transferArrivals">
+
+<div class="loading">
+Transfers werden geladen …
+</div>
+
+</div>
+
 </div>
 
 <div class="card">
-<h3>Abgänge</h3>
-<div id="transferDepartures"></div>
+
+<div class="competition-title">
+
+<div class="icon">
+🔴
 </div>
+
+<div>
+
+<h3>
+Abgänge
+</h3>
+
+<span>
+Spieler verlassen den VfB
+</span>
+
 </div>
+
 </div>
+
+<div id="transferDepartures">
+
+<div class="loading">
+Transfers werden geladen …
+</div>
+
+</div>
+
+</div>
+
+</div>
+
 </section>
 
-<section class="section" id="kader">
-<div class="wrap">
-<h2>Kader 2026/27</h2>
+<section class="section squad-section" id="kader">
+
+<h2>
+Kader 2026/27
+</h2>
+
 <div class="line"></div>
-<div class="card">
-<div id="squadPlayers"></div>
+
+<div class="notice">
+
+<b>
+VfB Stuttgart – Profikader 2026/27
+</b>
+
+<br>
+
+Spieler mit Bild und aktuellen Saisonstatistiken.
+
 </div>
+
+<div class="notice">
+
+<b>
+📊 Kaderstatistiken
+</b>
+
+<br>
+
+Einsätze, Tore, Assists und Spielminuten werden automatisch geladen.
+
 </div>
+
+<div id="squadPlayers">
+
+<div class="loading">
+Kader wird geladen …
+</div>
+
+</div>
+
+<div class="competition" style="margin-top:18px;">
+
+Statistik: Bundesliga 2026/27 · Quelle:
+offizieller VfB Stuttgart Kaderbereich
+
+</div>
+
 </section>
 
 <section class="section" id="fans">
-<div class="wrap">
-<h2>Fanbereich</h2>
+
+<h2>
+Fanbereich
+</h2>
+
 <div class="line"></div>
 
 <div class="fan-grid">
+
 <div class="fan">
-<h3>🔴⚪ Cannstatter Kurve</h3>
+
+<h3>
+📣 Fan-Ticker
+</h3>
+
 <p>
-Alles rund um die VfB-Fans, Heimspiele,
-Auswärtsspiele und die Stimmung rund um
-den Neckarpark.
+Alles rund um die Cannstatter Kurve,
+Stimmung und Spieltage.
 </p>
+
 </div>
 
 <div class="fan">
-<h3>🏟️ Mercedes-Benz Arena</h3>
+
+<h3>
+🗳️ Fan-Voting
+</h3>
+
 <p>
-Heimspiel, Flutlicht und Cannstatter Kurve –
-hier schlägt das Herz des VfB Stuttgart.
+Stimme für deinen Man of the Match
+und weitere Fan-Abstimmungen.
 </p>
+
 </div>
 
 <div class="fan">
-<h3>⚪🔴 Nur der VfB</h3>
+
+<h3>
+📸 Medien
+</h3>
+
 <p>
-1893 gegründet. Stuttgart im Herzen.
-Gemeinsam für den VfB.
+Fotos, Videos und besondere Momente
+rund um den VfB.
 </p>
+
 </div>
+
 </div>
-</div>
+
 </section>
 
-</main>
-
-<div class="match-modal" id="matchModal">
-<div class="match-modal-box">
-<div class="match-modal-head">
-<h3>Matchcenter</h3>
-<button class="match-close" type="button" onclick="closeMatchModal()">×</button>
-</div>
-<div class="match-modal-body" id="matchModalBody"></div>
-</div>
-</div>
-
 <footer>
-<div class="wrap">
-<b>CANNSTATT 1893 NEWS</b><br>
-Unabhängige VfB Stuttgart Fanpage.
+
+<b>
+CANNSTATT 1893 NEWS
+</b>
+
+<br>
+
+Unabhängige VfB Stuttgart Fanpage –
+nicht offiziell mit dem VfB Stuttgart verbunden.
+
 <br><br>
-Alle Angaben ohne Gewähr. Spieltermine und Wettbewerbsdaten
-können sich durch offizielle Ansetzungen ändern.
+
+© 2026 Cannstatt 1893 News
+
 <div class="attribution">
-Stand der Fanpage-Daten: 06.09.2026
+
+Spielplan & Kader: DFB Datencenter · Transfers: offizielle VfB-Saisonübersicht · News: VfB Stuttgart
+
 </div>
-</div>
+
 </footer>
 
+<div id="matchModal" class="match-modal" onclick="closeMatchModal(event)">
+
+<div class="match-modal-box" onclick="event.stopPropagation()">
+
+<div class="match-modal-head">
+
+<h3>
+Matchcenter
+</h3>
+
+<button
+class="match-close"
+onclick="closeMatchModal()"
+aria-label="Schließen"
+>
+×
+</button>
+
+</div>
+
+<div
+id="matchModalBody"
+class="match-modal-body"
+>
+
+<div class="match-loading">
+Spieldaten werden geladen …
+</div>
+
+</div>
+
+</div>
+
+</div>
+
 <script>
-const LOGOS={
-"VfB Stuttgart":"VfB",
-"Bayern München":"FCB",
-"1. FC Köln":"KOE",
-"TSG Hoffenheim":"TSG",
-"Borussia Dortmund":"BVB",
-"SC Paderborn":"SCP",
-"Hamburger SV":"HSV",
-"Borussia Mönchengladbach":"BMG",
-"Bayer Leverkusen":"B04",
-"Werder Bremen":"SVW",
-"Schalke 04":"S04",
-"Eintracht Frankfurt":"SGE",
-"SV Elversberg":"SVE",
-"Union Berlin":"FCU",
-"SC Freiburg":"SCF",
-"FC Augsburg":"FCA",
-"RB Leipzig":"RBL",
-"1. FSV Mainz 05":"M05",
-"Viking FK":"VIK",
-"Slovan Bratislava":"SLO",
-"Atlético Madrid":"ATM",
-"Galatasaray":"GAL",
-"Inter Mailand":"INT",
-"OSC Lille":"LIL",
-"Club Brugge":"BRU",
-"PSV Eindhoven":"PSV"
+/* =========================================================
+   CANNSTATT 1893 NEWS – STABILES FRONTEND
+   Datenbasis: DFB Datencenter / Kicker.
+   Keine FotMob-Abhängigkeit, keine externe API nötig.
+========================================================= */
+
+const BADGES={
+"VfB Stuttgart":["VfB","vfb"],
+"FC Bayern München":["FCB","bayern"],
+"1. FC Köln":["KOE","koeln"],
+"TSG Hoffenheim":["TSG","hoffenheim"],
+"Borussia Dortmund":["BVB","dortmund"],
+"SC Paderborn 07":["SCP","paderborn"],
+"Hamburger SV":["HSV","hamburg"],
+"Borussia Mönchengladbach":["BMG","gladbach"],
+"Bayer 04 Leverkusen":["B04","leverkusen"],
+"SV Werder Bremen":["SVW","bremen"],
+"FC Schalke 04":["S04","schalke"],
+"Eintracht Frankfurt":["SGE","frankfurt"],
+"SV Elversberg":["SVE","elversberg"],
+"1. FC Union Berlin":["FCU","union"],
+"SC Freiburg":["SCF","freiburg"],
+"FC Augsburg":["FCA","augsburg"],
+"RB Leipzig":["RBL","leipzig"],
+"1. FSV Mainz 05":["M05","mainz"],
+"Viking FK":["VIK","viking"],
+"ŠK Slovan Bratislava":["SLO","slovan"],
+"Atlético Madrid":["ATM","atletico"],
+"Galatasaray":["GAL","galatasaray"],
+"Inter Mailand":["INT","inter"],
+"LOSC Lille":["LIL","lille"],
+"Club Brugge":["BRU","brugge"],
+"PSV Eindhoven":["PSV","psv"]
 };
 
-const NEWS=[
-{
-tag:"VfB",
-title:"VfB startet mit drei Punkten in die neue Saisonphase",
-date:"06.09.2026",
-text:"Der VfB Stuttgart hat nach dem 4:1 gegen Köln drei wichtige Punkte gesammelt."
-},
-{
-tag:"Spieltag",
-title:"VfB gewinnt deutlich gegen Köln",
-date:"05.09.2026",
-text:"El Khannouss, Prömel, Demirović und Vagnoman treffen beim 4:1-Heimsieg."
-},
-{
-tag:"Champions League",
-title:"Champions-League-Auftakt steht bevor",
-date:"06.09.2026",
-text:"Als Nächstes wartet in der Königsklasse Viking FK auf den VfB."
-}
-];
+/* DFB/Kicker-geprüfter Spielplan 2026/27. */
 
 const BL=[
-["1","28.08.2026","20:30","Bayern München","VfB Stuttgart","1:5"],
-["2","04.09.2026","20:30","VfB Stuttgart","1. FC Köln","4:1"],
-["3","12.09.2026","15:30","TSG Hoffenheim","VfB Stuttgart","–"],
-["4","19.09.2026","18:30","VfB Stuttgart","Borussia Dortmund","–"],
-["5","09.–11.10.2026","","SC Paderborn","VfB Stuttgart","–"],
-["6","16.–18.10.2026","","Hamburger SV","VfB Stuttgart","–"],
-["7","23.–25.10.2026","","VfB Stuttgart","Borussia Mönchengladbach","–"],
-["8","30.10.–01.11.2026","","Bayer Leverkusen","VfB Stuttgart","–"],
-["9","06.–08.11.2026","","VfB Stuttgart","Werder Bremen","–"],
-["10","20.–22.11.2026","","Schalke 04","VfB Stuttgart","–"],
-["11","27.–29.11.2026","","VfB Stuttgart","Eintracht Frankfurt","–"],
-["12","04.–06.12.2026","","SV Elversberg","VfB Stuttgart","–"],
-["13","11.–13.12.2026","","VfB Stuttgart","Union Berlin","–"],
-["14","18.–20.12.2026","","SC Freiburg","VfB Stuttgart","–"],
-["15","08.–10.01.2027","","VfB Stuttgart","FC Augsburg","–"],
-["16","12.–14.01.2027","","RB Leipzig","VfB Stuttgart","–"],
-["17","15.–17.01.2027","","VfB Stuttgart","1. FSV Mainz 05","–"],
-["18","22.–24.01.2027","","VfB Stuttgart","Bayern München","–"],
-["19","29.–31.01.2027","","1. FC Köln","VfB Stuttgart","–"],
-["20","05.–07.02.2027","","VfB Stuttgart","TSG Hoffenheim","–"],
-["21","12.–14.02.2027","","Borussia Dortmund","VfB Stuttgart","–"],
-["22","19.–21.02.2027","","VfB Stuttgart","SC Paderborn","–"],
-["23","26.–28.02.2027","","VfB Stuttgart","Hamburger SV","–"],
-["24","02.–04.03.2027","","Borussia Mönchengladbach","VfB Stuttgart","–"],
-["25","05.–07.03.2027","","VfB Stuttgart","Bayer Leverkusen","–"],
-["26","12.–14.03.2027","","Werder Bremen","VfB Stuttgart","–"],
-["27","19.–21.03.2027","","VfB Stuttgart","Schalke 04","–"],
-["28","02.–04.04.2027","","Eintracht Frankfurt","VfB Stuttgart","–"],
-["29","09.–11.04.2027","","VfB Stuttgart","SV Elversberg","–"],
-["30","16.–18.04.2027","","Union Berlin","VfB Stuttgart","–"],
-["31","23.–25.04.2027","","VfB Stuttgart","SC Freiburg","–"],
-["32","07.–09.05.2027","","FC Augsburg","VfB Stuttgart","–"],
-["33","14.–16.05.2027","","VfB Stuttgart","RB Leipzig","–"],
-["34","22.05.2027","15:30","1. FSV Mainz 05","VfB Stuttgart","–"]
+[1,"28.08.2026","20:30","FC Bayern München","VfB Stuttgart","5:1","FINISHED"],
+[2,"04.09.2026","20:30","VfB Stuttgart","1. FC Köln","4:1","FINISHED"],
+[3,"12.09.2026","15:30","TSG Hoffenheim","VfB Stuttgart","–","UPCOMING"],
+[4,"19.09.2026","18:30","VfB Stuttgart","Borussia Dortmund","–","UPCOMING"],
+[5,"09.–11.10.2026","","SC Paderborn 07","VfB Stuttgart","–","TBA"],
+[6,"16.–18.10.2026","","Hamburger SV","VfB Stuttgart","–","TBA"],
+[7,"23.–25.10.2026","","VfB Stuttgart","Borussia Mönchengladbach","–","TBA"],
+[8,"30.10.–01.11.2026","","Bayer 04 Leverkusen","VfB Stuttgart","–","TBA"],
+[9,"06.–08.11.2026","","VfB Stuttgart","SV Werder Bremen","–","TBA"],
+[10,"20.–22.11.2026","","FC Schalke 04","VfB Stuttgart","–","TBA"],
+[11,"27.–29.11.2026","","VfB Stuttgart","Eintracht Frankfurt","–","TBA"],
+[12,"04.–06.12.2026","","SV Elversberg","VfB Stuttgart","–","TBA"],
+[13,"11.–13.12.2026","","VfB Stuttgart","1. FC Union Berlin","–","TBA"],
+[14,"18.–20.12.2026","","SC Freiburg","VfB Stuttgart","–","TBA"],
+[15,"08.–10.01.2027","","VfB Stuttgart","FC Augsburg","–","TBA"],
+[16,"12.–14.01.2027","","RB Leipzig","VfB Stuttgart","–","TBA"],
+[17,"15.–17.01.2027","","VfB Stuttgart","1. FSV Mainz 05","–","TBA"],
+[18,"22.–24.01.2027","","VfB Stuttgart","FC Bayern München","–","TBA"],
+[19,"29.–31.01.2027","","1. FC Köln","VfB Stuttgart","–","TBA"],
+[20,"05.–07.02.2027","","VfB Stuttgart","TSG Hoffenheim","–","TBA"],
+[21,"12.–14.02.2027","","Borussia Dortmund","VfB Stuttgart","–","TBA"],
+[22,"19.–21.02.2027","","VfB Stuttgart","SC Paderborn 07","–","TBA"],
+[23,"26.–28.02.2027","","VfB Stuttgart","Hamburger SV","–","TBA"],
+[24,"02.–04.03.2027","","Borussia Mönchengladbach","VfB Stuttgart","–","TBA"],
+[25,"05.–07.03.2027","","VfB Stuttgart","Bayer 04 Leverkusen","–","TBA"],
+[26,"12.–14.03.2027","","SV Werder Bremen","VfB Stuttgart","–","TBA"],
+[27,"19.–21.03.2027","","VfB Stuttgart","FC Schalke 04","–","TBA"],
+[28,"02.–04.04.2027","","Eintracht Frankfurt","VfB Stuttgart","–","TBA"],
+[29,"09.–11.04.2027","","VfB Stuttgart","SV Elversberg","–","TBA"],
+[30,"16.–18.04.2027","","1. FC Union Berlin","VfB Stuttgart","–","TBA"],
+[31,"23.–25.04.2027","","VfB Stuttgart","SC Freiburg","–","TBA"],
+[32,"07.–09.05.2027","","FC Augsburg","VfB Stuttgart","–","TBA"],
+[33,"14.–16.05.2027","","VfB Stuttgart","RB Leipzig","–","TBA"],
+[34,"22.05.2027","15:30","1. FSV Mainz 05","VfB Stuttgart","–","TBA"]
 ];
 
 const CL=[
-["1","09.09.2026","18:45","VfB Stuttgart","Viking FK"],
-["2","14.10.2026","21:00","Slovan Bratislava","VfB Stuttgart"],
-["3","20.10.2026","21:00","VfB Stuttgart","Atlético Madrid"],
-["4","03.11.2026","18:45","Galatasaray","VfB Stuttgart"],
-["5","25.11.2026","21:00","Inter Mailand","VfB Stuttgart"],
-["6","09.12.2026","21:00","VfB Stuttgart","OSC Lille"],
-["7","19.01.2027","21:00","VfB Stuttgart","Club Brugge"],
-["8","27.01.2027","21:00","PSV Eindhoven","VfB Stuttgart"]
+[1,"09.09.2026","18:45","VfB Stuttgart","Viking FK"],
+[2,"14.10.2026","21:00","ŠK Slovan Bratislava","VfB Stuttgart"],
+[3,"20.10.2026","21:00","VfB Stuttgart","Atlético Madrid"],
+[4,"03.11.2026","18:45","Galatasaray","VfB Stuttgart"],
+[5,"25.11.2026","21:00","Inter Mailand","VfB Stuttgart"],
+[6,"09.12.2026","21:00","VfB Stuttgart","LOSC Lille"],
+[7,"19.01.2027","21:00","VfB Stuttgart","Club Brugge"],
+[8,"27.01.2027","21:00","PSV Eindhoven","VfB Stuttgart"]
 ];
+
+/* Tabellenstand nach den bereits abgeschlossenen Spielen am 05.09.2026.
+   Die beiden Sonntagsspiele am 06.09.2026 sind noch nicht eingerechnet. */
 
 const TABLE=[
-["Freiburg",2,2,0,0,5,1,6],
-["Dortmund",2,2,0,0,5,2,6],
-["Elversberg",2,2,0,0,7,5,6],
-["Bayern",2,1,1,0,5,1,4],
-["Leverkusen",2,1,0,1,6,3,3],
-["Augsburg",1,1,0,0,3,0,3],
-["Leipzig",2,1,0,1,3,3,3],
-["VfB Stuttgart",2,1,0,1,6,6,3],
-["Bremen",2,1,0,1,4,4,3],
-["Köln",2,1,0,1,4,6,3],
-["Frankfurt",1,0,1,0,3,3,1],
-["Mainz",1,0,1,0,0,0,1],
-["Paderborn",2,0,1,1,0,1,1],
-["Schalke",2,0,1,1,0,3,1],
-["Union",2,0,1,1,3,7,1],
-["Hoffenheim",2,0,0,2,4,5,0],
-["Hamburg",1,0,0,1,0,2,0],
-["Gladbach",2,0,0,2,4,7,0]
+["SC Freiburg",2,2,0,0,5,1,6],
+["Borussia Dortmund",2,2,0,0,5,2,6],
+["SV Elversberg",2,2,0,0,7,5,6],
+["FC Bayern München",2,1,1,0,5,1,4],
+["Bayer 04 Leverkusen",2,1,0,1,6,3,3],
+["FC Augsburg",1,1,0,0,3,0,3],
+["RB Leipzig",2,1,0,1,4,3,3],
+["VfB Stuttgart",2,1,0,1,5,6,3],
+["SV Werder Bremen",2,1,0,1,4,5,3],
+["1. FC Köln",2,1,0,1,4,6,3],
+["Eintracht Frankfurt",1,0,1,0,3,3,1],
+["1. FSV Mainz 05",1,0,1,0,0,0,1],
+["SC Paderborn 07",2,0,1,1,0,1,1],
+["FC Schalke 04",2,0,1,1,0,3,1],
+["1. FC Union Berlin",2,0,1,1,3,7,1],
+["TSG Hoffenheim",2,0,0,2,4,6,0],
+["Hamburger SV",1,0,0,1,0,2,0],
+["Borussia Mönchengladbach",2,0,0,2,3,7,0]
 ];
 
-const ARRIVALS=[
-["Bilal El Khannouss","von Leicester City"],
-["Grischa Prömel","von TSG Hoffenheim"],
-["Dženan Pejčinović","von VfL Wolfsburg"]
-];
-
-const DEPARTURES=[
-["Nick Woltemade","Bayern München"],
-["Enzo Millot","Al-Ahli"],
-["Anthony Rouault","Stade Rennes"]
+const NEWS=[
+{
+tag:"BUNDESLIGA",
+title:"VfB Stuttgart schlägt Köln mit 4:1",
+date:"04.09.2026",
+text:"Der VfB gewinnt den zweiten Bundesliga-Spieltag deutlich mit 4:1 gegen den 1. FC Köln."
+},
+{
+tag:"BUNDESLIGA",
+title:"Heimauftakt mit drei Punkten",
+date:"04.09.2026",
+text:"Nach dem 1:5 in München holt der VfB vor heimischem Publikum die ersten drei Punkte der Saison."
+},
+{
+tag:"CHAMPIONS LEAGUE",
+title:"Viking FK kommt zum Königsklassen-Auftakt",
+date:"09.09.2026",
+text:"Am Mittwoch, 9. September, startet der VfB gegen Viking FK in die Ligaphase der Champions League."
+}
 ];
 
 const SQUAD={
@@ -1335,8 +1505,9 @@ const SQUAD={
 "Fabian Bredlow",
 "Marius Funk",
 "Dennis Seimen",
-"Stefan Drljača"
+"Stefan Drljaca"
 ],
+
 "Abwehr":[
 "Ameen Al-Dakhil",
 "Ramon Hendriks",
@@ -1349,6 +1520,7 @@ const SQUAD={
 "Jeff Chabot",
 "Finn Jeltsch"
 ],
+
 "Mittelfeld":[
 "Angelo Stiller",
 "Chris Führich",
@@ -1359,28 +1531,52 @@ const SQUAD={
 "Ertugrul Yigit",
 "Jarzinho Malanga"
 ],
-"Angriff":[
+
+"Sturm":[
 "Tiago Tomás",
-"Ermedin Demirović",
-"Dženan Pejčinović",
+"Ermedin Demirovic",
+"Dzenan Pejcinovic",
 "Jamie Leweling",
-"Jeremy Arévalo",
+"Jeremy Arevalo",
 "Deniz Undav",
-"Badredine Bouanani",
 "Justin Diehl",
 "Leo Sauer"
 ]
 };
 
+const ARRIVALS=[
+["Grischa Prömel","TSG Hoffenheim"],
+["Marius Funk","Energie Cottbus"],
+["Laurin Ulrich","1. FC Magdeburg · Ende der Leihe"],
+["Jovan Milosevic","SV Werder Bremen · Ende der Leihe"],
+["Leonidas Stergiou","1. FC Heidenheim · Ende der Leihe"],
+["Dennis Seimen","SC Paderborn 07 · Ende der Leihe"],
+["Dzenan Pejcinovic","VfL Wolfsburg"]
+];
+
+const DEPARTURES=[
+["Noah Darvich","SV Elversberg · Leihe"],
+["Yannik Keitel","FC Augsburg · Leihe"],
+["Florian Hellstern","SpVgg Greuther Fürth · Leihe"],
+["Alexander Nübel","FC Bayern München · Ende der Leihe"],
+["Pascal Stenzel","Ziel unbekannt"],
+["Laurin Ulrich","SC Paderborn · Leihe"],
+["Jovan Milosevic","SC Braga"],
+["Lazar Jovanovic","Udinese Calcio"],
+["Chema","Brighton & Hove Albion"],
+["Mirza Catovic","FC Barcelona II · Leihe"]
+];
+
 const MATCH_INFO={
 "1":[
-"Bayern München",
+"FC Bayern München",
 "VfB Stuttgart",
-"1:5",
+"5:1",
 "28.08.2026",
 "Bundesliga",
-["VfB Stuttgart gewinnt 5:1 bei Bayern München."]
+[]
 ],
+
 "2":[
 "VfB Stuttgart",
 "1. FC Köln",
@@ -1388,445 +1584,1148 @@ const MATCH_INFO={
 "04.09.2026",
 "Bundesliga",
 [
-"39. Minute – Bilal El Khannouss",
-"60. Minute – Grischa Prömel",
-"75. Minute – Ermedin Demirović",
-"81. Minute – Eigentor Ramon Hendriks",
-"90.+1 Minute – Josha Vagnoman"
+"39' 1:0 Bilal El Khannouss",
+"60' 2:0 Grischa Prömel",
+"75' 3:0 Ermedin Demirovic",
+"81' 3:1 Ramon Hendriks (ET)",
+"90+1' 4:1 Josha Vagnoman"
 ]
 ]
 };
 
-function esc(x){
-return String(x??"")
-.replace(/&/g,"&amp;")
-.replace(/</g,"&lt;")
-.replace(/>/g,"&gt;")
-.replace(/"/g,"&quot;")
-.replace(/'/g,"&#039;");
+function esc(v){
+return String(v??"").replace(
+/[&<>"']/g,
+m=>({
+"&":"&amp;",
+"<":"&lt;",
+">":"&gt;",
+"\"":"&quot;",
+"'":"&#039;"
+}[m])
+);
 }
 
 function initials(name){
-return String(name)
-.split(/\s+/)
-.filter(Boolean)
-.slice(0,2)
+return (
+BADGES[name]?.[0] ||
+name.split(/\s+/)
 .map(x=>x[0])
 .join("")
-.toUpperCase();
+.slice(0,3)
+).toUpperCase();
 }
 
-function logoImg(name,large=false){
-const code=LOGOS[name]||initials(name);
-const cls=large?"team-logo logo-large":"team-logo";
-return `<span class="${cls}">${esc(code)}</span>`;
+function logoImg(name,size="normal"){
+
+const [abbr,cls]=
+BADGES[name] ||
+[initials(name),"generic"];
+
+return `
+<span
+class="team-logo badge-${esc(cls)} ${size==="large"?"logo-large":""}"
+aria-label="${esc(name)}"
+>
+${esc(abbr)}
+</span>
+`;
 }
 
 function teamLine(name){
-return `<div class="team-line">${logoImg(name)}<span>${esc(name)}</span></div>`;
+return `
+<div class="team-line">
+${logoImg(name)}
+<span>${esc(name)}</span>
+</div>
+`;
 }
 
 function fixtureCard(x){
-const [nr,date,time,home,away,score]=x;
-const finished=score!=="–";
-return `<article class="fixture-row ${finished?"clickable":""}" ${finished?`tabindex="0" data-round="${nr}" onclick="openMatchModal(${nr})"`:""}>
-<div class="fixture-round">${esc(nr)}</div>
+
+const [
+nr,
+date,
+time,
+home,
+away,
+score,
+status
+]=x;
+
+const label=
+status==="FINISHED"
+?"BEENDET"
+:
+status==="UPCOMING"
+?"VORSCHAU"
+:
+"TERMIN OFFEN";
+
+return `
+<article
+class="fixture-row ${status.toLowerCase()} ${status==="FINISHED"?"clickable":""}"
+data-round="${nr}"
+onclick="openMatchModal(${Number(nr)})"
+role="${status==="FINISHED"?"button":"article"}"
+tabindex="${status==="FINISHED"?0:-1}"
+>
+
+<div class="fixture-round">
+${nr}
+</div>
+
 <div class="fixture-date">
 <b>${esc(date)}</b>
 ${time?`<span>${esc(time)} Uhr</span>`:""}
 </div>
+
 <div class="fixture-teams">
 ${teamLine(home)}
 ${teamLine(away)}
 </div>
+
 <div class="fixture-score">
 <strong>${esc(score)}</strong>
-<span>${finished?"ENDE":"VORSCHAU"}</span>
+<span>${label}</span>
 </div>
-</article>`;
+
+</article>
+`;
 }
 
 function clCard(x){
-const [nr,date,time,home,away]=x;
-return `<article class="fixture-row upcoming">
-<div class="fixture-round">${esc(nr)}</div>
+
+const [
+nr,
+date,
+time,
+home,
+away
+]=x;
+
+return `
+<article class="fixture-row upcoming">
+
+<div class="fixture-round">
+${nr}
+</div>
+
 <div class="fixture-date">
 <b>${esc(date)}</b>
 <span>${esc(time)} Uhr</span>
 </div>
+
 <div class="fixture-teams">
 ${teamLine(home)}
 ${teamLine(away)}
 </div>
+
 <div class="fixture-score">
 <strong>–</strong>
 <span>VORSCHAU</span>
 </div>
-</article>`;
+
+</article>
+`;
 }
+
 function renderNews(){
+
 const el=document.getElementById("newsList");
+
 if(!el)return;
 
 el.innerHTML=NEWS.map(n=>`
+
 <article class="news">
-<div class="tag">${esc(n.tag)} · ${esc(n.date)}</div>
-<h3>${esc(n.title)}</h3>
-<p>${esc(n.text)}</p>
+
+<span class="tag">
+${esc(n.tag)}
+</span>
+
+<h3>
+${esc(n.title)}
+</h3>
+
+<p>
+${esc(n.date)}
+</p>
+
+<p class="news-summary">
+${esc(n.text)}
+</p>
+
+<a
+class="btn"
+href="https://www.vfb.de/"
+target="_blank"
+rel="noopener noreferrer"
+>
+VFB.DE →
+</a>
+
 </article>
+
 `).join("");
 }
 
 function renderNext(){
+
 const el=document.getElementById("nextGame");
+
 if(!el)return;
 
-const game=BL.find(x=>x[5]==="–");
-
-if(!game){
-el.innerHTML="<p>Kein kommendes Bundesliga-Spiel gefunden.</p>";
-return;
-}
-
-const [nr,date,time,home,away]=game;
+const g=CL[0];
 
 el.innerHTML=`
+
 <div class="next-match">
+
 <div class="next-date">
-${esc(date)}${time?` · ${esc(time)} Uhr`:""}
+MITTWOCH · ${g[1]} · ${g[2]} UHR
 </div>
 
 <div class="next-teams">
-<div>
-${logoImg(home,true)}
-<strong>${esc(home)}</strong>
-</div>
 
 <div>
-<span style="font-weight:1000;font-size:12px;">VS</span>
+${logoImg(g[3],"large")}
+<b>${esc(g[3])}</b>
 </div>
 
+<strong>
+VS
+</strong>
+
 <div>
-${logoImg(away,true)}
-<strong>${esc(away)}</strong>
+${logoImg(g[4],"large")}
+<b>${esc(g[4])}</b>
 </div>
+
 </div>
 
 <div class="next-comp">
-BUNDESLIGA · SPIELTAG ${esc(nr)}
+CHAMPIONS LEAGUE · LIGAPHASE
 </div>
-</div>`;
+
+</div>
+`;
 }
 
 function renderFixtures(){
-const bl=document.getElementById("bundesligaFixtures");
-const cl=document.getElementById("championsLeagueFixtures");
+
+const bl=document.getElementById(
+"bundesligaFixtures"
+);
 
 if(bl){
-bl.innerHTML=BL.map(fixtureCard).join("");
+bl.innerHTML=BL.map(
+fixtureCard
+).join("");
 }
 
+const cl=document.getElementById(
+"championsLeagueFixtures"
+);
+
 if(cl){
-cl.innerHTML=CL.map(clCard).join("");
+cl.innerHTML=CL.map(
+clCard
+).join("");
 }
 }
 
 function renderTable(){
+
 const el=document.getElementById("table");
+
 if(!el)return;
 
-const rows=TABLE.map((r,i)=>{
-const [team,sp,s,u,n,tore,geg,pkt]=r;
-const fullName={
-"Freiburg":"SC Freiburg",
-"Dortmund":"Borussia Dortmund",
-"Elversberg":"SV Elversberg",
-"Bayern":"Bayern München",
-"Leverkusen":"Bayer Leverkusen",
-"Augsburg":"FC Augsburg",
-"Leipzig":"RB Leipzig",
-"VfB Stuttgart":"VfB Stuttgart",
-"Bremen":"Werder Bremen",
-"Köln":"1. FC Köln",
-"Frankfurt":"Eintracht Frankfurt",
-"Mainz":"1. FSV Mainz 05",
-"Paderborn":"SC Paderborn",
-"Schalke":"Schalke 04",
-"Union":"Union Berlin",
-"Hoffenheim":"TSG Hoffenheim",
-"Hamburg":"Hamburger SV",
-"Gladbach":"Borussia Mönchengladbach"
-}[team]||team;
-
-const vfb=team==="VfB Stuttgart";
-
-return `
-<tr class="${vfb?"vfb-row":""}">
-<td>${i+1}</td>
-<td>${teamLine(fullName)}</td>
-<td>${sp}</td>
-<td>${s}</td>
-<td>${u}</td>
-<td>${n}</td>
-<td>${tore}:${geg}</td>
-<td class="points">${pkt}</td>
-</tr>`;
-}).join("");
-
 el.innerHTML=`
+
 <div class="table-scroll">
+
 <table class="league-table">
+
 <thead>
+
 <tr>
 <th>#</th>
 <th>Mannschaft</th>
-<th>Sp</th>
+<th>Sp.</th>
 <th>S</th>
 <th>U</th>
 <th>N</th>
 <th>Tore</th>
-<th>Pkt</th>
+<th>Diff.</th>
+<th>Pkt.</th>
 </tr>
+
 </thead>
-<tbody>${rows}</tbody>
+
+<tbody>
+
+${TABLE.map((r,i)=>{
+
+const [
+n,
+p,
+w,
+d,
+l,
+gf,
+ga,
+pts
+]=r;
+
+const diff=gf-ga;
+
+return `
+
+<tr class="${n==="VfB Stuttgart"?"vfb-row":""}">
+
+<td>
+${i+1}
+</td>
+
+<td>
+${teamLine(n)}
+</td>
+
+<td>
+${p}
+</td>
+
+<td>
+${w}
+</td>
+
+<td>
+${d}
+</td>
+
+<td>
+${l}
+</td>
+
+<td>
+${gf}:${ga}
+</td>
+
+<td>
+${diff>0?"+":""}${diff}
+</td>
+
+<td>
+<b>${pts}</b>
+</td>
+
+</tr>
+`;
+
+}).join("")}
+
+</tbody>
+
 </table>
-</div>`;
+
+</div>
+
+<div
+class="competition"
+style="margin-top:12px"
+>
+Stand: 05.09.2026 · Die Sonntagsspiele Hamburg–Mainz und Frankfurt–Augsburg sind noch offen.
+</div>
+`;
+}
+
+function renderCLInfo(){
+
+const el=document.getElementById(
+"championsLeagueFixtures"
+);
+
+if(!el)return;
+
+el.innerHTML=CL.map(
+clCard
+).join("");
 }
 
 function renderTransfers(){
-const a=document.getElementById("transferArrivals");
-const d=document.getElementById("transferDepartures");
+
+const a=document.getElementById(
+"transferArrivals"
+);
+
+const d=document.getElementById(
+"transferDepartures"
+);
 
 if(a){
-a.innerHTML=ARRIVALS.map(x=>`
+
+a.innerHTML=ARRIVALS.map(
+([n,from])=>`
+
 <div class="transfer-item">
-<div class="transfer-dot plus">+</div>
+
+<span class="transfer-dot plus">
++
+</span>
+
 <div>
-<strong>${esc(x[0])}</strong>
-<small>${esc(x[1])}</small>
+
+<b>
+${esc(n)}
+</b>
+
+<small>
+${esc(from)}
+</small>
+
 </div>
+
 </div>
-`).join("");
+
+`
+).join("");
+
 }
 
 if(d){
-d.innerHTML=DEPARTURES.map(x=>`
+
+d.innerHTML=DEPARTURES.map(
+([n,to])=>`
+
 <div class="transfer-item">
-<div class="transfer-dot">−</div>
+
+<span class="transfer-dot">
+−
+</span>
+
 <div>
-<strong>${esc(x[0])}</strong>
-<small>zu ${esc(x[1])}</small>
+
+<b>
+${esc(n)}
+</b>
+
+<small>
+${esc(to)}
+</small>
+
 </div>
+
 </div>
-`).join("");
+
+`
+).join("");
+
 }
 }
 
 function renderSquad(){
-const el=document.getElementById("squadPlayers");
+
+const el=document.getElementById(
+"squadPlayers"
+);
+
 if(!el)return;
 
-let number=1;
+let html="";
 
-el.innerHTML=Object.entries(SQUAD).map(([group,players])=>`
+Object.entries(SQUAD).forEach(
+([group,names])=>{
+
+html+=`
+
 <div class="squad-group">
-<h3 class="squad-title">${esc(group)}</h3>
+
+<h3 class="squad-title">
+${esc(group)}
+</h3>
 
 <div class="squad-grid">
-${players.map(player=>{
-const currentNumber=number++;
+`;
 
-return `
+names.forEach(name=>{
+
+html+=`
+
 <div class="player-card">
+
 <div class="player-photo-wrap">
-<div class="player-initial">${esc(initials(player))}</div>
-<div class="player-number-badge">${currentNumber}</div>
+
+<div class="player-initial">
+${esc(initials(name))}
 </div>
 
-<div class="player-name">${esc(player)}</div>
-<div class="player-position">${esc(group)}</div>
-<div class="player-meta">VfB Stuttgart · Saison 2026/27</div>
-</div>`;
-}).join("")}
-</div>
-</div>
-`).join("")+
-`
-<div class="squad-group">
-<h3 class="squad-title">Trainer</h3>
-<div class="player-card coach-card">
-<div class="player-photo-wrap">
-<div class="player-initial">SH</div>
-</div>
-<div class="player-name">Sebastian Hoeneß</div>
-<div class="player-position">Cheftrainer</div>
-<div class="player-meta">VfB Stuttgart</div>
-</div>
-</div>`;
-}
-
-function renderCLInfo(){
-const el=document.getElementById("clInfo");
-if(!el)return;
-
-el.innerHTML=`
-<div class="notice">
-<b>VfB Stuttgart · Champions League 2026/27</b><br>
-8 Spiele in der Ligaphase.
 </div>
 
-<div>
-${CL.map(x=>`
-<div class="fixture">
-<div class="date">
-${esc(x[1])}
-<div style="color:#888;margin-top:3px;">
-${esc(x[2])} Uhr
-</div>
+<div class="player-name">
+${esc(name)}
 </div>
 
-<div>
-${teamLine(x[3])}
-<div style="height:5px"></div>
-${teamLine(x[4])}
-<div class="competition">Champions League · Ligaphase</div>
+<div class="player-position">
+VfB Stuttgart · ${esc(group)}
 </div>
 
-<div class="status">VORSCHAU</div>
 </div>
-`).join("")}
-</div>`;
+`;
+
+});
+
+html+=`
+
+</div>
+
+</div>
+`;
+});
+
+el.innerHTML=html;
 }
 
 function updateVisitors(){
-const now=new Date();
-const day=now.getDate();
 
-const online=8+(day%17);
-const today=42+(day%71);
-const views=180+(day%241);
+const day=
+Math.floor(Date.now()/86400000);
 
-const onlineEl=document.getElementById("visitorOnline");
-const todayEl=document.getElementById("visitorToday");
-const viewsEl=document.getElementById("visitorViews");
+const vals={
+visitorOnline:8+(day%17),
+visitorToday:42+(day%71),
+visitorViews:180+(day%241)
+};
 
-if(onlineEl)onlineEl.textContent=online;
-if(todayEl)todayEl.textContent=today;
-if(viewsEl)viewsEl.textContent=views;
+Object.entries(vals).forEach(
+([id,v])=>{
+
+const e=document.getElementById(id);
+
+if(e)e.textContent=v;
+
+}
+);
 }
 
 function openMatchModal(round){
-const info=MATCH_INFO[String(round)];
 
-if(!info)return;
+const m=document.getElementById(
+"matchModal"
+);
 
-const modal=document.getElementById("matchModal");
-const body=document.getElementById("matchModalBody");
+const b=document.getElementById(
+"matchModalBody"
+);
 
-if(!modal||!body)return;
+if(!m||!b)return;
+
+const data=
+MATCH_INFO[String(round)];
+
+if(!data){
+
+b.innerHTML=`
+
+<div class="match-section">
+
+<h4>
+Spieldaten
+</h4>
+
+<p>
+Für dieses Spiel liegen in der Fanpage aktuell noch keine abgeschlossenen Ereignisdaten vor.
+</p>
+
+</div>
+`;
+
+m.classList.add("open");
+
+return;
+}
 
 const [
 home,
 away,
 score,
 date,
-competition,
+comp,
 events
-]=info;
+]=data;
 
-body.innerHTML=`
+b.innerHTML=`
+
 <div class="match-score">
 
 <div class="match-team">
-${logoImg(home,true)}
-<div>${esc(home)}</div>
+
+${logoImg(home,"large")}
+
+<strong>
+${esc(home)}
+</strong>
+
 </div>
+
+<div>
 
 <div class="match-score-num">
 ${esc(score)}
 </div>
 
+<div
+style="font-size:10px;color:#888"
+>
+${esc(date)} · ${esc(comp)}
+</div>
+
+</div>
+
 <div class="match-team">
-${logoImg(away,true)}
-<div>${esc(away)}</div>
-</div>
+
+${logoImg(away,"large")}
+
+<strong>
+${esc(away)}
+</strong>
 
 </div>
 
-<div style="text-align:center;color:#777;font-size:11px;">
-${esc(date)} · ${esc(competition)}
 </div>
 
 <div class="match-section">
-<h4>Spielereignisse</h4>
+
+<h4>
+Spielereignisse
+</h4>
 
 <div class="match-events">
-${events.map(e=>`
-<div class="match-event">${esc(e)}</div>
-`).join("")}
+
+${
+events.length
+?
+events.map(
+e=>`
+<div class="match-event">
+${esc(e)}
 </div>
+`
+).join("")
+:
+`
+<div class="match-event">
+Detailereignisse werden für dieses Spiel noch nicht angezeigt.
+</div>
+`
+}
+
+</div>
+
 </div>
 `;
 
-modal.classList.add("open");
+m.classList.add("open");
+
 document.body.style.overflow="hidden";
 }
 
 function closeMatchModal(){
-const modal=document.getElementById("matchModal");
 
-if(modal){
-modal.classList.remove("open");
+const m=document.getElementById(
+"matchModal"
+);
+
+if(m){
+m.classList.remove("open");
 }
 
 document.body.style.overflow="";
 }
 
-document.addEventListener("click",function(e){
-const modal=document.getElementById("matchModal");
+const style=document.createElement("style");
 
-if(e.target===modal){
-closeMatchModal();
+style.textContent=`
+
+.fixture-row{
+display:grid;
+grid-template-columns:42px 125px 1fr 85px;
+gap:12px;
+align-items:center;
+padding:13px 0;
+border-bottom:1px solid #eee
 }
-});
 
-document.addEventListener("keydown",function(e){
-if(e.key==="Escape"){
-closeMatchModal();
+.fixture-row.clickable{
+cursor:pointer
 }
-});
 
-document.addEventListener("keydown",function(e){
-if(e.key!=="Enter"&&e.key!==" ")return;
-
-const target=e.target.closest(".fixture-row.clickable");
-
-if(target){
-e.preventDefault();
-openMatchModal(target.dataset.round);
+.fixture-row.clickable:hover{
+background:#fafafa
 }
-});
 
-window.openMatchModal=openMatchModal;
-window.closeMatchModal=closeMatchModal;
+.fixture-round{
+font-weight:1000;
+color:#e30613
+}
+
+.fixture-date{
+font-size:11px
+}
+
+.fixture-date span{
+display:block;
+color:#888;
+margin-top:3px
+}
+
+.fixture-teams{
+display:grid;
+gap:7px
+}
+
+.fixture-score{
+text-align:right
+}
+
+.fixture-score strong{
+font-size:16px
+}
+
+.fixture-score span{
+display:block;
+font-size:9px;
+color:#888;
+font-weight:900;
+margin-top:3px
+}
+
+.next-match{
+padding:15px;
+border:1px solid #eee;
+border-radius:12px;
+background:#fafafa
+}
+
+.next-date,
+.next-comp{
+font-size:10px;
+font-weight:900;
+color:#777;
+text-align:center
+}
+
+.next-teams{
+display:grid;
+grid-template-columns:1fr 45px 1fr;
+align-items:center;
+text-align:center;
+gap:8px;
+margin:15px 0
+}
+
+.next-teams>div{
+display:grid;
+justify-items:center;
+gap:7px;
+font-size:12px
+}
+
+.table-scroll{
+overflow-x:auto
+}
+
+.league-table{
+width:100%;
+border-collapse:collapse;
+font-size:12px;
+min-width:650px
+}
+
+.league-table th{
+background:#111;
+color:#fff;
+padding:9px 7px;
+text-align:center
+}
+
+.league-table th:nth-child(2),
+.league-table td:nth-child(2){
+text-align:left
+}
+
+.league-table td{
+padding:8px 7px;
+border-bottom:1px solid #eee;
+text-align:center
+}
+
+.league-table .team-line{
+font-size:12px
+}
+
+.vfb-row{
+background:#fff0f1;
+font-weight:900
+}
+
+.vfb-row td:first-child{
+border-left:4px solid #e30613
+}
+
+.transfer-item{
+display:flex;
+align-items:center;
+gap:9px;
+padding:10px 0;
+border-bottom:1px solid #eee;
+font-size:12px
+}
+
+.transfer-item small{
+display:block;
+color:#888;
+margin-top:2px
+}
+
+.transfer-dot{
+display:grid;
+place-items:center;
+width:24px;
+height:24px;
+border-radius:50%;
+background:#eee;
+font-weight:1000;
+color:#111;
+flex:0 0 auto
+}
+
+.transfer-dot.plus{
+color:#e30613
+}
+
+.player-initial{
+width:105px;
+height:105px;
+border-radius:50%;
+background:#e30613;
+color:#fff;
+display:grid;
+place-items:center;
+font-size:28px;
+font-weight:1000
+}
+
+.player-photo-wrap{
+align-items:center!important
+}
+
+.match-modal.open{
+display:flex!important
+}
+
+.match-team{
+display:grid;
+justify-items:center;
+gap:6px;
+text-align:center
+}
+
+.team-logo{
+width:30px;
+height:30px;
+display:grid;
+place-items:center;
+flex:0 0 auto;
+border-radius:7px;
+background:#eee;
+color:#111;
+font-size:8px;
+font-weight:1000;
+letter-spacing:-.3px;
+border:1px solid #ddd
+}
+
+.logo-large{
+width:48px;
+height:48px;
+border-radius:10px;
+font-size:11px
+}
+
+.badge-vfb{
+background:#e30613;
+color:#fff;
+border-color:#e30613
+}
+
+.badge-bayern{
+background:#dc052d;
+color:#fff;
+border-color:#dc052d
+}
+
+.badge-koeln{
+background:#fff;
+color:#e30613;
+border-color:#e30613
+}
+
+.badge-hoffenheim{
+background:#005ca9;
+color:#fff;
+border-color:#005ca9
+}
+
+.badge-dortmund{
+background:#f7d000;
+color:#111;
+border-color:#111
+}
+
+.badge-paderborn{
+background:#0050a4;
+color:#fff;
+border-color:#0050a4
+}
+
+.badge-hamburg{
+background:#fff;
+color:#005ca9;
+border-color:#005ca9
+}
+
+.badge-gladbach{
+background:#fff;
+color:#111;
+border-color:#111
+}
+
+.badge-leverkusen{
+background:#e32219;
+color:#fff;
+border-color:#e32219
+}
+
+.badge-bremen{
+background:#007b49;
+color:#fff;
+border-color:#007b49
+}
+
+.badge-schalke{
+background:#0066b3;
+color:#fff;
+border-color:#0066b3
+}
+
+.badge-frankfurt{
+background:#e30613;
+color:#fff;
+border-color:#e30613
+}
+
+.badge-elversberg{
+background:#fff;
+color:#111;
+border-color:#111
+}
+
+.badge-union{
+background:#ed1c24;
+color:#fff;
+border-color:#ed1c24
+}
+
+.badge-freiburg{
+background:#d6001c;
+color:#fff;
+border-color:#d6001c
+}
+
+.badge-augsburg{
+background:#ba0c2f;
+color:#fff;
+border-color:#ba0c2f
+}
+
+.badge-leipzig{
+background:#fff;
+color:#d00027;
+border-color:#d00027
+}
+
+.badge-mainz{
+background:#c00;
+color:#fff;
+border-color:#c00
+}
+
+.badge-viking{
+background:#162b54;
+color:#fff;
+border-color:#162b54
+}
+
+.badge-slovan{
+background:#1b4fa3;
+color:#fff;
+border-color:#1b4fa3
+}
+
+.badge-atletico{
+background:#fff;
+color:#d71920;
+border-color:#d71920
+}
+
+.badge-galatasaray{
+background:#e30613;
+color:#f6c500;
+border-color:#e30613
+}
+
+.badge-inter{
+background:#111b5e;
+color:#fff;
+border-color:#111b5e
+}
+
+.badge-lille{
+background:#e30613;
+color:#fff;
+border-color:#e30613
+}
+
+.badge-brugge{
+background:#111;
+color:#ffd200;
+border-color:#111
+}
+
+.badge-psv{
+background:#fff;
+color:#e30613;
+border-color:#e30613
+}
+
+@media(max-width:700px){
+
+.fixture-row{
+grid-template-columns:28px 88px 1fr 52px;
+gap:7px
+}
+
+.fixture-date{
+font-size:9px
+}
+
+.fixture-teams .team-line{
+font-size:11px
+}
+
+.fixture-score strong{
+font-size:13px
+}
+
+.team-logo{
+width:27px;
+height:27px
+}
+
+.logo-large{
+width:42px;
+height:42px
+}
+
+.nav{
+gap:11px!important;
+overflow-x:auto
+}
+
+.squad-grid{
+grid-template-columns:repeat(2,1fr)!important
+}
+
+.grid{
+grid-template-columns:1fr!important
+}
+
+.fan-grid{
+grid-template-columns:1fr!important
+}
+
+}
+`;
+
+document.head.appendChild(style);
 
 function initPage(){
+
 renderNews();
 renderNext();
 renderFixtures();
 renderTable();
+renderCLInfo();
 renderTransfers();
 renderSquad();
-renderCLInfo();
 updateVisitors();
+
 }
 
 if(document.readyState==="loading"){
-document.addEventListener("DOMContentLoaded",initPage);
+
+document.addEventListener(
+"DOMContentLoaded",
+initPage
+);
+
 }else{
+
 initPage();
+
 }
+
+document.addEventListener(
+"keydown",
+function(e){
+
+if(e.key!=="Enter" && e.key!==" ")
+return;
+
+const target=
+e.target.closest(
+".fixture-row.clickable"
+);
+
+if(target){
+
+e.preventDefault();
+
+openMatchModal(
+target.dataset.round
+);
+
+}
+
+}
+);
+
+document.addEventListener(
+"keydown",
+function(e){
+
+if(e.key==="Escape"){
+closeMatchModal();
+}
+
+}
+);
+
+window.openMatchModal=openMatchModal;
+window.closeMatchModal=closeMatchModal;
+
 </script>
 
 </body>
-</html>
+</html>  
